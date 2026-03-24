@@ -1,0 +1,240 @@
+\section{Three-Point Audit Protocol}
+\label{app:verification}
+
+The verification system implements a structured audit for every claim
+produced by the system.  This appendix provides formal definitions of
+each audit component, specifies their composition into a four-point
+verification protocol (three conceptual tests plus Z3 finite-model
+checking), and documents the protocol's application to all 34 derivation
+steps (Steps 0--33, Phases A--I).
+
+\subsection{Audit Components: Formal Definitions}
+
+\begin{definition}[Hidden Chooser Test (HC)]
+\label{def:hc}
+Let $s_i$ be derivation step $i$ with input state $I_i$ (the conclusions
+of all predecessor steps) and output $O_i$.  The Hidden Chooser Test
+verifies that $O_i$ is uniquely determined by $I_i$ and A0:
+\[
+  \mathrm{HC}(s_i) = \mathrm{PASS} \quad\iff\quad
+  \forall\, O' \neq O_i:\;
+  O' \text{ is either A0-violating or isomorphic to } O_i.
+\]
+Formally, ``isomorphic'' means there exists a computable bijection
+$\phi \colon O_i \to O'$ such that $\phi$ preserves all quotient-level
+properties (truth classes, fiber structure, test outcomes).  A step
+\emph{passes HC} if no non-isomorphic A0-compliant alternative exists.
+\end{definition}
+
+\begin{definition}[Encoding Invariance Check (EI)]
+\label{def:ei}
+Let $\Carrier_1$ and $\Carrier_2$ be two carrier representations with
+computable bijection $\phi \colon \Carrier_1 \to \Carrier_2$.  Let
+$\Ledger_2 = \{(\phi \circ \tau \circ \phi^{-1},\; a) \mid
+(\tau, a) \in \Ledger_1\}$ be the induced ledger under $\phi$.  The
+Encoding Invariance Check verifies:
+\[
+  \mathrm{EI}(C, w, \phi) = \mathrm{PASS} \quad\iff\quad
+  \TQ{\Ledger_1} \cong \TQ{\Ledger_2},
+\]
+where $\cong$ denotes isomorphism of quotient structures (preserving
+equivalence classes and their separator distances).  This check must hold
+for all $\phi \in \gauge$ (the gauge group of Step~12).  EI is the
+gauge invariance test applied to the derivation itself: it confirms that
+no derivation step depends on a particular bit-level encoding.
+\end{definition}
+
+\begin{definition}[Distinguishability Equivalence (DE)]
+\label{def:de}
+The Distinguishability Equivalence check verifies bidirectional
+consistency of A0 application:
+\begin{align}
+  \text{No false merges:}\quad &
+    [x] = [y] \;\Longrightarrow\;
+    \nexists\, \tau \in \Del^*:\; \UTM(\tau, x) \neq \UTM(\tau, y).
+    \label{eq:no-false-merge} \\
+  \text{No false splits:}\quad &
+    \bigl(\forall\, \tau \in \Del^*:\; \UTM(\tau, x) = \UTM(\tau, y)\bigr)
+    \;\Longrightarrow\; [x] = [y].
+    \label{eq:no-false-split}
+\end{align}
+Equation~\eqref{eq:no-false-merge} ensures that merged objects are
+genuinely indistinguishable; equation~\eqref{eq:no-false-split} ensures
+that distinguishable objects are never incorrectly identified.  Together
+they assert that the truth quotient $\equivL$ is the \emph{exact}
+equivalence induced by the test set.
+\end{definition}
+
+\begin{definition}[Z3 Finite-Model Verification]
+\label{def:z3}
+For steps with verifiable algebraic properties (equivalence relations,
+gauge group axioms, metric axioms, etc.), Z3 \citep{demoura2008} checks
+these properties on finite models:
+\begin{itemize}[nosep]
+  \item \textbf{Satisfiability checks} (\texttt{sat}): confirm that a
+        finite model satisfying the stated properties exists.
+  \item \textbf{Unsatisfiability checks} (\texttt{unsat}): confirm that
+        no finite model violating the stated properties exists (i.e., the
+        property holds for all models in the finite domain).
+\end{itemize}
+See Appendix~\ref{app:z3} for scripts and results.
+
+\textbf{Honest disclosure:} Satisfiability checks verify existence of a
+conforming model, not universal validity.  Unsatisfiability checks are
+stronger (universal over the finite domain) but do not extend to
+infinite domains without additional mechanization (Lean/Coq).
+\end{definition}
+
+\subsection{Composition: Four-Point Audit Protocol}
+
+\begin{definition}[Four-Point Audit]
+\label{def:four-point}
+A claim $C$ with witness $w$ \emph{passes the four-point audit} if and
+only if all four components return PASS:
+\begin{align}
+  \mathrm{HC}(C, w) &= \mathrm{PASS}
+    \tag{Hidden Chooser} \label{eq:audit-hc} \\
+  \mathrm{EI}(C, w, \phi) &= \mathrm{PASS}
+    \quad \forall\, \phi \in \gauge
+    \tag{Encoding Invariance} \label{eq:audit-ei} \\
+  \mathrm{DE}(C, w) &= \mathrm{PASS}
+    \tag{Distinguishability} \label{eq:audit-de} \\
+  \mathrm{Z3}(C) &= \mathrm{SAT} \;\text{or}\; \mathrm{UNSAT}^\dag
+    \quad \text{(where applicable)}
+    \tag{Finite-Model Check} \label{eq:audit-z3}
+\end{align}
+where $^\dag$ indicates negation-checking (the negation of the property
+is unsatisfiable, proving the property holds universally on the finite
+domain).
+\end{definition}
+
+\begin{remark}[Protocol Coverage]
+The three conceptual tests (HC, EI, DE) are complementary:
+\begin{itemize}[nosep]
+  \item HC guards against \emph{hidden choices} (non-forced design
+        decisions masquerading as theorems).
+  \item EI guards against \emph{encoding dependence} (results that change
+        under representation switching).
+  \item DE guards against \emph{quotient errors} (incorrect merging or
+        splitting of descriptions).
+\end{itemize}
+Together they ensure that each derivation step is forced (HC), invariant
+(EI), and faithful (DE).  Z3 provides independent machine-checked
+confirmation of algebraic properties on finite models.
+\end{remark}
+
+\subsection{Application to Derivation Steps}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}clcccl@{}}
+\toprule
+\textbf{Step} & \textbf{Name} & \textbf{HC} & \textbf{EI} & \textbf{DE} & \textbf{Z3} \\
+\midrule
+0  & $\noth$ + Output Gate & \checkmark & \checkmark & \checkmark & --- \\
+1  & Carrier $\Carrier$, $\FinSlice$ & \checkmark & \checkmark & \checkmark & --- \\
+2  & $\SdMap$ syntax & \checkmark & \checkmark & \checkmark & --- \\
+3  & Executability & \checkmark & \checkmark & \checkmark & --- \\
+4  & $\Del^*$, $\CanEnum$ & \checkmark & \checkmark & \checkmark & --- \\
+5  & Ledger $\Ledger$ & $\checkmark^{\ddagger}$ & \checkmark & \checkmark & --- \\
+6  & Truth quotient $\TQ{\Ledger}$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+7  & $\ObsOpen$, $\Eraser$, sim* & $\checkmark^{\ddagger}$ & \checkmark & \checkmark & --- \\
+8  & Entropic time $\Del\Tim$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+9  & Entropy, Budget & \checkmark & \checkmark & \checkmark & --- \\
+10 & Energy $\EnergyLedger$ & \checkmark & \checkmark & \checkmark & --- \\
+11 & $\opnoth$ & \checkmark & \checkmark & \checkmark & --- \\
+12 & Gauge $\gauge$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+13 & $\Epistemic$/$\Decision$ & \checkmark & \checkmark & \checkmark & --- \\
+14 & $\ExactGate$ + Split & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+15 & Myhill--Nerode & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+16 & Separator $\SepDist$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+17 & $\Pit$-consistency & \checkmark & \checkmark & \checkmark & --- \\
+18 & Bellman minimax & $\checkmark^{\S}$ & \checkmark & \checkmark & \texttt{sat} \\
+19 & Self-hosting $\SelfHost$ & $\checkmark^{\P}$ & \checkmark & \checkmark & \texttt{sat} \\
+20 & Binary interface & \checkmark & \checkmark & \checkmark & --- \\
+21 & Final chain & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+\midrule
+22 & Universal closure $\UnivOp$ & \checkmark & \checkmark & \checkmark & --- \\
+23 & Closure-defect $\ClosureDefect{Q}$ & \checkmark & \checkmark & \checkmark & --- \\
+24 & Consciousness $\ConsProj$ & \checkmark & \checkmark & \checkmark & --- \\
+25 & Trit field $\TritField$ & \checkmark & \checkmark & \checkmark & --- \\
+\midrule
+26 & Continuum limit $\Omega$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+27 & Measure $\mu_\Pit$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+28 & Dirichlet $\mathcal{E}$ & $\checkmark^{\dagger}$ & \checkmark & \checkmark & \texttt{sat} \\
+29 & Semigroup $\{T_t\}$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+30 & Metric $g_{ij}$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+31 & Complex $J$ & $\checkmark^{\dagger}$ & \checkmark & \checkmark & \texttt{sat} \\
+32 & Symplectic $\omega$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+33 & K\"{a}hler $(g,J,\omega)$ & \checkmark & \checkmark & \checkmark & \texttt{sat} \\
+\bottomrule
+\end{tabular}
+\caption{Four-point audit results for all 34 derivation steps (Steps 0--33).
+$^{\dagger}$Steps~28 and~31 involve modeling commitments (conductance $w=1/d^2$ and smoothness).
+$^{\ddagger}$Forced within the paper's pure non-disturbing test model
+(commutativity is a modeling commitment; see Appendix~\ref{app:oq:quantum}).
+$^{\S}$Forced as the unique non-dominated prior-free policy; Bayesian
+alternatives are A0-compatible when a prior is available.
+$^{\P}$Forced under the closed-universe assumption (no external verifier);
+external verification is A0-compatible but outside the model class.
+All steps pass; qualifications are honest disclosures of modeling
+commitments, not failures.}
+\label{tab:audit}
+\end{table}
+
+\subsection{Receipt Chain}
+
+Every system output includes a receipt chain encoded via $\SdMap$:
+\begin{enumerate}[nosep]
+  \item \textbf{Serialization:} Canonical JSON serialization of the
+        output (sorted keys, deterministic formatting).
+  \item \textbf{Hashing:} SHA-256 hash of the $\SdMap$-encoded canonical
+        JSON, producing a 256-bit fingerprint.
+  \item \textbf{Chaining:} Each receipt includes the hash of the previous
+        receipt, forming a hash chain: $h_i = \mathrm{SHA256}(h_{i-1}
+        \,\|\, \SdMap(\text{output}_i))$.
+  \item \textbf{Replay:} Any party can recompute the entire chain from
+        the problem specification and verify that the reproduced chain
+        matches the original hashes.
+\end{enumerate}
+
+The receipt chain ensures \emph{non-repudiation}: the system cannot
+silently change its output after the fact.  This is the computational
+analogue of the ledger's append-only property (Step~5).  The chain is
+\emph{deterministic}: given the same problem specification and budget,
+replay produces identical hashes, confirming that the system's behavior
+is fully reproducible.
+
+\subsection{Self-Hosting Verification}
+
+The self-hosting property ($\SelfHost = \mathcal{S}$, Step~19) means
+the system can verify its own derivation.  The verification procedure
+is:
+\begin{enumerate}[nosep]
+  \item \textbf{Encoding:} Encode each of the 34 derivation steps as a
+        compiled finite contract $P_i = \langle q_i, \mathcal{A}_i,
+        \mathcal{V}_i, B_i, \pi_i \rangle$, where $q_i$ is the claim,
+        $\mathcal{A}_i$ the answer space, $\mathcal{V}_i$ the three-point
+        audit, $B_i$ the verification budget, and $\pi_i$ the cost
+        assignment.
+  \item \textbf{Execution:} Run the system $\mathcal{S}$ on each $P_i$
+        using the three-point audit (HC $+$ EI $+$ DE) as the verifier
+        $\mathcal{V}_i$.
+  \item \textbf{Confirmation:} Verify that all 34 executions (Steps
+        0--33) produce $\UNIQUE$ (with modeling-commitment qualifications
+        at Steps~5, 18, 19, 28, 31).
+  \item \textbf{Certification:} The receipt chain linking all 34
+        verifications is the self-hosting certificate.  This certificate
+        is itself a finite object in $\Carrier$, verifiable by replay.
+\end{enumerate}
+
+\begin{remark}[Scope of Self-Hosting]
+Self-hosting is \emph{object-level} verification: the system checks each
+derivation step's conclusion given its premises.  It does \emph{not}
+verify the meta-claim ``the system is consistent'' or ``the audit
+procedure is correct,'' which would violate G\"{o}del's second
+incompleteness theorem \citep{godel1931}.  The three-point audit can
+verify specific claims but cannot prove the general correctness of the
+audit procedure itself.
+\end{remark}

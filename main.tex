@@ -1,0 +1,66 @@
+\documentclass[11pt,a4paper]{article}
+
+% Page geometry
+\usepackage[margin=1in]{geometry}
+
+% Opoch style package (theorems, commands, colors)
+\usepackage{opoch}
+
+% Additional packages
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+% ===== Document Metadata =====
+\title{Opoch: Structural Reality from Nothingness}
+
+\author{
+  Chetan \\
+  {\small \texttt{chetan@opoch.com}}
+  \and
+  Dharamveer Chouhan \\
+  {\small \texttt{dharamveer@opoch.com}}
+  \and
+  Ravish \\
+  {\small \texttt{ravish@opoch.com}} \\[6pt]
+  {\small Opoch Research}
+}
+
+\date{March 2026}
+
+% ===== Document =====
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% Core sections
+\input{sections/introduction}
+\input{sections/axioms}
+\input{sections/primitives}
+\input{sections/doctrines}
+\input{sections/forcing}
+\input{sections/derivation}
+\input{sections/context-born}
+\input{sections/physics}
+\input{sections/demonstration}
+\input{sections/related-work}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+% Bibliography
+\bibliography{refs}
+
+% Appendices
+\appendix
+\input{appendices/full-derivation}
+\input{appendices/verification}
+\input{appendices/z3-proofs}
+\input{appendices/open-questions}
+
+\end{document}

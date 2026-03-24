@@ -1,0 +1,70 @@
+% inverse-limit.tex — Continuum limit as inverse system (Step 26)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  qbox/.style={ellipse, draw=#1, fill=#1!10, minimum width=14mm,
+    minimum height=10mm, font=\small, line width=0.7pt, inner sep=2pt},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, #1},
+  darr/.style={-{Stealth[length=2.5mm]}, thick, densely dashed, #1},
+  nlabel/.style={font=\tiny\itshape, #1, align=center},
+]
+
+  % === Finite quotients (left to right, increasing budget) ===
+  \node[qbox=opochblue] (q1) at (0, 0) {$\TQ{\Ledger_{B_1}}$};
+  \node[nlabel=opochgray, below=3mm of q1] {3 classes};
+
+  \node[qbox=opochblue] (q2) at (3.2, 0) {$\TQ{\Ledger_{B_2}}$};
+  \node[nlabel=opochgray, below=3mm of q2] {5 classes};
+
+  \node[qbox=opochblue] (q3) at (6.4, 0) {$\TQ{\Ledger_{B_3}}$};
+  \node[nlabel=opochgray, below=3mm of q3] {8 classes};
+
+  \node[font=\large, opochgray] at (8.4, 0) {$\cdots$};
+
+  % === Limit space Omega ===
+  \node[ellipse, draw=opochgreen, fill=opochgreen!10, minimum width=20mm,
+    minimum height=14mm, font=\small\bfseries, line width=1pt, inner sep=2pt]
+    (omega) at (10.8, 0) {$\Omega$};
+  \node[nlabel=opochgreen!70!black, below=3mm of omega] {compact\\metrizable};
+
+  % === Bonding maps (surjections, right to left) ===
+  \draw[arr=opochorange!80] (q2) -- (q1)
+    node[above, font=\tiny, pos=0.5] {$\pi_{B_2,B_1}$};
+  \draw[arr=opochorange!80] (q3) -- (q2)
+    node[above, font=\tiny, pos=0.5] {$\pi_{B_3,B_2}$};
+
+  % === Projection arrows from Omega ===
+  \draw[darr=opochgreen!60] (omega) to[bend left=20] (q3);
+  \draw[darr=opochgreen!60] (omega) to[bend left=28] (q2);
+  \draw[darr=opochgreen!60] (omega) to[bend left=35] (q1);
+
+  % === Annotations ===
+  \node[font=\tiny, opochorange!80, align=center] at (3.2, 1.4)
+    {Bonding maps: surjective,\\Lipschitz (merge, never split)};
+
+  \node[font=\tiny, opochblue!80, align=center] at (0, 1.4)
+    {Finite metric\\spaces (Step~16)};
+
+  \node[font=\tiny, opochgreen!70!black, align=center] at (10.8, 1.6)
+    {$\varprojlim \TQ{\Ledger_B}$};
+
+  % === Budget axis ===
+  \draw[-{Stealth[length=2mm]}, opochgray!40, line width=0.5pt]
+    (-0.8, -1.8) -- (11.6, -1.8)
+    node[right, font=\tiny, opochgray] {budget $B$};
+  \node[font=\tiny, opochgray] at (0, -2.2) {$B_1$};
+  \node[font=\tiny, opochgray] at (3.2, -2.2) {$B_2$};
+  \node[font=\tiny, opochgray] at (6.4, -2.2) {$B_3$};
+  \node[font=\tiny, opochgray] at (10.8, -2.2) {$\infty$};
+
+\end{tikzpicture}
+\caption{Continuum limit of the truth quotient (Step~26).  As the budget
+  $B$ increases, truth quotients $\TQ{\Ledger_B}$ refine: bonding maps
+  $\pi_{B',B}$ are surjective (classes merge at lower budget, never split).
+  The inverse limit $\Omega = \varprojlim \TQ{\Ledger_B}$ is a compact,
+  separable, metrizable space---the arena for geometric reconstruction
+  (Steps~27--33).}
+\label{fig:inverse-limit}
+\end{figure}

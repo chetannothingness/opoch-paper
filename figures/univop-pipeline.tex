@@ -1,0 +1,76 @@
+% univop-pipeline.tex — Universal Closure Operator pipeline (Step 22)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  stage/.style={rectangle, draw=#1, fill=#1!10, rounded corners=4pt,
+    minimum width=20mm, minimum height=14mm, font=\small,
+    line width=0.7pt, align=center, inner sep=3pt},
+  io/.style={rectangle, draw=opochgray!50, fill=opochgray!8, rounded corners=2pt,
+    minimum width=14mm, minimum height=8mm, font=\small\bfseries,
+    inner sep=3pt},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, opochgray!70},
+  slabel/.style={font=\tiny\itshape, opochgray, align=center},
+]
+
+  % === Input ===
+  \node[io] (input) at (-1.5, 0) {state $s$};
+
+  % === Five pipeline stages ===
+  \node[stage=opochblue] (phi) at (1.8, 0)
+    {$\IndistOp$\\[-1pt]\tiny Indistinguish.};
+  \node[slabel, below=2mm of phi] {Steps 6--7};
+
+  \node[stage=opochpurple] (gamma) at (4.8, 0)
+    {$\GaugeOp$\\[-1pt]\tiny Gauge};
+  \node[slabel, below=2mm of gamma] {Step 12};
+
+  \node[stage=opochorange] (norm) at (7.8, 0)
+    {$\NormOp$\\[-1pt]\tiny Normalize};
+  \node[slabel, below=2mm of norm] {Step 17};
+
+  \node[stage=opochred] (fact) at (10.8, 0)
+    {$\Fact$\\[-1pt]\tiny Factor};
+  \node[slabel, below=2mm of fact] {Steps 4, 16};
+
+  \node[stage=opochgreen] (trit) at (13.8, 0)
+    {$\TritValuate$\\[-1pt]\tiny Trit};
+  \node[slabel, below=2mm of trit] {Step 0};
+
+  % === Output ===
+  \node[io] (output) at (16.3, 0) {$\trit{\pm 1, 0}$};
+
+  % === Arrows ===
+  \draw[arr] (input) -- (phi);
+  \draw[arr] (phi) -- (gamma);
+  \draw[arr] (gamma) -- (norm);
+  \draw[arr] (norm) -- (fact);
+  \draw[arr] (fact) -- (trit);
+  \draw[arr] (trit) -- (output);
+
+  % === Top annotations: what each stage does ===
+  \node[font=\tiny, opochblue!80, align=center, above=5mm of phi]
+    {collapse\\indistinguishable};
+  \node[font=\tiny, opochpurple!80, align=center, above=5mm of gamma]
+    {quotient by\\relabeling};
+  \node[font=\tiny, opochorange!80, align=center, above=5mm of norm]
+    {canonical\\representative};
+  \node[font=\tiny, opochred!80, align=center, above=5mm of fact]
+    {decompose\\into primes};
+  \node[font=\tiny, opochgreen!80, align=center, above=5mm of trit]
+    {extract\\terminal trit};
+
+  % === Composition label ===
+  \node[font=\footnotesize, opochgray!60, align=center] at (7.8, -2.2)
+    {$\UnivOp = \TritValuate \circ \Fact \circ \NormOp \circ \GaugeOp \circ \IndistOp$};
+
+\end{tikzpicture}%
+}% end resizebox
+\caption{The universal closure operator $\UnivOp$ (Step~22): a five-stage
+  pipeline where each stage is forced by a prior derivation step.
+  Composition order is determined by data-flow type constraints---omitting
+  any stage produces an A0~violation.}
+\label{fig:univop-pipeline}
+\end{figure}

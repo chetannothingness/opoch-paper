@@ -1,0 +1,90 @@
+You are a scientific LaTeX writing specialist. Your task is to generate complete replacement LaTeX for the open-questions appendix of the Opoch paper.
+
+Read the following files in this project directory:
+- appendices/open-questions.tex: CURRENT version (to be replaced)
+- sections/kernel.tex: Kernel section (for cross-references)
+- sections/primitives.tex: Primitives section (for cross-references)
+- sections/derivation.tex: Derivation section (for cross-references)
+- sections/axioms.tex: Axiom A0 definitions
+- opoch.sty: Custom commands (MUST use these)
+- synsc-reports/phase1a-math-verification-report.md: Phase 1A findings
+- synsc-reports/phase2b-appendix-improvements.md: Phase 2B improvements
+
+YOUR TASK: Generate complete replacement LaTeX for appendices/open-questions.tex implementing ALL of the following upgrades:
+
+1. NEW PREAMBLE — L0/L1/L2 Layer Clarification:
+   Add a new subsection \subsection{Three Layers of the Framework} with label \label{app:oq:layers} BEFORE the existing F.1.
+   Define:
+   - L0 (Bottom State): Nothingness (\noth). No distinctions, no carrier, no tests. The unfalsifiable starting point.
+   - L1 (Meaning Operator): A0 and its forced consequences. Everything derived by witnessability alone: carrier, syntax, executability, truth quotient, time, gauge invariance.
+   - L2 (Model-Class Commitments): Choices that are canonical/conservative but not A0-forced: commutativity (Step 5), minimax optimization (Step 18), closed-universe assumption (Steps 2, 19, 20).
+   Include a small 3-row table mapping L0/L1/L2 to their content.
+
+2. F.1 — CONSTRUCTIBILITY (existing \label{app:oq:machine}):
+   Rewrite with 5-argument constructibility proof. The five components are: (i) total evaluator on Δ*, (ii) self-delimiting parser, (iii) Bellman minimax solver on finite domains, (iv) receipt chain, (v) Pi-canonicalization (new: reference Definition~\ref{def:pi-canon}).
+
+3. F.2 — NONCOMMUTATIVITY (existing \label{app:oq:quantum}):
+   Rewrite with TWO cases:
+   (a) Resource-induced noncommutativity: test τ1 consumes budget, changing which tests are affordable for τ2. This is ALREADY inside the framework (Bellman loop accounts for budget consumption).
+   (b) Disturbance-induced noncommutativity: outcome of τ2 depends on whether τ1 was performed (quantum measurement). This requires the ordered-ledger extension.
+   Keep the existing extension path mathematics but frame it as applying only to case (b).
+
+4. F.3 — CONTINUOUS SPACES (existing \label{app:oq:continuous}):
+   CORRECT the differential entropy reference. Replace "H(W) (differential entropy)" with the Pi-fixed measure:
+   - |W| → μ_Π(W) where μ_Π is the counting measure on truth-quotient classes
+   - log|W| → H_Π(W) = -Σ μ_Π(w) log μ_Π(w) (the Pi-fixed entropy, NOT differential entropy)
+   - Note that differential entropy h(W) = -∫ p log p dμ is coordinate-dependent and therefore not gauge-invariant
+   - The correct continuous extension uses relative entropy (KL divergence) against the uniform measure on truth classes
+
+5. F.4 — GÖDEL (existing \label{app:oq:godel}):
+   Sharpen with: Υ(K)=K is a Pi-serialize fixed point. The kernel serializes each derivation step as a compiled finite contract, runs itself on that contract, and obtains UNIQUE for all 21 steps. This is object-level verification (proof-checking), categorically distinct from meta-consistency proof (proving no proof of ⊥ exists). Add the explicit distinction:
+   - Object-level: "Step i is the unique A0-compliant continuation" — checkable
+   - Meta-level: "The kernel never produces incorrect output" — not checkable (Gödel)
+
+6. F.5 — HALTING PROBLEM (existing \label{app:oq:halting}):
+   Replace "total on Δ*" language with "budget-total on Δ_{≤B}": tests that halt within budget B for every x ∈ FinSlice. Use the notation \Del_{≤B} for the set of budget-total tests. Keep the 3-item structure but sharpen terminology.
+
+7. F.6 — OMEGA OUTPUT (existing \label{app:oq:omega}):
+   Add a formal definition:
+   \begin{definition}[Ω Payload] \label{def:omega-payload}
+   The Ω output is a 5-tuple (A_S, τ_Ω, c(τ_Ω), B_rem, w_min) where:
+   - A_S ⊂ A is the surviving answer set (|A_S| > 1)
+   - τ_Ω is the minimal separator test
+   - c(τ_Ω) is the separator cost
+   - B_rem is the remaining budget
+   - w_min is the minimality witness: the Bellman search subtree proving no cheaper separator exists
+   \end{definition}
+   Follow with the MAPF example (compressed from current version).
+
+8. F.7 — ASSUMPTIONS TABLE (existing \label{app:oq:assumptions}):
+   Restructure tab:assumptions with a new "Layer" column (L1 or L2). Expand to 10 rows:
+   Row 1: A0 (Witnessability) — L1 — Axiom
+   Row 2: Finite slice D0 — L1 — Derived
+   Row 3: Totality of UTM on Δ* — L1 — Derived
+   Row 4: Positive integer costs — L1 — Derived
+   Row 5: Determinism of kernel — L1 — Derived
+   Row 6: Commutativity of tests — L2 — Modeling commitment
+   Row 7: Prior-free optimization — L2 — Modeling commitment
+   Row 8: Closed-universe assumption — L2 — Modeling commitment
+   Row 9: Pi-canonicalization uniqueness — L1 — Derived (new, references def:pi-canon)
+   Row 10: Receipt hash collision resistance — L2 — Modeling commitment (SHA-256 assumed)
+
+9. F.8 — CHALLENGES TABLE (existing \label{app:oq:challenges}):
+   Reframe tab:challenges with three categories:
+   (i) Structural — derivation-internal (Arrow of Time)
+   (ii) Contract Instantiation — applying the framework (Renormalization, Probability Origins, Measurement Problem)
+   (iii) Open Boundary — requires new Δ-specifications (Hard Problem, P vs NP)
+   Add a "Category" column to the table.
+
+CRITICAL RULES:
+- PRESERVE all existing \label{} markers: app:oq:machine, app:oq:quantum, app:oq:continuous, app:oq:godel, app:oq:halting, app:oq:omega, app:oq:assumptions, app:oq:challenges
+- ADD new labels: app:oq:layers, def:omega-payload
+- Use ONLY commands from opoch.sty: \Pit, \Del, \Tim, \UNIQUE, \OMEGA, \UNSAT, \noth, \opnoth, \TQ{}, \fiber{}, \gauge, \FinSlice, \Carrier, \SdMap, \UTM, \CanEnum, \SelfHost, \Contract, \Bellman, \ExactGate, \EnergyLedger, \Truthpoint, \Opoch, \step{}, \forcing{}, \trit{}, \equivL, \ObsOpen, \Eraser, \FixPt, \MNcong, \SepDist
+- Also use NEW commands (will be added to opoch.sty): \PiCanon, \Ser, \Adm, \Instrument
+- Use \cref{}, \ref{}, \cite{} consistently
+- Use enumitem options [nosep] for lists
+- Use booktabs (\toprule, \midrule, \bottomrule) for tables
+- Keep the same section/appendix structure (\section{Open Questions...})
+- Reference def:pi-canon (will be added to kernel.tex)
+
+Write the complete LaTeX to synsc-reports/phase3b-open-questions-rewrite.md wrapped in a single ```latex code block.

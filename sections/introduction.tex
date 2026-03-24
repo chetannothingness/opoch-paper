@@ -1,0 +1,141 @@
+% =============================================================================
+% Section 1: Introduction
+% =============================================================================
+
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{The Question}
+
+What is the minimal structure forced into existence by the requirement that
+every distinction be witnessable?
+
+This is not a question about engineering, artificial intelligence, or any
+particular domain of application. It is a foundational question about
+describable reality. If we insist, as A0$^*$ (Completed Witnessability) requires, that every meaningful
+distinction be backed by a finite procedure that can in fact separate it, then
+some structures become unavoidable. The purpose of this paper is to identify
+those structures and to make explicit which commitments are definitional and
+which are derived.  Crucially, A0$^*$ is itself \emph{derived} from
+nothingness ($\noth$) through a chain of five necessity theorems
+(N0--N4)---the paper assumes nothing and derives its operating principle.
+
+The central result is a 34-step derivation that begins at $\noth$ and
+unfolds by reapplying A0$^*$ to its own products, tracing a single reflective
+chain: nothingness forces closure, closure reveals defect, defect requires
+self-observation, and self-observation iterated on the continuum limit
+produces geometry.  Within the paper's model class, every structure in the
+chain---from the carrier of descriptions to the K\"{a}hler triple on the
+truth-quotient limit---is forced up to computable isomorphism; none is
+introduced as a free design parameter.
+
+Equally important is what we do \emph{not} claim. We do not claim to derive the
+specific \emph{content} of physical law, only a vocabulary and scaffolding for
+reasoning under witnessability. We do not claim that every modeling choice is
+eliminated under every possible formalization of A0$^*$. Our claim is narrower and
+testable: given the explicit premises and conventions in \cref{sec:axioms} and
+the model class studied in \cref{sec:derivation}, the resulting chain of
+structures is canonical up to computable isomorphism.
+
+\subsection{The Witnessability Principle}
+
+We begin from a single principle, derived from $\noth$ (not postulated):
+
+\begin{quote}
+\textbf{A0 (Bare Witnessability).}  A distinction is admissible if and
+only if a finite witness procedure can separate it.
+\end{quote}
+
+\noindent
+The completed form, A0$^*$, adds a reflective clause: witness validity itself must be witnessable by a process satisfying the same criterion.  A0$^*$ is not an axiom but the first theorem of the framework, derived from $\noth$ via five necessity theorems (N0--N4, see \cref{sec:axioms:derivation}).  All subsequent references use A0$^*$.
+
+This principle is not chosen for convenience. It is the weakest non-trivial
+constraint one can impose. If a distinction cannot even in principle be
+witnessed, then it is operationally meaningless. Wheeler's ``It from Bit''
+programme \citep{wheeler1990} and Rovelli's relational quantum
+mechanics \citep{rovelli1996} both point toward observer-relative,
+information-theoretic foundations. A0$^*$ isolates the operational core shared by
+such views and elevates it to an admissibility criterion.
+
+The formal statement of A0$^*$ and its immediate consequences are given in
+\cref{sec:axioms}.
+
+\subsection{Key Insight: Nothingness as the Only Unfalsifiable Truth}
+
+Nothingness, the state carrying zero information, asserting nothing, and
+distinguishing nothing, is the only unfalsifiable truth. Every other claim can
+in principle be tested and potentially refuted. Nothingness alone survives all
+tests trivially because it makes no assertions.
+
+This claim is meant operationally. $\noth$ is the unique state satisfying
+$\Del = \varnothing$, so no tests exist, no descriptions exist, and no
+distinctions are drawn. From this state, the self-application of A0$^*$ forces the
+existence of at least one admissible distinction, which breaks the symmetry.
+Once at least one distinction exists, the derivation proceeds step by step,
+making explicit where results are unique up to computable isomorphism and
+where the development depends on declared conventions.
+
+\begin{enumerate}[label=\textbf{S\arabic*}.]
+  \item $\noth$ is the unique unfalsifiable state; self-application of A0$^*$
+        forces the existence of at least one admissible distinction, breaking
+        the symmetry.
+  \item A0$^*$ applied to its own products yields, step by step, the three
+        primitives ($\Del$, $\Pit$, $\Tim$), a carrier closed under
+        witnessing \citep{church1936, turing1936}, gauge invariance,
+        separator geometry, Bellman-optimal dynamics, self-hosting closure,
+        and a K\"{a}hler structure on the continuum limit.
+\end{enumerate}
+
+The forcing claim is therefore precise. We claim canonical structure within
+the explicitly stated model class and up to computable isomorphism, and we
+state frontiers where additional assumptions, alternative modeling choices, or
+empirical input would be required.  \Cref{fig:phase-overview} provides a
+roadmap of the nine phases.
+
+\input{figures/phase-overview}
+
+\subsection{Contributions}
+
+This paper makes three contributions:
+
+\begin{enumerate}[label=(\arabic*)]
+  \item \textbf{A 34-step derivation of structural reality from $\noth$.}
+        Starting from nothingness, we derive the framework's core
+        vocabulary across nine phases (A--I), introducing 25 new
+        mathematical objects.  No external
+        assumption beyond A0$^*$ enters the derivation; the Church--Turing
+        thesis independently corroborates Step~3's mathematical conclusion.
+        A three-point self-audit and Z3 verification of selected
+        algebraic properties on finite models accompany the derivation
+        (\cref{sec:derivation}, Appendix~\ref{app:derivation},
+        Appendix~\ref{app:z3}).
+
+  \item \textbf{Three forced primitives and seven doctrines.}
+        The derivation isolates three primitives, $\Del$ (tests),
+        $\Pit$ (truth), and $\Tim$ (time), and collects seven doctrines that
+        follow from the operational reading of A0$^*$
+        (\cref{sec:primitives}, \cref{sec:doctrines}).
+
+  \item \textbf{K\"{a}hler geometry, Born rule, and the split law.}
+        The continuum limit of truth quotients carries a forced
+        K\"{a}hler triple $(g, J, \omega)$, a unique gauge-invariant
+        probability (the Born rule of the framework), and a canonical
+        dynamical decomposition whose sector-readouts recover the forms
+        of quantum mechanics, gauge theory, and thermodynamics
+        (\cref{sec:derivation}).
+\end{enumerate}
+
+\subsection{Paper Outline}
+
+\Cref{sec:axioms} derives A0$^*$ from $\noth$ and states the forced primitives.
+\Cref{sec:primitives} introduces the three forced primitives ($\Del$,
+$\Pit$, $\Tim$).
+\Cref{sec:doctrines} presents the seven non-negotiable doctrines.
+\Cref{sec:derivation} presents the 34-step derivation (Phases A--I) with proof sketches.
+\Cref{sec:verification} reports the three-point self-audit and Z3 verification.
+\Cref{sec:related} surveys the intellectual context.
+\Cref{sec:discussion} provides an honest assessment of claims, limitations,
+and open frontiers.
+\Cref{sec:conclusion} concludes with future directions.
+Appendices contain the complete derivation with full proofs, verification
+protocol, and Z3 scripts.

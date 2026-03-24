@@ -1,0 +1,42 @@
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  node distance=1.8cm,
+  every node/.style={font=\small},
+  box/.style={draw, rounded corners=3pt, minimum height=0.7cm,
+              minimum width=1.4cm, fill=black!5},
+  arr/.style={->, >=stealth, thick},
+  lbl/.style={font=\scriptsize, midway, above}
+]
+  \node[box] (bot) {$\bot$};
+  \node[box, right of=bot] (pi) {$\Pi$};
+  \node[box, right of=pi] (del) {$\Delta$};
+  \node[box, right of=del, minimum width=1.6cm] (germ) {$g(s)$};
+  \node[box, right of=germ, minimum width=1.6cm] (obs) {$\mathcal{O}(s)$};
+  \node[box, right of=obs, minimum width=2.0cm] (geo) {$(g,J,\omega)$};
+  \node[box, right of=geo, minimum width=2.6cm, node distance=2.4cm]
+        (split) {$\dot{x}{=}J\nabla E{-}\nabla D$};
+
+  \draw[arr] (bot)  -- node[lbl] {A0} (pi);
+  \draw[arr] (pi)   -- node[lbl] {defect} (del);
+  \draw[arr] (del)  -- node[lbl] {germ} (germ);
+  \draw[arr] (germ) -- node[lbl] {self-obs} (obs);
+  \draw[arr] (obs)  -- node[lbl] {$B{\to}\infty$} (geo);
+  \draw[arr] (geo)  -- node[lbl] {split} (split);
+
+  % Phase labels below
+  \node[font=\scriptsize, below=0.15cm of bot, text=gray] {Step 0};
+  \node[font=\scriptsize, below=0.15cm of pi, text=gray] {A--G};
+  \node[font=\scriptsize, below=0.15cm of del, text=gray] {Step 23};
+  \node[font=\scriptsize, below=0.15cm of germ, text=gray] {Step 23};
+  \node[font=\scriptsize, below=0.15cm of obs, text=gray] {Step 24};
+  \node[font=\scriptsize, below=0.15cm of geo, text=gray] {Phase I};
+  \node[font=\scriptsize, below=0.15cm of split, text=gray] {Steps 30--33};
+\end{tikzpicture}
+\caption{The reflective chain: nothingness forces closure, closure
+reveals defect, defect requires self-observation, and self-observation
+iterated on the continuum limit produces K\"{a}hler geometry and the
+split law.  Each arrow is labeled with its forcing mechanism; step
+numbers appear below.}
+\label{fig:reflective-chain}
+\end{figure}

@@ -1,0 +1,80 @@
+% fiber-shrinkage.tex — Fiber shrinkage under successive observations
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  fiberbox/.style={draw=opochblue!60, rounded corners=3pt, inner sep=4pt,
+    minimum height=20mm, minimum width=16mm, fill=opochblue!3},
+  dot/.style={circle, fill=#1, minimum size=2.5pt, inner sep=0pt},
+  dot/.default={opochblue!70},
+  dotfade/.style={circle, fill=opochgray!25, minimum size=2.5pt, inner sep=0pt},
+  trans/.style={-{Stealth[length=2.5mm]}, thick, opochred!70},
+  tlbl/.style={font=\scriptsize, opochred!80!black, above},
+  blbl/.style={font=\scriptsize, opochorange, below},
+  slbl/.style={font=\footnotesize\bfseries, opochblue!80!black, above=2mm},
+]
+
+  % ---- W0: 16 dots (4x4 grid) ----
+  \node[fiberbox, minimum width=22mm, minimum height=22mm] (w0) at (0, 0) {};
+  \node[slbl] at (w0.north) {$W_0$};
+  \foreach \i in {0,...,3} {
+    \foreach \j in {0,...,3} {
+      \node[dot] at (-0.45+\i*0.3, -0.45+\j*0.3) {};
+    }
+  }
+
+  % Transition 1
+  \draw[trans] (1.4, 0) -- node[tlbl] {$\tau_1$ fires} node[blbl] {$\Del\Tim \geq 0$} (2.8, 0);
+
+  % ---- W1: 8 dots (4x2 grid) ----
+  \node[fiberbox, minimum width=18mm] (w1) at (4.4, 0) {};
+  \node[slbl] at (w1.north) {$W_1$};
+  \foreach \i in {0,...,3} {
+    \foreach \j in {0,...,1} {
+      \node[dot] at (3.85+\i*0.3, -0.15+\j*0.3) {};
+    }
+  }
+
+  % Transition 2
+  \draw[trans] (5.5, 0) -- node[tlbl] {$\tau_2$ fires} node[blbl] {$\Del\Tim \geq 0$} (6.9, 0);
+
+  % ---- W2: 4 dots (2x2 grid) ----
+  \node[fiberbox, minimum width=14mm] (w2) at (8.2, 0) {};
+  \node[slbl] at (w2.north) {$W_2$};
+  \foreach \i in {0,...,1} {
+    \foreach \j in {0,...,1} {
+      \node[dot] at (8.05+\i*0.3, -0.15+\j*0.3) {};
+    }
+  }
+
+  % Transition 3
+  \draw[trans] (9.2, 0) -- node[tlbl] {$\tau_3$ fires} node[blbl] {$\Del\Tim \geq 0$} (10.5, 0);
+
+  % ---- W3: 1 dot ----
+  \node[fiberbox, minimum width=10mm] (w3) at (11.5, 0) {};
+  \node[slbl] at (w3.north) {$W_3$};
+  \node[dot=opochgreen!80, minimum size=4pt] at (11.5, 0) {};
+
+  % Size annotations
+  \node[font=\tiny, opochgray, below=3mm of w0] {$|W_0|=16$};
+  \node[font=\tiny, opochgray, below=3mm of w1] {$|W_1|=8$};
+  \node[font=\tiny, opochgray, below=3mm of w2] {$|W_2|=4$};
+  \node[font=\tiny, opochgray, below=3mm of w3] {$|W_3|=1$};
+
+  % UNIQUE marker
+  \node[font=\scriptsize\bfseries, opochgreen!80!black, below=7mm of w3] {$\UNIQUE$};
+
+  % Second law annotation
+  \draw[decorate, decoration={brace, amplitude=4pt, mirror}, opochorange!80]
+    (-0.2, -2.0) -- (12.0, -2.0)
+    node[midway, below=5pt, font=\footnotesize, opochorange!80!black]
+    {Second Law: $\Del\Tim \geq 0$ at each step $\;\Longrightarrow\;$ fiber can only shrink};
+
+\end{tikzpicture}
+\caption{Fiber shrinkage under successive observations.
+  Each test $\tau_i$ halves (or more) the surviving answer set $\fiber{\Ledger}$.
+  The irreversible time cost $\Del\Tim \geq 0$ guarantees monotone shrinkage
+  until a single answer ($\UNIQUE$) or a fundamental separator gap ($\OMEGA$) is reached.}
+\label{fig:fiber-shrinkage}
+\end{figure}

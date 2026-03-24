@@ -1,0 +1,102 @@
+% =============================================================================
+% Section: The Three Primitives
+% =============================================================================
+
+\section{The Three Primitives}
+\label{sec:primitives}
+
+The derivation from nothingness forces exactly three primitive concepts into
+existence.  They are not postulated; they are the unique consequences of
+applying A0$^*$ to its own products.  This section names them, states their
+definitions, and traces each to the derivation step where it first appears.
+
+% -------------------------------------------------------------------------
+\subsection{$\Del$ --- Tests (Distinctions)}
+\label{sec:primitives:delta}
+
+\begin{definition}[Tests]
+\label{def:prim-delta}
+A \emph{test} $\tau \in \Del$ is a total computable function that separates
+descriptions.  The set of all tests $\Del^*$ is the least fixed point of
+closure rules on the base tests $\Del_0$, enumerated canonically by
+$\CanEnum$ (Step~4, \cref{thm:endogenous}).
+\end{definition}
+
+Tests are the only epistemic currency of the framework.  A distinction
+without a separating test is operationally void---it violates A0$^*$.
+Every claim, every piece of evidence, every advance in knowledge reduces to
+the execution of a test and the recording of its outcome.  Tests emerge at
+Steps~3--4 of the derivation: Step~3 forces the computational substrate
+that can execute them, and Step~4 forces their closure into a self-generating
+algebra $\Del^*$.
+
+% -------------------------------------------------------------------------
+\subsection{$\Pit$ --- Truth}
+\label{sec:primitives:pi}
+
+\begin{definition}[Truth]
+\label{def:prim-pi}
+\emph{Truth} is the information that survives all valid tests.  Formally,
+the \emph{truth quotient} $\TQ{\Ledger} = \FinSlice / {\equivL}$ identifies
+descriptions that no recorded test can distinguish (Step~6,
+\cref{thm:truth-quotient}).
+\end{definition}
+
+Truth is not a Platonic ideal; it is the coarsest structure that survives
+all executed tests.  Two descriptions are ``the same truth'' precisely when
+no test separates them.  The truth quotient carries additional forced
+structure: an observable-open topology $\ObsOpen$, an eraser algebra
+$\Eraser$, and a self-generating fixed point $\mathrm{sim}^*$ (Step~7,
+\cref{thm:indistinguishability}).  Together these make truth not merely a
+quotient but a topological algebra of testability.
+The concrete algorithm that computes canonical representatives---selecting the lexicographically minimal serialization within each truth class---is $\PiCanon$-canonicalization (Definition~\ref{def:pi-canon}).
+
+% -------------------------------------------------------------------------
+\subsection{$\Tim$ --- Time}
+\label{sec:primitives:time}
+
+\begin{definition}[Time]
+\label{def:prim-time}
+\emph{Time} is the irreversible formation of records.  Each new entry
+appended to the ledger $\Ledger$ advances the clock by
+$\Del\Tim = \log(|\fiber{}|_{\mathrm{pre}} / |\fiber{}|_{\mathrm{post}})
+\geq 0$ (Step~8, \cref{thm:time}).
+\end{definition}
+
+Time is not a parameter imposed from outside; it \emph{is} the
+irreversibility of witnessing.  The ledger is append-only (Step~5): deleting
+a record would destroy a witness, violating A0$^*$.  Because each record can
+only refine the truth quotient (never coarsen it), the sequence of records
+defines an arrow---from less resolved to more resolved---that cannot be
+reversed.  This arrow is time.  The energy ledger $\EnergyLedger$ (Step~10)
+tracks the cost of each advance.
+
+% -------------------------------------------------------------------------
+\subsection{$\Truthpoint$ --- The Truthpoint}
+\label{sec:primitives:truthpoint}
+
+\begin{definition}[Truthpoint]
+\label{def:truthpoint}
+The \emph{truthpoint} $\Truthpoint$ is the limit of $\TQ{\Ledger}$ as the
+ledger grows without bound:
+\[
+  \Truthpoint \;=\; \lim_{|\Ledger| \to \infty} \TQ{\Ledger}.
+\]
+It is the ideal complete knowledge state---the truth quotient under
+unlimited budget---approached but never operationally reached.
+\end{definition}
+
+$\Truthpoint$ exists as a limit concept (Step~11, \cref{thm:opnoth}): when
+the budget is exhausted, the system reaches operational nothingness $\opnoth$,
+the horizon of resolvability.  The gap between any finite $\TQ{\Ledger}$ and
+$\Truthpoint$ is precisely what the $\OMEGA$ state reports: the surviving
+ambiguity, together with the minimal separator test that would reduce it.
+
+\bigskip
+\noindent
+\textbf{Summary.}  These three primitives---$\Del$ (tests), $\Pit$ (truth),
+$\Tim$ (time)---together with the limit concept $\Truthpoint$, are not design
+choices.  They are the unique forced consequences of A0$^*$ applied to its own
+products.  Every subsequent structure in the derivation (gauge invariance,
+Myhill--Nerode congruence, separator geometry, Bellman dynamics,
+self-hosting) is built from these three primitives and nothing else.

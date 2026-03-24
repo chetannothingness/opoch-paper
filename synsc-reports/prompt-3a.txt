@@ -1,0 +1,56 @@
+You are conducting a rigorous mathematical verification of reviewer proposals for the Opoch paper.
+
+Read the following files in this project directory:
+- sections/derivation.tex: The 21-step forced derivation
+- sections/kernel.tex: The NSL kernel implementation
+- sections/primitives.tex: The three primitives (Pi, Delta, T)
+- sections/axioms.tex: Axiom A0 and declared primitives
+- appendices/full-derivation.tex: Full proofs for each step
+- appendices/open-questions.tex: Current open questions appendix
+- synsc-reports/phase1a-math-verification-report.md: Phase 1A findings (FLAGS on steps)
+
+YOUR TASK: Verify eight reviewer correction proposals against the paper's actual mathematics.
+
+PROPOSAL 1 — Pi-Canonicalization Definition:
+The reviewer proposes defining Pi-canonicalization as: PiCanon(x) = min_lex{Ser(y) : y ≈ x} where Ser is a serialization operator, ≈ is truth-quotient equivalence, and min_lex selects the lexicographically minimal representative.
+VERIFY: Does this satisfy (a) totality on FinSlice, (b) slack collapse (PiCanon(x) = PiCanon(y) iff x ≈ y), (c) idempotence (PiCanon(PiCanon(x)) = PiCanon(x)), (d) gauge absorption (PiCanon is invariant under gauge transforms)? Is this consistent with the paper's truth quotient (Def in primitives.tex) and gauge groupoid (Step 12)?
+
+PROPOSAL 2 — Differential Entropy (F.3):
+The reviewer claims that differential entropy h(W) = -∫ p log p dμ is coordinate-dependent and therefore the wrong invariant for the continuous extension. They propose replacing it with a Pi-fixed measure: μ_Π where μ_Π(A) is defined via the truth quotient on measurable subsets.
+VERIFY: Is differential entropy actually coordinate-dependent? What is the correct continuous extension that preserves gauge invariance? Is relative entropy (KL divergence) a better choice?
+
+PROPOSAL 3 — Two Kinds of Noncommutativity (F.2):
+The reviewer distinguishes: (a) resource-induced noncommutativity (test τ1 changes budget/state, affecting τ2's feasibility) and (b) disturbance-induced noncommutativity (quantum-style, outcome of τ2 depends on whether τ1 was performed).
+VERIFY: Are these genuinely distinct? Is resource-induced noncommutativity already inside the framework (via budget consumption in the Bellman loop)? Does the paper's existing treatment in open-questions.tex conflate them?
+
+PROPOSAL 4 — Omega Payload Formalization (F.6):
+The reviewer proposes formalizing Ω output as a 5-tuple: Ω = (A_S, τ_Ω, c(τ_Ω), B_rem, w_min) where w_min is a minimality witness proving no cheaper separator exists.
+VERIFY: Does this follow from the Bellman construction (Definition in kernel.tex, value function)? Is the minimality witness computable from the Bellman search tree? Does it add genuine content beyond what's already stated?
+
+PROPOSAL 5 — L0/L1/L2 Layer Distinction:
+The reviewer proposes three layers: L0 = bottom state (nothingness), L1 = meaning operator (A0 + its immediate consequences), L2 = model-class commitments (commutativity, minimax, closed-universe).
+VERIFY: Is this consistent with the paper's existing assumption inventory (tab:assumptions in open-questions.tex)? Do the 8 items in that table cleanly map to L0/L1/L2? Does this clarification resolve any of the FLAGS from Phase 1A?
+
+PROPOSAL 6 — Gödel Resolution Sharpening (F.4):
+The reviewer proposes: Υ(K)=K is a Pi-serialize fixed point, meaning the kernel serializes its own derivation, runs the kernel on each step, and gets UNIQUE for all. This is object-level verification, categorically distinct from meta-consistency proof.
+VERIFY: Does this sharpen the existing Gödel resolution? Is "Pi-serialize fixed point" the right mathematical characterization of self-hosting?
+
+PROPOSAL 7 — Budget-Total Tests (F.5):
+The reviewer proposes replacing "total on Δ*" with "budget-total on Δ_{≤B}" — tests that halt within budget B on all inputs in FinSlice.
+VERIFY: Is this already what the paper says (check open-questions.tex F.5)? Does the terminology need sharpening or is it already correct?
+
+PROPOSAL 8 — Three-Category Reframe (F.8):
+The reviewer proposes reframing the challenges table into three categories: (i) structural (derivation-internal), (ii) contract instantiation (applying the framework to specific domains), (iii) open boundary (requiring new Δ-specifications not forced by A0).
+VERIFY: Do the 6 challenge items cleanly sort into these three categories? Is this categorization mathematically rigorous?
+
+CROSS-CHECK WITH PHASE 1A:
+Do the reviewer's corrections resolve the FLAGS on Steps 5, 8, 18, 19 identified in phase1a-math-verification-report.md?
+
+For EACH proposal, output:
+- Proposal number and title
+- SOUND / PARTIALLY SOUND / UNSOUND
+- Mathematical justification
+- Recommended modifications (if any)
+- Impact on existing labels/refs
+
+Write the complete verification report to synsc-reports/phase3a-reviewer-verification.md

@@ -1,0 +1,71 @@
+% kahler-triple.tex — Kähler compatibility triangle (Steps 30--33)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  vertex/.style={circle, draw=#1, fill=#1!12, minimum size=22mm,
+    font=\small\bfseries, line width=0.8pt, align=center, inner sep=2pt},
+  elabel/.style={font=\footnotesize, fill=white, inner sep=2pt, rounded corners=1pt},
+  forcing/.style={font=\tiny\itshape, #1, align=center},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, #1},
+]
+
+  % === Three vertices of the Kähler triangle ===
+  \node[vertex=opochblue] (g) at (90:3.2)
+    {$g_{ij}$\\[2pt]\scriptsize Riemannian\\[-1pt]\scriptsize metric};
+
+  \node[vertex=opochpurple] (J) at (210:3.2)
+    {$J$\\[2pt]\scriptsize Complex\\[-1pt]\scriptsize structure};
+
+  \node[vertex=opochred] (w) at (330:3.2)
+    {$\omega$\\[2pt]\scriptsize Symplectic\\[-1pt]\scriptsize form};
+
+  % === Edge labels (compatibility relations) ===
+  \draw[thick, opochgray!60] (g) -- (J)
+    node[elabel, pos=0.5, left=2mm] {$g(JX, JY) = g(X, Y)$};
+
+  \draw[thick, opochgray!60] (g) -- (w)
+    node[elabel, pos=0.5, right=2mm] {$\omega(X, Y) = g(X, JY)$};
+
+  \draw[thick, opochgray!60] (J) -- (w)
+    node[elabel, pos=0.5, below=1mm] {$J^2 = -\mathrm{id}$,\; $d\omega = 0$};
+
+  % === Center: Kähler label ===
+  \node[font=\large\bfseries, opochgreen!70!black] at (0, 0) {K\"{a}hler};
+  \node[font=\tiny, opochgray, align=center] at (0, -0.6)
+    {Step~33: triple\\compatibility forced};
+
+  % === Forcing provenance (below triangle) ===
+  \begin{scope}[shift={(0, -4.5)}]
+    \node[font=\footnotesize\bfseries, opochgray] at (0, 0.6) {Forcing chain:};
+
+    \node[rectangle, draw=opochblue!50, fill=opochblue!8, rounded corners=2pt,
+      font=\tiny, inner sep=3pt, align=center, minimum width=22mm]
+      (fg) at (-3.8, 0) {Steps 28$\to$30\\$\mathcal{E} \to d_{\mathcal{E}} \to g_{ij}$};
+
+    \node[rectangle, draw=opochpurple!50, fill=opochpurple!8, rounded corners=2pt,
+      font=\tiny, inner sep=3pt, align=center, minimum width=22mm]
+      (fJ) at (-1.2, 0) {Steps 18+30$\to$31\\Coupling Law $\to J$};
+
+    \node[rectangle, draw=opochred!50, fill=opochred!8, rounded corners=2pt,
+      font=\tiny, inner sep=3pt, align=center, minimum width=22mm]
+      (fw) at (1.5, 0) {Steps 5+30+31$\to$32\\Diamond Law $\to \omega$};
+
+    \node[rectangle, draw=opochgreen!50, fill=opochgreen!8, rounded corners=2pt,
+      font=\tiny, inner sep=3pt, align=center, minimum width=22mm]
+      (fK) at (4.2, 0) {Steps 30--32$\to$33\\$(g,J,\omega) \to$ K\"{a}hler};
+
+    \draw[arr=opochgray!60] (fg) -- (fJ);
+    \draw[arr=opochgray!60] (fJ) -- (fw);
+    \draw[arr=opochgray!60] (fw) -- (fK);
+  \end{scope}
+
+\end{tikzpicture}
+\caption{The K\"{a}hler triple forced by Phase~I.  The Riemannian metric~$g$
+  (Step~30), complex structure~$J$ (Step~31), and symplectic form~$\omega$
+  (Step~32) satisfy mutual compatibility, closing into a K\"{a}hler
+  structure (Step~33).  Each vertex is forced by prior derivation steps;
+  no free parameter enters.}
+\label{fig:kahler-triple}
+\end{figure}

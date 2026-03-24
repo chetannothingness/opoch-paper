@@ -1,0 +1,69 @@
+% dirichlet-network.tex — Conductance-weighted network (Step 28)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  tnode/.style={circle, draw=opochblue!70, fill=#1, minimum size=8mm,
+    font=\small\bfseries, inner sep=0pt, line width=0.7pt},
+  elabel/.style={font=\tiny, fill=white, inner sep=1pt, rounded corners=1pt},
+]
+
+  % === Truth class nodes with gradient coloring (representing f values) ===
+  \node[tnode=opochblue!40] (p1) at (0, 0) {$p_1$};
+  \node[tnode=opochblue!30] (p2) at (2.5, 1.2) {$p_2$};
+  \node[tnode=opochblue!20] (p3) at (5.0, 0.4) {$p_3$};
+  \node[tnode=opochblue!10] (p4) at (2.0, -1.5) {$p_4$};
+  \node[tnode=opochblue!5] (p5) at (4.5, -1.8) {$p_5$};
+
+  % === Edges with thickness proportional to conductance ===
+  % Close pairs: thick edges (high conductance, small d)
+  \draw[opochorange, line width=2.5pt, opacity=0.6] (p1) -- (p2)
+    node[elabel, pos=0.5, above left=-1mm] {$w_{12}$};
+  \draw[opochorange, line width=2.0pt, opacity=0.6] (p2) -- (p3)
+    node[elabel, pos=0.5, above=-1mm] {$w_{23}$};
+  \draw[opochorange, line width=1.8pt, opacity=0.6] (p4) -- (p5)
+    node[elabel, pos=0.5, below=-1mm] {$w_{45}$};
+
+  % Medium pairs
+  \draw[opochorange, line width=1.0pt, opacity=0.4] (p1) -- (p4)
+    node[elabel, pos=0.5, left=-1mm] {$w_{14}$};
+  \draw[opochorange, line width=0.8pt, opacity=0.4] (p3) -- (p5)
+    node[elabel, pos=0.5, right=-1mm] {$w_{35}$};
+  \draw[opochorange, line width=0.6pt, opacity=0.4] (p2) -- (p4);
+
+  % Far pairs: thin edges (low conductance, large d)
+  \draw[opochorange, line width=0.3pt, opacity=0.3] (p1) -- (p5);
+  \draw[opochorange, line width=0.3pt, opacity=0.3] (p1) -- (p3);
+
+  % === Conductance formula ===
+  \node[rectangle, draw=opochgray!40, fill=white, rounded corners=2pt,
+    font=\small, inner sep=4pt, align=center]
+    at (8.0, 0.8)
+    {$w(p, p') = \dfrac{1}{\SepDist(p, p')^2}$};
+
+  % === Energy functional ===
+  \node[rectangle, draw=opochgreen!50, fill=opochgreen!5, rounded corners=2pt,
+    font=\small, inner sep=4pt, align=center]
+    at (8.0, -1.2)
+    {$\mathcal{E}[f] = \dfrac{1}{2}\displaystyle\sum_{p \neq p'} w_{pp'}\bigl(f(p) - f(p')\bigr)^2$};
+
+  % === Legend ===
+  \node[font=\tiny, opochgray, align=left] at (8.0, -2.8)
+    {Edge thickness $\propto$ conductance\\
+     Thick = easy to distinguish\\
+     Thin = hard to distinguish};
+
+  % === Function value annotation ===
+  \node[font=\tiny, opochblue!70, align=center] at (2.5, 2.2)
+    {Node shade $=$ signal $f(p)$\\(dark $\to$ light)};
+
+\end{tikzpicture}
+\caption{Conductance network on truth classes (Step~28).  Nodes are truth
+  classes $p_i \in \Omega$; edge weight $w(p,p') = 1/\SepDist(p,p')^2$
+  assigns high conductance to easily distinguishable pairs and low
+  conductance to hard-to-distinguish ones.  The Dirichlet form
+  $\mathcal{E}[f]$ measures the total energy of a signal~$f$ on this
+  network---the source of all geometric structure in Steps~29--33.}
+\label{fig:dirichlet-network}
+\end{figure}

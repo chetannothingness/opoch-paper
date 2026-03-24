@@ -1,0 +1,91 @@
+% self-hosting.tex — Self-hosting: the system verifies its own derivation
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  box/.style={rectangle, draw=#1, fill=#1!10, rounded corners=4pt,
+    minimum width=32mm, minimum height=10mm, font=\small,
+    line width=0.7pt, align=center, inner sep=4pt},
+  box/.default={opochgray},
+  loop arrow/.style={-{Stealth[length=2.5mm]}, line width=1pt, #1},
+  step label/.style={font=\tiny\itshape, align=center, text width=25mm, #1},
+]
+
+  % === System S at the top ===
+  \node[box=opochblue] (kernel) at (0, 0)
+    {System $\mathcal{S}$};
+  \node[step label=opochblue!70!black, above=2mm of kernel]
+    {\Opoch{} system};
+
+  % === Step 1: Encode derivation ===
+  \node[box=opochgray] (encode) at (0, -2.5)
+    {Encode derivation as\\$P_0, P_1, \ldots, P_{33}$};
+
+  % === Step 2: Run S on each P_i ===
+  \node[box=opochorange] (run) at (0, -5.0)
+    {Run $\mathcal{S}$ on each $P_i$};
+
+  % Individual step indicators
+  \begin{scope}[shift={(0, -5.0)}]
+    \foreach \i in {0,...,5} {
+      \node[circle, draw=opochorange!50, fill=opochorange!15,
+        minimum size=4mm, font=\tiny, inner sep=0pt]
+        at ({-2.5 + \i*1.0}, -1.2) {$P_{\i}$};
+    }
+    \node[font=\tiny, opochorange!60] at (4.0, -1.2) {$\cdots\; P_{33}$};
+  \end{scope}
+
+  % === Step 3: All produce UNIQUE ===
+  \node[box=opochgreen] (verify) at (0, -8.5)
+    {All produce $\UNIQUE$};
+
+  % Checkmarks for visual confirmation
+  \begin{scope}[shift={(0, -8.5)}]
+    \foreach \x in {-1.0, 0, 1.0} {
+      \node[font=\small, opochgreen!70!black] at (\x, -0.9) {\checkmark};
+    }
+  \end{scope}
+
+  % === Downward arrows ===
+  \draw[loop arrow=opochblue!70] (kernel) -- (encode)
+    node[step label=opochgray, pos=0.5, right=3mm]
+      {Step 1: encode each\\derivation step\\as a proposition};
+
+  \draw[loop arrow=opochorange!70] (encode) -- (run)
+    node[step label=opochgray, pos=0.5, right=3mm]
+      {Step 2: submit\\to system};
+
+  \draw[loop arrow=opochgreen!70] (run) -- ++(0, -1.2)
+    -- (verify.north -| 0, 0)
+    node[step label=opochgray, pos=0.3, right=3mm]
+      {Step 3: each $P_i$\\resolves to $+1$};
+
+  % === Feedback loop: back to System ===
+  \draw[loop arrow=opochgreen!60!black, line width=1.2pt]
+    (verify.west) -- ++(-3.2, 0) -- ++(0, 8.5)
+    -- (kernel.west)
+    node[step label=opochgreen!70!black, pos=0.5, left=3mm, align=center]
+      {$\FixPt(\mathcal{S}) = \mathcal{S}$\\[2pt]
+       \footnotesize Self-hosting\\
+       \footnotesize fixed point};
+
+  % === Central emphasis ===
+  \node[font=\tiny, opochgray!60, align=center] at (3.8, -4.2)
+    {The system treats its own\\derivation steps as input\\and verifies each one.};
+
+  % === Receipt box ===
+  \node[rectangle, draw=opochgreen!40, fill=opochgreen!5,
+    rounded corners=2pt, font=\tiny, inner sep=3pt, align=left]
+    at (3.8, -9.5)
+    {Receipt:\\
+     $V(P_i, w_i) = +1\;\;\forall\, i \in \{0,\ldots,33\}$\\
+     $\Rightarrow\;\FixPt(\mathcal{S}) = \mathcal{S}$};
+
+\end{tikzpicture}
+\caption{Self-hosting: the system~$\mathcal{S}$ verifies its own derivation
+  via~$\FixPt(\mathcal{S}) = \mathcal{S}$. Each derivation step $P_0, \ldots, P_{33}$
+  is encoded as a proposition and fed to~$\mathcal{S}$; all 34 produce $\UNIQUE$,
+  closing the self-referential loop.}
+\label{fig:self-hosting}
+\end{figure}

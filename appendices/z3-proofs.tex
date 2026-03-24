@@ -1,0 +1,195 @@
+\section{Z3 Formal Verification}
+\label{app:z3}
+
+This appendix documents the SMT-LIB verification scripts used to check
+the algebraic properties of the derivation on finite models.  All 20
+scripts were executed using Z3 \citep{demoura2008} v4.15.0 and are
+available in the \texttt{scripts/z3/} directory.
+
+\subsection{Scope and Limitations}
+
+\textbf{What is verified:} Structural properties that can be expressed as
+first-order constraints over finite domains---ledger append-only semantics,
+equivalence relation axioms, eraser algebra, monotone fiber shrinkage,
+gauge group structure ($\mathrm{Sym}(2) \times \mathrm{Sym}(3)$ with full
+Cayley table), image factorization, right-congruence (including coarsest
+congruence), separator-induced metric (with (TS)-necessity demonstration),
+Bellman well-definedness with non-degenerate Coupling Law, fixed-point
+consistency, trichotomy exhaustiveness, and dependency DAG acyclicity.
+
+\textbf{What is NOT verified:} Infinite-domain properties (e.g., the full
+topological structure of $\ObsOpen$, the real-analytic properties of
+$\SepDist$ on continuous spaces), the naming convention for the forced class, and semantic forcing arguments (``this is the \emph{unique}
+A0-compliant continuation'').  These require mechanization in a proof
+assistant (Lean, Coq) or human peer review.
+
+\textbf{Honest disclosure:} Z3 checks that the stated properties are
+\emph{satisfiable} on finite models (i.e., a model exists).  This is
+weaker than proving the properties hold \emph{for all} models.  Where
+we check unsatisfiability (e.g., ``there is no model violating the
+triangle inequality''), we state this explicitly.
+
+\textbf{Clarification on scope:} These scripts are best understood as
+\emph{machine-checked sanity checks on finite instances}, not as
+general proofs of the universal theorems stated in the derivation.  Each
+script operates on a small domain (typically 3--8 elements) and verifies
+that the claimed algebraic structure is realizable.  Proving the general
+theorems---that the properties hold for \emph{all} finite models of the
+appropriate size, and that the forcing arguments produce \emph{unique}
+A0-compliant continuations---requires mechanization in a full proof
+assistant (Lean, Coq, or Isabelle), which is deferred to future work.
+
+\subsection{Scripts and Results}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}lclp{5.5cm}@{}}
+\toprule
+\textbf{Script} & \textbf{Step} & \textbf{Parts} & \textbf{Property Verified} \\
+\midrule
+\texttt{step05-append-only} & 5 & 3 & Append-only ledger; removal destroys witnesses (violates A0); Diamond Law \\
+\texttt{step06-equiv} & 6 & 3 & Equivalence relation (R, S, T) on 4 elements; coarsest quotient \\
+\texttt{step07-eraser} & 7 & 3 & Observable-open intersection closure; eraser idempotence; eraser commutativity \\
+\texttt{step08-monotone} & 8 & 3 & Fiber shrinkage: $|W'| \leq |W|$ \\
+\texttt{step12-groupoid} & 12 & 5 & $\mathrm{Sym}(2) \times \mathrm{Sym}(3)$ group: 12 elements, full Cayley table, closure, inverses, associativity, no 13th element \\
+\texttt{step14-split} & 14 & 3 & Image factorization $f = \iota \circ q$ \\
+\texttt{step15-myhill-nerode} & 15 & 4 & Right-congruence on 3-state DFA; coarsest congruence (merging distinguishable states is unsat) \\
+\texttt{step16-metric} & 16 & 4 & Separator-induced metric: min-cost separators satisfy triangle inequality; (TS)-violating costs \emph{can} break it \\
+\texttt{step18-bellman} & 18 & 7 & Bellman recursion with \emph{different} gains/costs; argmax efficiency; $\Pit$-canonical tie-break; policy invariance; determinism \\
+\texttt{step19-fixpoint} & 19 & 3 & $\FixPt(\mathcal{S}) = \mathcal{S}$ \\
+\texttt{step21-dichotomy} & 21 & 8 & Trichotomy exhaustive \\
+\texttt{step22-inverse-limit} & 22 & 3 & Metric preservation in inverse system \\
+\texttt{step23-invariant-measure} & 23 & 3 & Uniqueness of Sym-invariant counting measure \\
+\texttt{step24-dirichlet} & 24 & 4 & Dirichlet form axioms (E1)--(E3) on finite graph \\
+\texttt{step25-semigroup} & 25 & 4 & Markov semigroup properties \\
+\texttt{step26-intrinsic-metric} & 26 & 4 & Intrinsic distance metric axioms \\
+\texttt{step27-complex-structure} & 27 & 3 & $J^2 = -\mathrm{id}$ on 4D model \\
+\texttt{step28-symplectic} & 28 & 3 & Closedness on simplicial complex \\
+\texttt{step29-kahler} & 29 & 3 & K\"ahler compatibility conditions \\
+\texttt{step-dag-acyclic} & --- & 3 & Dependency DAG (34 steps): topological order exists; back-edge creates cycle; all steps reachable \\
+\bottomrule
+\end{tabular}
+\caption{Z3 verification results (20 scripts, 77 total check-sat calls).  Each script verifies multiple parts; all expected sat/unsat results match.}
+\label{tab:z3-results}
+\end{table}
+
+\subsection{Running the Verification}
+
+\begin{verbatim}
+  ./scripts/z3/run-all.sh
+\end{verbatim}
+Expected output: 20/20 pass.
+
+\subsection{Key Strengthening (v2)}
+
+Three proofs were substantially strengthened from the initial version:
+
+\begin{itemize}
+  \item \textbf{Step~18 (Coupling Law):} The original proof used equal gains
+    for all tests, reducing \texttt{argmax}($\varepsilon$) to
+    \texttt{argmin}(cost)---a degenerate case.  The new version uses 4 tests
+    with different gains and costs, verifies $\Pit$-canonical tie-breaking,
+    policy invariance under strictly monotone transformations, and uniqueness
+    of selection.
+
+  \item \textbf{Step~12 (Gauge Group):} The original checked group axioms on
+    3 abstract morphisms.  The new version explicitly constructs
+    $\mathrm{Sym}(2) \times \mathrm{Sym}(3)$ with all $2! \times 3! = 12$
+    elements, a complete $6 \times 6$ Cayley table for $S_3$, and proves no
+    13th element can exist.
+
+  \item \textbf{Step~16 (Separator Metric):} The original checked generic
+    metric axioms on abstract points.  The new version models 3 truth classes
+    with 3 tests of known costs, computes $d(p,p') = \min\{c(\tau) : \tau
+    \text{ separates } p, p'\}$, and demonstrates that (TS)-violating cost
+    models \emph{can} break the triangle inequality (showing (TS) is
+    necessary, not just sufficient).
+\end{itemize}
+
+Three new proofs were added:
+
+\begin{itemize}
+  \item \textbf{Step~5 (Append-Only Ledger):} Verifies that removing a
+    ledger entry destroys a witness, violating A0.  Also checks Diamond Law
+    (order-independence).
+
+  \item \textbf{Step~7 (Eraser Algebra):} Verifies observable-open
+    intersection closure, eraser idempotence, and eraser commutativity on 4
+    truth classes with 3 tests.
+
+  \item \textbf{DAG Acyclicity:} Encodes all 34 steps with their declared
+    dependencies, verifies a topological ordering exists, adding a back-edge
+    creates a cycle, and all steps are downstream of Step~0.
+\end{itemize}
+
+\subsection{Phase H Proofs (v3)}
+
+Eight new scripts verify the geometric reconstruction (Steps~22--29).
+These proofs operate on finite discrete models and check the algebraic
+properties that underpin the continuum-limit argument:
+
+\begin{itemize}
+  \item \textbf{Step~22 (Inverse Limit):} Verifies metric preservation
+    in a finite inverse system of truth-quotient graphs, confirming that
+    refinement maps are isometric embeddings.
+
+  \item \textbf{Step~23 (Invariant Measure):} Checks uniqueness of the
+    Sym-invariant counting measure on a 4-element set, verifying that
+    the uniform measure is the only gauge-invariant probability measure.
+
+  \item \textbf{Step~24 (Dirichlet Form):} Verifies the three Dirichlet
+    form axioms (E1: bilinearity, E2: Markov property, E3: closedness)
+    on a weighted graph with conductance $w = 1/d^2$.
+
+  \item \textbf{Step~25 (Semigroup):} Checks Markov semigroup properties
+    (positivity preservation, contraction, composition law) derived from
+    the Beurling--Deny theorem applied to the Dirichlet form.
+
+  \item \textbf{Step~26 (Intrinsic Metric):} Verifies that the intrinsic
+    distance induced by the Dirichlet form satisfies metric axioms
+    (non-negativity, symmetry, triangle inequality, separation).
+
+  \item \textbf{Step~27 (Complex Structure):} Checks $J^2 = -\mathrm{id}$
+    and the Nijenhuis integrability condition on a 4-dimensional model,
+    confirming that the almost-complex structure is integrable.
+
+  \item \textbf{Step~28 (Symplectic Form):} Verifies closedness and
+    non-degeneracy of the symplectic 2-form on a simplicial complex,
+    using the discrete exterior derivative.
+
+  \item \textbf{Step~29 (K\"ahler):} Checks the K\"ahler compatibility
+    conditions $g(JX, JY) = g(X, Y)$ and $\omega(X, Y) = g(JX, Y)$,
+    confirming that the metric, complex structure, and symplectic form
+    are mutually compatible.
+\end{itemize}
+
+\subsection{Verification Boundary}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Can verify (Z3, finite models)} & \textbf{Cannot verify (needs Lean/Coq)} \\
+\midrule
+Equivalence relation axioms & Forcing (``unique continuation'') \\
+Group structure ($\prod \mathrm{Sym}$) & Infinite-domain theorems \\
+Monotone fiber shrinkage & Observable-open topology \\
+Image factorization & Separator geometry (real analysis) \\
+Myhill--Nerode congruence & Semantic ``why this is forced'' \\
+Separator metric (finite) & \\
+Bellman + Coupling Law & \\
+Eraser algebra & \\
+Ledger append-only & \\
+DAG acyclicity (34 steps) & \\
+Fixed-point consistency & \\
+Trichotomy exhaustiveness & \\
+Dirichlet form axioms & Continuum limit (inverse system) \\
+Riemannian metric (intrinsic) & Smooth manifold structure \\
+Complex structure ($J^2=-\mathrm{id}$) & K\"ahler compatibility \\
+\bottomrule
+\end{tabular}
+\caption{Boundary between finite-model Z3 verification and infinite-domain mechanization.}
+\label{tab:z3-boundary}
+\end{table}

@@ -1,0 +1,201 @@
+% =============================================================================
+% Section: Discussion and Open Frontiers
+% =============================================================================
+
+\section{Discussion and Open Frontiers}
+\label{sec:discussion}
+
+% -------------------------------------------------------------------------
+\subsection{What Is Claimed}
+\label{sec:discussion:claimed}
+
+We claim the following, and no more:
+
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{A canonical structure is derived from A0$^*$ alone.}
+        A0$^*$, when self-applied to witness validity, forces the endogenous
+        witness algebra.  The former model-class commitments are not extra
+        assumptions but earlier consequences of that self-application: closed
+        universe is forced by (W6), commutativity is a derived sector property
+        of the ordered ledger, and prior-free minimax is forced by the absence
+        of witnessed priors.  The 34-step development (Phases~A--I) then
+        produces carrier, self-delimiting syntax, a test algebra, truth
+        quotient, observable-open structure, eraser operators, time and cost
+        accounting, gauge invariance, Myhill--Nerode congruence, separator
+        geometry, Bellman recursion, self-hosting closure, binary interface,
+        universal execution, consciousness projector, and a K\"{a}hler geometric
+        structure on the continuum limit of truths.  No modeling commitments
+        remain; every step is a theorem of A0$^*$.  The claim of ``forcedness''
+        is to be read as ``forced up to computable isomorphism,'' rather than as
+        a claim that every representational choice is eliminated under every
+        possible formalization of witnessability.  We provide a three-point
+        audit of the intended invariances.
+
+  \item \textbf{The derivation is self-auditing.}
+        Each step passes hidden-chooser, encoding-invariance, and
+        distinguishability-equivalence checks.  Selected algebraic
+        properties are verified on finite models via Z3.
+
+  \item \textbf{The derivation identifies its single input and its empirical boundary.}
+        The only declared input is A0$^*$.  The presentation makes explicit
+        where the derivation's structural vocabulary ends and empirical
+        specification begins---principally the choice of
+        $\Del_{\mathrm{phys}}$, which selects which tests nature actually
+        admits.
+\end{enumerate}
+
+% -------------------------------------------------------------------------
+\subsection{The Vocabulary of Physical Law}
+\label{sec:discussion:physics}
+
+The derivation produces vocabulary, carrier $\Carrier$, test
+algebra $\Del$, time $\Tim$, gauge group $\gauge$, fiber
+$\fiber{\cdot}$, truth quotient $\TQ{\cdot}$, that is
+structurally parallel to the vocabulary of mathematical physics.
+This parallel reflects a shared concern with what can be distinguished by
+finite operations.
+
+However, ``vocabulary'' is not ``theory.'' A physical theory
+specifies which tests $\Del_{\mathrm{phys}}$ nature actually
+admits, what their costs are, and what symmetry group relates
+equivalent descriptions. The \Opoch{} framework provides the
+scaffold. Specifying $\Del_{\mathrm{phys}}$ remains an open frontier.
+The derivation produces the \emph{form} of physical law without
+determining its \emph{content}, which requires empirical input.
+
+% -------------------------------------------------------------------------
+\subsection{The Split Law and Sector Readouts}
+\label{sec:discussion:split-law}
+
+The K\"{a}hler triple $(g, J, \omega)$ of Phase~I forces a canonical
+decomposition of any dynamical law on $\Omega$.  Every vector field $X$
+on a K\"{a}hler manifold splits uniquely as
+$X = J\nabla E - \nabla D$,
+where $E$ is a Hamiltonian (energy, conserved under $J$-rotation) and $D$
+is a dissipation potential (entropy production, irreversible).  The first
+term generates symplectic flow; the second generates gradient flow toward
+equilibrium.  Quantum mechanics, gauge field theory, gravitational
+dynamics, and thermodynamics are \emph{sector-readouts} of this single
+split: each arises by restricting $\Omega$ to a subsector and reading off
+the induced $(g, J, \omega)$.  The split is not a modeling choice---it is
+forced by Steps~30--33 via K\"{a}hler compatibility.
+
+% -------------------------------------------------------------------------
+\subsection{The Church--Turing Corroboration}
+\label{sec:discussion:utm}
+
+Step~3 forces the test set $\Del$ to be maximally closed under
+totality-preserving composition.  This maximal closure is exactly the
+class of total computable functions---a mathematical theorem provable
+within computability theory \citep{rogers1967}, independent of the
+Church--Turing thesis.  The Church--Turing thesis
+\citep{church1936, turing1936} independently identified this same class
+by a different route (characterizing ``effective procedure'').  The
+agreement between A0$^*$'s forcing and Church--Turing's identification is
+historical corroboration, not a logical dependency of the derivation.
+
+\begin{remark}
+If a hypercomputational model were discovered that exceeds
+Turing-computability, Step~3 would need revision. The derivation
+through Step~2 would survive intact, but the carrier $\Carrier$ would
+expand. The remainder of the development would proceed analogously within the
+enlarged carrier.
+\end{remark}
+
+% -------------------------------------------------------------------------
+\subsection{The Closed-System Assumption}
+\label{sec:discussion:closed}
+
+Step~8 (feasibility shrinkage) assumes a closed system with a finite
+budget~$B$. Claims whose verification cost exceeds any available budget
+remain in $\OMEGA$. Such claims are unresolved with
+a minimal separator and cannot be promoted to $\UNIQUE$ without
+additional resources. This is a direct consequence of budgeted witnessability.
+
+% -------------------------------------------------------------------------
+\subsection{Minimax vs.\ Other Optimality Criteria}
+\label{sec:discussion:minimax}
+
+Step~18 forces the minimax policy as the unique prior-free bootstrap
+policy.  Before any prior is itself witnessed and recorded in
+$\OrdLedger$, branch labels over future outcomes are gauge: no unrecorded
+probability distribution is admissible by A0$^*$.  The only cost aggregator
+invariant under outcome relabeling, cost rescaling, replay-equivalent path
+decomposition, and gauge recoding is the worst-case continuation
+cost---i.e., minimax.  Bayesian expected-cost selection becomes admissible
+only \emph{after} a prior~$\mu$ has itself attained witness status in the
+trace:
+\[
+  \tau^*_{\mathrm{Bayes}} = \argmin_{\tau \in \Del_q}
+    \Bigl[\pi(\tau) + \sum_{a \in \mathrm{out}(\tau)} \mu(a \mid \tau)\, V(\fiber{a}, t + \pi(\tau);\, q)\Bigr]
+    \quad(\mu \text{ witnessed in } \OrdLedger).
+\]
+Minimax is therefore the \emph{bootstrap} policy forced by A0$^*$;
+Bayesian selection is the \emph{mature} policy enabled by
+self-observation.  The choice is not left open---it is resolved by the
+witness status of the prior.
+
+% -------------------------------------------------------------------------
+\subsection{Myhill--Nerode Implications}
+\label{sec:discussion:myhill-nerode}
+
+The Myhill--Nerode congruence $\MNcong$ (Step~15) provides a minimal
+state representation. States with identical futures can be merged, reducing
+memory and computation. The connection to bisimulation in process algebra
+suggests that multi-system interactions can be analyzed using tools from
+concurrency theory.
+
+% -------------------------------------------------------------------------
+\subsection{Separator Geometry and Hardness}
+\label{sec:discussion:geometry}
+
+The separator metric $\SepDist$ (Step~16) provides a quantitative measure
+of difficulty. Regions of high curvature $\SepCurv$ correspond to
+phase transitions in difficulty, where small changes in the query produce
+large changes in resolution cost. This geometry is analogous in spirit to the
+Fisher-Rao metric on statistical manifolds, but it is defined over
+deterministic truth classes and measured in computational cost.
+
+% -------------------------------------------------------------------------
+\subsection{Quantitative Extraction Frontiers}
+\label{sec:discussion:frontiers}
+
+The structure is complete.  The computation is the frontier.  Every
+dimensionless invariant is forced (Theorem~\ref{thm:observable-decomp});
+every dimensional quantity is fixed up to the internally derived
+normalization map.  The remaining work is explicit spectral extraction
+from the seed operator---a well-posed computation, not an open
+structural question.
+
+\begin{enumerate}[label=(\arabic*)]
+  \item \textbf{Explicit spectral extraction from $L^*$.}
+        Computing the eigenvalues, holonomy classes, and normal-form
+        coefficients of the linearized refinement operator at the seed.
+        This is a concrete numerical problem, not a structural gap.
+
+  \item \textbf{Specifying $\Del_{\mathrm{phys}}$.}
+        Which families of physical experiments should be treated as primitive
+        tests, and which symmetries should be treated as gauge, so that the
+        resulting $\Del_{\mathrm{phys}}$ reproduces established empirical
+        constraints?
+
+  \item \textbf{Exploiting the ordered ledger for quantum reconstruction.}
+        Whether the non-commuting sector of $\WitAlg$, together with the
+        K\"{a}hler structure, suffices to reconstruct operator-algebraic
+        quantum mechanics without additional empirical input.
+
+  \item \textbf{Energy as abstract cost vs.\ physical energy.}
+        Clarifying the boundary between abstract resource measures and
+        physical energetics under the Landauer correspondence.
+
+  \item \textbf{Separator geometry as a complexity lens.}
+        Can $\SepCurv$ predict computational difficulty of problem classes
+        via circuit or communication complexity?
+
+  \item \textbf{Self-hosting depth.}
+        Understanding whether deeper reflective towers stabilize.
+
+  \item \textbf{Lean mechanization of infinite-domain theorems.}
+        The 338-theorem Lean~4 verification covers the finite/Nat model.
+        Encoding infinite-domain properties via mathlib remains in progress.
+\end{enumerate}

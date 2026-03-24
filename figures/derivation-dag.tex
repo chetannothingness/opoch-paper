@@ -1,0 +1,233 @@
+% derivation-dag.tex — Dependency graph of the 34 derivation steps (0–33)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  % Node styles by phase (9 phases: A through I)
+  origin/.style={circle, draw=opochgray, fill=opochgray!15, minimum size=8mm,
+    font=\footnotesize\bfseries, inner sep=1pt},
+  phaseA/.style={rounded rectangle, draw=opochblue, fill=opochblue!10,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseB/.style={rounded rectangle, draw=opochgreen, fill=opochgreen!10,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseC/.style={rounded rectangle, draw=opochorange, fill=opochorange!10,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseD/.style={rounded rectangle, draw=opochred, fill=opochred!10,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseE/.style={rounded rectangle, draw=opochblue!70!black, fill=opochblue!5,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseF/.style={rounded rectangle, draw=opochgreen!70!black, fill=opochgreen!5,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseG/.style={rounded rectangle, draw=opochred!70!black, fill=opochred!5,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseH/.style={rounded rectangle, draw=opochorange!70!black, fill=opochorange!5,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  phaseI/.style={rounded rectangle, draw=opochpurple, fill=opochpurple!10,
+    minimum width=14mm, minimum height=7mm, font=\footnotesize, inner sep=2pt},
+  dep/.style={-{Stealth[length=2.5mm]}, thin, opochgray!70},
+]
+
+  % === Phase A: The Only Law (Step 0) ===
+  \node[origin] (s0) at (0, 0) {$\noth$};
+  \node[above=1mm of s0, font=\scriptsize\itshape, opochgray] {Step 0};
+
+  % === Phase B: Carrier and Syntax (Steps 1–2) ===
+  \node[phaseA] (s1) at (-2, -1.5) {1: $\Carrier$};
+  \node[phaseA] (s2) at ( 2, -1.5) {2: $\SdMap$};
+
+  % === Phase C: Executability (Steps 3–4) ===
+  \node[phaseB] (s3) at (-2, -3.0) {3: $\UTM$};
+  \node[phaseB] (s4) at ( 2, -3.0) {4: $\Del^*$};
+
+  % === Phase D: Recording and Truth (Steps 5–7) ===
+  \node[phaseC] (s5) at (-3, -4.5) {5: $\Ledger$};
+  \node[phaseC] (s6) at ( 0, -4.5) {6: $\TQ{}$};
+  \node[phaseC] (s7) at ( 3, -4.5) {7: $\ObsOpen$};
+
+  % === Phase E: Time, Energy, Limits (Steps 8–11) ===
+  \node[phaseD] (s8)  at (-4.5, -6.0) {8: $\Del\Tim$};
+  \node[phaseD] (s9)  at (-1.5, -6.0) {9: $S, B$};
+  \node[phaseD] (s10) at ( 1.5, -6.0) {10: $\EnergyLedger$};
+  \node[phaseD] (s11) at ( 4.5, -6.0) {11: $\opnoth$};
+
+  % === Phase F: Invariance and Control (Steps 12–17) ===
+  \node[phaseE] (s12) at (-5, -7.5) {12: $\gauge$};
+  \node[phaseE] (s13) at (-3, -7.5) {13: $\Epistemic$};
+  \node[phaseE] (s14) at (-1, -7.5) {14: $\ExactGate$};
+  \node[phaseE] (s15) at ( 1, -7.5) {15: $\MNcong$};
+  \node[phaseE] (s16) at ( 3, -7.5) {16: $\SepDist$};
+  \node[phaseE] (s17) at ( 5, -7.5) {17: $\Pit$};
+
+  % === Phase G: Solver, Self-Hosting, Closure (Steps 18–21) ===
+  \node[phaseF] (s18) at (-3, -9.0) {18: $\Bellman$};
+  \node[phaseF] (s19) at ( 0, -9.0) {19: $\SelfHost$};
+  \node[phaseF] (s20) at ( 3, -9.0) {20: $\SdMap$-if};
+
+  % === Phase H: Universal Execution (Steps 22–25) ===
+  \node[phaseH] (s22) at (-4.5, -10.5) {22: $\UnivOp$};
+  \node[phaseH] (s23) at (-1.5, -10.5) {23: $\ClosureDefect{Q}$};
+  \node[phaseH] (s24) at ( 1.5, -10.5) {24: $\ConsProj$};
+  \node[phaseH] (s25) at ( 4.5, -10.5) {25: $\TritField$};
+
+  % === Phase I: Geometric Reconstruction (Steps 26–33) ===
+  \node[phaseI] (s26) at (-5.25, -12.0) {26: $\Omega$};
+  \node[phaseI] (s27) at (-3.75, -12.0) {27: $L^2$};
+  \node[phaseI] (s28) at (-2.25, -12.0) {28: $\mathcal{E}$};
+  \node[phaseI] (s29) at (-0.75, -12.0) {29: $T_t$};
+  \node[phaseI] (s30) at ( 0.75, -12.0) {30: $g$};
+  \node[phaseI] (s31) at ( 2.25, -12.0) {31: $J$};
+  \node[phaseI] (s32) at ( 3.75, -12.0) {32: $\omega$};
+  \node[phaseI] (s33) at ( 5.25, -12.0) {33: K\"ahler};
+
+  % === Step 21 (Closure) depends on all — bottom ===
+  \node[phaseG] (s21) at (0, -13.5) {21: Closure};
+
+  % === Dependencies ===
+
+  % From origin (Step 0)
+  \draw[dep] (s0) -- (s1);
+  \draw[dep] (s0) -- (s2);
+
+  % Phase B → Phase C
+  \draw[dep] (s1) -- (s3);
+  \draw[dep] (s2) -- (s3);
+  \draw[dep] (s1) -- (s4);
+  \draw[dep] (s3) -- (s4);
+
+  % Phase C → Phase D
+  \draw[dep] (s4) -- (s5);
+  \draw[dep] (s1) -- (s5);
+  \draw[dep] (s1) -- (s6);
+  \draw[dep] (s5) -- (s6);
+  \draw[dep] (s4) -- (s7);
+  \draw[dep] (s6) -- (s7);
+
+  % Phase D → Phase E
+  \draw[dep] (s5) -- (s8);
+  \draw[dep] (s7) -- (s8);
+  \draw[dep] (s5) -- (s9);
+  \draw[dep] (s8) -- (s9);
+  \draw[dep] (s8) -- (s10);
+  \draw[dep] (s9) -- (s10);
+  \draw[dep] (s8) -- (s11);
+  \draw[dep] (s10) -- (s11);
+
+  % Phase E → Phase F
+  \draw[dep] (s6) -- (s12);
+  \draw[dep] (s9) -- (s12);
+  \draw[dep] (s6) -- (s13);
+  \draw[dep] (s8) -- (s13);
+  \draw[dep] (s12) -- (s13);
+  \draw[dep] (s5) -- (s14);
+  \draw[dep] (s6) -- (s14);
+  \draw[dep] (s13) -- (s14);
+  \draw[dep] (s4) -- (s15);
+  \draw[dep] (s6) -- (s15);
+  \draw[dep] (s12) -- (s15);
+  \draw[dep] (s4) -- (s16);
+  \draw[dep] (s6) -- (s16);
+  \draw[dep] (s15) -- (s16);
+  \draw[dep] (s6) -- (s17);
+  \draw[dep] (s12) -- (s17);
+
+  % Phase F → Phase G
+  \draw[dep] (s9) -- (s18);
+  \draw[dep] (s14) -- (s18);
+  \draw[dep] (s16) -- (s18);
+  \draw[dep] (s3) -- (s19);
+  \draw[dep] (s5) -- (s19);
+  \draw[dep] (s6) -- (s19);
+  \draw[dep] (s18) -- (s19);
+  \draw[dep] (s2) -- (s20);
+  \draw[dep] (s19) -- (s20);
+
+  % Phase G → Phase H (Universal Execution)
+  % 22 ← {0, 4, 6, 7, 12, 16, 17}
+  \draw[dep] (s6) -- (s22);
+  \draw[dep] (s7) -- (s22);
+  \draw[dep] (s12) -- (s22);
+  \draw[dep] (s16) -- (s22);
+  \draw[dep] (s17) -- (s22);
+  % 23 ← {6, 8, 22}
+  \draw[dep] (s6) -- (s23);
+  \draw[dep] (s8) -- (s23);
+  \draw[dep] (s22) -- (s23);
+  % 24 ← {6, 7, 17, 19, 22}
+  \draw[dep] (s7) -- (s24);
+  \draw[dep] (s17) -- (s24);
+  \draw[dep] (s19) -- (s24);
+  \draw[dep] (s22) -- (s24);
+  % 25 ← {0, 5, 22, 23}
+  \draw[dep] (s5) -- (s25);
+  \draw[dep] (s22) -- (s25);
+  \draw[dep] (s23) -- (s25);
+
+  % Phase I: Geometric Reconstruction (Steps 26–33)
+  % 26 ← {16, 9, 7}
+  \draw[dep] (s16) -- (s26);
+  \draw[dep] (s9) -- (s26);
+  \draw[dep] (s7) -- (s26);
+  % 27 ← {26, 12}
+  \draw[dep] (s26) -- (s27);
+  \draw[dep] (s12) -- (s27);
+  % 28 ← {26, 27, 16}
+  \draw[dep] (s26) -- (s28);
+  \draw[dep] (s27) -- (s28);
+  \draw[dep] (s16) -- (s28);
+  % 29 ← {28, 8}
+  \draw[dep] (s28) -- (s29);
+  \draw[dep] (s8) -- (s29);
+  % 30 ← {28, 26}
+  \draw[dep] (s28) -- (s30);
+  \draw[dep] (s26) -- (s30);
+  % 31 ← {18, 30, 8}
+  \draw[dep] (s18) -- (s31);
+  \draw[dep] (s30) -- (s31);
+  \draw[dep] (s8) -- (s31);
+  % 32 ← {30, 31, 5}
+  \draw[dep] (s30) -- (s32);
+  \draw[dep] (s31) -- (s32);
+  \draw[dep] (s5) -- (s32);
+  % 33 ← {30, 31, 32}
+  \draw[dep] (s30) -- (s33);
+  \draw[dep] (s31) -- (s33);
+  \draw[dep] (s32) -- (s33);
+
+  % Step 21 (Closure) depends on all — show key edges
+  \draw[dep] (s20) -- (s21);
+  \draw[dep] (s25) -- (s21);
+  \draw[dep] (s33) -- (s21);
+
+  % === Legend ===
+  \begin{scope}[shift={(7.5, -1.0)}]
+    \node[font=\scriptsize\bfseries] at (0, 0) {Phases};
+    \node[phaseA, minimum width=10mm, minimum height=5mm] at (0, -0.5) {};
+    \node[font=\tiny, right] at (0.7, -0.5) {B: Carrier};
+    \node[phaseB, minimum width=10mm, minimum height=5mm] at (0, -1.0) {};
+    \node[font=\tiny, right] at (0.7, -1.0) {C: Executability};
+    \node[phaseC, minimum width=10mm, minimum height=5mm] at (0, -1.5) {};
+    \node[font=\tiny, right] at (0.7, -1.5) {D: Truth};
+    \node[phaseD, minimum width=10mm, minimum height=5mm] at (0, -2.0) {};
+    \node[font=\tiny, right] at (0.7, -2.0) {E: Time};
+    \node[phaseE, minimum width=10mm, minimum height=5mm] at (0, -2.5) {};
+    \node[font=\tiny, right] at (0.7, -2.5) {F: Invariance};
+    \node[phaseF, minimum width=10mm, minimum height=5mm] at (0, -3.0) {};
+    \node[font=\tiny, right] at (0.7, -3.0) {G: Solver};
+    \node[phaseH, minimum width=10mm, minimum height=5mm] at (0, -3.5) {};
+    \node[font=\tiny, right] at (0.7, -3.5) {H: Execution};
+    \node[phaseI, minimum width=10mm, minimum height=5mm] at (0, -4.0) {};
+    \node[font=\tiny, right] at (0.7, -4.0) {I: Geometry};
+    \node[phaseG, minimum width=10mm, minimum height=5mm] at (0, -4.5) {};
+    \node[font=\tiny, right] at (0.7, -4.5) {Closure};
+  \end{scope}
+
+\end{tikzpicture}
+\caption{Dependency graph of the 34-step derivation from $\noth$ (Steps~0--33).
+  Each node is a forced step; arrows show logical prerequisites.
+  Colors indicate the nine derivation phases (A through I):
+  The Only Law, Carrier, Executability, Truth, Time, Invariance, Solver,
+  Universal Execution, and Geometry.
+  Step~21 (Closure) depends on all preceding steps and appears at the bottom.}
+\label{fig:derivation-dag}
+\end{figure}

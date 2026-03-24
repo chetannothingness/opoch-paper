@@ -1,0 +1,268 @@
+% =============================================================================
+% Section: Qualitative and Quantitative Forcing from Nothingness
+% =============================================================================
+
+\section{Qualitative and Quantitative Forcing}
+\label{sec:forcing}
+
+Before proceeding to geometry and physics, we prove the two master theorems
+that bridge nothingness to structured reality.  From $\noth$, there are no
+external labels, names, coordinates, units, or scales.  This forces all
+qualitative structure to be quotient-invariant and all quantitative
+structure to be internal-comparison-invariant.
+
+% ---------------------------------------------------------------------------
+\subsection{Qualitative Forcing}
+\label{sec:forcing:qualitative}
+
+\begin{theorem}[Q1 --- Qualitative Forcing]
+\label{thm:qualitative-forcing}
+If no external labels are admissible, then all qualitative structure is
+quotient-invariant structure of the witness algebra.
+\begin{proof}[Proof]
+From $\noth$, there are no external labels, names, or tags.  A0$^*$ says a
+distinction is real iff a finite endogenous replayable witness separates
+it.  Two candidate objects $x, y$ that no admissible witness separates are
+\emph{indistinguishable}:
+\[
+  x \sim y \;\;\iff\;\; \forall\, w \in \WitAlg,\;\;
+  \mathrm{out}(w, x) = \mathrm{out}(w, y).
+\]
+Any property $P$ that assigns different values to indistinguishable objects
+would require an external label to distinguish them---but no external
+labels exist (from $\noth$).  By A0$^*$, the distinction ``$P(x) \neq P(y)$
+despite $x \sim y$'' has no witness, hence is not real.  Therefore every
+meaningful property is quotient-invariant:
+\[
+  x \sim y \;\;\Longrightarrow\;\; P(x) = P(y).
+\]
+\forcing{No external labels $\Rightarrow$ only witness-stable distinctions
+$\Rightarrow$ qualitative quotient structure.  This forces: identity
+(persistence under witnessing), objecthood (stable distinction class),
+property (invariant of a class), relation (witnessable comparison class),
+topology (observable-open structure from tests), causality (refinement
+order in the closure boundary), modality (survivor-class structure of
+continuations).}
+\end{proof}
+\end{theorem}
+
+% ---------------------------------------------------------------------------
+\subsection{Quantitative Forcing}
+\label{sec:forcing:quantitative}
+
+\begin{theorem}[Q2 --- Quantitative Forcing]
+\label{thm:quantitative-forcing}
+If no external units are admissible, then all quantitative structure is
+determined only up to internal scale gauge, and only gauge-invariant
+combinations are physically real.
+\begin{proof}[Proof]
+From $\noth$, there are no external units, absolute scales, or externally
+chosen coordinates.  Any numerical assignment $f(x)$ that changes under
+unit rescaling $d \to \lambda d$ is a bare number with no witnessable
+content---the distinction ``$f = 3$ in units $u_1$'' vs.\ ``$f = 7$ in
+units $u_2$'' has no witness unless a unit-independent comparison is
+available.  By A0$^*$, only witnessable distinctions are real.  Therefore
+only gauge-invariant combinations of quantities are physically meaningful.
+\forcing{No external units $\Rightarrow$ only internally comparable
+costs/frequencies/refinements $\Rightarrow$ quantitative invariants only
+up to scale gauge.}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Q3 --- Gauge-of-Units]
+\label{thm:gauge-of-units}
+Any two quantitative presentations related by unit rescaling or coordinate
+relabeling represent the same physical content iff all invariant ratios
+and normalized evaluations agree.
+\begin{proof}[Proof sketch]
+This is the quantitative analogue of Q1.  Just as two qualitatively
+indistinguishable objects are the same truth class, two quantitatively
+gauge-related assignments are the same physical quantity.  The proof is
+the same: distinguishing them would require an external unit standard,
+which violates $\noth$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Q4 --- Canonical Quantities]
+\label{thm:canonical-quantities}
+The only physically meaningful numbers are those invariant under the unit
+gauge group.  Every admissible quantity is one of:
+\begin{enumerate}[nosep, label=(\arabic*)]
+  \item a dimensionless invariant,
+  \item a ratio of like quantities,
+  \item a generator of an internal comparison group,
+  \item a normal form under scale gauge.
+\end{enumerate}
+\begin{proof}[Proof sketch]
+Any quantity not of these forms depends on an external unit choice, which
+is not witnessable from within.  By A0$^*$, it is not real.  This forces
+every downstream quantity to be defined as an internal invariant:
+\begin{itemize}[nosep]
+  \item time from irreversible ledger accumulation (not external seconds),
+  \item entropy from unresolved multiplicity (not external thermodynamics),
+  \item energy from internal witness cost of stabilizing distinctions,
+  \item distance from minimal separative comparison cost,
+  \item probability from normalized positive state evaluation,
+  \item curvature from variation of the internal distinguishability metric.
+\end{itemize}
+\forcing{No external scale $\Rightarrow$ every quantity is defined only up
+to internal gauge, and only gauge-invariant combinations are real.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Bridge to Downstream Structure]
+\label{rem:forcing-bridge}
+Q1--Q4 are the bridge between nothingness and the derivation chain.  They
+ensure that every structure derived in \cref{sec:derivation} and beyond is
+not merely ``consistent with A0$^*$'' but \emph{forced} by it:
+\begin{itemize}[nosep]
+  \item The truth quotient (Step~6) is forced by Q1: indistinguishable
+        objects must be identified.
+  \item Gauge invariance (Step~12) is forced by Q1 + Q3: untestable
+        relabelings are qualitative gauge.
+  \item The witness-path metric (Step~16) is forced by Q4: distance is
+        the minimal internal separative comparison cost.
+  \item The conductance exponent $w = C/d^2$ (Step~28) is forced by Q2:
+        scale covariance is a consequence of no external units.
+  \item The Born rule (\cref{thm:born-rule}) is forced by Q4: probability
+        is the unique normalized positive state evaluation.
+\end{itemize}
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{The Static Universe}
+\label{sec:forcing:static}
+
+The $\Pit$-fixed closure whole is atemporal.  Time is a local phenomenon
+arising from incomplete self-resolution, not a property of the universe
+as a whole.
+
+\begin{theorem}[S0 --- Whole-Before-Time]
+\label{thm:whole-before-time}
+The full $\Pit$-fixed closure whole $U = \mathrm{Fix}(\Pit)$ is
+atemporal: applying $\Pit$ to $U$ changes nothing.  All admissible
+local states are partial sections of~$U$.
+\begin{proof}
+By definition, $U = \mathrm{Fix}(\Pit)$ satisfies $\Pit(U) = U$.
+Therefore no witness applied to $U$ can refine the truth quotient
+further---the fiber $\fiber{p}$ is a singleton for every truth class
+$p$ in~$U$, so no test produces new information.  By Step~8
+(\cref{thm:time}), time is the irreversible formation of new records,
+measured by $\Del\Tim = \log(|\fiber{}|_{\mathrm{pre}} /
+|\fiber{}|_{\mathrm{post}}) \geq 0$.  When the fiber is already
+minimal ($|\fiber{}| = 1$), every test yields $\Del\Tim = 0$: no time
+passes.  The whole $U$ is therefore atemporal.
+
+Any admissible local state $s$ satisfies $s \subseteq U$ (since $U$
+contains all admissible truth classes) but in general
+$\Pit(s) \neq s$---the local truth quotient is not yet fully resolved.
+Hence $s$ is a partial section of the completed whole.
+\forcing{$U = \mathrm{Fix}(\Pit)$ is forced by the closure
+construction.  Atemporality follows from Step~8: when nothing remains
+to resolve, $\Del\Tim = 0$ identically.  Local states are partial
+sections because they are subsets of the complete truth quotient that
+have not yet exhausted their witness budget.}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[S1 --- Time is Local Defect-Resolution]
+\label{thm:time-local-defect}
+If $s$ is a local incomplete section of $U$, then ``time'' is the
+monotone reduction of unresolved witness-defect
+$\ClosureDefect{Q}(s) = \Pit(s) \setminus s$, not motion of $U$
+itself.  The universe is static globally, dynamic only as local
+self-resolution.
+\begin{proof}
+By \cref{thm:closure-defect} (Step~23), the closure-defect
+$\ClosureDefect{Q}(s) = \Pit_Q(s) - s$ measures the gap between the
+current state and its truth projection.  Its support
+$\Residue_t = \mathrm{supp}(\ClosureDefect{Q}(s_t))$ decreases
+monotonically with each test (Step~8): $|\Residue_{t+1}| \leq
+|\Residue_t|$.  This monotone decrease \emph{is} time for the local
+section~$s$.
+
+For the global whole $U = \mathrm{Fix}(\Pit)$, the closure-defect
+vanishes: $\ClosureDefect{Q}(U) = \Pit(U) - U = 0$.  Therefore $U$
+has no unresolved components and no time evolution.  ``Dynamics'' is
+exclusively a local phenomenon: the self-resolution of a partial
+section's witness-defect toward the already-existing fixed whole.
+\forcing{The global whole is static because $\ClosureDefect{Q}(U) = 0$
+(no defect to resolve).  Local time is the monotone decrease of
+$|\Residue_t|$, which is forced by the append-only ledger (Step~5)
+and the irreversibility of record formation (Step~8).  The universe
+does not ``move''---local sections resolve toward it.}
+\end{proof}
+\end{theorem}
+
+% ---------------------------------------------------------------------------
+\subsection{The Quantitative Seed}
+\label{sec:forcing:seed}
+
+The structural forcing of Sections~5.1--5.3 determines the \emph{form} of all
+physical law.  To pin down the \emph{values} of dimensionless observables, we
+isolate the unique quantitative seed $\delta^*$.
+
+\begin{definition}[Defect Space and Action]
+Let $D$ denote the space of closure-defect profiles (lists of
+component-state fibers).  The gauge group $G$ acts by permuting
+distinction labels, preserving total defect.  The \emph{action
+functional} $A : D/{\sim_G} \to \mathbb{N}$ maps each gauge class to
+its total defect.  A defect is \emph{self-retaining} if every open
+component has fiber~$1$ (minimum nonzero), making it a fixed point
+under witness accumulation.  A defect is \emph{non-gauge} if $A(d) > 0$.
+\end{definition}
+
+\begin{theorem}[Seed Existence and Uniqueness]
+\label{thm:seed-existence}
+There exists a unique (up to gauge) self-retaining non-gauge defect
+$\delta^*$ minimizing $A$.  Concretely: $A(\delta^*) = 1$, and every
+non-gauge defect has $A \ge 1$.
+\begin{proof}
+The class $D_\text{sr}$ of self-retaining non-gauge defects is nonempty
+(witness: a single open component with fiber~$1$).  The action maps to
+$\mathbb{N}$, which is well-ordered.  A minimizer exists by
+well-foundedness on a nonempty set.  Any two minimizers have the same
+action value by symmetric minimality.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Seed is Renormalization Fixed Point]
+\label{thm:seed-fixed}
+For any refinement operator $R$ that is monotone, gauge-preserving,
+and self-retaining-preserving, $A(R(\delta^*)) = A(\delta^*)$.
+\begin{proof}
+By monotonicity $A(R(\delta^*)) \le A(\delta^*)$; by minimality
+$A(\delta^*) \le A(R(\delta^*))$.
+\end{proof}
+\end{theorem}
+
+% ---------------------------------------------------------------------------
+\subsection{Quantitative Closure}
+\label{sec:forcing:closure}
+
+The linearized refinement operator $L^* = DR|_{\delta^*}$ acts on the
+tangent space at the seed.  Its spectral, holonomy, and normal-form data
+determine every dimensionless observable.
+
+\begin{theorem}[Dimensionless Observable Decomposition]
+\label{thm:observable-decomp}
+Every dimensionless observable $\mathcal{O}$ satisfies
+\[
+  \mathcal{O} = F\bigl(\operatorname{Spec}(L^*),\;
+  \operatorname{Hol}(L^*),\;\operatorname{NF}(L^*)\bigr).
+\]
+\begin{proof}
+Six-step ladder:
+\emph{(1)}~gauge invariance $\Rightarrow$ quotient-defined;
+\emph{(2)}~quotient $\Rightarrow$ seed-determined (via uniqueness);
+\emph{(3)}~linear invariants $=$ spectral data;
+\emph{(4)}~gauge-sector invariants $=$ holonomy;
+\emph{(5)}~interaction invariants $=$ normal-form coefficients;
+\emph{(6)}~corollary: $\mathcal{O}$ factors through
+$(\operatorname{Spec}, \operatorname{Hol}, \operatorname{NF})$.
+\end{proof}
+\end{theorem}
+
+Dimensional quantities (mass, coupling, $\Lambda$) are fixed up to the
+internally derived normalization map $(\hbar^* = A(\delta^*),\;
+c^* = \sup d_\text{sep}/\Delta T)$.  No external unit system enters.

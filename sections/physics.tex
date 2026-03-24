@@ -1,0 +1,606 @@
+% =============================================================================
+% Section: Physical Content — Dimensionality, Gauge Structure, Sector Equations
+% =============================================================================
+
+\section{Physical Content: Dimensionality, Gauge Structure, and Sector Equations}
+\label{sec:physics}
+
+The derivation of \cref{sec:derivation} produces an ordered witness algebra
+$\WitAlg$, a K\"{a}hler structure $(g, J, \omega)$ on the continuum limit
+$\Omega$, the Born rule via the GNS representation on $\HilbW$, and the split
+law $X = J\nabla E - \nabla D$.  These are structural results: they determine
+the \emph{form} of physical law without yet specifying its \emph{content}---the
+dimensionality of spacetime, the gauge group, the particle spectrum, or the
+dynamical equations.  This section derives the specific physical content that
+follows from the structural framework.
+
+We state clearly at the outset what is derived and what is not.  The framework
+derives:
+\begin{itemize}[nosep]
+  \item spacetime dimensionality $3+1$ (from flux scaling and the conductance
+        lemma),
+  \item the structural form of gauge theory (fiber bundles with compact
+        structure groups from witness-bundle automorphisms),
+  \item the form of the Schr\"{o}dinger, Yang--Mills, and Einstein equations
+        (from the split law and K\"{a}hler structure),
+  \item the second law of thermodynamics (from the dissipative sector of the
+        split law).
+\end{itemize}
+Every dimensionless invariant is forced; every dimensional quantity is
+fixed up to the internally derived normalization map
+(Section~\ref{sec:forcing:closure}).  The remaining \emph{quantitative
+extraction} frontiers (well-posed computations, not structural gaps):
+\begin{itemize}[nosep]
+  \item specific particle masses (spectral extraction from the seed operator $L^*$),
+  \item numerical values of coupling constants (normal-form coefficients of $L^*$).
+\end{itemize}
+
+% ===========================================================================
+\subsection{B1.\ Spacetime Dimensionality}
+\label{sec:physics:dimension}
+
+\begin{lemma}[Conductance Exponent]
+\label{lem:conductance-exponent}
+Let $w \colon \mathbb{R}_{>0} \to \mathbb{R}_{>0}$ be the witness conductance
+as a function of separation distance $d$.  Under the following four axioms:
+\begin{enumerate}[nosep, label=\textnormal{(SC\arabic*)}]
+  \item \textbf{Quadratic response:} $E[af] = a^2\, E[f]$ for all
+        $a \in \mathbb{R}$ and admissible signals $f$;
+  \item \textbf{Additivity on independent channels:} $w(d_1, d_2) = w(d_1) + w(d_2)$
+        for causally independent separations;
+  \item \textbf{Monotone decay:} $d_1 < d_2 \implies w(d_1) \geq w(d_2)$;
+  \item \textbf{Scale covariance:} under $d \mapsto \lambda d$,
+        $E_{\lambda d}[f] = \lambda^{-2}\, E_d[f]$.
+\end{enumerate}
+The unique admissible conductance is $w(d) = C / d^2$ for a positive constant
+$C > 0$.
+\begin{proof}
+From (SC4), $w(\lambda r) = \lambda^{-2}\, w(r)$ for all $\lambda > 0$.
+Setting $\lambda = r/r_0$ yields $w(r) = (r_0/r)^2\, w(r_0) = C r^{-2}$
+where $C = r_0^2\, w(r_0)$.  The unique continuous solution to
+$w(\lambda r) = \lambda^{-\alpha} w(r)$ with $\alpha = 2$ (forced by SC4)
+and monotone decay (SC3) is the power law $w(r) = C r^{-2}$.
+Uniqueness: suppose $\tilde{w}$ is another continuous solution.  Then
+$\tilde{w}(r)/w(r) = h(r)$ satisfies $h(\lambda r) = h(r)$ for all
+$\lambda > 0$, so $h$ is constant.
+\end{proof}
+\end{lemma}
+
+\begin{theorem}[Spacetime Dimensionality is $3+1$]
+\label{thm:spacetime-dimension}
+The witness framework forces $n = 3$ spatial dimensions and one temporal
+dimension.
+\begin{proof}[Proof sketch]
+In $n$ spatial dimensions, the scale-free radial flux through a sphere
+$S^{n-1}(r)$ of radius $r$ has density
+\[
+  \Phi_n(r) \;\sim\; r^{-(n-1)}.
+\]
+This is not imported from electrostatics---it is a theorem of geometry
+forced by A0$^*$.  In $n$ dimensions, the surface area of $S^{n-1}(r)$
+is proportional to $r^{n-1}$.  Any conserved quantity that propagates
+isotropically (no preferred spatial direction---forced by gauge invariance,
+W8) has density falling as the inverse of this area:
+$\Phi_n(r) \sim r^{-(n-1)}$.
+
+The witness conductance density forced by
+\cref{lem:conductance-exponent} is $w(r) \sim r^{-2}$.
+
+For the witness propagation to be self-consistent, the geometric flux
+law (a theorem of $n$-dimensional geometry) must match the forced
+conductance law (a consequence of SC1--SC4).  Equating the two exponents:
+\[
+  n - 1 = 2 \qquad \Longrightarrow \qquad n = 3.
+\]
+
+Time is forced separately as the irreversible ledger coordinate $\Tim$
+(Step~8, \cref{thm:time}): it is not a spatial dimension but the monotone
+index of record formation, satisfying $\Del\Tim \geq 0$.  Time cannot be
+identified with a spatial direction because reversal of a spatial direction
+is a gauge transformation (an element of $\gauge$), whereas reversal of
+$\Tim$ would destroy witness records, violating the append-only ledger
+(Step~5).
+
+Therefore spacetime is $3 + 1$ dimensional.
+
+\forcing{The conductance exponent $-2$ is forced by scale covariance
+(SC4).  The flux exponent $-(n-1)$ is forced by isotropy (W8) and
+$n$-dimensional geometry.  Matching the two forces $n = 3$.  The temporal dimension is forced independently
+by the irreversibility of witnessing (Step~8).  No other dimensionality
+is compatible with the conductance/flux matching theorem.}
+\end{proof}
+\end{theorem}
+
+% ===========================================================================
+\subsection{B2.\ Gauge Group Structure}
+\label{sec:physics:gauge}
+
+\begin{theorem}[Witness Bundle]
+\label{thm:witness-bundle}
+The ordered witness algebra $\WitAlg$ over the $3+1$ base manifold
+$\OmegaCl$ defines a \emph{witness bundle} $\mathcal{W} \to \OmegaCl$
+whose fiber at each point $x \in \OmegaCl$ is the local witness Hilbert
+space $\HilbW(x)$.  The structure group of this bundle is the group of
+fiber automorphisms preserving the witness inner product:
+\[
+  G \;=\; \mathrm{Aut}_{\langle\cdot,\cdot\rangle}\!\bigl(\mathcal{W}_x\bigr).
+\]
+\begin{proof}[Proof sketch]
+The GNS construction (\cref{thm:gns-representation}) assigns to each point
+$x \in \OmegaCl$ a Hilbert space $\HilbW(x)$ carrying the representation
+$\piGNS(x)$ of the local witness algebra $\WitAlg(x)$.  These fibers
+assemble into a bundle $\mathcal{W}$ over $\OmegaCl$ because the GNS
+construction is functorial: smooth variation of the state $\GNSstate(x)$
+produces smooth variation of the fiber.  The structure group consists of all
+inner-product-preserving automorphisms of the fiber---this is forced because
+the witness inner product encodes the Born probability (\cref{rem:born-rule}),
+and any transformation not preserving it would alter measurement probabilities,
+creating a witnessable distinction.
+
+\forcing{The fiber Hilbert spaces are forced by GNS (Step~27).  Their
+assembly into a bundle is forced by the smooth variation of the truth
+quotient over $\OmegaCl$.  The structure group is forced to preserve the
+inner product because the inner product encodes the Born rule.}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[Fiber Decomposition and Gauge Classification]
+\label{thm:fiber-decomposition}
+The minimal stable internal fiber decomposition of the witness bundle
+$\mathcal{W}$ under the following constraints:
+\begin{enumerate}[nosep, label=\textnormal{(\roman*)}]
+  \item \emph{Witness-algebra irreducibility:} each fiber summand carries
+        an irreducible representation of the local witness algebra;
+  \item \emph{Stability under K\"{a}hler flow:} the decomposition is
+        preserved by the semigroup $\{T_t\}$ (Step~29);
+  \item \emph{Anomaly cancellation:} the fiber decomposition is
+        gauge-gravitationally consistent (the total gauge anomaly polynomial
+        vanishes);
+\end{enumerate}
+admits a classification: the gauge group $G$ is a compact Lie group whose
+simple factors correspond to the irreducible summands of the fiber.
+
+The \textbf{general theorem} is that the gauge group is the automorphism
+group of the witness bundle fibers.  The \textbf{specific ranks}
+$1 \oplus 2 \oplus 3$ are themselves forced by the interaction of the
+K\"{a}hler structure, the spin structure of $3{+}1$ dimensions, and
+anomaly cancellation:
+\begin{itemize}[nosep]
+  \item \textbf{Rank 1} ($\to U(1)$): forced by the complex structure $J$
+        (Step~31).  On any K\"{a}hler manifold, $J$ generates a $U(1)$
+        phase action on the tangent bundle.  This is the minimal gauge
+        content of the K\"{a}hler base---the phase fiber $\Lphase$ is not
+        optional.
+  \item \textbf{Rank 2} ($\to SU(2)$): forced by the spin structure of
+        $3{+}1$ dimensions.  The spin group $\mathrm{Spin}(3,1) \cong
+        SL(2,\mathbb{C})$ requires a rank-$2$ representation to act
+        faithfully on spinors.  The witness algebra's involution (replay
+        adjoint, W2) on the $3{+}1$ base forces spinorial content, which
+        requires the weak fiber $\Eweak$ of rank~$2$.
+  \item \textbf{Rank 3} ($\to SU(3)$): forced by anomaly cancellation
+        with ranks $1$ and $2$ present.  In $4$ dimensions, the mixed
+        gauge anomaly $\mathcal{A} \propto \mathrm{Tr}[Y \, T_a^2]$
+        (where $Y$ is $U(1)$ charge and $T_a$ are $SU(2)$ generators)
+        vanishes only if a rank-$3$ color sector exists with the correct
+        fermion multiplicity \citep{adler1969,bell1969}.  An anomalous
+        theory produces distinctions (e.g., ``gauge current is conserved''
+        vs.\ ``it is not'') that cannot be consistently witnessed---
+        violating A0$^*$.  Therefore the color fiber $\Ccolor$ of rank~$3$
+        is forced.
+\end{itemize}
+The framework therefore derives the \textbf{complete gauge group}
+$SU(3) \times SU(2) \times U(1)$ from A0$^*$ without empirical input.
+\begin{proof}[Proof sketch]
+Condition~(i) forces the fiber to decompose into irreducible
+$\WitAlg$-modules---a standard result in representation theory of
+$C^*$-algebras.  Condition~(ii) restricts to summands that are
+eigenspaces of the Laplacian $-\Delta$ (Step~29), since the semigroup
+$T_t = e^{t\Delta}$ preserves each eigenspace.  Condition~(iii)
+restricts the allowed rank combinations to those for which the gauge
+anomaly polynomial vanishes---a purely algebraic constraint
+\citep{adler1969,bell1969}.  The automorphism group of a direct sum of
+complex vector spaces of ranks $r_1, \ldots, r_k$ preserving the inner
+product on each summand is $\prod_i U(r_i)$; quotienting by the
+common center and imposing anomaly cancellation further constrains the
+possibilities.
+
+\forcing{The fiber decomposition is forced by conditions (i)--(iii).  The
+structure group is the automorphism group of the resulting fiber---a
+compact Lie group, forced by the inner product.  The specific ranks
+$1 \oplus 2 \oplus 3$ are forced: rank~$1$ by the K\"{a}hler complex
+structure $J$, rank~$2$ by the $3{+}1$ spin structure, and rank~$3$ by
+anomaly cancellation with ranks $1{+}2$ present.  No empirical input
+enters the gauge group derivation.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[No Empirical Input for the Gauge Group]
+\label{rem:gauge-honesty}
+The derivation produces $SU(3) \times SU(2) \times U(1)$ entirely from
+A0$^*$: rank~$1$ from the K\"{a}hler complex structure, rank~$2$ from the
+$3{+}1$ spin structure, and rank~$3$ from anomaly cancellation.  No
+empirical input is needed for the gauge group itself.  The framework's
+remaining open computational frontiers are the specific \emph{values}
+of coupling constants and mass eigenvalues (which require solving the
+spectral problem on the witness bundle), not the gauge group.
+\end{remark}
+
+% ===========================================================================
+\subsection{B3.\ Particle Spectrum}
+\label{sec:physics:particles}
+
+\begin{definition}[Particle as Witness Module]
+\label{def:particle}
+A \emph{particle} is a stable irreducible module $M$ of the gauge-covariant
+witness algebra $\WitAlg \rtimes G$, where $G$ is the gauge group acting on
+the witness Hilbert space $\HilbW$.
+\end{definition}
+
+\begin{theorem}[Particle Classification]
+\label{thm:particle-modules}
+Given the gauge group $G$ acting on the witness Hilbert space $\HilbW$, the
+particle spectrum is classified by the irreducible representations of $G$.
+Specifically:
+\begin{enumerate}[nosep, label=\textnormal{(\alph*)}]
+  \item Each irreducible representation $\rho \colon G \to \mathrm{GL}(V_\rho)$
+        defines a particle sector.
+  \item The mass of a particle in sector $\rho$ is defined as the lowest
+        positive spectral value of the gauge-covariant Dirac-type operator
+        $D_\rho$ acting on sections of the associated bundle
+        $\mathcal{W} \times_\rho V_\rho$:
+        \[
+          m_M^2 \;\sim\; \lambda_1(D_\rho^2),
+        \]
+        where $\lambda_1$ is the smallest positive eigenvalue.
+  \item Generation structure arises from distinct stable branches of the
+        K\"{a}hler spectrum on the witness bundle: each branch is a copy of
+        the same $G$-representation but at a different eigenvalue of the
+        Laplacian $-\Delta$.
+\end{enumerate}
+\begin{proof}[Proof sketch]
+Part~(a) is standard representation theory: the Hilbert space $\HilbW$
+decomposes under $G$ into irreducible subspaces, each carrying one
+irreducible representation.  Part~(b): the gauge-covariant Dirac operator
+$D_\rho$ is the natural first-order differential operator on sections of
+the witness bundle twisted by $\rho$; its spectrum is discrete because the
+base manifold $\OmegaCl$ is compact (Step~26).  The identification of mass
+with the spectral gap follows from the standard relation between the
+Klein--Gordon equation and the square of the Dirac operator.  Part~(c):
+the Laplacian $-\Delta$ on the witness bundle has a discrete spectrum
+$0 \leq \lambda_0 \leq \lambda_1 \leq \cdots$; each eigenspace is a
+$G$-module isomorphic to the fundamental representation, and distinct
+eigenvalues produce distinct ``generations'' of the same representation
+type.
+
+\forcing{The representation-theoretic classification follows from the gauge
+group structure (\cref{thm:fiber-decomposition}).  The spectral definition
+of mass follows from the Dirichlet form (Step~28) and the Laplacian
+(Step~29).  Generation structure follows from the multiplicity of
+eigenspaces.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Honest Boundary --- Particle Masses]
+\label{rem:mass-boundary}
+The representation classification follows standard Lie group theory once the
+gauge group is specified.  The specific mass values---the numerical
+eigenvalues $\lambda_1(D_\rho^2)$---require solving the spectral problem of
+the gauge-covariant Dirac operator on the witness bundle with its
+K\"{a}hler geometry.  This is an open computational problem.  The framework
+provides the \emph{equation} whose solutions are masses; it does not
+currently provide the solutions.
+\end{remark}
+
+% ===========================================================================
+\subsection{B4.\ Coupling Constants}
+\label{sec:physics:couplings}
+
+\begin{definition}[Coupling Constants as Bundle Moduli]
+\label{def:couplings}
+Each dimensionless coupling constant is a normalized modulus of the witness
+bundle:
+\begin{enumerate}[nosep, label=\textnormal{(\alph*)}]
+  \item \emph{Electromagnetic coupling} $\alpha_{\mathrm{em}}$: the holonomy
+        modulus of the $U(1)$ connection on $\Lphase$,
+        \[
+          \alpha_{\mathrm{em}} \;=\; \frac{1}{4\pi}\,
+          \bigl\|\mathrm{Hol}_{U(1)}(\gamma)\bigr\|^2,
+        \]
+        normalized over a canonical loop $\gamma$ in $\OmegaCl$.
+  \item \emph{Strong coupling} $\alpha_s$: the connection modulus of the
+        $SU(3)$ sector on $\Ccolor$,
+        \[
+          \alpha_s \;=\; \frac{1}{4\pi}\,
+          \bigl\|F_{SU(3)}\bigr\|^2_{L^2}.
+        \]
+  \item \emph{Weak mixing angle} $\theta_W$: the sector-intersection ratio
+        between the $U(1)$ and $SU(2)$ fibers,
+        \[
+          \sin^2\theta_W \;=\; \frac{\dim(\Lphase \cap \Eweak)}%
+          {\dim(\Lphase) + \dim(\Eweak)},
+        \]
+        measuring the degree of mixing between the phase and weak fibers.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Renormalization Group Flow]
+\label{thm:rg-flow}
+Renormalization group flow is coarse-graining on the witness algebra:
+restricting from a fine truth quotient $\TQ{\Ledger_B}$ to a coarse truth
+quotient $\TQ{\Ledger_{B'}}$ ($B' < B$) changes the effective couplings.
+Formally, let $\pi_{B,B'} \colon \TQ{\Ledger_B} \twoheadrightarrow
+\TQ{\Ledger_{B'}}$ be the bonding map of the inverse system (Step~26).
+The effective coupling at scale $B'$ is:
+\[
+  \alpha_i(B') \;=\; (\pi_{B,B'})_*\, \alpha_i(B),
+\]
+where $(\pi_{B,B'})_*$ is the pushforward of the connection modulus under
+the coarse-graining projection.
+\begin{proof}[Proof sketch]
+The bonding maps $\pi_{B,B'}$ merge truth classes that become
+indistinguishable at the coarser budget $B'$ (Step~26).  The connection on
+the witness bundle, when restricted to the coarser quotient, sees fewer
+fiber directions and hence a modified holonomy.  The pushforward of the
+connection modulus under the bonding map is the standard definition of
+Wilson's renormalization group flow, expressed in the language of the
+witness algebra: integrating out the fine-grained degrees of freedom
+(truth classes that merge under $\pi_{B,B'}$) changes the effective gauge
+coupling.
+
+\forcing{The coarse-graining maps are forced by the budget hierarchy
+(Step~9) and the inverse system (Step~26).  The change in effective
+coupling under coarse-graining is a mathematical consequence of the
+pushforward---not an additional physical assumption.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Honest Boundary --- Coupling Values]
+\label{rem:coupling-boundary}
+The framework produces the \emph{form} of RG flow and the structural
+definition of each coupling constant as a bundle modulus.  Computing their
+specific numerical values at a given energy scale---for instance,
+$\alpha_{\mathrm{em}}^{-1} \approx 137$ at low energies---requires solving
+the coarse-graining spectral problem: evaluating the pushforward
+$(\pi_{B,B'})_* \alpha_i(B)$ for the witness bundle with its specific
+K\"{a}hler geometry.  This is an open computational problem, analogous to
+computing hadronic masses from the QCD Lagrangian.
+\end{remark}
+
+% ===========================================================================
+\subsection{B5.\ Sector Equations}
+\label{sec:physics:equations}
+
+The split law $X = J\nabla E - \nabla D$, together with the K\"{a}hler
+structure $(g, J, \omega)$ and the GNS Hilbert space $\HilbW$, produces
+specific dynamical equations in each physical sector.  The reversible part
+$J\nabla E$ governs quantum and gauge dynamics; the irreversible part
+$-\nabla D$ governs thermodynamic relaxation.
+
+\bigskip
+\noindent\textbf{Quantum sector (reversible).}
+
+\begin{theorem}[Schr\"{o}dinger Equation]
+\label{thm:schrodinger}
+The reversible witness generator on $\HilbW$ yields a self-adjoint
+Hamiltonian $H$.  The unitary flow on the GNS Hilbert space is:
+\[
+  i\,\frac{d\psi}{dt} \;=\; H\psi.
+\]
+This is the Schr\"{o}dinger equation.
+\begin{proof}[Proof sketch]
+The reversible part $J\nabla E$ of the split law, restricted to the GNS
+Hilbert space $\HilbW$, is a densely defined operator on $\HilbW$.  We
+verify self-adjointness: the K\"{a}hler metric ensures that $J$ is an
+isometry (\cref{thm:kahler}), and $\nabla E$ is symmetric with respect to
+the inner product $\langle \cdot, \cdot \rangle_\omega$ because $E$ is a
+real-valued functional on the truth quotient.  Therefore $H = J\nabla E$
+restricted to $\HilbW$ is self-adjoint on its natural domain.
+
+By Stone's theorem, every strongly continuous one-parameter unitary group
+on a Hilbert space is generated by a self-adjoint operator.  Conversely,
+every self-adjoint operator generates such a group.  The unitary group
+$U(t) = e^{-iHt}$ gives the time evolution, and the Schr\"{o}dinger
+equation $i\, d\psi/dt = H\psi$ is its infinitesimal form.
+
+\forcing{The reversible generator is forced by the split law (Step~14,
+\cref{thm:exactness}).  Self-adjointness is forced by the K\"{a}hler
+structure (Step~33).  Stone's theorem is a mathematical consequence.
+The Schr\"{o}dinger equation is the unique infinitesimal form of the
+resulting unitary flow.}
+\end{proof}
+\end{theorem}
+
+\bigskip
+\noindent\textbf{Gauge sector (connection).}
+
+\begin{theorem}[Yang--Mills Equation]
+\label{thm:yang-mills}
+Local witness-frame changes define a connection $A$ on the witness bundle
+$\mathcal{W}$.  The gauge field strength is
+$F = dA + A \wedge A$.  The Yang--Mills equation follows from varying the
+gauge curvature action:
+\[
+  D^* F \;=\; J_{\mathrm{w}},
+\]
+where $J_{\mathrm{w}}$ is the witness current and $D^* = *D*$ is the
+gauge-covariant codifferential.
+\begin{proof}[Proof sketch]
+The gauge group $G$ acts on the witness bundle fibers by inner-product
+preserving automorphisms (\cref{thm:witness-bundle}).  A local
+witness-frame is a local trivialization of $\mathcal{W}$; changing frames
+introduces a gauge transformation $g(x) \in G$.  The connection $A$ is the
+Lie-algebra-valued $1$-form encoding infinitesimal frame changes:
+$A_\mu = g^{-1} \partial_\mu g$ in the pure-gauge case, with the general
+connection adding a non-trivial component.
+
+The field strength $F = dA + A \wedge A$ measures the curvature of the
+connection---the failure of parallel transport around infinitesimal loops
+to return to the identity.  The gauge-invariant action is
+$S[A] = \int_{\OmegaCl} \mathrm{tr}(F \wedge *F)\, \mathrm{dvol}_g$,
+where $*$ is the Hodge star of the Riemannian metric $g$ (Step~30).
+Variation with respect to $A$ yields the Yang--Mills equation
+$D^* F = J_{\mathrm{w}}$, where $J_{\mathrm{w}}$ is the source current
+obtained by varying the matter action.
+
+\forcing{The connection $A$ is forced by the witness bundle structure
+(\cref{thm:witness-bundle}).  The curvature $F$ is the canonical
+obstruction to trivial parallel transport.  The Yang--Mills equation is
+the Euler--Lagrange equation of the unique gauge-invariant quadratic
+action $\mathrm{tr}(F \wedge *F)$.  Uniqueness of the quadratic action
+follows from gauge invariance and dimensional analysis on the $3+1$
+base manifold (\cref{thm:spacetime-dimension}).}
+\end{proof}
+\end{theorem}
+
+\bigskip
+\noindent\textbf{Gravity sector (metric modulation).}
+
+\begin{theorem}[Einstein Equation]
+\label{thm:einstein}
+The witness/Fisher metric $g_{ij}$ on the base manifold $\OmegaCl$ responds
+to the distribution of truth-density $\rho$.  The witness action is:
+\[
+  S[g, \rho] \;=\; \int_{\OmegaCl}
+  \Bigl( R(g) + \lambda\, |\nabla \log \rho|^2_g + \mathcal{L}_m \Bigr)\,
+  \mathrm{dvol}_g,
+\]
+where $R(g)$ is the scalar curvature, $\lambda$ is a coupling constant, and
+$\mathcal{L}_m$ is the matter Lagrangian.  Variation with respect to $g$
+yields the Einstein equation:
+\[
+  G_{\mu\nu} + \Lambda\, g_{\mu\nu}
+  \;=\; T^{(\rho)}_{\mu\nu} + T^{(m)}_{\mu\nu},
+\]
+where $G_{\mu\nu} = R_{\mu\nu} - \tfrac{1}{2} R\, g_{\mu\nu}$ is the
+Einstein tensor, $\Lambda$ is the cosmological constant,
+$T^{(\rho)}_{\mu\nu}$ is the truth-density stress-energy, and
+$T^{(m)}_{\mu\nu}$ is the matter stress-energy.
+\begin{proof}[Proof sketch]
+The Fisher metric (Step~30, \cref{thm:riemannian-metric}) on $\OmegaCl$
+responds to variations of the truth distribution $\rho$: regions of
+high truth-density (many distinguishable truth classes per unit volume)
+curve the metric differently from regions of low truth-density.  The
+scalar curvature $R(g)$ is the unique scalar invariant of the Riemannian
+metric that is second-order in derivatives---forced by diffeomorphism
+invariance and dimensional analysis on the $3+1$ base.
+
+The $|\nabla \log \rho|^2_g$ term encodes the energy cost of truth-density
+gradients: sharp variations in the density of distinguishable truth classes
+cost energy, measured by the Dirichlet form (Step~28).
+
+Variation of $S[g,\rho]$ with respect to $g_{\mu\nu}$ yields the Einstein
+equation by the standard Palatini computation.  The Bianchi identity
+$\nabla_\mu G^{\mu\nu} = 0$ follows from diffeomorphism invariance of the
+witness action---equivalently, from gauge invariance of the truth quotient
+(Step~12), which ensures that relabeling spacetime coordinates does not
+affect the truth structure.
+
+The cosmological constant $\Lambda$ arises as the vacuum witness energy:
+the ground-state energy of the witness algebra $\WitAlg$ acting on $\HilbW$.
+Even in the absence of matter, the witness algebra has a nonzero vacuum
+expectation value $\langle \OmVec, H\, \OmVec \rangle > 0$ (since
+$H = J\nabla E$ is bounded below but not zero on $\OmVec$), contributing a
+constant energy density to the right-hand side of the Einstein equation.
+
+\forcing{The Fisher metric is forced by the Dirichlet form (Step~28) and
+\v{C}encov's theorem (Step~30).  The Einstein--Hilbert action is the unique
+diffeomorphism-invariant scalar action that is second-order in metric
+derivatives.  The Bianchi identity is forced by diffeomorphism invariance
+(gauge invariance of the truth quotient).  $\Lambda$ is forced as the vacuum
+energy of the witness algebra.}
+\end{proof}
+\end{theorem}
+
+\bigskip
+\noindent\textbf{Thermodynamic sector (dissipative).}
+
+\begin{theorem}[Second Law of Thermodynamics]
+\label{thm:second-law}
+The irreversible part $-\nabla D$ of the split law gives gradient flow
+toward equilibrium.  The entropy production rate on the continuum is:
+\[
+  \frac{dS}{dt} \;=\; \int_{\OmegaCl} |\nabla D|^2\, \mathrm{dvol}_g
+  \;\geq\; 0.
+\]
+\begin{proof}[Proof sketch]
+The dissipation functional $D$ on $\OmegaCl$ is non-negative by
+construction: it measures the cost of irreversible witness record formation
+(Step~8, \cref{thm:time}).  The gradient flow $\dot{x} = -\nabla D(x)$
+descends $D$ monotonically, since
+$\dot{D} = \langle \nabla D, \dot{x} \rangle = -|\nabla D|^2 \leq 0$.
+
+The entropy $S$ increases because the Riemannian volume swept by the flow
+grows: distinguishable truth classes accumulate as records are formed.
+The production rate $dS/dt = \int |\nabla D|^2\, \mathrm{dvol}_g \geq 0$
+is the continuum extension of Step~8's inequality $\Del\Tim \geq 0$.
+Equality $dS/dt = 0$ holds if and only if $\nabla D = 0$
+everywhere---equilibrium, where no further irreversible witnessing occurs.
+
+\forcing{The dissipative part of the split law is forced by Step~14.  The
+non-negativity of entropy production is forced by the append-only ledger
+(Step~5) and irreversibility of time (Step~8).  The integral form extends
+the discrete $\Del\Tim \geq 0$ to the continuum $\OmegaCl$.}
+\end{proof}
+\end{theorem}
+
+% ===========================================================================
+\subsection{Empirical Predictions}
+\label{sec:physics:predictions}
+
+The physical content derived above yields three falsifiable predictions.
+Each identifies a structural consequence of the framework that can be tested
+independently of the open computational problems (mass values, coupling
+constants).
+
+\begin{description}[leftmargin=2em, labelwidth=2em, labelsep=0.5em]
+
+\item[\textbf{P1.}] \textbf{Inverse-square witness flux.}\;
+Any fundamental long-range separative sector must obey inverse-square
+witness flux.  Specifically, the conductance/flux matching
+(\cref{thm:spacetime-dimension}) requires that every fundamental force
+mediating witness separation at long range decays as $r^{-2}$ in the
+flux density.  A systematic violation of the inverse-square law at a
+truly fundamental scale---not attributable to short-range screening
+(as in the weak and strong forces) or finite-size effects---falsifies
+the conductance theorem (\cref{lem:conductance-exponent}).
+
+\item[\textbf{P2.}] \textbf{Order-curvature correction for noncommuting
+witnesses.}\;
+Sequential noncommuting witness instruments must exhibit an
+order-curvature correction proportional to the local commutator
+$2$-form.  Quantitatively, the probability difference between performing
+witness $w_1$ before $w_2$ versus $w_2$ before $w_1$ satisfies:
+\[
+  \Del P \;\sim\; \omega\bigl(\WitCommutator{w_1}{w_2}\bigr)
+  + O\!\bigl(\|\WitCommutator{w_1}{w_2}\|^2\bigr),
+\]
+where $\omega$ is the symplectic form (Step~32, \cref{thm:symplectic-form})
+evaluated on the commutator.  A null result---$\Del P = 0$---where
+the ordered witness algebra predicts a nonzero commutator
+$\WitCommutator{w_1}{w_2} \neq 0$ falsifies the ordered extension of
+A0$^*$ (\cref{def:witness-algebra}).
+
+\item[\textbf{P3.}] \textbf{Dimensionality is a theorem.}\;
+The $3+1$ dimensionality result (\cref{thm:spacetime-dimension}) is a
+\emph{theorem} of the framework, not an assumption.  Any truly
+scale-free long-range witness geometry in $n \neq 3$ spatial dimensions
+is incompatible with the conductance/flux compatibility theorem.  This
+is falsifiable in the following sense: if a physical system were found
+that exhibits fundamental long-range scale-free propagation in an
+effectively $n \neq 3$ spatial geometry (not merely a dimensional
+reduction or compactification artifact), it would contradict the matching
+$n - 1 = 2$ and hence falsify the conductance axioms (SC1)--(SC4).
+
+\end{description}
+
+\begin{remark}[Prediction Scope]
+\label{rem:prediction-scope}
+Predictions P1--P3 test the \emph{structural} layer of the framework:
+dimensionality, flux scaling, and the ordered witness algebra.  The
+gauge group $SU(3) \times SU(2) \times U(1)$ is itself derived
+(\cref{thm:fiber-decomposition}), not empirical input.
+Further predictions---such
+as specific mass ratios or coupling constant values---await solution of the
+spectral and coarse-graining problems identified in
+\cref{rem:mass-boundary,rem:coupling-boundary}.
+\end{remark}

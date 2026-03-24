@@ -1,0 +1,31 @@
+You are conducting a rigorous mathematical verification of the Opoch paper's derivation from Nothingness.
+
+Read the following files in this project directory:
+- sections/derivation.tex: The compressed 21-step derivation
+- appendices/full-derivation.tex: The full proofs for each step
+- sections/primitives.tex: The three primitives (Pi, Delta, T)
+- sections/doctrines.tex: The Seven Doctrines
+- appendices/open-questions.tex: Open questions and claimed resolutions
+
+YOUR TASK: For each of the 21 derivation steps, evaluate whether the step is truly FORCED by Axiom A0 (Witnessability: "A distinction is admissible iff a finite witness procedure can separate it") and prior steps, or whether it contains a hidden design choice that could go differently.
+
+SPECIFIC SCRUTINY POINTS:
+1. Step 3 (Church-Turing as naming convention): The paper claims Church-Turing is just a "naming convention" for what A0 already demands. Is this honest? Does A0 actually force computable witnessing, or is this a substantive assumption being downplayed?
+
+2. Step 5 (Diamond Law / commutativity): The derivation claims tests must commute. Could non-commuting tests be equally forced? What about quantum-mechanical non-commutativity?
+
+3. Step 18 (Bellman minimax): The paper claims minimax/Bellman optimality is forced. Could Bayesian updating be equally valid? Is there a genuine forcing argument or is this a choice?
+
+4. Step 19 (Self-hosting): The paper claims the framework can verify itself without violating Godel's incompleteness. Is this claim well-calibrated? Does the escape via "finite witness" vs "all truths" actually work?
+
+5. Step 21 (Gauge-Invariant Truth Machine): Does the GITM construction actually follow from prior steps or does it introduce new assumptions?
+
+For EACH step, output:
+- Step number and name
+- PASS (truly forced) or FLAG (contains hidden choice) or FAIL (logical gap)
+- Brief justification
+- If FLAG/FAIL: what alternative could be equally valid
+
+Also check appendices/open-questions.tex: Are the claimed resolutions of objections actually valid?
+
+Write the complete verification report to a file called synsc-reports/phase1a-math-verification-report.md

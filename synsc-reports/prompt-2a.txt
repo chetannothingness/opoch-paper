@@ -1,0 +1,42 @@
+You are a scientific writing specialist. Your task is to polish the core sections of the Opoch paper for journal submission quality.
+
+Read the following files in this project directory:
+- sections/abstract.tex
+- sections/introduction.tex
+- sections/discussion.tex
+- sections/conclusion.tex
+- sections/derivation.tex
+- sections/primitives.tex
+- sections/doctrines.tex
+- sections/kernel.tex
+- sections/related-work.tex
+
+Also read these verification reports for context on what issues to address:
+- synsc-reports/phase1a-math-verification-report.md
+- synsc-reports/phase1b-citation-report.md
+- synsc-reports/phase1c-consistency-report.md
+
+YOUR TASK: For each of the following sections, produce improved LaTeX text that is journal-submission ready:
+
+1. sections/abstract.tex — Make it concise, compelling, and precisely scoped. Ensure claims match what was actually proven.
+
+2. sections/introduction.tex — Sharpen the "Question" framing. Ensure the "what we claim" and "what we don't claim" are crystal clear from the start. Address the Phase 1A finding that "all are forced" should be qualified as "forced up to computable isomorphism within the paper's model class."
+
+3. sections/discussion.tex — Strengthen the open frontiers section. Address the Phase 1A flags:
+   - Qualify the minimax claim as "prior-free" (Step 18 flag)
+   - Clarify whether Step 10 energy forcing depends on Landauer or A0 alone
+   - Acknowledge that commutativity (Step 5) is a modeling restriction, not forced by A0 alone
+
+4. sections/conclusion.tex — Make it memorable. Ensure it accurately reflects proven vs. conjectured results.
+
+RULES:
+- PRESERVE all mathematical content, labels, LaTeX commands, \ref{}, \cite{} structure
+- PRESERVE document structure (\section, \subsection, etc.)
+- IMPROVE clarity, conciseness, academic register, and scientific precision
+- ELIMINATE vague phrasing like "it turns out" or "interestingly" — use precise claims
+- STRENGTHEN theorem motivation (why each step matters, not just what it is)
+- IMPROVE transitions between sections
+- MAINTAIN consistent voice and tone throughout
+- Do NOT change any theorem statements or proofs — only surrounding prose
+
+Write the improved text for each section as a single markdown file at synsc-reports/phase2a-writing-improvements.md, with each section clearly labeled so we can apply the edits.

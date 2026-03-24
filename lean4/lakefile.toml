@@ -1,0 +1,15 @@
+name = "OpochLean4"
+version = "0.1.0"
+defaultTargets = ["opochlean4"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "v4.14.0"
+
+[[lean_lib]]
+name = "OpochLean4"
+
+[[lean_exe]]
+name = "opochlean4"
+root = "Main"

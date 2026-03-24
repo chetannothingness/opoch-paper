@@ -1,0 +1,91 @@
+% consciousness-projector.tex — Minimal persistent self-valued witness selector (Step 24)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  arr/.style={-{Stealth[length=2.5mm]}, thick, #1},
+  axiom/.style={font=\tiny, align=left, text width=38mm},
+]
+
+  % === Outer circle: state space X (world) ===
+  \draw[opochblue, line width=1pt, fill=opochblue!5]
+    (0, 0) circle (3.2);
+  \node[font=\small\bfseries, opochblue!80] at (0, 3.6)
+    {State space $X$ (world)};
+
+  % === Inner circle: consciousness subsystem C ===
+  \draw[opochpurple, line width=1.2pt, fill=opochpurple!8]
+    (0, -0.2) circle (1.8);
+  \node[font=\small\bfseries, opochpurple!80] at (0, 1.2)
+    {$C \subset X$};
+
+  % === Self-model at center ===
+  \node[rectangle, draw=opochgreen!60, fill=opochgreen!10,
+    rounded corners=2pt, font=\scriptsize\bfseries, inner sep=3pt]
+    (code) at (0, -0.2)
+    {$\ulcorner r_C \urcorner$};
+  \node[font=\tiny, opochgreen!70!black, below=1mm of code]
+    {self-model};
+
+  % === Feedback arrows ===
+  % C2: Self/world distinguishability (X → C)
+  \draw[arr=opochblue!70, line width=1pt]
+    (2.8, 1.5) to[bend left=15] (1.4, 0.5)
+    node[font=\tiny, pos=0.3, right=1mm, opochblue!80, align=center]
+      {self/world\\distinguish (C2)};
+
+  % C3: Causal efficacy (C → X)
+  \draw[arr=opochpurple!70, line width=1pt]
+    (-1.4, -1.5) to[bend left=15] (-2.8, -1.0)
+    node[font=\tiny, pos=0.5, left=1mm, opochpurple!80, align=center]
+      {causal\\efficacy (C3)};
+
+  % C4: Valuation loop
+  \draw[arr=opochgreen!60, line width=0.8pt]
+    (0.5, -1.6) to[bend right=40] (-0.5, -1.6)
+    node[font=\tiny, pos=0.5, below=2mm, opochgreen!70!black]
+      {$V_C$: valuation (C4)};
+
+  % === Runtime law annotation ===
+  \node[rectangle, draw=opochpurple!40, fill=white,
+    rounded corners=2pt, font=\small, inner sep=4pt]
+    at (0, -3.8)
+    {$(D^*, m^*) = \operatorname*{argmin}_{D,m}
+      \bigl[k(D) + k(m) + V_{Q,D}(\mathrm{next})\bigr]$};
+
+  % === Four conditions (right side) ===
+  \begin{scope}[shift={(5.8, 1.6)}]
+    \node[font=\footnotesize\bfseries, opochgray] at (0, 0.4)
+      {Four forced conditions:};
+
+    \node[axiom] at (0, -0.3)
+      {\textbf{C1} Self-model: persistent code
+       $\ulcorner r_C \urcorner \subseteq C$
+       \textcolor{opochgray}{\tiny [W1$+$W4]}};
+    \node[axiom] at (0, -1.1)
+      {\textbf{C2} Self/world distinguishability:
+       future witnesses differ with/without self-model
+       \textcolor{opochgray}{\tiny [W4$+$A0$^*$]}};
+    \node[axiom] at (0, -1.9)
+      {\textbf{C3} Causal efficacy: $C$ alters
+       subsequent witness selection
+       \textcolor{opochgray}{\tiny [W5$+$W6]}};
+    \node[axiom] at (0, -2.7)
+      {\textbf{C4} Endogenous valuation: $V_C$
+       on interaction channels
+       \textcolor{opochgray}{\tiny [Coupling Law]}};
+  \end{scope}
+
+\end{tikzpicture}%
+}% end resizebox
+\caption{The consciousness projector $\ConsProj$ (Step~24): the unique
+  minimal persistent self-valued witness selector $C \subset X$.  The four
+  conditions are individually forced: (C1)~self-model by (W1)$+$(W4),
+  (C2)~self/world distinguishability by (W4)$+$A0$^*$,
+  (C3)~causal efficacy by (W5)$+$(W6), and (C4)~endogenous
+  valuation by the Coupling Law (Step~18).  The runtime law selects the
+  least-cost distinction algebra and self-model.}
+\label{fig:consciousness-projector}
+\end{figure}

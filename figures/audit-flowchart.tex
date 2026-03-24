@@ -1,0 +1,82 @@
+% audit-flowchart.tex — Three-point verification protocol
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  inbox/.style={rectangle, draw=opochblue, fill=opochblue!10, rounded corners=4pt,
+    minimum width=28mm, minimum height=10mm, font=\small\bfseries,
+    line width=0.7pt, align=center, inner sep=4pt},
+  gate/.style={diamond, draw=#1, fill=#1!10, minimum width=26mm,
+    minimum height=22mm, font=\scriptsize, inner sep=2pt,
+    line width=0.7pt, align=center, aspect=1.6},
+  result/.style={rectangle, draw=#1, fill=#1!15, rounded corners=4pt,
+    minimum width=20mm, minimum height=8mm, font=\small\bfseries,
+    line width=0.8pt, align=center, inner sep=3pt},
+  arr/.style={-{Stealth[length=2.5mm]}, thick, opochgray!70},
+  ylbl/.style={font=\tiny\bfseries, opochgreen!70!black},
+  nlbl/.style={font=\tiny\bfseries, opochred!70},
+]
+
+  % === Input ===
+  \node[inbox] (input) at (0, 0) {Step $P_i$};
+
+  % === Gate 1: Hidden Chooser ===
+  \node[gate=opochblue] (hc) at (0, -2.8)
+    {Hidden Chooser\\[2pt]\tiny Alternative\\A0-compliant\\continuation?};
+
+  % === Gate 2: Encoding Invariance ===
+  \node[gate=opochorange] (ei) at (0, -6.0)
+    {Encoding\\Invariance\\[2pt]\tiny Same quotient\\under different\\encoding?};
+
+  % === Gate 3: Distinguishability Equivalence ===
+  \node[gate=opochpurple] (de) at (0, -9.2)
+    {Distinguishability\\Equivalence\\[2pt]\tiny All witnessed\\distinctions\\present?};
+
+  % === Optional Gate 4: Z3 ===
+  \node[rectangle, draw=opochgray!50, fill=opochgray!8, rounded corners=3pt,
+    minimum width=22mm, minimum height=8mm, font=\scriptsize,
+    inner sep=3pt, align=center, densely dashed, line width=0.6pt]
+    (z3) at (0, -11.8)
+    {Z3 finite model\\check (optional)};
+
+  % === PASS ===
+  \node[result=opochgreen] (pass) at (0, -13.6) {PASS \checkmark};
+
+  % === FAIL nodes ===
+  \node[result=opochred] (f1) at (4.5, -2.8) {FAIL};
+  \node[result=opochred] (f2) at (4.5, -6.0) {FAIL};
+  \node[result=opochred] (f3) at (4.5, -9.2) {FAIL};
+
+  % === Arrows: main flow ===
+  \draw[arr] (input) -- (hc);
+  \draw[arr] (hc) -- (ei) node[ylbl, pos=0.5, left=2mm] {No};
+  \draw[arr] (ei) -- (de) node[ylbl, pos=0.5, left=2mm] {Yes};
+  \draw[arr] (de) -- (z3) node[ylbl, pos=0.5, left=2mm] {Yes};
+  \draw[arr] (z3) -- (pass);
+
+  % === Arrows: failure branches ===
+  \draw[arr] (hc) -- (f1) node[nlbl, pos=0.5, above=1mm] {Yes};
+  \draw[arr] (ei) -- (f2) node[nlbl, pos=0.5, above=1mm] {No};
+  \draw[arr] (de) -- (f3) node[nlbl, pos=0.5, above=1mm] {No};
+
+  % === Annotations ===
+  \node[font=\tiny, opochblue!70, align=left, anchor=west] at (-5.5, -2.8)
+    {Is there any other\\A0-compliant step\\that could follow?};
+
+  \node[font=\tiny, opochorange!70, align=left, anchor=west] at (-5.5, -6.0)
+    {Does re-executing\\under a different\\encoding give the\\same quotient?};
+
+  \node[font=\tiny, opochpurple!70, align=left, anchor=west] at (-5.5, -9.2)
+    {Is every introduced\\distinction witnessed,\\and no witnessed one\\omitted?};
+
+\end{tikzpicture}
+\caption{The three-point verification protocol applied to each derivation
+  step~$P_i$.  A step passes only if no alternative A0-compliant
+  continuation exists (Hidden Chooser), the quotient is encoding-invariant,
+  and all witnessed distinctions are present (Distinguishability
+  Equivalence).  An optional fourth gate checks algebraic properties on
+  finite models via Z3.  All 34 steps pass
+  (Table~\ref{tab:audit-results}).}
+\label{fig:audit-flowchart}
+\end{figure}

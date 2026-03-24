@@ -1,0 +1,505 @@
+% =============================================================================
+% Section: Context Algebra, GNS Representation, and Born Rule
+% =============================================================================
+
+\section{Context Algebra, GNS Representation, and Born Rule}
+\label{sec:context-born}
+
+The derivation through \step{33} established a K\"{a}hler structure
+$(g, J, \omega)$ on the continuum limit $\Omega$ of truth quotients.  But the
+\emph{probabilistic} structure of the framework---the rule assigning
+probabilities to experimental outcomes---has so far appeared only in
+embryonic form: the gauge-invariant measure $\mu_\Pit$ of \step{27} counts
+truth classes uniformly.  This section derives the full quantum probability
+structure: a C*-algebra, a canonical Hilbert space via the GNS construction,
+a context-dependent event algebra, and the Born rule.  Every step is forced
+by A0$^*$; no quantum postulates are imported.
+
+% ---------------------------------------------------------------------------
+\subsection{The Witness C*-Algebra}
+\label{sec:context-born:cstar}
+
+Recall from \cref{def:witness-algebra} that the ordered witness algebra
+$\WitAlg$ carries a product (ordered composition $\WitCompose$), an
+involution ($*$ = replay adjoint), a unit ($\mathbf{1}$), positivity
+($\GNSstate(w^* \WitCompose w) \geq 0$), and an operational norm
+($\|w\| = \sup_s \|w(s)\|$).  We now show that these data force the
+norm-closed completion of $\WitAlg$ to be a unital C*-algebra.
+
+\begin{theorem}[C*-Completion of the Witness Algebra]
+\label{thm:cstar-completion}
+Under A0$^*$, the norm-closed completion of $\WitAlg$ is a unital
+C*-algebra $\CstarW$.  That is, $\CstarW$ is a Banach algebra over
+$\mathbb{C}$ with an isometric involution satisfying the C*-identity
+$\|a^* a\| = \|a\|^2$ for all $a \in \CstarW$.
+
+\begin{proof}[Proof sketch]
+We verify each C*-algebra axiom from the A0$^*$ conditions:
+
+\emph{1.\ Algebra structure.}
+Ordered composition $\WitCompose$ is associative (\cref{def:witness-algebra}(a))
+and distributes over formal linear combinations of witness processes.
+Scalar multiplication by $\lambda \in \mathbb{C}$ extends the real-valued
+witness amplitudes to the complex field---this extension is forced because
+restriction to $\mathbb{R}$ would render the involution $*$ trivial on the
+self-adjoint sector, collapsing the distinction between $w$ and $w^*$ for
+self-adjoint witnesses and thereby losing the separation guaranteed by (W4).
+
+\emph{2.\ Positivity from witnessed frequencies.}
+Condition (W4) guarantees that outcome weights from actual separations are
+non-negative.  Hence $\GNSstate(w^* \WitCompose w) \geq 0$ for every
+$w \in \WitAlg$ and every admissible state---this is positivity in the
+$*$-algebraic sense.
+
+\emph{3.\ Norm from operational supremum.}
+Condition (W3) bounds every witness action by a finite budget, so
+$\|w\| = \sup_s \|w(s)\| < \infty$ for all $w \in \WitAlg$.  This supremum
+over admissible states defines a submultiplicative norm:
+$\|w_1 \WitCompose w_2\| \leq \|w_1\| \cdot \|w_2\|$, because executing
+$w_1$ then $w_2$ costs at most the product of their individual suprema.
+
+\emph{4.\ Closure under limits from maximal closure.}
+Condition (W7) demands compositional closure: if $w_1, w_2$ are admissible,
+so is $w_1 \WitCompose w_2$.  Taking norm-limits of Cauchy sequences of
+admissible witnesses yields processes that are still finitely approximable
+to arbitrary precision within the budget hierarchy.  The norm-completion
+$\CstarW$ is the closure of $\WitAlg$ in the operator norm topology; it
+inherits all algebraic operations by continuity.
+
+\emph{5.\ C*-identity: $\|w^* \WitCompose w\| = \|w\|^2$.}
+This is the key identity.  The argument proceeds in two steps.
+
+\emph{Step (i): $\|w^* \WitCompose w\| \leq \|w\|^2$.}
+This follows from the submultiplicativity of the operator norm
+($\|ab\| \leq \|a\| \|b\|$) together with $\|w^*\| = \|w\|$
+(the replay adjoint has the same operational supremum as $w$, since
+replay (W2) reproduces the same separation outcomes).
+
+\emph{Step (ii): $\|w^* \WitCompose w\| \geq \|w\|^2$.}
+For any state $s$, the composite $w^* \WitCompose w$ first executes $w$
+on $s$ (producing outcome and state update), then replays $w$ on the
+output.  By (W2), replay is exact: the replay adjoint applied to the
+output of $w$ recovers exactly the separation information that $w$
+produced.  Therefore the operational weight of the composite at state $s$
+is at least $\|w(s)\|^2$ (the square of the forward separation).
+Taking the supremum over $s$:
+$\|w^* \WitCompose w\| \geq \sup_s \|w(s)\|^2 = \|w\|^2$.
+
+Combining: $\|w^* \WitCompose w\| = \|w\|^2$.
+
+The essential content is that replay (W2) is not an approximate
+inverse---it exactly recovers the separation data, so the composite
+$w^* \WitCompose w$ is a positive element whose norm is the squared
+norm of $w$.  This is what makes the witness algebra a genuine
+C$^*$-algebra and not merely a Banach $^*$-algebra.
+
+\forcing{Each C*-axiom is forced by A0$^*$: associativity by (W7),
+involution by (W2), positivity by (W4), norm finiteness by (W3), closure
+under limits by (W7), and the C*-identity by the replay-separation
+correspondence (W2 $+$ W4).  Omitting any axiom leaves an algebraic
+gap permitting unwitnessed distinctions.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Complex Scalars are Forced]
+\label{rem:complex-scalars}
+The extension from real to complex scalars deserves emphasis.  In a purely
+real $*$-algebra, the involution is trivial on the self-adjoint part and
+cannot encode phase information.  But (W5) records disturbance---including
+the \emph{relative phase} between successive witness executions (the
+asymmetry between $w_1 \WitCompose w_2$ and $w_2 \WitCompose w_1$).
+Encoding this phase requires at least one imaginary direction:
+$\mathbb{C}$ is the minimal field extension of $\mathbb{R}$ admitting a
+non-trivial automorphism (complex conjugation) compatible with the
+involution.  Higher extensions ($\mathbb{H}$, octonions) would introduce
+additional structure not forced by any A0$^*$ condition.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{GNS Representation}
+\label{sec:context-born:gns}
+
+We now construct the canonical Hilbert space representation.  The key
+ingredient is a \emph{state} on the C*-algebra $\CstarW$---a positive
+linear functional normalized to unity.
+
+\begin{definition}[Gauge-Invariant Event Valuation]
+\label{def:gns-state}
+The \emph{canonical state} $\GNSstate \colon \CstarW \to \mathbb{C}$ is
+defined by:
+\begin{enumerate}[nosep, label=(\roman*)]
+  \item $\GNSstate(\mathbf{1}) = 1$ \quad (normalization),
+  \item $\GNSstate(a^* a) \geq 0$ for all $a \in \CstarW$ \quad (positivity),
+  \item $\GNSstate(g \cdot a \cdot g^{-1}) = \GNSstate(a)$ for all
+        $g \in \gauge$ \quad (gauge invariance).
+\end{enumerate}
+At finite budget $B$, this state coincides with the uniform counting
+measure on $\TQ{\Ledger_B}$:
+$\GNSstate(a) = |\TQ{\Ledger_B}|^{-1} \sum_{p \in \TQ{\Ledger_B}} a(p)$.
+In the continuum limit, $\GNSstate$ extends to the measure $\mu_\Pit$ of
+\step{27} by Kolmogorov consistency.
+\end{definition}
+
+\begin{theorem}[GNS Representation]
+\label{thm:gns-representation}
+The pair $(\CstarW, \GNSstate)$ yields the GNS triple
+$(\HilbW, \piGNS, \OmVec)$ consisting of:
+\begin{enumerate}[nosep, label=(\alph*)]
+  \item a separable Hilbert space $\HilbW$,
+  \item a $*$-representation $\piGNS \colon \CstarW \to B(\HilbW)$
+        (bounded operators on $\HilbW$),
+  \item a cyclic vector $\OmVec \in \HilbW$ with
+        $\overline{\piGNS(\CstarW)\OmVec} = \HilbW$,
+\end{enumerate}
+satisfying the reconstruction identity:
+\[
+  \GNSstate(a) \;=\;
+  \langle \OmVec,\, \piGNS(a)\, \OmVec \rangle
+  \quad \text{for all } a \in \CstarW.
+\]
+The triple is unique up to unitary equivalence.
+
+\begin{proof}[Proof sketch]
+This is the Gel'fand--Na\u{\i}mark--Segal construction applied to the
+C*-algebra $\CstarW$ with state $\GNSstate$.  The proof proceeds in three
+steps:
+
+\emph{Step 1: Inner product.}
+Define $\langle a, b \rangle_\GNSstate = \GNSstate(a^* b)$ on $\CstarW$.
+Positivity of $\GNSstate$ (\cref{def:gns-state}(ii)) guarantees this is a
+positive semi-definite sesquilinear form.
+
+\emph{Step 2: Quotient and completion.}
+Let $\mathcal{N} = \{a \in \CstarW : \GNSstate(a^* a) = 0\}$ be the null
+space (the \emph{Gel'fand ideal}).  The quotient $\CstarW / \mathcal{N}$
+carries a genuine inner product.  Its completion in the induced norm is
+the Hilbert space $\HilbW$.
+
+\emph{Step 3: Representation and cyclic vector.}
+For each $a \in \CstarW$, define $\piGNS(a)[b] = [ab]$ (left
+multiplication on equivalence classes).  This is well-defined because
+$\mathcal{N}$ is a left ideal.  Boundedness follows from the C*-norm:
+$\|\piGNS(a)\| \leq \|a\|$.  The cyclic vector is
+$\OmVec = [\mathbf{1}]$, the class of the identity.  Then:
+\[
+  \langle \OmVec, \piGNS(a) \OmVec \rangle
+  \;=\; \langle [\mathbf{1}], [a \cdot \mathbf{1}] \rangle
+  \;=\; \GNSstate(\mathbf{1}^* \cdot a \cdot \mathbf{1})
+  \;=\; \GNSstate(a).
+\]
+Cyclicity: $\piGNS(\CstarW)\OmVec = \{[a] : a \in \CstarW\}$ is dense
+in $\HilbW$ by construction.  Uniqueness up to unitary equivalence is
+standard (see, e.g., \citealt{bratteli1987}).
+
+\forcing{The Hilbert space $\HilbW$ is not postulated---it is the unique
+(up to unitary equivalence) representation space forced by the C*-algebra
+$\CstarW$ (\cref{thm:cstar-completion}) and the gauge-invariant state
+$\GNSstate$ (\cref{def:gns-state}).  No choice of Hilbert space dimension,
+inner product, or representation is made: the GNS theorem determines all
+three from the algebraic data that A0$^*$ provides.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[The Hilbert Space is Derived, Not Postulated]
+\label{rem:hilbert-derived}
+In standard quantum mechanics, the Hilbert space is a primitive postulate
+(the first axiom of the Dirac--von Neumann formulation).  Here, $\HilbW$
+is a \emph{theorem}: the GNS construction applied to the witness C*-algebra
+forced by A0$^*$.  The inner product $\langle \cdot, \cdot \rangle$ is not
+a choice but the sesquilinear form $\GNSstate(a^* b)$ inherited from
+replay-composition.  The cyclic vector $\OmVec$ is the state of ``no
+witnessing yet performed''---the algebraic unit projected into $\HilbW$.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Context Algebra and Events}
+\label{sec:context-born:contexts}
+
+With the Hilbert space $\HilbW$ and representation $\piGNS$ in hand, we
+now define the event structure.
+
+\begin{definition}[Sharp Events]
+\label{def:sharp-events}
+A \emph{sharp event} is a projection $P \in \piGNS(\CstarW)''$
+(the von Neumann algebra generated by $\piGNS(\CstarW)$) satisfying
+$P = P^* = P^2$.  The set of sharp events is denoted
+$\mathcal{P}(\HilbW)$.
+\end{definition}
+
+\begin{definition}[General Events (Effects)]
+\label{def:effects}
+A \emph{general event} (or \emph{effect}) is an operator
+$E \in B(\HilbW)$ satisfying $0 \leq E \leq I$, where $I$ is the
+identity and the ordering is the usual operator ordering:
+$0 \leq E$ means $\langle \psi, E\psi \rangle \geq 0$ for all
+$\psi \in \HilbW$, and $E \leq I$ means
+$\langle \psi, (I - E)\psi \rangle \geq 0$ for all $\psi \in \HilbW$.
+The set of effects is denoted $\mathcal{E}(\HilbW)$.
+
+Every sharp event is an effect ($P^2 = P$ and $P^* = P$ imply
+$0 \leq P \leq I$), but not every effect is sharp.
+\end{definition}
+
+\begin{definition}[Context]
+\label{def:context}
+A \emph{context} $\Context$ is a maximal commuting family of witness
+processes in $\WitAlg$:
+\[
+  \Context \;=\; \{w_i\}_{i \in I} \;\subset\; \WitAlg
+  \quad\text{such that}\quad
+  \WitCommutator{w_i}{w_j} = 0 \;\;\text{for all } i, j \in I,
+\]
+and $\Context$ is not properly contained in any larger commuting family.
+Under the GNS representation, a context maps to a maximal abelian
+subalgebra $\piGNS(\Context) \subset B(\HilbW)$.
+\end{definition}
+
+\begin{proposition}[Boolean Algebra Within a Context]
+\label{prop:boolean-within-context}
+Within a single context $\Context$, the sharp events
+$\mathcal{P}(\piGNS(\Context))$ form a Boolean algebra: they admit
+meet ($P \wedge Q = PQ$), join ($P \vee Q = P + Q - PQ$), and
+complement ($P^\perp = I - P$), satisfying distributivity.
+
+\begin{proof}[Proof sketch]
+Since all elements of $\Context$ commute, the projections in
+$\piGNS(\Context)''$ also commute.  Commuting projections on a
+Hilbert space form a Boolean algebra under the lattice operations
+$P \wedge Q = PQ$, $P \vee Q = P + Q - PQ$, with $P^\perp = I - P$.
+Distributivity holds because multiplication of commuting projections
+distributes over addition.
+\forcing{The Boolean structure is forced by commutativity within a
+context.  No additional assumption is needed: commuting projections on
+a Hilbert space always form a Boolean algebra.}
+\end{proof}
+\end{proposition}
+
+\begin{definition}[Event Algebra $\EventAlg$]
+\label{def:event-algebra}
+The \emph{event algebra} $\EventAlg$ is obtained by pasting the Boolean
+algebras of all contexts along their shared coarse events.  Formally:
+\begin{enumerate}[nosep, label=(\roman*)]
+  \item For each context $\Context_\alpha$, let
+        $\mathcal{B}_\alpha = \mathcal{P}(\piGNS(\Context_\alpha))$ be
+        its Boolean algebra of sharp events.
+  \item If two contexts $\Context_\alpha$ and $\Context_\beta$ share a
+        coarse-graining---that is, a sub-Boolean-algebra
+        $\mathcal{B}_{\alpha\beta} \subset \mathcal{B}_\alpha \cap
+        \mathcal{B}_\beta$---then the Boolean algebras are identified on
+        $\mathcal{B}_{\alpha\beta}$.
+  \item The global event structure is the colimit:
+        $\EventAlg = \mathrm{colim}_\alpha\, \mathcal{B}_\alpha$.
+\end{enumerate}
+$\EventAlg$ is generally \emph{not} a Boolean algebra (it lacks a global
+distributive law), but each ``local slice'' (restriction to a single
+context) is Boolean.
+\end{definition}
+
+\begin{definition}[Orthogonality of Events]
+\label{def:orthogonality}
+Two effects $E, F \in \mathcal{E}(\HilbW)$ are \emph{orthogonal},
+written $E \perp F$, if and only if no refinement branch in the witness
+algebra jointly affirms them:
+\[
+  E \perp F
+  \quad\iff\quad
+  E \cdot F = 0
+  \quad\iff\quad
+  \text{ran}(E) \perp \text{ran}(F) \text{ in } \HilbW.
+\]
+Operationally: $E \perp F$ means that no admissible witness process can
+produce an outcome affirming both $E$ and $F$ simultaneously.
+
+\forcing{Orthogonality is forced by (W4): if $E$ and $F$ could be jointly
+affirmed, the composite witness $w_E \WitCompose w_F$ would fail to
+separate the distinction ``$E$ or $F$\,?''---the witness would produce
+identical outcomes for both, contradicting the separation requirement.}
+\end{definition}
+
+% ---------------------------------------------------------------------------
+\subsection{The Born Rule}
+\label{sec:context-born:born}
+
+We now derive the probability assignment on $\EventAlg$.  The key
+result is that the four conditions below---each individually forced by
+A0$^*$---uniquely determine the Born rule.
+
+\begin{theorem}[Born Rule]
+\label{thm:born-rule}
+The unique probability assignment $\BornProb$ on the event algebra
+$\EventAlg$ satisfying:
+\begin{enumerate}[nosep, label=(\alph*)]
+  \item \emph{Additivity on orthogonal events:}
+        if $E_1 \perp E_2$, then
+        $\BornProb(E_1 + E_2) = \BornProb(E_1) + \BornProb(E_2)$;
+  \item \emph{Invariance under context-preserving recoding:}
+        if $U$ is a unitary with $U \Context U^* = \Context$ for
+        every context $\Context$, then $\BornProb(U E U^*) = \BornProb(E)$;
+  \item \emph{Continuity under refinement:}
+        if $E_n \to E$ in the weak operator topology, then
+        $\BornProb(E_n) \to \BornProb(E)$;
+  \item \emph{Product multiplicativity on independent systems:}
+        if $E$ and $F$ act on independent (tensor-factor) subsystems,
+        then $\BornProb(E \otimes F) = \BornProb(E) \cdot \BornProb(F)$;
+\end{enumerate}
+is the state evaluation:
+\begin{equation}
+\label{eq:born-rule}
+  \boxed{\;
+    \BornProb(E)
+    \;=\; \GNSstate(E)
+    \;=\; \langle \OmVec,\, \piGNS(E)\, \OmVec \rangle.
+  \;}
+\end{equation}
+For a general normal state $\rho$ (density operator on $\HilbW$) and
+a projection $P_E$ onto the eigenspace of event $E$:
+\begin{equation}
+\label{eq:born-pure}
+  \BornProb_\rho(E) \;=\; \mathrm{tr}(\rho\, E).
+\end{equation}
+In particular, for a pure state $|\psi\rangle$ and a sharp event $P_E$:
+\begin{equation}
+\label{eq:born-pure-proj}
+  \BornProb(E) \;=\; \|P_E \psi\|^2.
+\end{equation}
+This is the Born rule of quantum mechanics.
+
+\begin{proof}[Proof sketch]
+The proof proceeds by showing that conditions (a)--(d) uniquely constrain
+$\BornProb$ to be a state on $\CstarW$, and then applying the generalized
+Gleason theorem.
+
+\emph{Step 1: Frame function.}
+Condition (a) makes $\BornProb$ a \emph{frame function} on the effect
+algebra $\mathcal{E}(\HilbW)$: it assigns non-negative reals to effects
+and is additive on orthogonal families.
+
+\emph{Step 2: Generalized Busch--Gleason theorem.}
+By the theorem of Busch \citep{busch2003}, every frame function on the
+effect algebra $\mathcal{E}(\HilbW)$ of a Hilbert space $\HilbW$ with
+$\dim \HilbW \geq 2$ extends uniquely to a positive linear functional
+on $B(\HilbW)$.  Crucially, this result holds for \emph{effects}
+(operators $0 \leq E \leq I$), not merely projections.  The classical
+Gleason theorem \citep{gleason1957} applies only to projections and
+requires $\dim \HilbW \geq 3$; the Busch generalization removes the
+dimension restriction by working with the full effect algebra.
+
+The dimension restriction $\dim \HilbW \geq 2$ is automatically
+satisfied: a one-dimensional Hilbert space admits no non-trivial
+projections, hence no non-trivial events, contradicting A0$^*$'s
+demand that at least one distinction be admissible.
+
+\emph{Step 3: Uniqueness from invariance and continuity.}
+The Busch--Gleason theorem gives a positive linear functional
+$\BornProb(\cdot) = \mathrm{tr}(\rho\, \cdot)$ for some density
+operator $\rho$.  Condition (b) (gauge invariance) forces
+$\rho = U \rho U^*$ for all context-preserving unitaries $U$, and
+condition (c) (continuity) ensures the functional is normal.
+Condition (d) (multiplicativity on independent systems) forces
+$\rho_{\mathrm{total}} = \rho_1 \otimes \rho_2$ on product systems,
+ruling out entangled reference states.
+
+For the canonical GNS state, $\rho = |\OmVec\rangle\langle\OmVec|$
+is the projection onto the cyclic vector, recovering
+\cref{eq:born-rule}.  For a general normal state represented by
+density operator $\rho$, we obtain \cref{eq:born-pure}.  For a pure
+state $\rho = |\psi\rangle\langle\psi|$ and projection $P_E$:
+$\BornProb(E) = \langle\psi, P_E \psi\rangle = \|P_E\psi\|^2$,
+which is \cref{eq:born-pure-proj}.
+
+\forcing{Each condition is individually forced:
+\begin{itemize}[nosep]
+  \item[(a)] Additivity is forced by the orthogonality structure
+    (\cref{def:orthogonality}): mutually exclusive witness outcomes
+    must have separately accountable probabilities, or else the
+    distinction between ``$E$ occurred'' and ``$F$ occurred'' would
+    be unwitnessable.
+  \item[(b)] Invariance is forced by gauge invariance (\step{12}):
+    recoding that preserves context structure cannot change probabilities,
+    or it would constitute a testable distinction between gauge-equivalent
+    descriptions.
+  \item[(c)] Continuity is forced by the budget hierarchy: as the budget
+    increases, refinement limits must converge (the inverse system of
+    \step{26} is Cauchy), hence probability assignments must be
+    continuous under refinement.
+  \item[(d)] Multiplicativity is forced by (W7): independent witness
+    processes compose without interaction, so their outcome probabilities
+    must multiply.
+\end{itemize}
+Given (a)--(d), the Busch--Gleason theorem is a mathematical
+consequence---not a physical assumption---yielding the Born rule as the
+unique probability assignment.}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Clarification of the Step~27 Born-Like Measure]
+\label{rem:step27-clarification}
+The gauge-invariant measure $\mu_\Pit$ derived at \step{27} was described
+as ``Born-like'' (\cref{rem:born-rule}).  We can now make this precise:
+$\mu_\Pit$ is the restriction of the Born rule to the commutative center
+$\CenterW$ of the witness algebra.  Within $\CenterW$, all witnesses
+commute, so there is a single global context and the event algebra
+$\EventAlg$ reduces to a Boolean algebra.  On this Boolean algebra, the
+Born rule $\BornProb(E) = \GNSstate(E)$ coincides with the uniform
+gauge-invariant counting measure $\mu_\Pit$.  The full Born rule
+(\cref{thm:born-rule}) generalizes $\mu_\Pit$ to the noncommutative
+sector, where multiple incompatible contexts coexist and probability
+is context-relative.
+\end{remark}
+
+\begin{remark}[No Dimension Restriction]
+\label{rem:no-dim-restriction}
+The use of the Busch--Gleason theorem on effects, rather than the
+classical Gleason theorem on projections, is essential.  Gleason's
+original theorem \citep{gleason1957} requires $\dim \HilbW \geq 3$
+and therefore fails for qubits ($\dim = 2$).  Busch's generalization
+\citep{busch2003} works for all $\dim \HilbW \geq 2$ by considering
+the full effect algebra $\mathcal{E}(\HilbW)$ rather than just the
+projection lattice $\mathcal{P}(\HilbW)$.  Since our event algebra
+$\EventAlg$ naturally includes general effects
+(\cref{def:effects})---coarse-grained witness outcomes that need not
+be sharp---the Busch--Gleason theorem is the correct tool.  The Born
+rule derived here applies to qubits, qutrits, and all finite- and
+infinite-dimensional systems without exception.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Summary}
+\label{sec:context-born:summary}
+
+The derivation chain of this section is:
+\[
+  \WitAlg
+  \;\xrightarrow{\text{norm closure}}\;
+  \CstarW
+  \;\xrightarrow{\GNS}\;
+  (\HilbW, \piGNS, \OmVec)
+  \;\xrightarrow{\text{contexts}}\;
+  \EventAlg
+  \;\xrightarrow{\text{Busch--Gleason}}\;
+  \BornProb(E) = \langle \OmVec, \piGNS(E)\, \OmVec \rangle.
+\]
+
+\begin{enumerate}[nosep]
+  \item The ordered witness $*$-algebra $\WitAlg$, forced by A0$^*$
+        (\cref{def:witness-algebra}), carries product, involution,
+        positivity, and norm.
+  \item Norm-closed completion yields the unital C*-algebra $\CstarW$
+        (\cref{thm:cstar-completion}).
+  \item The gauge-invariant state $\GNSstate$ and the GNS construction
+        produce the Hilbert space $\HilbW$, representation $\piGNS$, and
+        cyclic vector $\OmVec$ (\cref{thm:gns-representation}).
+  \item Maximal commuting families define contexts $\Context$; within each
+        context, events form a Boolean algebra; pasting across contexts
+        yields the global event algebra $\EventAlg$
+        (\cref{def:context,def:event-algebra}).
+  \item Additivity, gauge invariance, continuity, and multiplicativity
+        uniquely force the Born rule via the Busch--Gleason theorem
+        (\cref{thm:born-rule}).
+\end{enumerate}
+
+Every step is forced by A0$^*$.  No quantum postulate---no Hilbert space
+axiom, no projection postulate, no Born rule---is imported.  The
+quantum probability structure is a \emph{theorem} of completed
+witnessability, derived through the same forcing methodology as the
+K\"{a}hler geometry of \step{33}.

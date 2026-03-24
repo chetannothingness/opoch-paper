@@ -1,0 +1,36 @@
+You are a scientific writing specialist focused on mathematical exposition. Your task is to polish the appendix sections of the Opoch paper.
+
+Read the following files in this project directory:
+- appendices/full-derivation.tex
+- appendices/open-questions.tex
+- appendices/verification.tex
+- appendices/z3-proofs.tex
+- appendices/experiments.tex
+
+Also read these verification reports for context on issues found:
+- synsc-reports/phase1a-math-verification-report.md
+- synsc-reports/phase1b-citation-report.md
+
+YOUR TASK: For each appendix, produce improved LaTeX text:
+
+1. appendices/full-derivation.tex — Ensure proof clarity. Address the Phase 1A findings:
+   - Step 11 (Operational Nothingness): Fix the internal inconsistency between "zero-cost test" and "costs are positive integers c >= 1". The correct framing is "no affordable separator test remains within budget" rather than "only constant tests exist."
+   - Steps flagged as containing hidden choices (2, 4, 5, 8, 9, 10, 14, 15, 18, 19, 20): Add honest qualifications where appropriate — e.g., "forced within the paper's model class" or "unique up to computable isomorphism"
+   - Step 21: Qualify the final chain claim per Phase 1A: "A coherent chain exists given A0 + CT + the paper's modeling commitments, canonical up to isomorphism" rather than "no design choices"
+
+2. appendices/open-questions.tex — Strengthen resolutions. Address Phase 1A feedback:
+   - Halting problem section: Make explicit that "total" is budget-relative totality on the finite slice (decidable), and TIMEOUT is a first-class outcome
+   - "Declared vs Derived" inventory: Reclassify commutativity as "derived under the framework's test model" rather than "derived from A0 alone"
+   - Quantum mechanics section: Strengthen the honest concession that Step 5 commutativity is a modeling restriction
+
+3. appendices/verification.tex — Make the three-point audit protocol more precise and formal
+
+RULES:
+- PRESERVE all mathematical content, labels, LaTeX commands, \ref{}, \cite{}, theorem environments
+- PRESERVE all \label{} markers exactly
+- IMPROVE clarity, precision, and honest qualification of claims
+- Fix any internal inconsistencies flagged by the verification reports
+- Do NOT change theorem statements — only proofs and surrounding prose where flagged
+- Maintain consistent formatting across all appendices
+
+Write the improved text to synsc-reports/phase2b-appendix-improvements.md, with each appendix clearly labeled.

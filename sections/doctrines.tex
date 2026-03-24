@@ -1,0 +1,64 @@
+% =============================================================================
+% Section: Seven Non-Negotiable Doctrines
+% =============================================================================
+
+\section{Seven Non-Negotiable Doctrines}
+\label{sec:doctrines}
+
+The three primitives ($\Del$, $\Pit$, $\Tim$) and the derivation from
+nothingness impose seven constraints on any system that reasons under A0$^*$.
+These are not design choices or engineering heuristics---they are forced
+consequences of the axiom.  Each doctrine is traced to the derivation step
+that forces it.
+
+\begin{enumerate}[label=\textbf{D\arabic*.}]
+  \item \textbf{Everything must be finitely describable.}
+        Every admissible object is a finite binary string in $\Carrier$.
+        Infinite descriptions require infinite witnesses, violating A0$^*$.
+        \hfill\emph{(A0$^*$, Step~1; \cref{thm:carrier})}
+
+  \item \textbf{Meaning requires testable differences.}
+        A distinction without a separating test $\tau \in \Del^*$ is
+        operationally void.  If no finite procedure can detect the
+        difference, the difference does not exist within the framework.
+        \hfill\emph{(Steps~3--4; \cref{thm:executability}, \cref{thm:endogenous})}
+
+  \item \textbf{Truth emerges from feasible tests.}
+        The truth quotient $\TQ{\Ledger}$ is the coarsest structure
+        surviving all executed tests.  Truth is not assumed; it is
+        constructed by the accumulation of test outcomes.
+        \hfill\emph{(Steps~6--7; \cref{thm:truth-quotient}, \cref{thm:indistinguishability})}
+
+  \item \textbf{Time is an irreversible ledger.}
+        Each record appended to $\Ledger$ advances the clock.  Reversal
+        would destroy a witness, violating A0$^*$.  Time is the irreversibility
+        of record formation.
+        \hfill\emph{(Step~8; \cref{thm:time})}
+
+  \item \textbf{The truthpoint $\Truthpoint$ exists as a limit concept.}
+        The ideal truth quotient under unlimited budget is approached but
+        never operationally reached.  The gap between any finite
+        $\TQ{\Ledger}$ and $\Truthpoint$ is precisely what $\OMEGA$ reports.
+        \hfill\emph{(Step~11; \cref{thm:opnoth})}
+
+  \item \textbf{Completeness demands enumeration of lawful tests.}
+        The canonical enumeration $\CanEnum$ over $\Del^*$ ensures no
+        admissible test is overlooked.  The enumeration order is determined
+        by the self-delimiting syntax $\SdMap$, requiring no external
+        scheduler.
+        \hfill\emph{(Step~4; \cref{thm:endogenous})}
+
+  \item \textbf{Claims require finite witnesses or explicit gaps.}
+        Every output is either $\UNIQUE$ (verified answer with witness) or
+        $\OMEGA$ (unknown, with the minimal separator test needed for
+        resolution).  There is no probabilistic hedging, no confidence
+        score, no ungrounded assertion.
+        \hfill\emph{(Step~0; \cref{thm:nothingness})}
+\end{enumerate}
+
+\begin{remark}
+These doctrines are \emph{consequences} of A0$^*$ and the derivation, collected
+here for clarity.  They add no axiomatic content beyond what the derivation
+establishes.  Any system that violates a doctrine necessarily violates A0$^*$ at
+the cited step.
+\end{remark}

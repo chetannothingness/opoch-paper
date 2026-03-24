@@ -1,0 +1,97 @@
+% bellman-coupling.tex — Bellman minimax with Coupling Law (Step 18)
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  qnode/.style={circle, draw=opochblue, fill=opochblue!12, minimum size=10mm,
+    font=\small\bfseries, inner sep=0pt, line width=0.7pt},
+  tnode/.style={rectangle, draw=opochorange, fill=opochorange!10,
+    rounded corners=3pt, minimum width=12mm, minimum height=7mm,
+    font=\scriptsize, inner sep=2pt, line width=0.6pt},
+  leaf/.style={circle, draw=#1, fill=#1!15, minimum size=7mm,
+    font=\tiny\bfseries, inner sep=0pt, line width=0.6pt},
+  arr/.style={-{Stealth[length=2mm]}, line width=0.7pt, opochgray!70},
+  best/.style={-{Stealth[length=2.5mm]}, line width=1.2pt, opochgreen!80},
+]
+
+  % === Root query ===
+  \node[qnode] (q) at (0, 0) {$q$};
+
+  % === Test branches ===
+  \node[tnode] (t1) at (-3.5, -2.0) {$\tau_1$};
+  \node[tnode, draw=opochgreen, fill=opochgreen!12, line width=1pt]
+    (t2) at (0, -2.0) {$\tau^*$};
+  \node[tnode] (t3) at (3.5, -2.0) {$\tau_3$};
+
+  % Arrows from query to tests
+  \draw[arr] (q) -- (t1);
+  \draw[best] (q) -- (t2);
+  \draw[arr] (q) -- (t3);
+
+  % === Leaves for t1 ===
+  \node[leaf=opochgreen] (l1a) at (-4.5, -3.8) {$+1$};
+  \node[leaf=opochorange] (l1b) at (-3.5, -3.8) {$0$};
+  \node[leaf=opochorange] (l1c) at (-2.5, -3.8) {$0$};
+  \draw[arr] (t1) -- (l1a);
+  \draw[arr] (t1) -- (l1b);
+  \draw[arr] (t1) -- (l1c);
+
+  % === Leaves for t* (optimal) ===
+  \node[leaf=opochgreen] (l2a) at (-0.8, -3.8) {$+1$};
+  \node[leaf=opochgreen] (l2b) at (0, -3.8) {$+1$};
+  \node[leaf=opochred] (l2c) at (0.8, -3.8) {$-1$};
+  \draw[arr] (t2) -- (l2a);
+  \draw[arr] (t2) -- (l2b);
+  \draw[arr] (t2) -- (l2c);
+
+  % === Leaves for t3 ===
+  \node[leaf=opochorange] (l3a) at (2.5, -3.8) {$0$};
+  \node[leaf=opochorange] (l3b) at (3.5, -3.8) {$0$};
+  \node[leaf=opochred] (l3c) at (4.5, -3.8) {$-1$};
+  \draw[arr] (t3) -- (l3a);
+  \draw[arr] (t3) -- (l3b);
+  \draw[arr] (t3) -- (l3c);
+
+  % === Efficiency bars (right side) ===
+  \begin{scope}[shift={(7.5, -1.0)}]
+    \node[font=\footnotesize\bfseries, opochgray] at (0, 0.8) {Efficiency $\varepsilon$};
+
+    % Bar for tau_1
+    \fill[opochorange!30] (0, 0) rectangle (1.2, 0.4);
+    \draw[opochorange!50, line width=0.5pt] (0, 0) rectangle (1.2, 0.4);
+    \node[font=\tiny, left] at (0, 0.2) {$\tau_1$};
+
+    % Bar for tau* (longest = best)
+    \fill[opochgreen!40] (0, -0.5) rectangle (2.4, -0.1);
+    \draw[opochgreen!70, line width=0.8pt] (0, -0.5) rectangle (2.4, -0.1);
+    \node[font=\tiny\bfseries, left, opochgreen!70!black] at (0, -0.3) {$\tau^*$};
+
+    % Bar for tau_3
+    \fill[opochorange!30] (0, -1.0) rectangle (0.8, -0.6);
+    \draw[opochorange!50, line width=0.5pt] (0, -1.0) rectangle (0.8, -0.6);
+    \node[font=\tiny, left] at (0, -0.8) {$\tau_3$};
+  \end{scope}
+
+  % === Coupling Law formula ===
+  \node[rectangle, draw=opochgreen!50, fill=opochgreen!5, rounded corners=2pt,
+    font=\small, inner sep=4pt, align=center]
+    at (7.5, -3.5)
+    {$\OptTest{q}{W} = \Pit\text{-min}\bigl(\argmax_\tau \EffQ{\tau}{W}\bigr)$};
+
+  % === Annotations ===
+  \node[font=\tiny, opochblue!70, align=center] at (0, 0.8)
+    {Query with\\surviving answers $W$};
+
+  \node[font=\tiny, opochgray, align=center] at (0, -4.8)
+    {Trit outcomes after test};
+
+\end{tikzpicture}
+\caption{Bellman minimax search with the Coupling Law (Step~18).  The
+  system selects the test $\tau^*$ maximizing efficiency
+  $\EffQ{\tau}{W}$, with ties broken by $\Pit$-canonical ordering.
+  The optimal test is a deterministic function of the query~$q$ and
+  surviving answer set~$W$---the last hidden degree of freedom
+  (the scheduler) is eliminated.}
+\label{fig:bellman-coupling}
+\end{figure}

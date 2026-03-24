@@ -1,0 +1,243 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{opoch}[2026/02/20 Opoch Paper Style]
+
+% ===== Required Packages =====
+\RequirePackage{amsmath,amssymb,amsthm}
+\IfFileExists{mathtools.sty}{\RequirePackage{mathtools}}{}
+\RequirePackage{tikz}
+\IfFileExists{pgfplots.sty}{%
+  \RequirePackage{pgfplots}%
+  \pgfplotsset{compat=1.18}%
+}{}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric,shapes.misc,decorations.pathmorphing,decorations.pathreplacing,backgrounds,fit,matrix}
+\IfFileExists{algorithm.sty}{\RequirePackage{algorithm}}{}
+\IfFileExists{algpseudocode.sty}{\RequirePackage{algpseudocode}}{}
+\IfFileExists{booktabs.sty}{\RequirePackage{booktabs}}{}
+\IfFileExists{enumitem.sty}{\RequirePackage{enumitem}}{}
+\RequirePackage{xcolor}
+\RequirePackage{hyperref}
+\IfFileExists{cleveref.sty}{\RequirePackage{cleveref}}{}
+
+% ===== Colors =====
+\definecolor{opochblue}{RGB}{30,80,160}
+\definecolor{opochgreen}{RGB}{40,140,70}
+\definecolor{opochred}{RGB}{180,40,40}
+\definecolor{opochorange}{RGB}{200,120,30}
+\definecolor{opochgray}{RGB}{100,100,100}
+\definecolor{opochpurple}{RGB}{120,60,180}
+
+% ===== Theorem Environments =====
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{axiom}{Axiom}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% ===== Opoch-Specific Commands =====
+
+% Primitives
+\newcommand{\Pit}{\Pi}              % Truth
+\newcommand{\Del}{\Delta}           % Tests/Distinctions
+\newcommand{\Tim}{\mathcal{T}}      % Time
+\newcommand{\Carrier}{\mathcal{D}^*}% Carrier set D* = {0,1}^{<\infty}
+\newcommand{\Ledger}{\mathcal{L}}   % Ledger
+\newcommand{\UTM}{\mathcal{U}}      % Universal Turing Machine
+
+% Null-State Logic
+\newcommand{\UNIQUE}{\textsc{unique}}
+\newcommand{\OMEGA}{\Omega}
+\newcommand{\UNSAT}{\textsc{unsat}}
+\let\REFUTED\UNSAT % backward-compat alias
+\newcommand{\trit}[1]{\langle #1 \rangle}
+
+% Truth quotient
+\newcommand{\TQ}[1]{\Pi^*(#1)}
+\newcommand{\equivL}{\equiv_{\Ledger}}
+
+% Fiber and gauge
+\newcommand{\fiber}[1]{W(#1)}
+\newcommand{\gauge}{\mathcal{G}_\Tim}
+
+% Nothingness
+\newcommand{\noth}{\bot}
+\newcommand{\opnoth}{\bot_{\mathrm{op}}}
+
+% Problem 5-tuple
+\newcommand{\Problem}{\langle \mathcal{Q}, \mathcal{A}, \mathcal{V}, B, \pi \rangle}
+
+% Diamond law
+\newcommand{\Noise}{\mathcal{N}}
+\newcommand{\Query}{\mathcal{Q}}
+
+% Bellman
+\newcommand{\Bellman}{\mathcal{B}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+
+% ===== Derivation Commands (Steps 0--33) =====
+
+% Observable Opens and Eraser Algebra
+\newcommand{\ObsOpen}{\mathcal{O}^{\mathrm{fin}}_\Delta}
+\newcommand{\Eraser}{\mathcal{E}}
+
+% Self-Generating Fixed Point
+\newcommand{\FixPt}{\Upsilon}
+
+% Myhill-Nerode Congruence
+\newcommand{\MNcong}{\equiv_q}
+
+% Separator Geometry
+\newcommand{\SepDist}{d_q}
+
+% Self-Hosting
+\newcommand{\SelfHost}{\Upsilon(\mathcal{S})}
+
+% Self-Delimiting Map
+\newcommand{\SdMap}{\mathrm{sd}}
+
+% Canonical Enumeration
+\newcommand{\CanEnum}{E_\Delta}
+
+% Closure Rules
+\newcommand{\ClMin}{\mathrm{Cl}_{\min}}
+
+% Finite Slice
+\newcommand{\FinSlice}{D_0}
+
+% Exactness Gate
+\newcommand{\ExactGate}{\mathcal{G}_{\mathrm{ex}}}
+
+% Energy Ledger
+\newcommand{\Efficiency}{\varepsilon}
+\newcommand{\EnergyLedger}{\mathcal{L}_E}
+
+% Decision/Epistemic Regimes
+\newcommand{\Epistemic}{\mathcal{R}_{\mathrm{ep}}}
+\newcommand{\Decision}{\mathcal{R}_{\mathrm{dec}}}
+
+% Curvature and Hardness
+\newcommand{\SepCurv}{\kappa}
+\newcommand{\Hardness}{\mathcal{H}}
+
+% Pi-Canonicalization and supporting commands
+\newcommand{\PiCanon}{\Pi_{\mathrm{can}}}
+\newcommand{\Ser}{\mathrm{Ser}}
+\newcommand{\Adm}{\mathrm{Adm}}
+\newcommand{\Instrument}{\mathcal{I}}
+
+% Coupling Law (Separator-Indistinguishability Coupling)
+\newcommand{\AnsQuot}[2]{\mathrm{Ans}(#1,\, #2)}       % Answer quotient Ans(q, W_a)
+\newcommand{\RefGain}[2]{\Delta\Tim_{#1}(#2)}            % Refinement gain DeltaT_q(tau; W)
+\newcommand{\EffQ}[2]{\varepsilon(#1;\, #2)}             % Efficiency epsilon(tau; W)
+\newcommand{\OptTest}[2]{\tau^*(#1,\, #2)}               % Optimal test tau*(q, W)
+\newcommand{\OmegaDist}[2]{d(#1;\, #2)}                  % Omega distance d(q; W)
+
+% Truthpoint, Opoch, Contract aliases
+\newcommand{\Truthpoint}{\Pi_\infty}
+\newcommand{\Opoch}{\textsc{Opoch}}
+\newcommand{\Contract}{\Problem}
+
+% ===== Phase I: Universal Execution Commands =====
+
+% Universal Closure Operator
+\newcommand{\UnivOp}{\mathbb{K}}                              % Universal operator K
+\newcommand{\TritValuate}{\mathrm{TritVal}}                   % TritValuate operator
+\newcommand{\Fact}{\mathrm{Fact}}                              % Factorization operator
+\newcommand{\NormOp}{\mathrm{N}}                               % Normalization operator
+\newcommand{\GaugeOp}{\Gamma}                                  % Gauge collapse operator
+\newcommand{\IndistOp}{\Phi}                                   % Indistinguishability closure
+
+% Closure-Defect
+\newcommand{\ClosureDefect}[1]{\Delta_{#1}}                    % Closure-defect Delta_Q
+\newcommand{\Residue}{r}                                       % Unresolved residue
+
+% Consciousness Projector
+\newcommand{\ConsProj}{\mathfrak{c}}                           % Consciousness projector c
+\newcommand{\ConsMeasure}{C}                                   % Consciousness measure
+
+% Trit Field and Valuation State
+\newcommand{\TritField}{\theta}                                % Trit field theta
+\newcommand{\PrimeBasis}{\mathrm{PrimeBasis}}                  % Prime basis set
+\newcommand{\ValState}{(m, \theta, r)}                         % Valuation state triple
+
+% Algebraic Structure
+\newcommand{\IndepComp}{\otimes}                               % Independent composition
+\newcommand{\NormAlg}{\hat{M}}                                 % Normalized distinguished algebra
+\newcommand{\CostGrade}{c}                                     % Cost grading
+\newcommand{\PrimeSpec}{\mathrm{Spec}_P}                       % Prime spectrum
+
+% Globally Glued Field
+\newcommand{\GluedField}{\mathfrak{F}}                         % Globally glued self-fixed field
+\newcommand{\ObstAlg}{\mathfrak{O}}                            % Obstruction algebra
+\newcommand{\RankCollapse}{\mathrm{dim}_{\mathrm{eff}}}        % Effective dimension (rank collapse)
+
+% ===== A0*-Complete Closure: Ordered Witness Algebra =====
+
+% Ordered witness algebra and ledger
+\newcommand{\WitAlg}{\mathcal{A}_W}                            % Ordered witness *-algebra
+\newcommand{\OrdLedger}{\mathcal{L}_{\mathrm{ord}}}            % Ordered ledger
+\newcommand{\WitCompose}{\mathbin{\vartriangleright}}           % Ordered witness composition
+\newcommand{\WitCommutator}[2]{[\,#1,\,#2\,]}                  % Witness commutator [e_i, e_j]
+
+% Witness cost splitting
+\newcommand{\Ksep}{K_{\mathrm{sep}}}                           % Separative (reversible) cost
+\newcommand{\Kdiss}{K_{\mathrm{diss}}}                         % Dissipative (irreversible) cost
+\newcommand{\dsep}{d_{\mathrm{sep}}}                           % Symmetric separative distance
+\newcommand{\dtime}{\tau_{\mathrm{dir}}}                       % Directed time quasi-metric
+
+% Witness category
+\newcommand{\WitCat}{\mathbf{C}_W}                             % Witness path category
+\newcommand{\WitPath}{\gamma}                                   % Witness path
+
+% C*-algebra and GNS
+\newcommand{\CstarW}{\overline{\WitAlg}}                       % C*-completion of witness algebra
+\newcommand{\GNS}{\mathrm{GNS}}                                % GNS construction
+\newcommand{\HilbW}{H_\omega}                                  % GNS Hilbert space
+\newcommand{\piGNS}{\pi_\omega}                                % GNS representation map
+\newcommand{\OmVec}{\Omega_\omega}                             % GNS cyclic vector
+\newcommand{\GNSstate}{\omega}                                 % GNS state functional
+
+% Context algebra and Born rule
+\newcommand{\Context}{\mathsf{C}}                              % Context (maximal commuting family)
+\newcommand{\EventAlg}{\mathcal{E}_Q}                          % Event algebra
+\newcommand{\BornProb}{P}                                      % Born probability
+
+% Witness generator decomposition
+\newcommand{\WitGen}{A}                                        % Local witness generator
+\newcommand{\WitSym}{S}                                        % Symmetric part (gives metric)
+\newcommand{\WitAnti}{K}                                       % Antisymmetric part (gives symplectic)
+
+% Center of witness algebra
+\newcommand{\CenterW}{Z(\WitAlg)}                              % Center of witness algebra
+\newcommand{\OmegaCl}{\Omega_{\mathrm{cl}}}                    % Classical base manifold
+
+% Replay-completeness
+\newcommand{\ReplayComplete}{\mathrm{RC}}                      % Replay-completeness property
+
+% Physics sector commands
+\newcommand{\Lphase}{L_{\mathrm{phase}}}                       % Phase fiber (rank 1)
+\newcommand{\Eweak}{E_{\mathrm{weak}}}                         % Weak fiber (rank 2)
+\newcommand{\Ccolor}{C_{\mathrm{color}}}                       % Color fiber (rank 3)
+
+% ===== Formatting =====
+\newcommand{\step}[1]{\textbf{Step~#1}}
+\newcommand{\forcing}[1]{\textit{Forcing:}~#1}
+
+% ===== Hyperref Setup =====
+\hypersetup{
+  colorlinks=true,
+  linkcolor=opochblue,
+  citecolor=opochgreen,
+  urlcolor=opochblue
+}
+
+% ===== Fallback for cleveref =====
+\@ifpackageloaded{cleveref}{}{%
+  \providecommand{\cref}[1]{\ref{#1}}%
+  \providecommand{\Cref}[1]{\ref{#1}}%
+}

@@ -1,0 +1,44 @@
+% diamond-law.tex — Commutative diamond: Noise and Query commute
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  node distance=25mm and 30mm,
+  dnode/.style={rounded rectangle, draw=opochblue, fill=opochblue!8,
+    minimum width=18mm, minimum height=9mm, font=\small, inner sep=3pt},
+  darr/.style={-{Stealth[length=3mm]}, thick, opochgray!80},
+  dlbl/.style={font=\small, fill=white, inner sep=2pt},
+]
+
+  % Nodes
+  \node[dnode] (L) at (0, 0) {$\Ledger$};
+  \node[dnode] (NL) at (-2.8, -2.5) {$\Noise(\Ledger)$};
+  \node[dnode] (QL) at ( 2.8, -2.5) {$\Query(\Ledger)$};
+  \node[dnode, draw=opochgreen, fill=opochgreen!8] (bot) at (0, -5.0)
+    {$\Query\!\bigl(\Noise(\Ledger)\bigr) = \Noise\!\bigl(\Query(\Ledger)\bigr)$};
+
+  % Arrows
+  \draw[darr, opochred!70] (L) -- node[dlbl, left, pos=0.45]
+    {$\Noise$} (NL);
+  \draw[darr, opochblue!70] (L) -- node[dlbl, right, pos=0.45]
+    {$\Query$} (QL);
+  \draw[darr, opochblue!70] (NL) -- node[dlbl, left, pos=0.45]
+    {$\Query$} (bot);
+  \draw[darr, opochred!70] (QL) -- node[dlbl, right, pos=0.45]
+    {$\Noise$} (bot);
+
+  % Commutativity annotation
+  \node[font=\footnotesize\itshape, opochgreen!70!black] at (0, -2.5) {commutes};
+
+  % Forcing note
+  \node[font=\scriptsize, opochgray, align=center] at (0, -6.2)
+    {The diamond law ensures that encoding noise\\
+     and query extraction are order-independent.};
+
+\end{tikzpicture}
+\caption{The Diamond Law: noise~$\Noise$ and query~$\Query$ commute over the
+  ledger~$\Ledger$. Applying noise then querying yields the same result as
+  querying then applying noise, ensuring gauge invariance of extracted truth.}
+\label{fig:diamond-law}
+\end{figure}

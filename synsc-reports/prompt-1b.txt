@@ -1,0 +1,38 @@
+You are conducting a thorough literature and citation verification of the Opoch paper.
+
+Read the following files in this project directory:
+- refs.bib: The bibliography (42 citations)
+- sections/related-work.tex: The intellectual context / related work section
+- sections/introduction.tex: The introduction with initial citations
+
+YOUR TASKS:
+
+1. CITATION VERIFICATION: For each citation in refs.bib, verify:
+   - Does this work actually exist? (search for it online)
+   - Is the author attribution correct?
+   - Is the year correct?
+   - Is the title accurate?
+   - Mark each: VERIFIED, UNCERTAIN, or ERROR
+
+2. MISSING REFERENCES: Check if the paper is missing important references in these areas:
+   - Category theory foundations (Mac Lane "Categories for the Working Mathematician", Lawvere's work)
+   - Information geometry (Amari and Nagaoka)
+   - Constructor theory (Deutsch and Marletto follow-up papers beyond the original)
+   - Formal verification in mathematics (Lean mathlib, Coq/proof assistants)
+   - Self-referential systems (Yanofsky "A Universal Approach to Self-Referential Paradoxes", Hofstadter)
+   - Computational complexity theory connections
+   - Any other foundational works that a reviewer would expect to see cited
+
+3. RELATED WORK FAIRNESS: Read sections/related-work.tex and check:
+   - Is the positioning against prior art (Tegmark, Wheeler, Wolfram, etc.) fair and accurate?
+   - Are there overclaims about novelty?
+   - Are there undercitations where credit should be given?
+   - Does the paper adequately distinguish itself from similar frameworks?
+
+4. OVERCLAIM DETECTION: Identify any claims that are stronger than what the citations support.
+
+Write a structured report to synsc-reports/phase1b-citation-report.md with:
+- Citation verification table (cite key, status, notes)
+- List of recommended additions with full BibTeX entries
+- Fairness assessment of related work positioning
+- Any overclaims or undercitations found

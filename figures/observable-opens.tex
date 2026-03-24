@@ -1,0 +1,115 @@
+% observable-opens.tex — Observable opens topology on the truth quotient
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  truthclass/.style={circle, fill=opochgray, minimum size=2.5pt, inner sep=0pt},
+  open set label/.style={font=\scriptsize, inner sep=1pt},
+]
+
+  % --- Background: the space Pi*(L) ---
+  \draw[rounded corners=12pt, draw=opochgray!50, fill=opochgray!5, line width=0.6pt]
+    (-3.8, -2.8) rectangle (4.2, 3.2);
+  \node[font=\footnotesize\bfseries, opochgray!80!black] at (3.4, 2.8)
+    {$\TQ{\Ledger}$};
+
+  % --- Open set O_{tau_1,a} (blue, left-center) ---
+  \draw[draw=opochblue, fill=opochblue!12, line width=0.7pt, rounded corners=8pt]
+    (-3.0, -0.8) .. controls (-3.2, 1.0) and (-1.8, 2.6) ..
+    (-0.2, 2.4) .. controls (0.8, 2.2) and (1.0, 0.6) ..
+    (0.2, -0.2) .. controls (-0.4, -1.0) and (-2.6, -1.4) ..
+    cycle;
+  \node[open set label, opochblue!80!black] at (-2.4, 2.2)
+    {$O_{\tau_1, a}$};
+
+  % --- Open set O_{tau_2,a} (green, right-center) ---
+  \draw[draw=opochgreen, fill=opochgreen!12, line width=0.7pt, rounded corners=8pt]
+    (-0.6, -1.8) .. controls (-0.8, 0.2) and (0.0, 1.8) ..
+    (1.6, 2.0) .. controls (3.0, 2.0) and (3.6, 0.4) ..
+    (3.2, -0.8) .. controls (2.6, -2.0) and (0.4, -2.4) ..
+    cycle;
+  \node[open set label, opochgreen!80!black] at (2.8, 1.8)
+    {$O_{\tau_2, a}$};
+
+  % --- Open set O_{tau_3,a} (orange, bottom) ---
+  \draw[draw=opochorange, fill=opochorange!12, line width=0.7pt, rounded corners=8pt]
+    (-2.4, -2.2) .. controls (-2.6, -0.8) and (-1.4, 0.4) ..
+    (0.2, 0.2) .. controls (1.4, 0.0) and (2.2, -0.6) ..
+    (2.0, -1.6) .. controls (1.6, -2.4) and (-1.6, -2.6) ..
+    cycle;
+  \node[open set label, opochorange!80!black] at (1.8, -2.2)
+    {$O_{\tau_3, a}$};
+
+  % --- Truth class points scattered across the space ---
+  % In O_{tau_1,a} only
+  \node[truthclass] (p1) at (-2.6, 1.4) {};
+  \node[truthclass] (p2) at (-2.0, 0.6) {};
+  \node[truthclass] (p3) at (-1.4, 1.8) {};
+
+  % In O_{tau_1,a} cap O_{tau_3,a} (blue-orange intersection)
+  \node[truthclass] (p4) at (-1.6, -0.4) {};
+  \node[truthclass] (p5) at (-0.8, 0.0) {};
+
+  % In O_{tau_1,a} cap O_{tau_2,a} (blue-green intersection, top)
+  \node[truthclass] (p6) at (0.0, 1.6) {};
+  \node[truthclass] (p7) at (0.4, 1.0) {};
+
+  % In all three (triple intersection)
+  \node[truthclass, fill=opochgray!80!black, minimum size=3pt] (p8) at (-0.1, -0.4) {};
+  \node[truthclass, fill=opochgray!80!black, minimum size=3pt] (p9) at (0.4, -0.2) {};
+
+  % In O_{tau_2,a} only
+  \node[truthclass] (p10) at (2.4, 1.0) {};
+  \node[truthclass] (p11) at (2.8, 0.2) {};
+  \node[truthclass] (p12) at (1.8, 0.6) {};
+
+  % In O_{tau_2,a} cap O_{tau_3,a} (green-orange intersection)
+  \node[truthclass] (p13) at (1.2, -1.2) {};
+  \node[truthclass] (p14) at (0.6, -1.6) {};
+
+  % In O_{tau_3,a} only
+  \node[truthclass] (p15) at (-1.0, -1.8) {};
+  \node[truthclass] (p16) at (0.0, -1.4) {};
+
+  % Outside all open sets
+  \node[truthclass, fill=opochgray!40] (q1) at (3.4, -1.8) {};
+  \node[truthclass, fill=opochgray!40] (q2) at (-3.2, -1.6) {};
+  \node[truthclass, fill=opochgray!40] (q3) at (3.6, 2.4) {};
+
+  % --- Annotations ---
+  % Intersection label
+  \draw[-{Stealth[length=2mm]}, thin, opochgray!70]
+    (1.8, -2.8) node[font=\tiny, below, align=center]
+      {$O_{\tau_1,a} \cap O_{\tau_2,a} \cap O_{\tau_3,a}$\\(also open)}
+    -- (0.1, -0.6);
+
+  % Union label
+  \node[font=\tiny, align=center, opochgray!70!black] at (-3.4, 3.5)
+    {$O_{\tau_1,a} \cup O_{\tau_2,a} \cup O_{\tau_3,a}$};
+  \node[font=\tiny, opochgray!60] at (-3.4, 3.1)
+    {(also open)};
+
+  % Legend
+  \begin{scope}[shift={(5.0, 1.2)}]
+    \node[font=\tiny\bfseries, opochgray!80!black] at (0, 0) {Legend};
+    \node[truthclass] at (-0.3, -0.5) {};
+    \node[font=\tiny, right] at (0.0, -0.5) {truth class};
+    \draw[draw=opochblue, fill=opochblue!12, line width=0.5pt]
+      (-0.4, -1.1) rectangle (0.0, -0.8);
+    \node[font=\tiny, right] at (0.0, -0.95) {$O_{\tau_1, a}$};
+    \draw[draw=opochgreen, fill=opochgreen!12, line width=0.5pt]
+      (-0.4, -1.5) rectangle (0.0, -1.2);
+    \node[font=\tiny, right] at (0.0, -1.35) {$O_{\tau_2, a}$};
+    \draw[draw=opochorange, fill=opochorange!12, line width=0.5pt]
+      (-0.4, -1.9) rectangle (0.0, -1.6);
+    \node[font=\tiny, right] at (0.0, -1.75) {$O_{\tau_3, a}$};
+  \end{scope}
+
+\end{tikzpicture}
+\caption{Observable opens topology: open sets as testable predicates form a topology
+  on the truth quotient $\TQ{\Ledger}$. Intersections and unions of observable opens
+  are again open, satisfying the axioms of a topology. Individual truth classes
+  (dots) are grouped by which tests separate them.}
+\label{fig:observable-opens}
+\end{figure}

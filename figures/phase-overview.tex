@@ -1,0 +1,101 @@
+% phase-overview.tex — High-level phase map of the 34-step derivation
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+  phase/.style={rectangle, draw=#1, fill=#1!12, rounded corners=4pt,
+    minimum width=16mm, minimum height=14mm, font=\scriptsize,
+    line width=0.7pt, align=center, inner sep=3pt},
+  arr/.style={-{Stealth[length=2mm]}, thick, opochgray!50},
+]
+
+  % === Phase boxes (horizontal flow) ===
+  \node[phase=opochblue] (A) at (0, 0)
+    {{\tiny\bfseries\color{opochblue!80} A}\\[1pt]\tiny Step 0\\[-1pt]\tiny Output gate};
+
+  \node[phase=opochblue] (B) at (2.0, 0)
+    {{\tiny\bfseries\color{opochblue!80} B}\\[1pt]\tiny 1--2\\[-1pt]\tiny Carrier};
+
+  \node[phase=opochblue] (C) at (4.0, 0)
+    {{\tiny\bfseries\color{opochblue!80} C}\\[1pt]\tiny 3--4\\[-1pt]\tiny Executability};
+
+  \node[phase=opochorange] (D) at (6.0, 0)
+    {{\tiny\bfseries\color{opochorange!80} D}\\[1pt]\tiny 5--7\\[-1pt]\tiny Truth};
+
+  \node[phase=opochorange] (E) at (8.0, 0)
+    {{\tiny\bfseries\color{opochorange!80} E}\\[1pt]\tiny 8--11\\[-1pt]\tiny Time};
+
+  \node[phase=opochorange] (F) at (10.0, 0)
+    {{\tiny\bfseries\color{opochorange!80} F}\\[1pt]\tiny 12--17\\[-1pt]\tiny Invariance};
+
+  \node[phase=opochgreen] (G) at (12.0, 0)
+    {{\tiny\bfseries\color{opochgreen!80} G}\\[1pt]\tiny 18--21\\[-1pt]\tiny Solver};
+
+  \node[phase=opochpurple] (H) at (14.0, 0)
+    {{\tiny\bfseries\color{opochpurple!80} H}\\[1pt]\tiny 22--25\\[-1pt]\tiny Execution};
+
+  \node[phase=opochred] (I) at (16.0, 0)
+    {{\tiny\bfseries\color{opochred!80} I}\\[1pt]\tiny 26--33\\[-1pt]\tiny Geometry};
+
+  % === Connecting arrows ===
+  \draw[arr] (A) -- (B);
+  \draw[arr] (B) -- (C);
+  \draw[arr] (C) -- (D);
+  \draw[arr] (D) -- (E);
+  \draw[arr] (E) -- (F);
+  \draw[arr] (F) -- (G);
+  \draw[arr] (G) -- (H);
+  \draw[arr] (H) -- (I);
+
+  % === Theme groupings (top) ===
+  \draw[opochblue!30, line width=0.5pt, decorate,
+    decoration={brace, amplitude=4pt, mirror}]
+    (-0.9, 1.0) -- (4.9, 1.0)
+    node[midway, above=4pt, font=\tiny, opochblue!70] {Foundation};
+
+  \draw[opochorange!30, line width=0.5pt, decorate,
+    decoration={brace, amplitude=4pt, mirror}]
+    (5.1, 1.0) -- (10.9, 1.0)
+    node[midway, above=4pt, font=\tiny, opochorange!70] {Structure};
+
+  \draw[opochgreen!30, line width=0.5pt, decorate,
+    decoration={brace, amplitude=4pt, mirror}]
+    (11.1, 1.0) -- (12.9, 1.0)
+    node[midway, above=4pt, font=\tiny, opochgreen!70] {Dynamics};
+
+  \draw[opochpurple!30, line width=0.5pt, decorate,
+    decoration={brace, amplitude=4pt, mirror}]
+    (13.1, 1.0) -- (14.9, 1.0)
+    node[midway, above=4pt, font=\tiny, opochpurple!70] {Law};
+
+  \draw[opochred!30, line width=0.5pt, decorate,
+    decoration={brace, amplitude=4pt, mirror}]
+    (15.1, 1.0) -- (16.9, 1.0)
+    node[midway, above=4pt, font=\tiny, opochred!70] {Shape};
+
+  % === Narrative arc (bottom) ===
+  \draw[opochgray!40, line width=0.8pt, -{Stealth[length=2.5mm]},
+    decorate, decoration={snake, amplitude=0.5mm, segment length=8mm}]
+    (0, -1.6) -- (16.0, -1.6);
+
+  \node[font=\tiny\itshape, opochgray, align=center] at (0, -2.1)
+    {nothingness};
+  \node[font=\tiny\itshape, opochgray, align=center] at (4.5, -2.1)
+    {closure};
+  \node[font=\tiny\itshape, opochgray, align=center] at (9.0, -2.1)
+    {defect};
+  \node[font=\tiny\itshape, opochgray, align=center] at (13.0, -2.1)
+    {self-observation};
+  \node[font=\tiny\itshape, opochgray, align=center] at (16.0, -2.1)
+    {geometry};
+
+\end{tikzpicture}%
+}% end resizebox
+\caption{The nine phases of the forced derivation (Steps~0--33).
+  Nothingness (Phase~A) forces closure (A--G), closure reveals defect
+  (H), defect requires self-observation (H), and self-observation
+  iterated on the continuum limit produces geometry~(I).}
+\label{fig:phase-overview}
+\end{figure}

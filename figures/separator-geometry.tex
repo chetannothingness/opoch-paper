@@ -1,0 +1,110 @@
+% separator-geometry.tex — Separator geometry: metric on the truth quotient
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  truthpt/.style={circle, fill=#1, draw=black!30, minimum size=5pt,
+    inner sep=0pt, line width=0.4pt},
+  truthpt/.default={opochblue!70},
+  edge label/.style={font=\tiny, fill=white, inner sep=1pt, rounded corners=1pt},
+  region label/.style={font=\scriptsize\itshape, #1},
+]
+
+  % === Curved surface (manifold sketch) ===
+  % Draw a subtle grid to suggest a curved surface
+  \begin{scope}[opochblue!15, line width=0.3pt]
+    % Horizontal curves (slight curvature)
+    \draw (-4.0, -1.5) .. controls (-2.0, -1.3) and (0.0, -1.8) ..
+      (2.0, -1.2) .. controls (3.5, -0.8) and (4.5, -1.0) .. (5.5, -0.6);
+    \draw (-4.0, -0.5) .. controls (-2.0, -0.2) and (0.0, -0.8) ..
+      (2.0, -0.1) .. controls (3.5, 0.3) and (4.5, 0.0) .. (5.5, 0.4);
+    \draw (-4.0, 0.5) .. controls (-2.0, 0.8) and (0.0, 0.2) ..
+      (2.0, 0.9) .. controls (3.5, 1.3) and (4.5, 1.0) .. (5.5, 1.4);
+    \draw (-4.0, 1.5) .. controls (-2.0, 1.9) and (0.0, 1.2) ..
+      (2.0, 1.9) .. controls (3.5, 2.3) and (4.5, 2.0) .. (5.5, 2.4);
+    % Vertical curves
+    \draw (-3.5, -1.8) .. controls (-3.4, -0.5) and (-3.6, 0.5) .. (-3.5, 1.8);
+    \draw (-1.5, -1.6) .. controls (-1.4, -0.3) and (-1.6, 0.7) .. (-1.5, 1.9);
+    \draw (0.5, -1.9) .. controls (0.6, -0.6) and (0.4, 0.4) .. (0.5, 1.5);
+    \draw (2.5, -1.2) .. controls (2.6, 0.0) and (2.4, 1.0) .. (2.5, 2.0);
+    \draw (4.5, -0.9) .. controls (4.6, 0.2) and (4.4, 1.2) .. (4.5, 2.2);
+  \end{scope}
+
+  % === High curvature region (left, closely spaced points) ===
+  \begin{scope}[on background layer]
+    \draw[rounded corners=6pt, draw=opochred!30, fill=opochred!6,
+      densely dashed, line width=0.5pt]
+      (-3.2, -0.8) rectangle (-0.8, 1.2);
+  \end{scope}
+
+  \node[truthpt=opochred!60] (p1) at (-2.8, 0.8) {};
+  \node[truthpt=opochred!60] (p2) at (-2.2, 0.2) {};
+  \node[truthpt=opochred!60] (p3) at (-1.4, 0.6) {};
+  \node[truthpt=opochred!60] (p4) at (-2.0, -0.4) {};
+
+  \node[font=\tiny, above=1mm] at (p1) {$[p_1]$};
+  \node[font=\tiny, below left=0.5mm] at (p2) {$[p_2]$};
+  \node[font=\tiny, above right=0.5mm] at (p3) {$[p_3]$};
+  \node[font=\tiny, below=1mm] at (p4) {$[p_4]$};
+
+  % Edges with distances (high curvature = small metric distances but high cost)
+  \draw[opochred!60, line width=0.5pt] (p1) -- (p2)
+    node[edge label, pos=0.5] {$\SepDist\!=\!3$};
+  \draw[opochred!60, line width=0.5pt] (p2) -- (p3)
+    node[edge label, pos=0.5] {$\SepDist\!=\!4$};
+  \draw[opochred!60, line width=0.5pt] (p2) -- (p4)
+    node[edge label, pos=0.5] {$\SepDist\!=\!2$};
+  \draw[opochred!60, line width=0.5pt] (p3) -- (p4)
+    node[edge label, pos=0.4] {$\SepDist\!=\!5$};
+
+  % Curvature annotation
+  \node[region label=opochred!80!black, align=center] at (-2.0, -1.4)
+    {High curvature $\SepCurv \gg 0$\\(expensive separators)};
+
+  % === Low curvature region (right, spread out points) ===
+  \begin{scope}[on background layer]
+    \draw[rounded corners=6pt, draw=opochblue!30, fill=opochblue!6,
+      densely dashed, line width=0.5pt]
+      (1.0, -1.0) rectangle (5.2, 2.2);
+  \end{scope}
+
+  \node[truthpt=opochblue!70] (q1) at (1.6, 1.6) {};
+  \node[truthpt=opochblue!70] (q2) at (3.8, 1.8) {};
+  \node[truthpt=opochblue!70] (q3) at (4.6, 0.0) {};
+  \node[truthpt=opochblue!70] (q4) at (2.4, -0.4) {};
+
+  \node[font=\tiny, above=1mm] at (q1) {$[q_1]$};
+  \node[font=\tiny, above=1mm] at (q2) {$[q_2]$};
+  \node[font=\tiny, right=1mm] at (q3) {$[q_3]$};
+  \node[font=\tiny, below=1mm] at (q4) {$[q_4]$};
+
+  % Edges with distances (low curvature = cheap separators)
+  \draw[opochblue!60, line width=0.5pt] (q1) -- (q2)
+    node[edge label, pos=0.5] {$\SepDist\!=\!1$};
+  \draw[opochblue!60, line width=0.5pt] (q2) -- (q3)
+    node[edge label, pos=0.5] {$\SepDist\!=\!1$};
+  \draw[opochblue!60, line width=0.5pt] (q3) -- (q4)
+    node[edge label, pos=0.5] {$\SepDist\!=\!1$};
+  \draw[opochblue!60, line width=0.5pt] (q1) -- (q4)
+    node[edge label, pos=0.5] {$\SepDist\!=\!1$};
+
+  % Curvature annotation
+  \node[region label=opochblue!80!black, align=center] at (3.4, -1.4)
+    {Low curvature $\SepCurv \approx 0$\\(cheap separators)};
+
+  % === Cross-region edge ===
+  \draw[opochgray!50, line width=0.5pt, densely dotted] (p3) -- (q1)
+    node[edge label, pos=0.5] {$\SepDist\!=\!7$};
+
+  % === Axis label ===
+  \node[font=\footnotesize\bfseries, opochgray!80!black] at (1.0, 2.8)
+    {$(\TQ{\Ledger},\; \SepDist)$};
+
+\end{tikzpicture}
+\caption{Separator geometry: the cost of distinguishing truth classes induces
+  a metric~$\SepDist$ on the quotient space $\TQ{\Ledger}$. Regions where
+  separators are expensive exhibit high curvature~$\SepCurv$, while regions
+  with cheap single-test separators are metrically flat.}
+\label{fig:separator-geometry}
+\end{figure}

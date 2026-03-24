@@ -1,0 +1,68 @@
+% trit-states.tex — Three terminal states: UNIQUE, OMEGA, UNSAT
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  query/.style={diamond, draw=opochblue, fill=opochblue!10, minimum width=22mm,
+    minimum height=18mm, font=\small\bfseries, inner sep=2pt, line width=0.8pt},
+  tbox/.style={rounded rectangle, minimum width=38mm, minimum height=18mm,
+    font=\small, inner sep=4pt, line width=0.8pt, align=center},
+  ubox/.style={tbox, draw=opochgreen, fill=opochgreen!8},
+  obox/.style={tbox, draw=opochorange, fill=opochorange!8},
+  rbox/.style={tbox, draw=opochred, fill=opochred!8},
+  tarr/.style={-{Stealth[length=3mm]}, thick},
+  tlbl/.style={font=\footnotesize\bfseries, fill=white, inner sep=2pt, rounded corners=1pt},
+]
+
+  % Central query node
+  \node[query] (q) at (0, 0) {Query $q$};
+
+  % === UNIQUE (+1) — top right ===
+  \node[ubox] (uniq) at (5.5, 2.2)
+    {\textbf{\UNIQUE{} $(+1)$}\\[2pt]
+     \scriptsize answer $+$ witness $+$ receipt};
+  \draw[tarr, opochgreen!80] (q.east) -- ++(0.8, 0) |- (uniq.west)
+    node[tlbl, pos=0.25, above] {$+1$};
+
+  % Green check
+  \node[font=\large, opochgreen!70!black] at (3.2, 2.2) {\checkmark};
+
+  % === OMEGA (0) — middle right ===
+  \node[obox] (omega) at (5.5, -0.0)
+    {\textbf{$\OMEGA$ $(0)$}\\[2pt]
+     \scriptsize family $+$ separator $+$ gap};
+  \draw[tarr, opochorange!80] (q.east) -- (omega.west)
+    node[tlbl, pos=0.5, above] {$0$};
+
+  % Question mark
+  \node[font=\large, opochorange!80!black] at (3.2, 0.0) {?};
+
+  % === REFUTED (-1) — bottom right ===
+  \node[rbox] (ref) at (5.5, -2.2)
+    {\textbf{\REFUTED{} $(-1)$}\\[2pt]
+     \scriptsize reason $+$ violations};
+  \draw[tarr, opochred!80] (q.east) -- ++(0.8, 0) |- (ref.west)
+    node[tlbl, pos=0.25, below] {$-1$};
+
+  % X mark
+  \node[font=\large\bfseries, opochred!70] at (3.2, -2.2) {$\times$};
+
+  % Annotations on the left
+  \node[font=\scriptsize\itshape, opochgray, align=right, anchor=east]
+    at (-1.8, 1.0) {Every query\\terminates in\\exactly one of\\three states};
+
+  % Trit label
+  \node[font=\scriptsize, opochgray, align=center] at (5.5, -3.6)
+    {$\trit{+1, 0, -1}$ --- the \emph{trit} replaces\\
+     probabilistic confidence scores};
+
+\end{tikzpicture}
+\caption{The three terminal states forced by the output gate (Step~0).
+  Every query~$q$ resolves to exactly one trit value:
+  $\UNIQUE$ ($+1$) with a verified witness,
+  $\OMEGA$ ($0$) with the minimal separator test needed to resolve,
+  or $\UNSAT$ ($-1$) with specific violations identified.
+  No probabilistic hedging is permitted.}
+\label{fig:trit-states}
+\end{figure}

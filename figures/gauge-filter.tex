@@ -1,0 +1,89 @@
+% gauge-filter.tex — Gauge filter: raw objects → G_T barrier → invariant structure
+% Requires opoch.sty (loaded by main document)
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  obj/.style={rounded rectangle, draw=#1, fill=#1!10, minimum width=10mm,
+    minimum height=7mm, font=\small, inner sep=2pt},
+  obj/.default={opochgray},
+  blocked/.style={rounded rectangle, draw=opochred!50, fill=opochred!8,
+    minimum width=10mm, minimum height=7mm, font=\small, inner sep=2pt,
+    text=opochred!60},
+  passed/.style={rounded rectangle, draw=opochgreen, fill=opochgreen!10,
+    minimum width=10mm, minimum height=7mm, font=\small\bfseries, inner sep=2pt,
+    text=opochgreen!80!black},
+  barrier/.style={draw=opochorange, fill=opochorange!8, line width=1.2pt,
+    minimum width=8mm, minimum height=50mm, rounded corners=2pt},
+  arr/.style={-{Stealth[length=2.5mm]}, opochgray!60, thick},
+  xarr/.style={-{Stealth[length=2mm]}, opochred!50, thick, dashed},
+  garr/.style={-{Stealth[length=2.5mm]}, opochgreen!70, thick},
+]
+
+  % === Left side: Raw encoding-dependent objects ===
+  \node[font=\footnotesize\bfseries, opochgray] at (-4.2, 2.8) {Raw objects};
+
+  % Passing objects (encoding-invariant)
+  \node[obj=opochblue] (r1) at (-4.2,  1.8) {$3$};
+  \node[obj=opochblue] (r2) at (-4.2,  0.6) {$\pi$};
+  \node[obj=opochblue] (r3) at (-4.2, -0.6) {$e$};
+
+  % Blocked objects (encoding-dependent labels)
+  \node[blocked] (b1) at (-4.2, -1.8) {\textsf{``three''}};
+  \node[blocked] (b2) at (-4.2, -3.0) {\textsf{``drei''}};
+  \node[blocked] (b3) at (-4.2, -4.2) {\textsf{``III''}};
+
+  % === Barrier: Gauge filter G_T ===
+  \node[barrier] (filt) at (0, -0.7) {};
+  \node[font=\small\bfseries, opochorange!80!black, rotate=90] at (0, -0.7)
+    {$\gauge$ filter};
+
+  % Dashed vertical lines for barrier texture
+  \foreach \y in {-2.8,-2.2,-1.6,-1.0,-0.4,0.2,0.8,1.4} {
+    \draw[opochorange!30, thin] (-0.25, \y) -- (0.25, \y);
+  }
+
+  % === Arrows: passing through ===
+  \draw[arr] (r1) -- (-0.6,  1.8);
+  \draw[arr] (r2) -- (-0.6,  0.6);
+  \draw[arr] (r3) -- (-0.6, -0.6);
+
+  \draw[garr] (0.6,  1.8) -- (3.0,  1.8);
+  \draw[garr] (0.6,  0.6) -- (3.0,  0.6);
+  \draw[garr] (0.6, -0.6) -- (3.0, -0.6);
+
+  % === Arrows: blocked ===
+  \draw[xarr] (b1) -- (-0.6, -1.8);
+  \draw[xarr] (b2) -- (-0.6, -3.0);
+  \draw[xarr] (b3) -- (-0.6, -4.2);
+
+  % X marks for blocked items
+  \node[font=\large\bfseries, opochred!60] at (-0.6, -1.8) {$\times$};
+  \node[font=\large\bfseries, opochred!60] at (-0.6, -3.0) {$\times$};
+  \node[font=\large\bfseries, opochred!60] at (-0.6, -4.2) {$\times$};
+
+  % === Right side: Gauge-invariant structure ===
+  \node[font=\footnotesize\bfseries, opochgreen!70!black] at (4.5, 2.8)
+    {Gauge-invariant};
+
+  \node[passed] (p1) at (4.5,  1.8) {$3$};
+  \node[passed] (p2) at (4.5,  0.6) {$\pi$};
+  \node[passed] (p3) at (4.5, -0.6) {$e$};
+
+  \draw[garr] (3.0,  1.8) -- (p1);
+  \draw[garr] (3.0,  0.6) -- (p2);
+  \draw[garr] (3.0, -0.6) -- (p3);
+
+  % Annotation
+  \node[font=\scriptsize, opochgray, align=center, text width=55mm] at (0, -5.5)
+    {The gauge filter $\gauge$ blocks encoding-dependent labels\\
+     and passes only structure invariant under all\\
+     admissible re-encodings.};
+
+\end{tikzpicture}
+\caption{The gauge filter~$\gauge$. Raw objects enter from the left.
+  Encoding-invariant quantities ($3$, $\pi$, $e$) pass through; encoding-dependent
+  labels (``three'', ``drei'', ``III'') are blocked. Only gauge-invariant
+  structure survives as admissible truth.}
+\label{fig:gauge-filter}
+\end{figure}

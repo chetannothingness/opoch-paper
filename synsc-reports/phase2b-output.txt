@@ -1,0 +1,66 @@
+
+
+I'll start by reading the prompt file to understand the full instructions.
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/prompt-2b.txt
+Now let me read all the referenced files in parallel.
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/full-derivation.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/open-questions.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/verification.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/z3-proofs.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/experiments.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase1a-math-verification-report.md
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase1b-citation-report.md
+Let me also read the rest of the full-derivation.tex file to see the remaining content.
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/appendices/full-derivation.tex
+Now I have a complete understanding of all the files and the verification reports. Let me create the task plan and then produce the improved appendix text.
+[93m[1m| [0m[90m Todo     [0m9 todos
+Now I'll produce the complete improved appendix text. Let me write it all out to the target file.
+[91m[1m| [0m[90m Bash     [0mList synsc-reports directory
+
+phase1a-math-verification-report.md
+phase1a-math-verification.txt
+phase1a-output.txt
+phase1b-citation-report.md
+phase1b-citation-verification.txt
+phase1b-output.txt
+phase1c-consistency-audit.txt
+phase1c-consistency-report.md
+phase1c-output.txt
+phase2a-output.txt
+phase2b-output.txt
+prompt-1a.txt
+prompt-1b.txt
+prompt-1c.txt
+prompt-2a.txt
+prompt-2b.txt
+
+[92m[1m| [0m[90m Write    [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase2b-appendix-improvements.md
+The LSP errors are pre-existing in the project (duplicate labels and undefined references in other files), not caused by our output. Now let me mark all tasks as completed.
+[93m[1m| [0m[90m Todo     [0m0 todos
+All tasks complete. The improved appendix text has been written to `synsc-reports/phase2b-appendix-improvements.md`. Here is a summary of what was produced:
+
+**`appendices/full-derivation.tex`** --- 14 changes:
+
+- **Step 11 (Critical Fix):** Removed the internal inconsistency between "zero-cost test" and "costs are positive integers c >= 1". The proof now correctly frames operational nothingness as "no affordable separator test remains within budget" rather than "only constant tests exist." The feasible test set becomes empty ($\varnothing$) when remaining budget falls below the minimum test cost.
+
+- **Step 21 (Critical Fix):** The final chain claim now honestly acknowledges two layers of external input: (1) the Church-Turing thesis, and (2) three modeling commitments (pure non-disturbing tests, prior-free optimization, closed-universe assumption). The claim is restated as "canonical up to computable isomorphism given A0 + CT + modeling commitments."
+
+- **Steps 2, 4, 5, 8, 9, 10, 14, 15, 18, 19, 20:** Each `\forcing{}` block now carries honest qualifications distinguishing what is forced by A0 from what is forced within the paper's model class. Key pattern: "forced within the paper's model class" replaces unqualified "forced."
+
+- **Verification Summary:** Updated to explicitly list gauge freedoms and modeling commitments.
+
+**`appendices/open-questions.tex`** --- 3 changes:
+
+- **Halting problem:** Budget-relative totality on the finite slice is now explicit and identified as decidable. TIMEOUT is called out as a first-class outcome, not a gap.
+
+- **Quantum mechanics:** Step 5 commutativity is explicitly labeled a "modeling restriction, not a consequence of A0 alone," with the scope of propagation (Steps 5, 7) spelled out.
+
+- **Assumptions table:** Expanded from 8 to 10 entries. Commutativity reclassified from "Derived" to "Modeling commitment." Two new entries added: prior-free optimization (Step 18) and closed-universe assumption (Steps 2, 19, 20).
+
+**`appendices/verification.tex`** --- Full rewrite:
+
+- HC, EI, DE given formal `\begin{definition}` environments with explicit equations.
+- Four-point composition specified as a labeled Definition.
+- Audit table gains differentiated footnote symbols for CT ($\dagger$), commutativity ($\ddagger$), minimax ($\S$), and self-hosting ($\P$).
+- Receipt chain hash formula made explicit: $h_i = \mathrm{SHA256}(h_{i-1} \| \SdMap(\text{output}_i))$.
+- Self-hosting procedure spelled out with 5-tuple encoding and scope remark.

@@ -1,0 +1,123 @@
+% =============================================================================
+% Section: Intellectual Context
+% =============================================================================
+
+\section{Intellectual Context}
+\label{sec:related}
+
+We situate the \Opoch{} framework within five intellectual lineages,
+identifying precise points of contact and divergence.
+
+% -------------------------------------------------------------------------
+\subsection{Constructive Foundations}
+\label{sec:related:constructive}
+
+Martin-L\"{o}f's intuitionistic type theory \citep{martinlof1984} requires
+explicit constructions for existence claims; Bishop's constructive
+analysis \citep{bishop1967} demonstrated that large portions of classical
+mathematics survive under this constraint; Kleene's
+realizability \citep{kleene1952} formalized truth as recursive function
+existence.  The Curry--Howard correspondence identifies proofs with
+programs, connecting logic and computation.  A0$^*$ distills the constructive
+programme further: not just ``existence requires a witness'' but
+``\emph{distinction} requires a witness.''  Where Martin-L\"{o}f begins
+with a rich type structure (universes, dependent types), we begin with
+$\noth$ and derive structure.  The self-hosting property (Step~19) is a
+Curry--Howard instance: the derivation's proof corresponds to a program
+that verifies itself.
+
+% -------------------------------------------------------------------------
+\subsection{Computation and Information}
+\label{sec:related:computation}
+
+Solomonoff's universal induction \citep{solomonoff1964} and Kolmogorov
+complexity \citep{kolmogorov1963,livitanyi2008} define a universal prior
+over hypotheses weighted by description length.  Wheeler's ``It from
+Bit'' \citep{wheeler1990} proposed that physical quantities derive meaning
+from information-theoretic questions.  Zuse \citep{zuse1969} and
+Fredkin \citep{fredkin2003} modeled the universe as discrete computation.
+Deutsch and Marletto's constructor theory \citep{deutsch2015} reformulates
+physics in terms of which transformations can and cannot be performed.
+Our carrier $\Carrier$ is precisely the set on which Kolmogorov complexity
+is defined, and the prefix-free coding at Step~2 satisfies the same Kraft
+inequality \citep{kraft1949}.  The key divergence from Solomonoff is
+philosophical: we use $\UTM$ as a \emph{verifier}, not a prior for
+probabilistic prediction; the trit $\{\UNIQUE, \OMEGA, \UNSAT\}$ replaces
+probability.  Unlike digital physics, our derivation does not assume
+discrete computation---Step~3 derives the need for a computational
+substrate from A0$^*$; the Church--Turing thesis corroborates the forced class.
+Both constructor theory and \Opoch{} ask ``what tasks are possible?'' rather
+than ``what trajectories occur?''---but our derivation forces the test
+algebra $\Del^*$ from A0$^*$ rather than taking possible transformations as
+primitive.
+
+% -------------------------------------------------------------------------
+\subsection{Verification and Certification}
+\label{sec:related:verification}
+
+Necula's proof-carrying code \citep{necula1997} attaches machine-checkable
+proofs to executables; Goldwasser, Micali, and
+Rackoff \citep{goldwasser1989} established interactive proof systems;
+Clarke et~al.\ \citep{clarke2018} provide the reference for model checking.
+McConnell et~al.\ \citep{mcconnell2011} formalized certifying algorithms
+that produce efficiently checkable certificates alongside results.
+Belnap's four-valued logic \citep{belnap1977} extends classical logic with
+``unknown'' and ``contradictory'' values.  The \Opoch{} receipt system is
+proof-carrying code applied to reasoning traces: every execution produces a
+SHA-256 hash chain that is replay-verifiable.  Unlike interactive proofs,
+verification is non-interactive; unlike model checking, the Bellman search
+prunes the state space dynamically.  The exactness gate (Step~14) implements
+McConnell's certificate-first pattern.  Our trit differs from Belnap's four
+values: we exclude ``contradictory'' (a deterministic verifier cannot produce
+genuine contradictions), and our $\OMEGA$ is constructive---it returns the
+minimal separator test, not a static ``unknown'' label.
+
+% -------------------------------------------------------------------------
+\subsection{Geometry, Topology, and Automata}
+\label{sec:related:geometry}
+
+Scott's domain theory \citep{scott1970} models computation via continuous
+lattices; Smyth \citep{smyth1983} and Abramsky \citep{abramsky1994} connect
+topological structure to logical systems.  The Myhill--Nerode
+theorem \citep{myhill1957,nerode1958} identifies strings with identical
+futures, yielding minimal automata \citep{hopcroft1979}; Milner's
+bisimulation \citep{milner1989} extends this to concurrent systems.
+Amari's information geometry \citep{amari2016} treats statistical models
+as Riemannian manifolds with the Fisher metric measuring
+distinguishability \citep{rao1945}.  Our observable opens $\ObsOpen$
+(Step~7) are a finite restriction of the Scott topology to testable
+predicates.  The Myhill--Nerode congruence $\MNcong$ (Step~15) applies
+futures equivalence to the system's state space rather than string classes,
+with the test algebra $\Del^*$ as alphabet.  The separator geometry
+(Step~16) constructs a metric $\SepDist$ analogous to Fisher-Rao distance
+but defined over deterministic truth classes and measured in test cost
+rather than information divergence.
+
+% -------------------------------------------------------------------------
+\subsection{Decision Theory and Applications}
+\label{sec:related:applications}
+
+Bellman's principle of optimality \citep{bellman1957} and Wald's minimax
+decision theory \citep{wald1950} provide the mathematical foundation for
+the framework's test-selection rule: at each step, select the test minimizing
+worst-case cost-to-go.  Chain-of-thought \citep{wei2022} and
+tree-of-thoughts \citep{yao2023} improve LLM reasoning by eliciting
+intermediate steps, but every step remains a sample from a learned
+distribution.  The \Opoch{} test selection (Step~18) is a direct application
+of the Bellman equation in test space rather than action space, with
+Wald's minimax framing justifying the worst-case optimization.
+
+% -------------------------------------------------------------------------
+\subsection{Self-Reference}
+\label{sec:related:selfref}
+
+The Kleene recursion theorem guarantees that every total recursive function
+can compute its own index; metacircular interpreters and reflective towers
+formalize systems reasoning about their own structure.  Our self-hosting
+property $\SelfHost = \mathcal{S}$ (Step~19) is the verification analog:
+the system verifies its own derivation, producing $\UNIQUE$ with receipts
+for each step.  This is stronger than metacircular interpretation (which
+merely executes) and connects to proof-carrying code (each step's receipt
+is a proof that the step is forced).  Mechanizing the derivation in a proof
+assistant (Lean, Coq) would yield a certified executable system via the
+Curry--Howard correspondence.

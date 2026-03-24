@@ -1,0 +1,24 @@
+[33m[1m| [0m[90m Glob     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper
+[33m[1m| [0m[90m Glob     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/prompt-2a.txt
+[33m[1m| [0m[90m Glob     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/abstract.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/primitives.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/introduction.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/derivation.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/discussion.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/conclusion.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/related-work.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase1a-math-verification-report.md
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/doctrines.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/sections/kernel.tex
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase1b-citation-report.md
+[93m[1m| [0m[90m Read     [0mUsers/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase1c-consistency-report.md
+[33m[1m| [0m[90m apply_patch  [0mSuccess. Updated the following files:
+A Users/dharamveerchouhan/Downloads/opoch-plugin/opoch-paper/synsc-reports/phase2a-writing-improvements.md
+Wrote the requested journal-polished replacements to `synsc-reports/phase2a-writing-improvements.md`, with clearly labeled full-content blocks for:
+
+- `sections/abstract.tex` (tightened scope, removed strongest overclaims, added “forced up to computable isomorphism within the model class”)
+- `sections/introduction.tex` (sharper framing, explicit “what we claim / don’t claim,” qualified forcedness per Phase 1A)
+- `sections/discussion.tex` (made minimax explicitly prior-free, clarified energy as abstract cost vs Landauer interpretation, acknowledged commutativity as a modeling restriction, strengthened open frontiers)
+- `sections/conclusion.tex` (more memorable while separating proven vs frontier claims)

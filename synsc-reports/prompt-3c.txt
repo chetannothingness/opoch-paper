@@ -1,0 +1,71 @@
+You are a formal mathematics specialist. Your task is to define Pi-canonicalization precisely and audit its cross-references.
+
+Read the following files in this project directory:
+- sections/kernel.tex: The NSL kernel (insert definition here)
+- sections/primitives.tex: The three primitives (add forward reference here)
+- sections/derivation.tex: The 21-step derivation (Steps 6, 12 especially)
+- sections/axioms.tex: Axiom A0 and carrier definitions
+- appendices/full-derivation.tex: Full proofs
+- opoch.sty: Custom commands (check for conflicts)
+
+YOUR TASK — Three deliverables:
+
+DELIVERABLE 1: Formal Definition for kernel.tex
+
+Generate a formal Definition block for Pi-canonicalization to insert in kernel.tex between the Phase 2 bullet (lines 248-251) and Phase 3 bullet. The definition should be:
+
+\begin{definition}[$\PiCanon$-Canonicalization]
+\label{def:pi-canon}
+Let $\Ser \colon \FinSlice \to \{0,1\}^*$ be the serialization induced by $\SdMap$, and let $\equivL$ be the ledger-induced equivalence (Definition~\ref{def:prim-pi}).  The \emph{$\Pit$-canonicalization} of $x \in \FinSlice$ is:
+\[
+  \PiCanon(x) \;=\; \min_{\mathrm{lex}}\bigl\{\,\Ser(y) \;\bigm|\; y \equivL x\,\bigr\}.
+\]
+$\PiCanon$ satisfies:
+\begin{enumerate}[nosep]
+  \item \emph{Totality}: $\PiCanon(x)$ is defined for every $x \in \FinSlice$ (the equivalence class is non-empty and finite).
+  \item \emph{Slack collapse}: $\PiCanon(x) = \PiCanon(y)$ iff $x \equivL y$.
+  \item \emph{Idempotence}: $\PiCanon(\PiCanon(x)) = \PiCanon(x)$.
+  \item \emph{Gauge absorption}: for every $g \in \gauge$, $\PiCanon(g \cdot x) = \PiCanon(x)$.
+\end{enumerate}
+\end{definition}
+
+VERIFY this definition:
+- Is min_lex well-defined on the finite set {Ser(y) : y ≡_L x}? (Yes, if FinSlice is finite and Ser is injective)
+- Does totality follow from finiteness of FinSlice?
+- Does slack collapse follow from the definition of ≡_L?
+- Does idempotence follow from PiCanon(x) being in the same equivalence class as x?
+- Does gauge absorption follow from gauge transforms preserving equivalence classes (Step 12)?
+- Is this consistent with the truth quotient TQ(L) = D0 / ≡_L?
+
+ALSO: Update the Phase 2 bullet text. Currently it reads:
+"Strip gauge redundancy by applying the truth quotient (Step~12): reduce the problem to its canonical, encoding-invariant form. Fix all representation choices before solving."
+Change to:
+"Strip gauge redundancy via $\PiCanon$-canonicalization (Definition~\ref{def:pi-canon}): reduce each description to its lexicographically minimal representative under the truth quotient (Step~12).  Fix all representation choices before solving."
+
+DELIVERABLE 2: Forward Reference for primitives.tex
+
+Generate ONE sentence to insert in primitives.tex after line 51 (after "topological algebra of testability."). The sentence should link the abstract Pi to the concrete PiCanon algorithm:
+
+"The concrete algorithm that computes canonical representatives---selecting the lexicographically minimal serialization within each truth class---is $\PiCanon$-canonicalization, defined formally in \S\ref{sec:kernel:protocol} (Definition~\ref{def:pi-canon})."
+
+DELIVERABLE 3: Cross-Reference Audit
+
+1. List ALL places in the paper that reference:
+   - Truth quotient (Step 6, Def in primitives.tex)
+   - Gauge groupoid (Step 12)
+   - Phase 2 of the reasoning protocol
+   - "canonical form" or "encoding-invariant"
+   For each, state whether the new PiCanon definition affects the reference (YES/NO and why).
+
+2. Check that these NEW opoch.sty commands don't conflict with existing ones:
+   - \PiCanon → renders as Π_{can} — any conflict with \Pit? (No, different subscript)
+   - \Ser → renders as Ser (roman) — any conflict? (Check for existing \Ser)
+   - \Adm → renders as Adm (roman) — any conflict?
+   - \Instrument → renders as calligraphic I — any conflict with existing calligraphic commands?
+
+3. Verify the definition is consistent with:
+   - Truth quotient: Def 4.3 in primitives.tex (def:prim-pi)
+   - Gauge groupoid: Step 12 in derivation.tex
+   - Self-hosting: Step 19 (does PiCanon affect Υ(K)=K?)
+
+Write the complete report to synsc-reports/phase3c-pi-canon-definition.md with three clearly labeled sections for the three deliverables.

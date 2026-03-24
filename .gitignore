@@ -1,0 +1,36 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.pdf
+*.dvi
+*.ps
+
+# Editor files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directory
+build/
+
+# Claude Code
+.claude/
+
+# Task tracking
+tasks/
+
+# Environment
+.env

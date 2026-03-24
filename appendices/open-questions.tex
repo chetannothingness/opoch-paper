@@ -1,0 +1,402 @@
+\section{Open Questions and Theoretical Boundaries}
+\label{app:open-questions}
+
+This appendix addresses theoretical questions raised during independent
+review of the derivation.  For each question we provide the best answer
+currently available, state honest limitations, and identify the
+resolving test where one exists.
+
+% -------------------------------------------------------------------------
+\subsection{Three Layers of the Framework}
+\label{app:oq:layers}
+
+The paper can be read as deriving a reasoning system from nothingness, but
+it is useful to separate three layers that play different logical roles.
+We name them L0, L1, and L2.
+
+\paragraph{L0 (Bottom State).}
+L0 is absolute nothingness $\noth$, the unfalsifiable starting point.  In
+L0 there are no distinctions, no carrier, and no tests, meaning
+$\Del = \varnothing$ and $\Carrier = \varnothing$ (\step{0}).
+
+\paragraph{L1 (Meaning Operator).}
+L1 is Axiom~A0 (Witnessability) together with its forced consequences.
+This layer contains the objects and constraints that follow from
+witnessability alone, for example the carrier and finite slice
+($\Carrier$, $\FinSlice$), self-delimitation ($\SdMap$), executability
+(a total evaluator $\UTM$ and a cost functional), the truth quotient
+$\TQ{\Ledger}$, entropic time $\Tim$, and gauge invariance $\gauge$.  Informally, L1 is the
+operator that turns a would-be distinction into meaning by requiring a
+finite witness.
+
+\paragraph{L2 (Model-Class Commitments).}
+L2 collects canonical or conservative commitments that are not forced by A0
+alone, but define the paper's specific model class.  In this paper these
+include commutativity of causally independent tests (\step{5}), prior-free
+minimax optimization for test selection (\step{18}), and the closed-universe
+assumption that forbids external delimiter or verifier oracles
+(\step{2}, \step{19}, \step{20}).  Alternative choices are A0-compatible,
+but they yield structurally analogous, different frameworks.
+
+\paragraph{Coupling Law resolution.}
+The scheduling commitment---which test to run next---was previously
+classified as L2 (a modeling choice, since $\CanEnum$ tie-breaking was
+one of several A0-compatible options).  The Separator-Indistinguishability
+Coupling Law (\cref{thm:bellman}, Part~(b)) resolves this: the
+question-relative efficiency $\EffQ{\tau}{W}$ is the canonical dimensionless
+ratio constructible from the framework's own quantities, and $\PiCanon$
+tie-breaking is forced by gauge invariance.  Together they make the
+test-selection map $\OptTest{q}{W}$ a deterministic function of $(W, q)$,
+upgrading the scheduling commitment from L2 (model class) to L1 (forced
+by A0).
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Three layers and their logical roles in \Opoch.}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Layer} & \textbf{Name} & \textbf{Content} \\
+\midrule
+L0 & Bottom state & $\noth$, no admissible distinctions, no carrier, no tests \\
+L1 & Meaning operator & A0 and its forced consequences (carrier, tests, truth, time, gauge) \\
+L2 & Model class & Canonical commitments (commutativity, minimax, closed universe) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% -------------------------------------------------------------------------
+\subsection{Can the Self-Computing Machine Be Built?}
+\label{app:oq:machine}
+
+The system $\mathcal{S}$ is specified by \cref{sec:derivation}.  The question here is
+constructibility in the strict sense, meaning whether an implementation can
+be built from finitely specified, individually computable components.
+
+\paragraph{Five-component constructibility argument.}
+A full implementation decomposes into five components, each with a finite
+witness procedure:
+\begin{enumerate}[nosep]
+  \item \textbf{Total evaluator on $\Del^*$.}  A universal evaluator $\UTM$
+        that executes any endogenous test description $\tau$ on any input
+        $x$ and returns a well-defined outcome, as fixed by the
+        executability substrate (\step{3}).
+  \item \textbf{Self-delimiting parser.}  A parser for the prefix-free
+        interface induced by $\SdMap$ (\step{2}), which decodes
+        $1^{|s|}0s$ in at most $2|s|+1$ bit-reads.
+  \item \textbf{Bellman minimax solver on finite domains.}  The Bellman
+        recursion over the surviving answer set and the feasible test set
+        is computable because the system operates on $\FinSlice$ and, for
+        fixed remaining budget, the feasible test set is finite
+        (\step{18}).
+  \item \textbf{Receipt chain.}  A deterministic receipt system that
+        serializes inputs and outputs, hashes them, and chains hashes.
+        This uses standard SHA-256
+        collision resistance as a modeling commitment.
+  \item \textbf{$\Pit$-canonicalization.}  A canonicalization operator
+        $\PiCanon$ that reduces gauge-equivalent representations to a
+        canonical representative before hashing and comparison.  This
+        component is defined in Definition~\ref{def:pi-canon}.
+\end{enumerate}
+Since each component is individually computable and their composition is
+finite, the self-computing machine is constructible in principle.
+
+\paragraph{Practical limitation.}
+The Bellman minimax recursion has worst-case complexity exponential in
+$|\TQ{\Ledger}|$ (the number of truth classes).  For large problem
+domains, heuristic approximations or domain-specific pruning are
+needed.  The framework accommodates this: any pruned solver that
+cannot reach $\UNIQUE$ within budget simply outputs $\OMEGA$ with
+the frontier witness, which is the honest response.
+
+\paragraph{Status.}
+\textbf{Constructible in principle, with exponential worst-case cost.}
+The three-point audit (\S\ref{sec:verification}) demonstrates internal
+consistency on the derivation's 34 steps.
+
+% -------------------------------------------------------------------------
+\subsection{Quantum Mechanics and Non-Commuting Observables}
+\label{app:oq:quantum}
+
+Non-commutativity arises in two distinct ways.  The first is already
+internal to the framework, while the second requires a genuine extension.
+
+\paragraph{(a) Resource-induced noncommutativity (already covered).}
+Even when tests are pure functions, the \emph{set of affordable tests}
+depends on prior spending.  If running $\tau_1$ consumes budget, then the
+subsequent feasible set $\Del(\Tim)$ available for $\tau_2$ can change.
+This produces an order effect in policy space, but it is handled by the
+Bellman loop, because the value function explicitly conditions on remaining
+budget (\step{18}).
+
+\paragraph{(b) Disturbance-induced noncommutativity (requires extension).}
+In quantum measurement, the outcome statistics of $\tau_2$ can depend on
+whether $\tau_1$ was performed, because performing $\tau_1$ changes the
+state.  This is an order effect at the level of the physical test
+instrument, not merely at the level of budget.
+
+\paragraph{Scope of the restriction.}
+Case (b) is excluded by the current model class, which assumes that tests
+do not disturb the underlying state, and therefore that causally
+independent tests commute at the quotient level (Diamond Law, \step{5}).
+This assumption propagates to the multiset ledger (\step{5}) and to
+unconditional commutativity in the eraser algebra (\step{7}).  The
+remainder of the derivation, including carrier, syntax, executability,
+time, gauge, separator geometry, Bellman dynamics, and self-hosting, does
+not require commutativity and can be carried over.
+
+\paragraph{Extension path.}
+The extension is needed only for case (b).  Replace the multiset ledger
+(\step{5}) with an ordered (or partially ordered) ledger, and refine tests
+from pure maps to instruments $\Instrument$ that return both an outcome and
+a state update.  In such a ledger, the truth quotient becomes
+order-dependent, and the Diamond Law applies only to commuting pairs:
+\[
+  e_{\tau_1} \circ e_{\tau_2} = e_{\tau_2} \circ e_{\tau_1}
+  \quad\text{iff}\quad [\tau_1, \tau_2] = 0.
+\]
+
+\paragraph{Status.}
+\textbf{Case (a) is handled, case (b) is not.}  Resource-induced order
+effects are already captured by budget conditioning in the Bellman
+recursion.  Disturbance-induced noncommutativity requires the
+ordered-ledger, instrumented-test extension sketched above.
+
+% -------------------------------------------------------------------------
+\subsection{Continuous Spaces and Infinite Carriers}
+\label{app:oq:continuous}
+
+The derivation operates on $\FinSlice \subset \Carrier$ (\step{1}).
+Extending the framework to continuous state spaces requires care, because
+naively importing differential entropy introduces coordinate dependence.
+
+\paragraph{Correct invariant replacement.}
+The finite framework measures uncertainty in terms of truth-quotient
+classes.  Accordingly, in the continuous extension one should work with a
+$\Pit$-fixed measure on truth classes, not with coordinate densities.
+Concretely, for a surviving set $W$ of truth-classes, replace:
+\begin{itemize}[nosep]
+  \item $|W|$ with $\mu_{\Pit}(W)$, the counting measure on
+        truth-quotient classes.
+  \item $\log |W|$ with the $\Pit$-fixed entropy
+        $H_{\Pit}(W) = -\sum_{w \in W} \mu_{\Pit}(w)\,\log \mu_{\Pit}(w)$,
+        which is defined on truth classes and is gauge-invariant.
+\end{itemize}
+By contrast, differential entropy
+$h(W) = -\int p\,\log p\,d\mu$ depends on the choice of coordinates,
+and is therefore not gauge-invariant.
+
+\paragraph{Relative-entropy formulation.}
+The correct continuous extension uses relative entropy (KL divergence)
+against the uniform measure on truth classes.  This preserves gauge
+invariance and aligns with the system's use of class-level ambiguity.
+
+\paragraph{Status.}
+\textbf{The finite-carrier framework extends naturally.}  Rigorous
+treatment requires measure-theoretic machinery (Borel $\sigma$-algebras,
+measurable selection theorems) beyond the current paper's scope.  The
+finite-slice derivation is the foundational case; the continuous
+extension is deferred to future work.
+
+% -------------------------------------------------------------------------
+\subsection{G\"{o}del's Incompleteness and Self-Hosting}
+\label{app:oq:godel}
+
+G\"{o}del's second incompleteness theorem \citep{godel1931} states that no
+consistent formal system of sufficient strength can prove its own
+consistency.  The self-hosting property (\step{19}) can be misread as such
+a proof, but it is not.
+
+\paragraph{Resolution.}
+Self-hosting is the claim that $\FixPt(\mathcal{S}) = \mathcal{S}$,
+meaning the system can verify each derivation step by encoding it as a
+compiled finite contract, serializing it, and running itself on that
+contract to obtain $\UNIQUE$ (\cref{thm:self-hosting}).  In this sense,
+the fixed point is a $\Pit$-serialize fixed point, because
+$\Ser(\cdot)$ produces a finite code and $\PiCanon$ removes gauge
+redundancy before receipt formation.
+
+This is categorically distinct from a consistency proof.  The system checks
+object-level claims of the form, ``\step{$i$} is the unique A0-compliant
+continuation of \step{0} through \step{$i{-}1$},'' which are checkable.
+It does not establish the meta-level claim, ``the system never produces
+incorrect output,'' which would amount to a global consistency guarantee.
+G\"{o}del blocks the latter, not the former.
+
+\begin{enumerate}[nosep]
+  \item \textbf{Object-level:} ``\step{$i$} is the unique A0-compliant
+        continuation'' (checkable by replay on a finite contract).
+  \item \textbf{Meta-level:} ``the system never produces incorrect output''
+        (not checkable in the sense prohibited by G\"{o}del).
+\end{enumerate}
+
+\paragraph{Status.}
+\textbf{No contradiction with G\"{o}del.}  Self-hosting is object-level
+verification, not meta-consistency proof.  The system can verify its
+derivation steps but cannot prove its own consistency.
+
+% -------------------------------------------------------------------------
+\subsection{The Halting Problem and the Total Evaluator}
+\label{app:oq:halting}
+
+The halting problem establishes that no algorithm can decide whether an
+arbitrary Turing machine halts.  Step~3 introduces an evaluator $\UTM$,
+and the framework's operational semantics require that admissible tests
+terminate within the allocated budget.
+
+\paragraph{Resolution.}
+The evaluator operates on budget-total tests over the finite slice.
+Write $\Del_{\leq B}$ for the set of tests that halt within budget $B$ on
+every input in $\FinSlice$, equivalently the set of tests that are
+admissible at budget $B$ (written $\Adm_{\leq B}(\tau)$).
+
+\begin{enumerate}[nosep]
+  \item \textbf{Budget-totality on $\FinSlice$.}  A test $\tau$ is
+        \emph{budget-total} if $\UTM(\tau, x)$ halts within $B$ steps for
+        every $x \in \FinSlice$.  Because $\FinSlice$ is finite (\step{1})
+        and $B$ is fixed, this property is decidable by bounded simulation.
+  \item \textbf{TIMEOUT as first-class outcome.}  Tests that do not halt
+        within budget return $\mathrm{TIMEOUT} \in A$, which is a
+        well-defined outcome in the test's outcome alphabet---not an
+        undefined state or a semantic gap.  The evaluator is therefore
+        \emph{total by construction}: every input produces a well-defined
+        output within finite time, where $\mathrm{TIMEOUT}$ is one such
+        output.
+  \item \textbf{Constructive admissibility filtering.}  Enumerate candidate
+        programs by $\CanEnum$ (\step{4}), execute each on all
+        $x \in \FinSlice$ for at most $B$ steps, and admit those in
+        $\Del_{\leq B}$.  Tests that exceed budget on some $x$ are excluded
+        from the feasible set.
+\end{enumerate}
+
+The key insight is that A0's finiteness requirement (every witness must
+terminate within finite budget) converts the undecidable question ``does
+$\tau$ halt on all inputs?'' into the decidable question ``does $\tau$
+halt on all inputs in $\FinSlice$ within budget $B$?''  This is not an
+approximation or workaround---it is the correct formalization of A0's
+operational semantics: only budget-feasible tests are admissible, and
+budget-feasibility is decidable.
+
+\paragraph{Status.}
+\textbf{No conflict with the halting problem.}  The framework operates
+with budget-totality on the finite slice, which is decidable.
+$\mathrm{TIMEOUT}$ is a first-class outcome, not an error or gap.
+Tests that might not halt on unbounded inputs are simply infeasible
+(cost exceeds budget) and are excluded from $\Del(\Tim)$.
+
+% -------------------------------------------------------------------------
+\subsection{What Does $\OMEGA$ Look Like Concretely?}
+\label{app:oq:omega}
+
+We formalize the information returned in the $\OMEGA$ case.
+
+\begin{definition}[$\OMEGA$ Payload]
+\label{def:omega-payload}
+The $\OMEGA$ output is a 5-tuple $(\mathcal{A}_S, \tau_\OMEGA, c(\tau_\OMEGA),
+B_{\mathrm{rem}}, w_{\min})$ where:
+\begin{itemize}[nosep]
+  \item $\mathcal{A}_S \subset \mathcal{A}$ is the surviving answer set,
+        with $|\mathcal{A}_S| > 1$.
+  \item $\tau_\OMEGA$ is the minimal separator test for $\mathcal{A}_S$.
+  \item $c(\tau_\OMEGA)$ is the separator cost.
+  \item $B_{\mathrm{rem}}$ is the remaining budget.
+  \item $w_{\min}$ is the minimality witness, the Bellman search subtree
+        certifying that no cheaper separator exists.
+\end{itemize}
+\end{definition}
+
+\paragraph{Example.}
+Query: ``Find collision-free paths for 10 robots on a $25 \times 25$
+grid with 30 delivery jobs.''  After exhausting the test budget, the
+system returns:
+\[
+  \OMEGA:\;\bigl(\mathcal{A}_S,\; \tau_\OMEGA,\; c(\tau_\OMEGA),\;
+  B_{\mathrm{rem}},\; w_{\min}\bigr),
+\]
+where $|\mathcal{A}_S| = 3$, $\tau_\OMEGA$ is a corridor-conflict test, and
+$c(\tau_\OMEGA) = 47$ while $B_{\mathrm{rem}} = 12$, so the separator is
+not affordable.
+\emph{Interpretation:} the system cannot distinguish the 3 candidates
+with remaining budget, but tells the user \emph{exactly} what test would
+resolve the ambiguity and how much additional budget is needed.  This is
+qualitatively different from ``I don't know''---it is ``I don't know,
+\emph{and here is how to find out.}''
+
+% -------------------------------------------------------------------------
+\subsection{Declared vs.\ Derived Assumptions---Honest Inventory}
+\label{app:oq:assumptions}
+
+\Cref{tab:assumptions} provides a complete inventory of assumptions
+relevant to the system as formalized in this paper, with an explicit layer
+classification matching \cref{app:oq:layers}.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Complete assumption inventory for the 34-step derivation.}
+\label{tab:assumptions}
+\begin{tabular}{@{}clclll@{}}
+\toprule
+\textbf{\#} & \textbf{Assumption} & \textbf{Step} & \textbf{Layer} & \textbf{Status} & \textbf{Justification} \\
+\midrule
+1 & Witnessability (A0) & 0 & L1 & Axiom & Foundational, the only law \\
+2 & Finite slice $\FinSlice$ & 1 & L1 & Derived & Forced by A0 finiteness \\
+3 & Totality of $\UTM$ on $\Del^*$ & 3 & L1 & Derived & Forced by executability layer \\
+4 & Positive integer costs & 3 & L1 & Derived & Cost equals execution steps $\geq 1$ \\
+5 & Determinism of system & 18 & L1 & Derived & Canonical enumeration and Bellman argmin \\
+6 & Commutativity of tests & 5 & L2 & Modeling commitment & Pure, non-disturbing test model \\
+7 & Prior-free optimization & 18 & L2 & Modeling commitment & Minimax as conservative prior-free policy \\
+8 & Closed-universe assumption & 2, 19, 20 & L2 & Modeling commitment & No external delimiter or verifier \\
+9 & $\Pit$-canonicalization uniqueness & --- & L1 & Derived & Definition~\ref{def:pi-canon} fixes a canonical representative \\
+10 & Receipt hash collision resistance & --- & L2 & Modeling commitment & SHA-256 assumed collision-resistant \\
+11 & Smoothness of efficiency landscape & 31 & L1 & Assumption & Required for complex structure $J$ \\
+12 & Conductance $w = 1/d^2$ & 28 & L2 & Modeling commitment & Dimensional analysis; alternatives possible \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+The layer column makes the logical separation explicit.  L1 items are
+meaning-operator consequences, and L2 items are model-class commitments.
+Alternative L2 choices, for example an ordered ledger for disturbance or a
+Bayesian objective for test selection, remain A0-compatible but change the
+resulting system class.  Phase~H adds one further L2 commitment: the
+conductance weights $w = 1/d^2$ in the Dirichlet form (\step{28}), which
+follow from dimensional analysis but could be replaced by any
+$w = f(d)$ with $f$ strictly decreasing.
+
+% -------------------------------------------------------------------------
+\subsection{Verification Challenges: Framework-Level Interpretations}
+\label{app:oq:challenges}
+
+The framework's vocabulary invites connections to open problems in physics
+and mathematics.  \Cref{tab:challenges} organizes these connections into
+three categories.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Open verification challenges and framework-level interpretations.
+These are interpretive connections, not formal proofs within the
+derivation.}
+\label{tab:challenges}
+\begin{tabular}{@{}lllp{5.1cm}@{}}
+\toprule
+\textbf{Challenge} & \textbf{Domain} & \textbf{Category} & \textbf{Framework Status} \\
+\midrule
+Arrow of Time & Thermodynamics & Structural & $\Del\Tim \geq 0$ forced (\step{8}), internal arrow of time \\
+Renormalization & QFT & Contract instantiation & Gauge coequalization gives vocabulary (\step{12}), interpretive only \\
+Probability Origins & Foundations & Contract instantiation & Test counting forces frequency ratios, not full measure theory \\
+Measurement Problem & QM & Contract instantiation & Fiber shrinkage analogy (\step{8}), not a resolution \\
+Hard Problem & Consciousness & Open boundary & Requires specifying new $\Del$ instruments and verifiers \\
+P vs.\ NP & Complexity & Open boundary & Separator geometry (\step{16}) suggests a lens, no reduction exists \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Disclaimer.}
+These entries are \emph{framework-level interpretations}---they map
+external problems into the derivation's vocabulary.  None constitutes a
+proof or resolution of the corresponding open problem.  They are
+included to clarify the framework's scope and to identify where further
+formalization could be productive.

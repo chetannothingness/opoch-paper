@@ -1,0 +1,504 @@
+% =============================================================================
+% Section: Axiomatic Foundation
+% =============================================================================
+
+\section{Axiomatic Foundation}
+\label{sec:axioms}
+
+The \Opoch{} framework begins from $\noth$ (Nothingness: no committed
+distinctions) and \emph{derives} its sole operating principle A0$^*$ as the
+first theorem.  A0$^*$ is not declared---it is the unique admissibility
+criterion forced by the absence of all external structure.
+
+% ---------------------------------------------------------------------------
+\subsection{Starting Point: $\noth$}
+\label{sec:axioms:nothingness}
+
+\begin{definition}[Nothingness $\noth$]
+\label{def:nothingness-formal}
+$\noth$ is the state with no committed distinctions:
+no external labels, no external delimiter, no external clock, no external
+witness, no primitive observer/observed split.  If anything else is assumed,
+it is already not nothingness.
+\end{definition}
+
+% ---------------------------------------------------------------------------
+\subsection{Derivation of A0$^*$ from $\noth$}
+\label{sec:axioms:derivation}
+
+From $\noth$, the admissibility criterion A0$^*$ is derived through a
+chain of five necessity theorems:
+\[
+  \noth \;\to\; \text{N0} \;\to\; \text{N1} \;\to\; \text{N2}
+  \;\to\; \text{N3} \;\to\; \text{N4} \;\to\; \text{A0}^*.
+\]
+
+\begin{theorem}[N0 --- No Externality]
+\label{thm:N0}
+At $\noth$, any proposed distinction that depends on an external
+distinguisher is inadmissible, because no external distinguisher exists.
+\begin{proof}
+$\noth$ carries no committed distinctions.  An external distinguisher is
+itself a distinction.  If it existed, $\noth$ would not be nothingness.
+Contradiction.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[N1 --- Endogenous Admissibility]
+\label{thm:N1}
+The only admissible distinction is one that can separate itself from
+within reality---endogenously.
+\begin{proof}
+By N0, no external distinguisher exists.  If a distinction cannot be
+separated from within, it requires an external agent to assert it, which
+N0 forbids.  Therefore any admissible distinction must be endogenously
+separable.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[N2 --- Finiteness]
+\label{thm:N2}
+Any admissible witness must terminate in finite steps.
+\begin{proof}
+At $\noth$, there are no infinite resources---infinite resources would
+constitute a committed external structure, violating $\noth$.  A witness
+requiring infinite steps never produces a verdict, hence never separates
+a distinction.  Therefore only finite witnesses are admissible.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[N3 --- Replayability]
+\label{thm:N3}
+An admissible witness must carry its own replay trace.
+\begin{proof}
+Without an external recorder (forbidden by N0), the only way to verify a
+witness's outcome is to replay it from the trace it produced.  A witness
+that cannot be replayed depends on an unrepeatable external event,
+violating N0.  Therefore replayability is forced.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}[N4 --- Internal Validity]
+\label{thm:N4}
+The distinction ``$w$ is a valid witness'' must itself be witnessable by
+a finite endogenous procedure.
+\begin{proof}
+If witness validity were not witnessable, then ``$w$ is valid'' vs.\
+``$w$ is not valid'' would be an external meta-judgment---a distinction
+with no endogenous witness.  By N1, such a distinction is inadmissible.
+Therefore witness validity must be endogenously checkable.
+\end{proof}
+\end{theorem}
+
+\medskip\noindent
+Theorems N0--N4 together force the unique admissibility criterion:
+
+\begin{theorem}[A0$^*$ --- Completed Witnessability (Derived)]
+\label{thm:a0star-derived}
+A distinction is admissible if and only if a finite, endogenous,
+replayable, self-accounting witness process whose own validity is
+endogenously checkable can separate it.  A0$^*$ is the first theorem of
+the framework, derived from $\noth$ via N0--N4---it is not postulated.
+\end{theorem}
+
+\begin{remark}[Set-Theoretic Operations as Instances of A0$^*$]
+\label{rem:set-theory}
+Basic set-theoretic operations (finite sets, membership, equality, union)
+are themselves witnessable---each is a total computable function on finite
+data---and are therefore members of the test set that A0$^*$ forces.  They are
+not background assumptions; they are instances of the admissible procedures
+that A0$^*$ demands.  The meta-language in which the paper is written (English,
+mathematical notation) is not an axiom of the derivation, any more than
+the choice of natural language is an axiom of a physics paper.
+\end{remark}
+
+\begin{remark}[Church--Turing as Historical Corroboration]
+\label{rem:ct-status}
+The Church--Turing thesis \citep{church1936,turing1936} independently
+identified the class of total computable functions---the same class that
+A0$^*$ forces at Step~3 (\cref{thm:executability}) via maximal closure under
+totality-preserving composition.  The derivation does not use CT as a
+premise; it derives the class directly as a mathematical theorem
+(\cref{prop:utm-forced}).  The agreement between A0$^*$'s forcing and the
+Church--Turing identification is historical corroboration, not a logical
+dependency.  A reader who reads A0$^*$'s ``finite procedure'' as ``takes
+finite input, runs finitely many steps, produces finite output'' arrives
+at the same class without invoking CT.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{From A0 to A0$^*$: The Closure Move}
+\label{sec:axioms:closure-move}
+
+The \emph{informal} starting point is:
+
+\begin{quote}
+\textbf{A0 (Bare Witnessability).}  A distinction is admissible if and only
+if a finite witness procedure can separate it.
+\end{quote}
+
+This formulation is not yet self-consistent.  It speaks of ``valid witness
+procedures'' without specifying what makes a witness valid.  The distinction
+between ``$w$ is a valid witness for $\delta$'' and ``$w$ is not a valid
+witness for $\delta$'' is itself a meaningful distinction.  By A0's own
+criterion, that distinction must itself be witnessable by a finite
+procedure internal to the universe.
+
+Therefore an admissible witness process cannot be a bare separator only.
+It must carry enough internal structure so that its own validity is finitely
+checkable.  This is not a new axiom---it is A0 applied to its own witness
+notion.  We call the result \textbf{A0$^*$ (Completed Witnessability)}.
+
+% ---------------------------------------------------------------------------
+\subsection{A0$^*$: Completed Witnessability (Derived)}
+\label{sec:axioms:a0star}
+
+\begin{remark}[A0$^*$ Is Derived, Not Postulated]
+\label{rem:a0star-derived-status}
+A0$^*$ is the first theorem of the framework, derived from $\noth$ via
+the chain $\noth \to \text{N0} \to \text{N1} \to \text{N2} \to
+\text{N3} \to \text{N4} \to \text{A0}^*$
+(\cref{thm:N0,thm:N1,thm:N2,thm:N3,thm:N4,thm:a0star-derived}).
+The \texttt{axiom} environment below is retained for referenceability,
+but the content is a derived criterion, not a postulate.
+\end{remark}
+
+\begin{axiom}[A0$^*$ --- Completed Witnessability]
+\label{ax:a0star}
+A distinction $\delta$ is admissible if and only if there exists a finite
+endogenous witness process $w$ satisfying all of the following:
+\begin{enumerate}[nosep, label=(W\arabic*)]
+  \item \textbf{Finite description:} $w$ has a finite endogenous code
+        $\mathrm{code}(w) \in \Carrier$.
+  \item \textbf{Replayability:} $w$ is replayable from its own trace---any
+        agent with access to $\mathrm{tr}(w,s)$ can re-execute $w$ and
+        obtain the same outcome.
+  \item \textbf{Termination:} $w$ terminates within finite budget $B$
+        on every admissible input.
+  \item \textbf{Separation:} $w$ produces distinct outcomes on descriptions
+        that $\delta$ distinguishes.
+  \item \textbf{Disturbance accounting:} $w$ records its own state update
+        $\mathrm{upd}(w,s)$---the change it induces on the state $s$---as
+        part of the trace.
+  \item \textbf{Endogenous validity:} the validity of $w$ is itself
+        witnessable by a process satisfying (W1)--(W5) within the same
+        universe.
+  \item \textbf{Compositional closure:} if $w_1, w_2$ are admissible
+        witness processes, then their ordered composition
+        $w_1 \WitCompose w_2$ is again an admissible witness process.
+  \item \textbf{Quotient invariance:} quotient-equivalent encodings of the
+        same state induce equivalent witness traces---the witness does not
+        depend on gauge-level representational choices.
+\end{enumerate}
+\end{axiom}
+
+\begin{remark}[Bootstrap Reading of A0$^*$]
+\label{rem:a0star-bootstrap}
+The formal statement of A0$^*$ uses concepts (``carrier,'' ``code,''
+``budget'') that are themselves derived in Steps~1--3.  This is not
+circular: the \emph{informal} version---``a distinction is admissible iff
+a finite, replayable, self-accounting witness process can separate it''---is
+the primitive axiom.  The formal (W1)--(W8) listing is the \emph{derived}
+restatement, expressed in the language that A0$^*$ itself forces.
+\end{remark}
+
+\begin{remark}[Why A0$^*$ and not bare A0]
+\label{rem:why-a0star}
+Bare A0 leaves the notion of ``valid witness'' as an external
+meta-concept.  This creates a gap: the distinction between valid and
+invalid witnesses would depend on an unwitnessed externality.  A0$^*$
+closes this gap by demanding that witness validity be endogenously
+checkable.  The additional structure (W1)--(W8) is not imported---it is
+\emph{forced} by applying the witnessability criterion to itself.  Each
+condition is individually necessary:
+\begin{itemize}[nosep]
+  \item Without (W1), witnesses are not finitely describable.
+  \item Without (W2), witness outcomes are not independently verifiable.
+  \item Without (W3), witnesses may consume infinite resources.
+  \item Without (W4), witnesses do not actually separate.
+  \item Without (W5), the distinction between ``state before $w$'' and
+        ``state after $w$'' is unwitnessed.
+  \item Without (W6), witness validity is an ungrounded meta-assertion.
+  \item Without (W7), the test algebra is not maximally closed.
+  \item Without (W8), truth depends on representational choices.
+\end{itemize}
+Omitting any one of (W1)--(W8) leaves a distinction that depends on an
+unwitnessed externality, violating the witnessability criterion.
+\end{remark}
+
+A0$^*$ is the unique self-consistent completion of bare
+witnessability, derived from $\noth$ via N0--N4.  It rules out distinctions that require infinite resources,
+appeals to Platonic existence, unverifiable oracles, or untracked
+disturbance.  In spirit it distills Bishop's constructivism
+\citep{bishop1967} and Martin-L\"{o}f type theory \citep{martinlof1984}
+into a single self-applied predicate, stated in computational rather than
+type-theoretic terms.
+
+% ---------------------------------------------------------------------------
+\subsection{The Endogenous Boundary Theorem}
+\label{sec:axioms:boundary}
+
+\begin{theorem}[Endogenous Boundary --- Closed Universe is Forced]
+\label{thm:endogenous-boundary}
+Under A0$^*$, external delimiters, external verifiers, and external oracles
+are inadmissible.  The universe must be informationally closed.
+\begin{proof}[Proof sketch]
+Suppose an external delimiter $v$ is used to parse witness traces.  Then
+the distinction between ``same raw stream under delimiter $v_1$'' and
+``same raw stream under delimiter $v_2$'' depends on $v$, which is not
+itself an endogenous witness process satisfying (W1)--(W6).  This violates
+(W6): the validity of any witness using $v$ is not endogenously
+checkable.  The same argument applies to external verifiers and oracles.
+Therefore all delimiters, verifiers, and composition rules must be
+internally encoded and replayable.
+\forcing{External dependencies create unwitnessed validity distinctions.
+Endogenous closure is forced by (W6).}
+\end{proof}
+\end{theorem}
+
+\begin{remark}[Closed Universe as L1, not L2]
+\label{rem:closed-universe-l1}
+In earlier drafts, the closed-universe assumption was classified as a
+modeling commitment (L2).  \Cref{thm:endogenous-boundary} shows it is a
+consequence of A0$^*$ (L1): the self-application of witnessability to
+witness validity forces endogenous closure.  This eliminates one of the
+former ``model-class commitments.''
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{The Ordered Witness Algebra}
+\label{sec:axioms:witness-algebra}
+
+A0$^*$ forces not just individual witness processes but an algebraic
+structure on the collection of all admissible witnesses.
+
+\begin{definition}[Ordered Witness Algebra $\WitAlg$]
+\label{def:witness-algebra}
+The \emph{ordered witness algebra} $\WitAlg$ is the set of all admissible
+witness processes under A0$^*$, equipped with:
+\begin{enumerate}[nosep, label=(\alph*)]
+  \item \emph{Ordered composition:} $w_1 \WitCompose w_2$ denotes
+        ``execute $w_1$, record its trace including state update, then
+        execute $w_2$ on the updated state.''  This is associative but
+        generally \emph{not} commutative.
+  \item \emph{Involution:} $w^*$ denotes the \emph{replay adjoint}---the
+        process that replays $w$'s trace in reverse, reading outcomes as
+        inputs and inputs as outcomes.
+  \item \emph{Positivity:} for every state $s$, the outcome weight
+        $\GNSstate(w^* \WitCompose w) \geq 0$.
+  \item \emph{Unit:} the identity witness $\mathbf{1}$ (do nothing, record
+        nothing) is the composition identity.
+  \item \emph{Norm:} $\|w\| = \sup_s \|w(s)\|$ is the operational
+        supremum over admissible states.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Witness Algebra is Forced]
+\label{prop:witness-algebra-forced}
+Each component of $\WitAlg$ is forced by A0$^*$:
+\begin{itemize}[nosep]
+  \item Ordered composition is forced by (W7) and (W5): composition must
+        be closed, and state updates must be tracked, so execution order
+        matters.
+  \item The involution is forced by (W2): replayability requires the
+        existence of a reverse-reading process for every witness.
+  \item Positivity is forced by (W4): outcome weights from actual
+        separations are non-negative.
+  \item The unit is forced by (W7): the identity process is a trivially
+        valid witness.
+  \item The norm is forced by (W3): finite budget bounds all witness
+        actions.
+\end{itemize}
+\forcing{The algebraic structure of $\WitAlg$ is the unique structure
+compatible with (W1)--(W8).  Omitting any component leaves an algebraic
+gap that permits unwitnessed distinctions.}
+\end{proposition}
+
+\begin{definition}[Witness Commutator]
+\label{def:witness-commutator}
+For witness processes $w_1, w_2 \in \WitAlg$, the \emph{commutator} is:
+\[
+  \WitCommutator{w_1}{w_2} \;=\;
+  (w_1 \WitCompose w_2) - (w_2 \WitCompose w_1).
+\]
+When $\WitCommutator{w_1}{w_2} = 0$, the witnesses commute and their
+execution order does not affect the truth quotient.  When
+$\WitCommutator{w_1}{w_2} \neq 0$, the witnesses are \emph{non-commuting}
+and order matters---each disturbs the state in a way that affects the
+other's outcome.
+\end{definition}
+
+\begin{remark}[Noncommutativity is Internal from the Start]
+\label{rem:noncommutativity}
+The ordered witness algebra $\WitAlg$ is generally noncommutative because
+(W5) tracks state disturbance.  Commutativity is not a global assumption
+but a \emph{derived property} of specific witness pairs.  The commuting
+sector $\CenterW$ (the center of $\WitAlg$) is the subalgebra of witnesses
+that commute with all others.  The classical ``Diamond Law'' of earlier
+drafts becomes a theorem about $\CenterW$, not a global axiom.  This
+resolves the quantum gap: noncommuting observables are internal to the
+framework from Step~0.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Consequences of A0$^*$}
+\label{sec:axioms:consequences}
+
+We now derive the structural consequences of A0$^*$ that form the substrate
+for the full derivation in \cref{sec:derivation}.
+
+% --- Carrier ---
+\begin{definition}[Carrier Set $\Carrier$]
+\label{def:carrier}
+The \emph{carrier} is the set of all finite binary strings:
+\[
+  \Carrier \;=\; \{0,1\}^{<\infty}
+    \;=\; \{\varepsilon,\; 0,\; 1,\; 00,\; 01,\; 10,\; 11,\; 000,\; \ldots\}.
+\]
+\end{definition}
+
+\begin{proposition}[Carrier is Forced]
+\label{prop:carrier-forced}
+Under A0$^*$, every admissible witness has finite length (W1, W3).
+Therefore every admissible description is a finite string over a finite
+alphabet.  Up to recoding, this is $\Carrier = \{0,1\}^{<\infty}$.
+
+\forcing{Any finite alphabet $\Sigma$ with $|\Sigma| \geq 2$ is
+inter-translatable with $\{0,1\}$ by a computable bijection (W8).  An
+alphabet of size~1 admits no distinctions.  Binary is therefore the
+minimal non-trivial choice, and all others reduce to it.}
+\end{proposition}
+
+% --- Self-delimitation ---
+\begin{proposition}[Self-Delimitation is Forced by Replayability]
+\label{prop:prefix-forced}
+A witness trace must be replayable from its own finite record (W2).  If
+boundaries are not internally decidable, then the distinction between
+``trace $= x$'' and ``trace begins with $x$'' is not witnessable from the
+trace itself.  Therefore self-delimiting (prefix-free) coding is forced.
+Any valid encoding must satisfy the Kraft inequality \citep{kraft1949}:
+\[
+  \sum_{x \in S} 2^{-|x|} \;\leq\; 1.
+\]
+\forcing{Self-delimitation is not a ``closed-universe extra.''  It is A0$^*$
+applied to replayability (W2).}
+\end{proposition}
+
+% --- Endogenous tests and executability ---
+\begin{definition}[Endogenous Witness Instruments]
+\label{def:endogenous-tests}
+An \emph{endogenous witness instrument} is a witness process
+$w \in \WitAlg$ with:
+\begin{itemize}[nosep]
+  \item a code $\mathrm{code}(w) \in \Carrier$,
+  \item an outcome map $\mathrm{out}(w, s) \in \Carrier$ for each state $s$,
+  \item a state-update map $\mathrm{upd}(w, s)$ recording disturbance,
+  \item a cost $c(w) \in \mathbb{N}_{>0}$.
+\end{itemize}
+When the update map is trivial ($\mathrm{upd}(w,s) = s$ for all $s$), we
+call $w$ a \emph{pure test} (non-disturbing).  The set of all pure tests
+is denoted $\Del$.  The full set of witness instruments (including
+disturbing ones) is $\WitAlg$.
+\end{definition}
+
+\begin{definition}[Executability Primitives]
+\label{def:executability}
+The \emph{executability substrate} consists of:
+\begin{enumerate}[nosep, label=(\alph*)]
+  \item A \emph{total evaluator} $\UTM$ such that $\UTM(w, s)$ halts
+        for all $w, s \in \Carrier$, returning both outcome and state
+        update.
+  \item A \emph{total decoder} $\mathrm{dec} \colon \Carrier \to
+        \Carrier \times \Carrier$ parsing self-delimiting streams.
+  \item A \emph{cost functional} $c \colon \WitAlg \to \mathbb{N}_{>0}$
+        with $c(w) \geq 1$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Executability is Forced]
+\label{prop:utm-forced}
+A0$^*$ demands that \emph{all} finite witness procedures be admissible (W7).
+The closure of all such procedures under composition and finite description
+is precisely a universal evaluator $\UTM$ \citep{rogers1967}.
+
+\forcing{If some finite procedure were excluded from the admissible set,
+then there would exist a distinction (between ``inside'' and ``outside''
+the admissible set) that no admissible witness could detect---violating
+A0$^*$.  Hence the set of witnesses must be maximally closed.  Maximal
+closure under totality-preserving composition on a countable carrier
+yields exactly the total computable functions, and a universal evaluator
+is forced.}
+\end{proposition}
+
+\begin{definition}[Finite Slice $\FinSlice$]
+\label{def:finite-slice}
+For a given budget $B$, the \emph{finite slice} is the operationally
+reachable subset of the carrier:
+\[
+  \FinSlice \;=\; \bigl\{\, s \in \{0,1\}^* \;\bigm|\; |s| \leq B \,\bigr\}
+    \;\subset\; \Carrier.
+\]
+All truth-quotient operations and witness executions are restricted to
+$\FinSlice$.  The full carrier $\Carrier$ serves as the ambient space.
+\end{definition}
+
+\begin{remark}[The Church--Turing Corroboration]
+\label{rem:ct-dependency}
+\Cref{prop:utm-forced} derives the class of total computable functions
+from A0$^*$ alone: maximal closure under totality-preserving composition on
+a countable carrier is a mathematical theorem, not an empirical claim
+\citep{rogers1967}.  The Church--Turing thesis independently identified
+this same class by a different route---confirming the derivation's
+conclusion, not entering it as a premise.
+\end{remark}
+
+% ---------------------------------------------------------------------------
+\subsection{Summary of the Axiomatic Base}
+\label{sec:axioms:summary}
+
+The framework has \emph{no declared axioms}---A0$^*$ is the first
+theorem, derived from $\noth$ via the necessity chain N0--N4.
+\Cref{tab:axiom-summary} collects the logical dependencies.  Everything
+downstream of this section is \emph{derived}, not postulated.  Notably,
+all items formerly classified as ``modeling commitments'' (L2) are now
+derived consequences of A0$^*$ (L1):
+
+\begin{itemize}[nosep]
+  \item \emph{Closed universe:} forced by (W6) via
+        \cref{thm:endogenous-boundary}.
+  \item \emph{Self-delimitation:} forced by (W2) via replayability.
+  \item \emph{Ordered witness ledger:} forced by (W5) and (W7) via
+        disturbance accounting and compositional closure.
+  \item \emph{Noncommutativity:} internal from (W5); commutativity is a
+        derived sector property.
+\end{itemize}
+
+\begin{table}[ht]
+\centering
+\caption{Axiomatic base and immediate consequences under A0$^*$.}
+\label{tab:axiom-summary}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Item} & \textbf{Status} & \textbf{Forced by} \\
+\midrule
+A0$^*$ (Completed Witnessability) & \emph{Derived from $\noth$} & N0--N4 \\
+\midrule
+Carrier $\Carrier = \{0,1\}^{<\infty}$ & \emph{Derived} & (W1), (W3) \\
+Finite slice $\FinSlice \subset \Carrier$ & \emph{Derived} & (W3), Budget $B$ \\
+Self-delimiting syntax $\SdMap$ & \emph{Derived} & (W2) \\
+Closed universe / endogenous boundary & \emph{Derived} & (W6) \\
+Ordered witness algebra $\WitAlg$ & \emph{Derived} & (W5), (W7) \\
+Witness instruments (incl.\ disturbing) & \emph{Derived} & (W4), (W5) \\
+Pure tests $\Del \subset \WitAlg$ & \emph{Derived} & (W4), $\mathrm{upd} = \mathrm{id}$ \\
+Executability ($\UTM$, dec, $c$) & \emph{Derived} & (W1), (W3), (W7) \\
+Noncommutativity (internal) & \emph{Derived} & (W5) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+With these objects in hand---a carrier $\Carrier$ with finite slice
+$\FinSlice$, a self-delimiting syntax $\SdMap$, an ordered witness algebra
+$\WitAlg$ with pure-test subalgebra $\Del$, executability primitives
+($\UTM$, decoder, cost functional), and endogenous closure---we have the
+complete substrate from which the derivation of \cref{sec:derivation}
+proceeds.
