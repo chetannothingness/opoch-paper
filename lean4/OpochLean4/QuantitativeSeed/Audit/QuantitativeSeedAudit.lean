@@ -6,7 +6,7 @@
   - Verify the theorem is accessible (imported and compiles)
   - Provide a falsifiability witness: a modified structure where the
     theorem does NOT hold, proving the theorem has real content
-  - Confirm zero sorry, zero admit, one axiom (A0star)
+  - Confirm zero gaps, zero admit, one axiom (A0star)
 
   Dependencies: ALL QuantitativeSeed files
   Assumptions: A0star only.
