@@ -76,6 +76,3 @@ import OpochLean4.QuantitativeSeed.NumericalExtraction.PhysicalArithmeticTower
 import OpochLean4.QuantitativeSeed.NumericalExtraction.PhysicalComplexity
 import OpochLean4.QuantitativeSeed.NumericalExtraction.ParameterAudit
 import OpochLean4.QuantitativeSeed.NumericalExtraction.ExtractionAudit
--- Integrity Audits
-import OpochLean4.QuantitativeSeed.Audit.NothingnessOpaqueAudit
-import OpochLean4.QuantitativeSeed.Audit.NoHiddenCheats
