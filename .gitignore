@@ -31,6 +31,8 @@ build/
 
 # Task tracking
 tasks/
-
+arxiv_submission/
 # Environment
 .env
+arxiv_abstract.txt
+arxiv_submission.tar.gz

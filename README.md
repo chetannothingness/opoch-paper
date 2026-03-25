@@ -254,7 +254,7 @@ bash scripts/verify-all.sh
 ```bibtex
 @article{opoch2026,
   title   = {Opoch: Structural Reality from Nothingness},
-  author  = {Chouhan, Chetan and Chouhan, Dharamveer and Ravish},
+  author  = {Chauhan, Chetan and Chouhan, Dharamveer and Ravish},
   year    = {2026},
   note    = {78 Lean 4 files, 414 theorems, 0 sorry, 1 axiom (derived from nothingness)}
 }

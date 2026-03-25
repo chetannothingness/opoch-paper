@@ -1,0 +1,169 @@
+% =============================================================================
+% Appendix: Formalization and Artifacts
+% =============================================================================
+
+\section{Formalization and Artifacts}
+\label{app:formalization}
+
+\subsection{Companion Lean~4 Development}
+
+The derivation chain in this paper is accompanied by a mechanically
+checked Lean~4 formalization.  The formal artifact for this version is:
+
+\begin{itemize}[nosep]
+  \item \textbf{Repository:}
+        \url{https://github.com/chetannothingness/opoch-paper}
+  \item \textbf{Lean version:} 4.14.0
+  \item \textbf{Mathlib version:} v4.14.0
+  \item \textbf{Build command:} \texttt{cd lean4 \&\& lake build}
+  \item \textbf{Expected output:} \texttt{Build completed successfully.}
+        (3884 modules including mathlib)
+  \item \textbf{Theorems:} 414
+  \item \textbf{Files:} 78
+  \item \textbf{sorry count:} 0
+  \item \textbf{admit count:} 0
+  \item \textbf{Axioms:} 1 (A0$^*$; see note below)
+\end{itemize}
+
+\noindent
+The build is deterministic: \texttt{lake build} invokes Lean's kernel
+type-checker on every theorem.  If the build succeeds, every proof is
+valid.  This is mechanical verification, not heuristic evaluation.
+
+\paragraph{Note on the axiom count.}
+Within the paper, A0$^*$ is derived from $\noth$ via N0--N4
+(\cref{rem:a0star-derived-status}).  Within the Lean formalization,
+the forward direction ($\mathit{IsReal}\;\delta \Rightarrow
+\exists\, w,\;\ldots$) is derived as theorems N1--N5 in
+\texttt{EndogenousMeaning.lean}, which imports only
+\texttt{Nothingness.lean}.  The full biconditional is then packaged
+as the sole \texttt{axiom} declaration in \texttt{Axioms.lean} for
+use by the 74 downstream files.  The backward direction (witnessed
+$\Rightarrow$ real) encodes the definitional closure that ``real
+distinction'' means ``witnessed distinction.''  Thus: the paper has
+no postulated axioms; the Lean artifact has one \texttt{axiom}
+keyword packaging a derived forward direction with a definitional
+backward direction.
+
+\subsection{Formalization Scope}
+
+The paper's mathematical claims fall into three categories:
+
+\begin{enumerate}[nosep, label=(\roman*)]
+  \item \textbf{Formalized in Lean~4:} The structural derivation chain
+        (Steps~0--33), the quantitative seed extension (seed existence,
+        uniqueness, renormalization fixed point, spectral analysis, and
+        numerical extraction), and the operator-algebra layer (C$^*$-algebra
+        properties confirmed by mathlib).
+  \item \textbf{Verified by Z3:} Selected algebraic properties on finite
+        models (20 checks, all passing).
+  \item \textbf{Paper-level arguments:} The forcing arguments at each
+        step (WHY each structure is the unique A0$^*$-compliant
+        continuation) are given in the paper text and appendices.
+        These philosophical and physical reasoning steps are not
+        mechanized---they are the paper's contribution.  The Lean code
+        verifies THAT the structures have the claimed properties and
+        THAT alternatives fail.
+\end{enumerate}
+
+\subsection{Dependency Structure}
+
+The 78 Lean files form a single acyclic dependency graph:
+
+\begin{itemize}[nosep]
+  \item \textbf{Root:} \texttt{Manifest/Nothingness.lean} (opaque types,
+        no constructors, five no-externality conditions)
+  \item \textbf{Axiom:} \texttt{Manifest/Axioms.lean} (one axiom:
+        A0$^*$, imports only Nothingness)
+  \item \textbf{Derivation:} \texttt{Foundations/EndogenousMeaning.lean}
+        (imports Nothingness directly, derives N1--N5 and A0$^*$'s
+        forward direction)
+  \item \textbf{Downstream:} 74 files flow through \texttt{Axioms.lean}
+  \item \textbf{Disconnected:} \texttt{Basic.lean} (utility) and
+        \texttt{OperatorAlgebra/MathlibBridge.lean} (pure mathlib
+        verification---an independent library confirming C$^*$-algebra,
+        Hilbert space, and metric properties)
+\end{itemize}
+
+\subsection{Formalization Map}
+\label{app:formalization:map}
+
+Table~\ref{tab:formalization-map} maps major paper claims to Lean
+modules and theorem names.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\caption{Formalization map: paper claims to Lean modules.}
+\label{tab:formalization-map}
+\begin{tabular}{@{}p{3.6cm}lp{3.8cm}@{}}
+\toprule
+\textbf{Paper Claim} & \textbf{Lean Module(s)} & \textbf{Key Theorem(s)} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Foundation (Layer 0--1)}} \\
+\midrule
+Nothingness conditions & Manifest/Nothingness & \texttt{N0\_no\_external\_verifier}, \texttt{N0\_clock\_invariance} \\
+N1--N5 necessity lemmas & Foundations/EndogenousMeaning & \texttt{N1}--\texttt{N5}, \texttt{S0\_whole\_atemporal} \\
+A0$^*$ (one axiom) & Manifest/Axioms & \texttt{A0star} \\
+W1--W8 witness properties & Foundations/WitnessStructure & \texttt{W1\_finite}, \texttt{W2\_replayable}, \texttt{real\_has\_admissible} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Carrier, Encoding, Algebra (Steps 1--7)}} \\
+\midrule
+Binary carrier forced & Foundations/FiniteCarrier & \texttt{unary\_no\_distinctions} \\
+Self-delimiting syntax & Foundations/PrefixFree & \texttt{sd\_injective} \\
+Truth quotient & Algebra/TruthQuotient & \texttt{Q1\_real\_quotient\_invariant} \\
+Gauge group laws & Algebra/Gauge & \texttt{gauge\_inverse}, \texttt{gaugeBij\_comp\_inv} \\
+Ordered ledger, Diamond Law & Algebra/OrderedLedger & \texttt{diamond\_law}, \texttt{append\_preserves} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Time, Entropy, Control (Steps 8--18)}} \\
+\midrule
+Irreversible time & Algebra/Time & \texttt{time\_monotone}, \texttt{append\_increases\_time} \\
+Second law & Algebra/Entropy & \texttt{second\_law}, \texttt{budget\_exhaustion} \\
+Bellman minimax & Control/Bellman & \texttt{budget\_decreases}, \texttt{value\_deterministic} \\
+Regime partition & Control/RegimeSplit & \texttt{regimes\_disjoint}, \texttt{regimes\_exhaustive} \\
+$\Pit$-consistency & Control/PiConsistency & \texttt{gauge\_is\_piConsistent} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Execution (Steps 19--25)}} \\
+\midrule
+Self-hosting & Execution/SelfHosting & \texttt{fixed\_point}, \texttt{self\_hosting\_all\_unique} \\
+Closure-defect & Execution/ClosureDefect & \texttt{witness\_step\_monotone}, \texttt{residue\_all\_open} \\
+Consciousness (C1--C4) & Execution/Consciousness & \texttt{c1}--\texttt{c4\_necessary}, \texttt{minimal\_cost\_unique} \\
+Trit field & Execution/TritField & \texttt{trit\_exhaustive}, \texttt{trit\_partition} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Geometry (Steps 26--33)}} \\
+\midrule
+Conductance $w = C/d^2$ & Geometry/ConductanceLemma & \texttt{conductance\_determined}, \texttt{conductance\_unique} \\
+$n = 3$ spatial & Geometry/Dimensionality & \texttt{spatial\_dimension\_is\_three}, \texttt{two\_fails\_matching} \\
+Dirichlet form & Geometry/DirichletForm & \texttt{dirichlet\_axioms\_hold} \\
+Fisher metric & Geometry/FisherMetric & \texttt{spd\_symm}, \texttt{spd\_refl} \\
+$J^2 = -I$ & Geometry/KahlerProof & \texttt{j\_squared\_neg\_id}, \texttt{j\_preserves\_metric} \\
+Unique decomposition & Geometry/WitnessGenerator & \texttt{decomp\_unique}, \texttt{kahler\_2d} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Operator Algebra}} \\
+\midrule
+C$^*$-algebra & OperatorAlgebra/WitnessStarAlgebra & \texttt{cstar\_norm}, \texttt{wit\_star\_star} \\
+Mathlib bridge & OperatorAlgebra/MathlibBridge & \texttt{born\_probability\_nonneg}, \texttt{triangle\_ineq\_complex} \\
+Born rule & OperatorAlgebra/BornRule & \texttt{born\_additivity}, \texttt{born\_normalization} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Physics}} \\
+\midrule
+Split law & Physics/SplitLaw & \texttt{split\_unique}, \texttt{hamiltonian\_is\_bijective} \\
+Gauge group derived & Physics/SplitLaw & \texttt{anomaly\_forces\_rank\_3}, \texttt{gauge\_dimension\_derived} \\
+Predictions & Physics/Predictions & \texttt{P1}--\texttt{P3} \\
+\midrule
+\multicolumn{3}{@{}l}{\emph{Quantitative Seed}} \\
+\midrule
+Seed existence & QSeed/SeedExistence & \texttt{exists\_action\_minimizer} \\
+Seed uniqueness & QSeed/SeedExistence & \texttt{seed\_unique\_up\_to\_gauge} \\
+Renormalization fixed pt & QSeed/Renormalization & \texttt{seed\_is\_fixed\_point} \\
+Physical dim = 16 & QSeed/NE/PhysicalDefect & \texttt{physical\_dim\_is\_sixteen} \\
+Block-diagonal $L^*$ & QSeed/NE/BlockDiagonal & \texttt{physicalLstar\_block\_diagonal} \\
+Eigenpairs (kernel) & QSeed/NE/BlockEigenvalues & \texttt{temporalEigenPair}, \texttt{spatialConstant/Nonconstant} \\
+Spectral split 1+13+2 & QSeed/NE/PhysicalSpectralSplit & \texttt{time\_from\_unstable\_direction} \\
+$\Lambda = 6/16$ & QSeed/NE/CosmologicalConstant & \texttt{vacuum\_curvature\_invariant} \\
+Charges $\mathbb{Z} \times \mathbb{Z}_2 \times \mathbb{Z}_3$ & QSeed/NE/ChargeQuantization & \texttt{su2\_center\_Z2}, \texttt{su3\_triality\_Z3} \\
+All physics from seed & QSeed/PhysicsRealizationFromSeed & \texttt{all\_physics\_from\_seed} \\
+Parameter audit & QSeed/NE/ParameterAudit & \texttt{all\_entries\_classified}, \texttt{no\_empirical\_inputs} \\
+\bottomrule
+\end{tabular}
+\end{table}

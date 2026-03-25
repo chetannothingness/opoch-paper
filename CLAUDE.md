@@ -3,7 +3,7 @@
 ## Paper Overview
 
 **Title**: Opoch: Structural Reality from Nothingness
-**Authors**: Chetan, Dharamveer Chouhan, Ravish (Opoch Research)
+**Authors**: Chetan Chauhan, Dharamveer Chouhan, Ravish (Opoch Research)
 **Status**: Complete, 100 pages, 396 Lean theorems verified, 20/20 Z3 proofs pass
 **Date**: March 2026
 

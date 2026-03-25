@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Opoch: Structural Reality from Nothingness"
+type: article
+authors:
+  - given-names: Chetan
+    family-names: Chauhan
+    email: chetan@opoch.com
+  - given-names: Dharamveer
+    family-names: Chouhan
+    email: dharamveer@opoch.com
+  - given-names: Ravish
+    email: ravish@opoch.com
+    affiliation: Opoch Research
+date-released: "2026-03-24"
+keywords:
+  - formal verification
+  - Lean 4
+  - witnessability
+  - foundations of physics
+  - structural reality
+license: CC-BY-4.0
+repository-code: "https://github.com/chetannothingness/opoch-paper"

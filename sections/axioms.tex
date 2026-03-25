@@ -161,6 +161,20 @@ the chain $\noth \to \text{N0} \to \text{N1} \to \text{N2} \to
 (\cref{thm:N0,thm:N1,thm:N2,thm:N3,thm:N4,thm:a0star-derived}).
 The \texttt{axiom} environment below is retained for referenceability,
 but the content is a derived criterion, not a postulate.
+
+\medskip\noindent
+\emph{Lean formalization note.}
+In the companion Lean~4 development, the forward direction of
+A0$^*$ ($\mathit{IsReal}\;\delta \Rightarrow \exists\, w,\;\ldots$) is
+derived in \texttt{EndogenousMeaning.lean} from the
+\texttt{Nothingness} structure via theorems N1--N5.  The full
+biconditional is packaged as the sole \texttt{axiom} declaration in
+\texttt{Axioms.lean} for downstream use; the backward direction
+encodes the semantic closure that ``real'' means ``witnessed.''
+When this paper states ``no declared axioms,'' it refers to the
+paper's logical structure; when the artifact description states
+``one axiom,'' it refers to the Lean packaging of the derived
+biconditional.
 \end{remark}
 
 \begin{axiom}[A0$^*$ --- Completed Witnessability]
