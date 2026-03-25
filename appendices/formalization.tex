@@ -91,15 +91,25 @@ The 78 Lean files form a single acyclic dependency graph:
 Table~\ref{tab:formalization-map} maps major paper claims to Lean
 modules and theorem names.
 
-\begin{table}[ht]
-\centering
+\begingroup
 \footnotesize
+\begin{longtable}{@{}p{3.4cm}lp{3.6cm}@{}}
 \caption{Formalization map: paper claims to Lean modules.}
-\label{tab:formalization-map}
-\begin{tabular}{@{}p{3.6cm}lp{3.8cm}@{}}
+\label{tab:formalization-map} \\
 \toprule
 \textbf{Paper Claim} & \textbf{Lean Module(s)} & \textbf{Key Theorem(s)} \\
 \midrule
+\endfirsthead
+\multicolumn{3}{@{}l}{\emph{Table~\ref{tab:formalization-map} continued}} \\
+\toprule
+\textbf{Paper Claim} & \textbf{Lean Module(s)} & \textbf{Key Theorem(s)} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r@{}}{\emph{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
 \multicolumn{3}{@{}l}{\emph{Foundation (Layer 0--1)}} \\
 \midrule
 Nothingness conditions & Manifest/Nothingness & \texttt{N0\_no\_external\_verifier}, \texttt{N0\_clock\_invariance} \\
@@ -164,6 +174,5 @@ $\Lambda = 6/16$ & QSeed/NE/CosmologicalConstant & \texttt{vacuum\_curvature\_in
 Charges $\mathbb{Z} \times \mathbb{Z}_2 \times \mathbb{Z}_3$ & QSeed/NE/ChargeQuantization & \texttt{su2\_center\_Z2}, \texttt{su3\_triality\_Z3} \\
 All physics from seed & QSeed/PhysicsRealizationFromSeed & \texttt{all\_physics\_from\_seed} \\
 Parameter audit & QSeed/NE/ParameterAudit & \texttt{all\_entries\_classified}, \texttt{no\_empirical\_inputs} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+\endgroup
