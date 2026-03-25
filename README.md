@@ -249,6 +249,16 @@ bash scripts/verify-all.sh
 
 ---
 
+## Verify with AI
+
+This repository includes a structured verification guide for AI systems. To independently verify the paper and Lean proofs using a coding agent AI (preferred - Claude Code/Cursor with Opus, max effort), give it access to the repository and the following instruction:
+
+> Read `AI_VERIFICATION_GUIDE.md` and follow every instruction in order. Read the entire paper before forming any opinion. Report your complete findings.
+
+The guide walks through: reading the full paper, verifying the foundation chain from nothingness to A0\*, checking all 414 Lean theorems, tracing the dependency graph, verifying the seed quantization chain, cross-referencing physics claims with Lean proofs, and stating findings with integrity.
+
+---
+
 ## Citation
 
 ```bibtex
@@ -264,4 +274,4 @@ bash scripts/verify-all.sh
 
 ## License
 
-This work is released for academic and research use.
+Paper text and figures: CC BY 4.0. Lean formalization and code: MIT. See [LICENSE](LICENSE) for details.
