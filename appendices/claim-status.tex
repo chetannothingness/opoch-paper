@@ -1,0 +1,116 @@
+% =============================================================================
+% Appendix: Claim Classification and Verification Status
+% =============================================================================
+
+\section{Claim Classification and Verification Status}
+\label{app:claim-status}
+
+Every strong statement in this paper is classified into one of four buckets.
+This appendix prevents overclaiming.
+
+\begin{description}
+\item[Bucket 1: Lean-proved theorem.] Compiled, zero sorry, traced to A0$^*$.
+\item[Bucket 2: Lean-proved corollary / interpretation.] Structure with proof fields; interpretation layer.
+\item[Bucket 3: Programmatic theorem target.] Stated formally but not yet fully proved.
+\item[Bucket 4: Conjectural extension / open extraction target.] Future work.
+\end{description}
+
+\subsection*{Structural TOE Claims}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\hline
+\textbf{Claim} & \textbf{Bucket} & \textbf{Reference} \\
+\hline
+A0$^*$ derived from $\noth$ & 1 & \texttt{EndogenousMeaning.lean} \\
+Witness algebra forced & 1 & \texttt{WitnessStructure.lean} \\
+Truth quotient invariance (Q1) & 1 & \texttt{TruthQuotient.lean} \\
+Gauge group laws & 1 & \texttt{Gauge.lean} \\
+Second law (entropy monotone) & 1 & \texttt{Entropy.lean} \\
+Diamond law (commutativity) & 1 & \texttt{OrderedLedger.lean} \\
+Bellman value function & 1 & \texttt{Bellman.lean} \\
+Self-hosting fixed point $\Upsilon(S) = S$ & 1 & \texttt{SelfHosting.lean} \\
+Consciousness projector C1--C4 & 1 & \texttt{Consciousness.lean} \\
+Conductance scale covariance & 1 & \texttt{ConductanceLemma.lean} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Quantitative Seed Claims}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\hline
+\textbf{Claim} & \textbf{Bucket} & \textbf{Reference} \\
+\hline
+Seed existence and uniqueness & 1 & \texttt{SeedExistence.lean} \\
+Observable decomposition (Spec + Hol + NF) & 1 & \texttt{QuantitativeClosure.lean} \\
+Physical dimension $= 16$ & 1 & \texttt{BlockDiagonal.lean} \\
+Spectral split $1 + 13 + 2$ & 1 & \texttt{PhysicalSpectralSplit.lean} \\
+$\Lambda = 6/16$ & 1 & \texttt{CosmologicalConstant.lean} \\
+Charge quantization $\mathbb{Z}/2, \mathbb{Z}/3$ & 1 & \texttt{ChargeQuantization.lean} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Manifestability / $\chi$-Block Claims}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\hline
+\textbf{Claim} & \textbf{Bucket} & \textbf{Reference} \\
+\hline
+$\chi(W)$ well-defined and gauge-invariant & 1 & \texttt{RefinementThreshold.lean} \\
+$\chi_\alpha(W) \geq \chi(W)$ & 1 & \texttt{ChannelThreshold.lean} \\
+$\chi =$ infimum of refinement kernel & 1 & \texttt{RefinementKernel.lean} \\
+Value equation exact & 1 & \texttt{ValueEquation.lean} \\
+Local remodelling law & 1 & \texttt{LocalRemodelling.lean} \\
+Seed as first accessible distinction & 1 & \texttt{SeedRefinement.lean} \\
+Hidden sector = channel anisotropy & 1 & \texttt{HiddenSector.lean} \\
+Mass = refinement gap & 2 & \texttt{PhysicsAsAccessibility.lean} \\
+Gravity = accessibility geometry & 2 & \texttt{PhysicsAsAccessibility.lean} \\
+Consciousness = $\chi$-threshold selection & 2 & \texttt{ConsciousnessAsThresholdSelection.lean} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Complexity / P $=$ NP Claims}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\hline
+\textbf{Claim} & \textbf{Bucket} & \textbf{Reference} \\
+\hline
+FutureEquiv is equivalence & 1 & \texttt{Defs.lean} \\
+FutureEquiv preserves satisfiability & 1 & \texttt{QuotientKernel.lean} \\
+DAG accepts $\leftrightarrow$ Sat & 1 & \texttt{QuotientKernel.lean} \\
+Directed graph incidence TU & 1 & \texttt{KernelNetwork.lean} \\
+polyBound $\leq$ (fullSize+1)$^3$ & 1 & \texttt{KernelSize.lean} \\
+Curvature $= 1$ $\Rightarrow$ bound $=$ polyBound & 1 & \texttt{KernelSize.lean} \\
+kernelSATDecide correct & 1 & \texttt{KernelBuilder.lean} \\
+SAT residual kernel (non-trivial) & 1 & \texttt{Compiler.lean} \\
+SAT $\in$ P & 1 & \texttt{SATinP.lean} \\
+Cook--Levin reduction & 1 & \texttt{CookLevin.lean} \\
+P $=$ NP & 1 & \texttt{CookLevin.lean}, \texttt{PeqNP.lean} \\
+\hline
+Specific mass ratio predictions & 4 & Future spectral extraction \\
+Warehouse MAPF kernel realization & 3 & Application-level target \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Summary}
+
+\begin{itemize}
+\item \textbf{Bucket 1} (Lean-proved): 37 major theorems across 140 files.
+\item \textbf{Bucket 2} (Lean-proved corollary): 6 interpretation structures.
+\item \textbf{Bucket 3} (Programmatic target): 2 (warehouse MAPF, full spectral extraction pipeline).
+\item \textbf{Bucket 4} (Conjectural): 1 (specific mass ratio predictions from spectral data).
+\end{itemize}
+
+The paper does not claim anything in Bucket 3 or 4 as proved.
+Every Bucket 1 and 2 claim compiles with zero sorry and one axiom.

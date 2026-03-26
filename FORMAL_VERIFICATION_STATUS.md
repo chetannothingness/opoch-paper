@@ -12,8 +12,8 @@
 
 | Metric | Value |
 |--------|-------|
-| Lean source files | 76 |
-| Theorems | 396 |
+| Lean source files | 140 |
+| Includes | Manifestability block, residual kernel, Cook-Levin, P=NP |
 | `sorry` | 0 |
 | `admit` | 0 |
 | Axioms beyond Lean kernel | 1 (A0star) |
@@ -33,7 +33,7 @@ cd lean4 && lake build
 
 ## Build Status
 
-**GREEN** -- all 76 files compile, all 396 theorems check, zero sorry, zero admit.
+**GREEN** -- all 140 files compile, zero sorry, zero admit. Build produces 4006 targets.
 
 ---
 

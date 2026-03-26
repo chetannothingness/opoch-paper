@@ -157,15 +157,16 @@ Fisher-Rao metric on statistical manifolds, but it is defined over
 deterministic truth classes and measured in computational cost.
 
 % -------------------------------------------------------------------------
-\subsection{Quantitative Extraction Frontiers}
+\subsection{Quantitative and Operational Extraction Frontiers}
 \label{sec:discussion:frontiers}
 
-The structure is complete.  The computation is the frontier.  Every
-dimensionless invariant is forced (Theorem~\ref{thm:observable-decomp});
-every dimensional quantity is fixed up to the internally derived
-normalization map.  The remaining work is explicit spectral extraction
-from the seed operator---a well-posed computation, not an open
-structural question.
+The structure is complete at three levels: structural (A0$^*$ $\to$ K\"{a}hler),
+quantitative (seed $\to$ spectrum), and operational ($\chi(W)$ $\to$
+value equation $\to$ residual kernel).  Every dimensionless invariant is
+forced (Theorem~\ref{thm:observable-decomp}); every dimensional quantity is
+fixed up to the internally derived normalization map.  The remaining work
+is explicit spectral extraction from the seed operator and deployment of
+the residual kernel compiler to specific problem families.
 
 \begin{enumerate}[label=(\arabic*)]
   \item \textbf{Explicit spectral extraction from $L^*$.}
@@ -188,14 +189,19 @@ structural question.
         Clarifying the boundary between abstract resource measures and
         physical energetics under the Landauer correspondence.
 
-  \item \textbf{Separator geometry as a complexity lens.}
-        Can $\SepCurv$ predict computational difficulty of problem classes
-        via circuit or communication complexity?
+  \item \textbf{Residual kernel deployment.}
+        Deploying the residual kernel compiler to specific problem families
+        (SAT, scheduling, MAPF) and measuring the polynomial bound in
+        practice.  The theoretical bound is (fullSize+1)$^4$; practical
+        bounds may be tighter.
 
-  \item \textbf{Self-hosting depth.}
-        Understanding whether deeper reflective towers stabilize.
+  \item \textbf{Law mining.}
+        The law-mining block (\texttt{LawMining/}) enables Lean to verify
+        candidate residual signatures for completeness, minimality, and
+        polynomial bound.  Extending this to automatically discover
+        efficient problem encodings.
 
   \item \textbf{Lean mechanization of infinite-domain theorems.}
-        The 414-theorem Lean~4 verification covers the finite/Nat model.
+        The 140-file Lean~4 verification covers the finite/Nat model.
         Encoding infinite-domain properties via mathlib remains in progress.
 \end{enumerate}

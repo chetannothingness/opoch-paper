@@ -6,6 +6,19 @@ import OpochLean4.Manifest.Axioms
 import OpochLean4.Foundations.WitnessStructure
 import OpochLean4.Foundations.FiniteCarrier
 import OpochLean4.Foundations.PrefixFree
+-- Manifestability Block (12 files) — Level 3 of TOE: χ(W) operational law
+import OpochLean4.Foundations.Manifestability.Indistinguishability
+import OpochLean4.Foundations.Manifestability.ResidualClass
+import OpochLean4.Foundations.Manifestability.WitnessCost
+import OpochLean4.Foundations.Manifestability.RefinementThreshold
+import OpochLean4.Foundations.Manifestability.ChannelThreshold
+import OpochLean4.Foundations.Manifestability.RefinementEvent
+import OpochLean4.Foundations.Manifestability.RefinementKernel
+import OpochLean4.Foundations.Manifestability.ManifestabilityFunctional
+import OpochLean4.Foundations.Manifestability.ValueEquation
+import OpochLean4.Foundations.Manifestability.LocalRemodelling
+import OpochLean4.Foundations.Manifestability.HiddenSector
+import OpochLean4.Foundations.Manifestability.SeedRefinement
 import OpochLean4.Algebra.TruthQuotient
 import OpochLean4.Algebra.OrderedLedger
 import OpochLean4.Algebra.WitnessPath
@@ -76,3 +89,53 @@ import OpochLean4.QuantitativeSeed.NumericalExtraction.PhysicalArithmeticTower
 import OpochLean4.QuantitativeSeed.NumericalExtraction.PhysicalComplexity
 import OpochLean4.QuantitativeSeed.NumericalExtraction.ParameterAudit
 import OpochLean4.QuantitativeSeed.NumericalExtraction.ExtractionAudit
+-- Complexity Core (χ-connected)
+import OpochLean4.Complexity.Core.TM
+import OpochLean4.Complexity.Core.P
+import OpochLean4.Complexity.Core.NP
+import OpochLean4.Complexity.Core.Reductions
+import OpochLean4.Complexity.Core.NPComplete
+import OpochLean4.Complexity.Core.SAT
+import OpochLean4.Complexity.Core.CookLevin
+-- Complexity Residual (χ-geometry)
+import OpochLean4.Complexity.Residual.Verifier
+import OpochLean4.Complexity.Residual.FutureEq
+import OpochLean4.Complexity.Residual.Signature
+import OpochLean4.Complexity.Residual.RefinementCost
+import OpochLean4.Complexity.Residual.ValuePropagation
+import OpochLean4.Complexity.Residual.PolyBound
+import OpochLean4.Complexity.Residual.Compiler
+import OpochLean4.Complexity.Residual.Transition
+import OpochLean4.Complexity.Residual.Objective
+import OpochLean4.Complexity.Residual.BinaryEncoding
+import OpochLean4.Complexity.Residual.RuntimeCertifier
+-- Complexity SAT (extended)
+import OpochLean4.Complexity.SAT.VerifierState
+import OpochLean4.Complexity.SAT.FutureQuotient
+import OpochLean4.Complexity.SAT.KernelTU
+import OpochLean4.Complexity.SAT.KernelPolytime
+import OpochLean4.Complexity.SAT.SATReduction
+import OpochLean4.Complexity.SAT.SATLift
+-- Complexity Bridge (flagships)
+import OpochLean4.Complexity.Bridge.SATinP
+import OpochLean4.Complexity.Bridge.NewPeqNP
+import OpochLean4.Complexity.Bridge.AllNPInP
+import OpochLean4.Complexity.Bridge.NPHardCollapse
+-- Complexity LawMining
+import OpochLean4.Complexity.LawMining.CandidateSignature
+import OpochLean4.Complexity.LawMining.CompletenessCheck
+import OpochLean4.Complexity.LawMining.MinimalityCheck
+import OpochLean4.Complexity.LawMining.SignatureRefinement
+-- Complexity Audit
+import OpochLean4.Complexity.Audit.PvsNPAudit
+import OpochLean4.Complexity.Audit.TheoremManifest
+import OpochLean4.Complexity.Audit.AxiomCensus
+import OpochLean4.Complexity.Audit.Replay
+-- Corollaries (Level 3 consequences)
+import OpochLean4.Foundations.Corollaries.PhysicsAsAccessibility
+import OpochLean4.Foundations.Corollaries.ConsciousnessAsThresholdSelection
+import OpochLean4.Foundations.Corollaries.ComputationAsRefinementGeometry
+import OpochLean4.Foundations.Corollaries.DarkSectorAsChannelAnisotropy
+-- Audit
+import OpochLean4.Audit.PreChiManifest
+import OpochLean4.Audit.PreChiAxiomCensus

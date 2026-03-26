@@ -18,6 +18,8 @@
 import OpochLean4.Execution.SelfHosting
 import OpochLean4.Execution.ClosureDefect
 import OpochLean4.Control.Bellman
+import OpochLean4.Foundations.Manifestability.RefinementThreshold
+import OpochLean4.Foundations.Manifestability.ValueEquation
 
 namespace Consciousness
 
@@ -197,5 +199,38 @@ theorem runtimeLaw_empty : runtimeLaw ([] : List Candidate) = none := rfl
 -- The runtime law returns some for singletons
 theorem runtimeLaw_singleton (c : Candidate) :
     runtimeLaw [c] = some c := rfl
+
+-- ═══════════════════════════════════════════════════════════════
+-- SECTION 5: Consciousness via manifestability (χ extension)
+-- ═══════════════════════════════════════════════════════════════
+
+open Manifestability
+
+/-- Consciousness as χ-threshold selection:
+    The runtime law selects the configuration that minimizes cost,
+    which in the manifestability framework means minimizing the
+    refinement threshold χ of the unresolved self-model class.
+    Attention = selection by V−χ; effort = paying χ; learning = lowering χ. -/
+structure ConsciousnessManifestability where
+  /-- The unresolved self-model class -/
+  selfClass : ResidualClass
+  /-- Value of the self-model state -/
+  stateValue : Nat
+  /-- Refinement threshold of the self-model class -/
+  threshold : RefinementThreshold selfClass
+  /-- The runtime law: select by value minus threshold -/
+  net_value : stateValue ≥ threshold.chi
+
+/-- Consciousness requires that χ(self) is finite:
+    the self-model must be refinable (otherwise no self-observation). -/
+theorem consciousness_requires_finite_chi
+    (cm : ConsciousnessManifestability) :
+    IsRefinable cm.selfClass :=
+  cm.threshold.refinable
+
+/-- The value of consciousness: net value = stateValue - χ.
+    Higher net value means more effective self-remodelling. -/
+def consciousnessNetValue (cm : ConsciousnessManifestability) : Nat :=
+  cm.stateValue - cm.threshold.chi
 
 end Consciousness

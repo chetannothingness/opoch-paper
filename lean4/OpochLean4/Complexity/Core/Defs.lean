@@ -3,7 +3,7 @@
 
   Standard complexity definitions. No shortcuts.
   P has polynomial bound. NP has polynomial verifier.
-  SAT defined properly. No Classical.propDecidable anywhere.
+  SAT defined properly. Pure definitions.
   Assumptions: None beyond Lean's type theory.
 -/
 
@@ -11,10 +11,23 @@
 -- SECTION 1: Size and polynomial bounds
 -- ═══════════════════════════════════════════════════════════════
 
-/-- Polynomial bound function. -/
+/-- Polynomial bound function with enforced polynomial growth.
+    eval is bounded by coeff * (n+1)^degree.
+    This ensures no exponential can satisfy Poly. -/
 structure Poly where
   eval : Nat → Nat
+  degree : Nat
+  coeff : Nat
   monotone : ∀ a b, a ≤ b → eval a ≤ eval b
+  polynomial_bound : ∀ n, eval n ≤ coeff * (n + 1) ^ degree
+
+-- ═══════════════════════════════════════════════════════════════
+-- SECTION 1b: Sized types
+-- ═══════════════════════════════════════════════════════════════
+
+/-- A type with a computable size measure. -/
+class Sized (α : Type) where
+  size : α → Nat
 
 -- ═══════════════════════════════════════════════════════════════
 -- SECTION 2: SAT definitions (concrete, computational)
@@ -37,6 +50,21 @@ def numVars (φ : CNF) : Nat :=
 /-- Formula size (total literal occurrences). -/
 def cnfSize (φ : CNF) : Nat :=
   φ.foldl (fun acc c => acc + c.length) 0
+
+instance : Sized (List Bool) where
+  size := List.length
+
+/-- CNF size measure: captures all relevant parameters.
+    numVars (variable count) + cnfSize (total literals) +
+    length (clause count) + maxWidth (max clause width).
+    This ensures all formula parameters ≤ Sized.size. -/
+def cnfFullSize (φ : CNF) : Nat :=
+  -- Forward declaration — maxWidth defined in KernelSize.lean
+  -- For the size measure, we use a conservative bound
+  numVars φ + cnfSize φ + φ.length
+
+instance : Sized CNF where
+  size := cnfFullSize
 
 /-- Evaluate a literal under assignment. -/
 def evalLit (l : Literal) (σ : Assign) : Bool :=
@@ -153,3 +181,21 @@ theorem futureEquiv_preserves_futureSat (φ : CNF) (pa₁ pa₂ : PartialAssign)
     exact ⟨suffix, by rw [← h suffix]; exact hsat⟩
   · intro ⟨suffix, hsat⟩
     exact ⟨suffix, by rw [h suffix]; exact hsat⟩
+
+-- ═══════════════════════════════════════════════════════════════
+-- SECTION 7: NP with polynomial constraints
+-- ═══════════════════════════════════════════════════════════════
+
+/-- NP language with POLYNOMIAL witness bound and POLYNOMIAL verification.
+    Unlike NP_Bool, the witness bound is a Poly (not α → Nat),
+    requiring a Sized instance on α. This rules out exponential witness bounds. -/
+structure NP_Poly {α : Type} [Sized α] (L : α → Prop) where
+  /-- Two-argument verifier: instance × witness → Bool. -/
+  verify : α → List Bool → Bool
+  /-- POLYNOMIAL witness length bound. -/
+  witBound : Poly
+  /-- Completeness: if L x, there exists a short witness. -/
+  complete : ∀ x, L x → ∃ w : List Bool,
+    w.length ≤ witBound.eval (Sized.size x) ∧ verify x w = true
+  /-- Soundness: any accepted witness implies L x. -/
+  sound : ∀ x (w : List Bool), verify x w = true → L x

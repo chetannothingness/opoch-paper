@@ -10,8 +10,8 @@ Starting from absolute nothingness — the state with no committed distinctions,
 +--------------------------------------------------+
 |          MACHINE-VERIFIED PROOF SUITE             |
 +--------------------------------------------------+
-|  Lean files:              78                      |
-|  Theorems:                414                     |
+|  Lean files:              140                     |
+|  Includes:  Manifestability + P=NP via χ-kernel   |
 |  sorry count:             0                       |
 |  admit count:             0                       |
 |  Axioms:                  1  (A0*, derived from ⊥)|
@@ -255,7 +255,7 @@ This repository includes a structured verification guide for AI systems. To inde
 
 > Read `AI_VERIFICATION_GUIDE.md` and follow every instruction in order. Read the entire paper before forming any opinion. Report your complete findings.
 
-The guide walks through: reading the full paper, verifying the foundation chain from nothingness to A0\*, checking all 414 Lean theorems, tracing the dependency graph, verifying the seed quantization chain, cross-referencing physics claims with Lean proofs, and stating findings with integrity.
+The guide walks through: reading the full paper, verifying the foundation chain from nothingness to A0\*, checking all 140 Lean files, tracing the dependency graph, verifying the seed quantization chain, cross-referencing physics claims with Lean proofs, and stating findings with integrity.
 
 ---
 
@@ -266,7 +266,7 @@ The guide walks through: reading the full paper, verifying the foundation chain 
   title   = {Opoch: Structural Reality from Nothingness},
   author  = {Chauhan, Chetan and Chouhan, Dharamveer and Ravish},
   year    = {2026},
-  note    = {78 Lean 4 files, 414 theorems, 0 sorry, 1 axiom (derived from nothingness)}
+  note    = {78 Lean 4 files, 140 files, 0 sorry, 0 sorry, 1 axiom (derived from nothingness)}
 }
 ```
 

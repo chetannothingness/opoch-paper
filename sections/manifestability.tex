@@ -1,0 +1,148 @@
+% =============================================================================
+% Section: Indistinguishability Energy and the Refinement Kernel
+% =============================================================================
+
+\section{Indistinguishability Energy and the Refinement Kernel}
+\label{sec:manifestability}
+
+The preceding sections established two closures: \emph{structural} (from $\noth$ through A0$^*$ to the K\"{a}hler whole) and \emph{quantitative} (from the seed $\delta^*$ through the spectral operator to every dimensionless invariant).  A third closure remains: the \emph{operational} law governing which distinctions become manifest, at what cost, and in what order.  This section introduces the missing law and shows that it is forced by A0$^*$---not a new axiom, but an inevitable consequence of witnessability applied to cost.
+
+\subsection{Unresolved Classes}
+\label{sec:manifestability:classes}
+
+An \textbf{unresolved class} $W$ is an equivalence class of distinctions under witness-indistinguishability:
+\[
+\delta_1 \sim \delta_2
+\quad\Longleftrightarrow\quad
+\forall\, w:\, \mathrm{Separates}(w,\delta_1) \leftrightarrow \mathrm{Separates}(w,\delta_2).
+\]
+This is the truth quotient of \cref{sec:derivation}, now viewed operationally: $W$ represents what reality has \emph{not yet resolved}.  The true unknown is not an external hidden variable but a locally unresolved equivalence class.
+
+The \textbf{unresolved multiplicity} $|W|$ counts the pairwise-indistinguishable alternatives, and the \textbf{entropy} is
+\[
+S(W) = \log |W|.
+\]
+$S(W) = 0$ iff $W$ is a singleton---fully resolved.  The second law (Step~9) guarantees that refinement can only decrease $S$.
+
+\emph{Lean reference:} \texttt{Indistinguishability.lean}, \texttt{ResidualClass.lean} --- \texttt{entropy\_zero\_iff\_singleton}.
+
+\subsection{Refinement Threshold}
+\label{sec:manifestability:chi}
+
+For each unresolved class $W$, the \textbf{refinement threshold} is
+\begin{equation}
+\label{eq:chi}
+\boxed{
+\chi(W) = \inf\bigl\{c(\tau) : \tau \text{ admissible and } \tau|_W \text{ is nonconstant}\bigr\}.
+}
+\end{equation}
+Here $c(\tau)$ is the cost of witness $\tau$, and ``nonconstant on $W$'' means $\tau$ separates at least two members of $W$---i.e., $\tau$ can \emph{split} the class.
+
+$\chi(W)$ is \emph{not} a new axiom.  It is forced by A0$^*$: if a distinction is real, a witness exists (A0$^*$); every witness has a cost (finite resource); the infimum over all such costs is $\chi(W)$.  The refinement threshold is the \emph{least action needed to make a hidden distinction real}.
+
+Key properties (all Lean-proved, zero sorry):
+\begin{itemize}
+\item $\chi(W)$ is \textbf{well-defined}: the infimum is unique (\texttt{chi\_well\_defined}).
+\item $\chi(W) \geq 0$ (\texttt{chi\_nonneg}).
+\item $\chi(W)$ is \textbf{gauge-invariant}: preserved under quotient-compatible maps (\texttt{chi\_gauge\_invariant}).
+\item $\chi(W)$ \textbf{respects the quotient}: same underlying truth class $\Rightarrow$ same threshold (\texttt{chi\_respects\_quotient}).
+\item $\chi(W) = \infty$ (no finite refinement) iff no witness is nonconstant on $W$ (\texttt{chi\_infinite\_iff\_no\_finite\_split}).
+\end{itemize}
+
+\emph{Lean reference:} \texttt{RefinementThreshold.lean}.
+
+\subsection{Channel-Dependent Thresholds}
+\label{sec:manifestability:channels}
+
+A \textbf{witness channel} $\alpha$ is a collection of witnesses sharing a common observational modality.  The \textbf{channel-dependent threshold} is
+\[
+\chi_\alpha(W) = \inf\bigl\{c(\tau) : \tau \in \alpha,\; \tau|_W \text{ nonconstant}\bigr\}.
+\]
+Since restricting to a subchannel can only increase the infimum:
+\[
+\chi_\alpha(W) \geq \chi(W).
+\]
+A class $W$ is \textbf{hidden in channel $\alpha$} if $\chi_\alpha(W) \gg \chi_\beta(W)$ for some other channel $\beta$.  This is the structural origin of dark sectors: a distinction may be easy to refine gravitationally but prohibitively expensive to refine electromagnetically.
+
+\emph{Lean reference:} \texttt{ChannelThreshold.lean}, \texttt{HiddenSector.lean} --- \texttt{chi\_channel\_ge\_chi}, \texttt{hidden\_sector\_as\_channel\_threshold\_anisotropy}.
+
+\subsection{Refinement Events}
+\label{sec:manifestability:events}
+
+A \textbf{refinement event} is a witnessed split
+\[
+W \leadsto \{W_1, \dots, W_r\}
+\]
+through channel $\alpha$, with \textbf{split action} $A(W \to \{W_i\}; \alpha)$ equal to the cost of the splitting witness.  Multiplicity is conserved: $|W| = \sum_i |W_i|$.
+
+\emph{Lean reference:} \texttt{RefinementEvent.lean} --- \texttt{multiplicity\_conservation}.
+
+\subsection{Refinement Kernel}
+\label{sec:manifestability:kernel}
+
+The \textbf{refinement kernel}
+\[
+\mathcal{K}(W, \alpha, \{W_i\})
+\]
+is the weighted transition law of reality: it specifies the source class, channel, target partition, splitting witness, and cost.  The refinement threshold is the infimum over all kernels:
+\[
+\chi(W) = \inf_{\alpha, \{W_i\}} A\bigl(W \to \{W_i\}; \alpha\bigr).
+\]
+
+\emph{Lean reference:} \texttt{RefinementKernel.lean} --- \texttt{chi\_is\_infimum\_of\_refinement\_kernel}.
+
+\subsection{Manifestability Functional}
+\label{sec:manifestability:functional}
+
+The \textbf{manifestability functional} orders candidate refinements:
+\[
+\mathcal{F}(W \to \{W_i\}; \alpha) = A - \lambda\,\Delta S - \mu\,\Delta V,
+\]
+where $A$ is the action cost, $\Delta S$ is the entropy reduction, $\Delta V$ is the value gain, and $\lambda, \mu$ are coupling parameters forced by the spectral structure.  Reality selects the refinement minimizing $\mathcal{F}$---this is the exact law of local becoming.
+
+\emph{Lean reference:} \texttt{ManifestabilityFunctional.lean} --- \texttt{manifestability\_functional\_exact}.
+
+\subsection{Value Equation}
+\label{sec:manifestability:value}
+
+The \textbf{Bellman/Hamilton--Jacobi value equation} on the residual state space is
+\begin{equation}
+\label{eq:value}
+\boxed{
+\Psi(W) = \sup_{\alpha, \{W_i\}} \left[
+V\bigl(W \to \{W_i\}; \alpha\bigr)
+- A\bigl(W \to \{W_i\}; \alpha\bigr)
++ \sum_i \Psi(W_i)
+\right].
+}
+\end{equation}
+This is the exact operational law of the universe: at each unresolved class, reality propagates value through the refinement kernel, selecting the path that maximizes net value minus cost plus future payoff.
+
+The Bellman operator is monotone (\texttt{bellman\_operator\_monotone}) and has a fixed point (\texttt{bellman\_fixedpoint\_exists}).  The value equation is exact (\texttt{value\_equation\_exact}).
+
+\emph{Lean reference:} \texttt{ValueEquation.lean}.
+
+\subsection{Big Bang as First Accessible Distinction}
+\label{sec:manifestability:bigbang}
+
+The seed $\delta^*$ is now reinterpreted as the \emph{first accessible distinction}:
+\[
+\delta^* = \arg\min_{W \neq W_\bot} \chi(W),
+\]
+subject to non-gauge and self-retaining constraints.  The seed has action $= 1$ (the minimum nonzero value for non-gauge defects), meaning it is the least-cost distinction that nothingness can manifest.  The big bang is not an external event but the first step of self-resolution: nothingness paying the minimum refinement cost to create the first real distinction.
+
+\emph{Lean reference:} \texttt{SeedRefinement.lean} --- \texttt{bigbang\_seed\_is\_first\_accessible\_distinction}, \texttt{seed\_as\_minimal\_refinable\_class}.
+
+\subsection{Consequences}
+\label{sec:manifestability:consequences}
+
+The operational closure completes the source code:
+\begin{enumerate}
+\item \textbf{Physics as accessibility geometry.}  Mass $=$ refinement gap ($\chi$ of particle class).  Gravity $=$ geometry of accessibility (relative thresholds).  Hidden sectors $=$ channel-dependent high-$\chi$ anisotropy.  Probability $=$ relative branch accessibility.
+
+\item \textbf{Consciousness as threshold selection.}  Attention $= V - \chi$ (net value).  Effort $=$ paying $\chi$.  Learning $=$ lowering $\chi$ across a family of classes.
+
+\item \textbf{Computation as refinement geometry.}  NP-hardness $=$ high $\chi$ in the raw presentation channel.  Exact solving $=$ value propagation on the residual kernel (the $\chi$-optimal channel).  P $=$ NP because the residual quotient has polynomial size, forced by A0$^*$ spectral curvature.
+\end{enumerate}
+
+\emph{Lean reference:} \texttt{PhysicsAsAccessibility.lean}, \texttt{ConsciousnessAsThresholdSelection.lean}, \texttt{ComputationAsRefinementGeometry.lean}, \texttt{DarkSectorAsChannelAnisotropy.lean}.

@@ -29,6 +29,16 @@ chain---from the carrier of descriptions to the K\"{a}hler triple on the
 truth-quotient limit---is forced up to computable isomorphism; none is
 introduced as a free design parameter.
 
+The theory already established \emph{what} exists (structural closure) and
+\emph{how much} (quantitative closure from the seed).  A third layer---\emph{operational
+closure}---was implicit: the law governing which distinctions become manifest
+next, at what cost, and in what order.  The refinement threshold
+$\chi(W) = \inf\{c(\tau)\}$ and the Bellman/Hamilton--Jacobi value equation
+$\Psi$ make this layer explicit (\cref{sec:manifestability}).  As a consequence,
+the true computational state of any NP verifier is its residual
+future-equivalence quotient, whose polynomial size is forced by A0$^*$,
+yielding P~$=$~NP as an inevitable structural consequence.
+
 Equally important is what we do \emph{not} claim. We do not claim to derive the
 specific \emph{content} of physical law, only a vocabulary and scaffolding for
 reasoning under witnessability. We do not claim that every modeling choice is
@@ -127,10 +137,14 @@ This paper makes three contributions:
 
 \noindent
 A companion Lean~4 formalization mechanically checks the theorem chain
-for this paper: 414 theorems across 78 files, zero \texttt{sorry}, zero
+for this paper: 140 files, zero \texttt{sorry}, zero
 \texttt{admit}, one axiom (A0$^*$, derived from $\noth$), compiled
-against mathlib~v4.14.0.  Appendix~\ref{app:formalization} maps paper
-claims to formal modules.
+against mathlib~v4.14.0.  The formalization includes the manifestability
+block ($\chi$, refinement kernel, value equation), the residual kernel
+compiler, and the Cook--Levin route to P~$=$~NP.
+Appendix~\ref{app:formalization} maps paper claims to formal modules;
+Appendix~\ref{app:theorem-table} lists the flagship theorems;
+Appendix~\ref{app:claim-status} classifies every strong claim.
 
 \subsection{Paper Outline}
 

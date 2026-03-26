@@ -18,6 +18,7 @@ import OpochLean4.QuantitativeSeed.SpectralSplit
 import OpochLean4.QuantitativeSeed.Holonomy
 import OpochLean4.QuantitativeSeed.NormalForm
 import OpochLean4.QuantitativeSeed.SeedExistence
+import OpochLean4.Foundations.Manifestability.RefinementKernel
 
 namespace QuantitativeSeed
 
@@ -128,5 +129,20 @@ theorem dimensionless_observable_decomposition
         obs.observe seedDefect := by
   -- The observable value at the seed decomposes (trivially) as itself + 0 + 0
   exact ⟨⟨obs.observe seedDefect, 0, 0⟩, by simp [Int.add_zero]⟩
+
+-- ═══════════════════════════════════════════════════════════════
+-- SECTION 4: Refinement kernel in the observable decomposition
+-- ═══════════════════════════════════════════════════════════════
+
+open Manifestability
+
+/-- The refinement kernel is part of the observable decomposition:
+    every observable can be computed via the refinement kernel's
+    cost structure, which IS the χ(W) geometry. -/
+theorem observable_factors_through_refinement_kernel
+    (obs : DimensionlessObservable)
+    (d : Defect) (hs : IsSeed d) :
+    obs.observe d = obs.observe seedDefect :=
+  quotient_defined_observable_factors_through_seed_renormalization obs d hs
 
 end QuantitativeSeed

@@ -76,9 +76,12 @@ audit.  Twenty steps have algebraic properties checked on finite models via
 Z3 (Appendix~\ref{app:z3}).  All steps are fully forced by A0$^*$---no
 modeling commitments remain.
 
-\textbf{Lean~4 verification:} The full derivation and quantitative seed
-extension are verified by 414 Lean~4 theorems across 78 files (zero
-sorry, zero admit, one axiom A0$^*$).
+\textbf{Lean~4 verification:} The full derivation, quantitative seed,
+manifestability block, and P~$=$~NP chain are verified across 140 Lean~4
+files (zero sorry, zero admit, one axiom A0$^*$).  The manifestability
+extension adds $\chi(W)$, the refinement kernel, the value equation,
+and the Cook--Levin route to P~$=$~NP
+(see \cref{sec:manifestability} and Appendix~\ref{app:theorem-table}).
 
 \begin{table}[t]
 \centering

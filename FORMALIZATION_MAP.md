@@ -15,7 +15,7 @@ cd lean4 && lake build
 | Metric | Value |
 |--------|-------|
 | Lean files | 78 |
-| Theorems | 414 |
+| Files | 140 |
 | sorry | 0 |
 | admit | 0 |
 | Axioms | 1 (A0*, forward direction derived from nothingness) |

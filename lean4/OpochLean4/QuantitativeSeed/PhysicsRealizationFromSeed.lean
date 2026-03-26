@@ -15,6 +15,8 @@ import OpochLean4.QuantitativeSeed.Holonomy
 import OpochLean4.QuantitativeSeed.NormalForm
 import OpochLean4.Physics.SplitLaw
 import OpochLean4.Physics.Predictions
+import OpochLean4.Foundations.Manifestability.RefinementThreshold
+import OpochLean4.Foundations.Manifestability.ChannelThreshold
 
 namespace QuantitativeSeed
 
@@ -106,5 +108,47 @@ theorem all_physics_from_seed
   constructor
   · exact quotient_defined_observable_factors_through_seed_renormalization obs d hs
   · exact dimensionless_observable_decomposition obs
+
+-- ═══════════════════════════════════════════════════════════════
+-- SECTION: Physics via manifestability (χ extension)
+-- ═══════════════════════════════════════════════════════════════
+
+open Manifestability
+
+/-- Mass as refinement gap: the mass of a particle is the
+    refinement threshold of its corresponding residual class.
+    Heavier particles require more cost to resolve. -/
+structure MassAsRefinementGap where
+  particleClass : ResidualClass
+  threshold : RefinementThreshold particleClass
+  mass_value : Nat
+  mass_eq_chi : mass_value = threshold.chi
+
+/-- Gravity as accessibility geometry: gravitational interaction
+    between two classes is determined by the relative accessibility
+    (relative refinement thresholds) of their residual classes. -/
+structure GravityAsAccessibility where
+  class1 : ResidualClass
+  class2 : ResidualClass
+  rt1 : RefinementThreshold class1
+  rt2 : RefinementThreshold class2
+  interaction_strength : Nat
+  interaction_from_thresholds : interaction_strength = rt1.chi + rt2.chi
+
+/-- Mass is non-negative (follows from χ ≥ 0). -/
+theorem mass_nonneg (m : MassAsRefinementGap) : m.mass_value ≥ 0 :=
+  Nat.zero_le _
+
+/-- Gravity is symmetric: interaction(A,B) = interaction(B,A). -/
+theorem gravity_symmetric
+    (g1 : GravityAsAccessibility)
+    (g2 : GravityAsAccessibility)
+    (h1 : g1.class1 = g2.class2)
+    (h2 : g1.class2 = g2.class1)
+    (hrt1 : g1.rt1.chi = g2.rt2.chi)
+    (hrt2 : g1.rt2.chi = g2.rt1.chi) :
+    g1.interaction_strength = g2.interaction_strength := by
+  rw [g1.interaction_from_thresholds, g2.interaction_from_thresholds, hrt1, hrt2]
+  omega
 
 end QuantitativeSeed

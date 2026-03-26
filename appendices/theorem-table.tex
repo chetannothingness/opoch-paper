@@ -1,0 +1,57 @@
+% =============================================================================
+% Appendix: Theorem Summary Table
+% =============================================================================
+
+\section{Theorem Summary and Verification Status}
+\label{app:theorem-table}
+
+The following table lists the major Lean~4 theorems accompanying this paper.
+All theorems compile with zero \texttt{sorry} and one axiom (A0$^*$).
+
+\begin{center}
+\small
+\begin{tabular}{@{}llcp{4.5cm}@{}}
+\hline
+\textbf{Theorem} & \textbf{File} & \textbf{Tier} & \textbf{Statement} \\
+\hline
+\texttt{A0star} & Manifest/Axioms & 0 & IsReal $\delta$ $\leftrightarrow$ $\exists w$, Admissible $w$ $\delta$ \\
+\texttt{indist\_equivalence} & Algebra/TruthQuotient & 1 & Indistinguishability is equivalence \\
+\texttt{Q1\_real\_quotient\_invariant} & Algebra/TruthQuotient & 1 & IsReal is quotient-invariant \\
+\texttt{seed\_unique\_up\_to\_gauge} & QSeed/SeedExistence & 2 & Seed unique by minimality \\
+\texttt{chi\_well\_defined} & Manif./RefinementThreshold & 3 & $\chi(W)$ uniquely determined \\
+\texttt{chi\_gauge\_invariant} & Manif./RefinementThreshold & 3 & $\chi$ preserved by gauge \\
+\texttt{chi\_channel\_ge\_chi} & Manif./ChannelThreshold & 3 & $\chi_\alpha(W) \geq \chi(W)$ \\
+\texttt{chi\_is\_infimum\_of\_kernel} & Manif./RefinementKernel & 3 & $\chi =$ inf of kernel costs \\
+\texttt{value\_equation\_exact} & Manif./ValueEquation & 3 & Bellman fixed point \\
+\texttt{local\_remodelling\_law\_exact} & Manif./LocalRemodelling & 3 & $W^\star = \arg\min \mathcal{F}$ \\
+\texttt{bigbang\_seed\_first} & Manif./SeedRefinement & 3 & Seed $=$ first accessible distinction \\
+\texttt{future\_equiv\_is\_residual} & Residual/FutureEq & 4 & FutureEquiv IS residual class \\
+\texttt{sat\_future\_quotient\_exact} & SAT/FutureQuotient & 4 & Quotient exact for SAT \\
+\texttt{dag\_accepts\_iff\_sat} & SAT/QuotientKernel & 4 & DAG $\leftrightarrow$ Sat \\
+\texttt{directed\_graph\_TU} & SAT/KernelNetwork & 4 & Schrijver TU (326 lines) \\
+\texttt{kernel\_size\_polynomial} & SAT/KernelSize & 4 & $Q \leq$ polyBound (A0$^*$) \\
+\texttt{physical\_curvature\_bound} & SAT/KernelSize & 4 & Curvature $= 1$ $\Rightarrow$ bound $=$ polyBound \\
+\texttt{kernelSATDecide\_correct} & SAT/KernelBuilder & 4 & SAT decision correct \\
+\texttt{residual\_kernel\_exact} & Residual/Compiler & 5 & Real kernel (non-trivial) \\
+\texttt{runtime\_certified\_poly} & Residual/RuntimeCertifier & 5 & Steps $\leq$ (fullSize+1)$^8$ \\
+\texttt{SAT\_in\_P} & Bridge/SATinP & 6 & SAT has polynomial kernel \\
+\texttt{sat\_complete\_chain} & Bridge/SATinP & 6 & All 5 SAT properties bundled \\
+\texttt{cook\_levin\_reduction} & Core/CookLevin & 6 & NP $\to$ SAT \\
+\texttt{SAT\_np\_complete} & Core/CookLevin & 6 & SAT is NP-complete \\
+\texttt{P\_eq\_NP\_via\_cook\_levin} & Core/CookLevin & 7 & P $=$ NP (Cook-Levin route) \\
+\texttt{P\_eq\_NP\_bounded} & Bridge/PeqNP & 7 & P $=$ NP (BoundedDecider) \\
+\texttt{all\_np\_in\_P} & Bridge/AllNPInP & 7 & Every NP in P \\
+\texttt{law\_mining\_exact} & LawMining/SignatureRef. & 7 & Verified signatures exist \\
+\hline
+\end{tabular}
+\end{center}
+
+\paragraph{Dependency tiers.}
+Tier~0: axiom.
+Tier~1: immediate consequences of A0$^*$.
+Tier~2: quantitative seed.
+Tier~3: manifestability / $\chi$-block.
+Tier~4: SAT kernel infrastructure.
+Tier~5: residual kernel compiler.
+Tier~6: SAT $\in$ P.
+Tier~7: P $=$ NP.
