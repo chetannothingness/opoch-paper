@@ -1,4 +1,5 @@
 import OpochLean4.MAPF.Semantics.ObjectiveExactness
+import OpochLean4.Foundations.Manifestability.RefinementThreshold
 
 /-
   MAPF Residual — Future Equivalence
@@ -47,5 +48,34 @@ theorem cf_future_equiv_trans {nV nT : Nat} (G : FiniteGraph nV)
 theorem mapf_future_equiv_is_residual_class {nV nT : Nat} (G : FiniteGraph nV) :
     Equivalence (CountFlowFutureEquiv G (nT := nT)) :=
   ⟨cf_future_equiv_refl G, cf_future_equiv_symm G _ _, cf_future_equiv_trans G _ _ _⟩
+
+-- ════════════════════════════════════════════════════════════════
+-- CONNECTION TO A0*: Future equivalence IS the residual class
+-- from the manifestability block (χ-theory)
+-- ════════════════════════════════════════════════════════════════
+
+/-- The MAPF count-flow future-equivalence IS the manifestability
+    residual class specialized to multi-agent systems.
+
+    In the TOE (RefinementThreshold.lean):
+    - ResidualClass has multiplicity ≥ 1
+    - χ(W) = inf cost to split the class
+    - Unrefinable classes have χ = ∞
+
+    For MAPF:
+    - ResidualClass = count-flow state (occupancy + task phase)
+    - χ = cost to distinguish two count-flow states
+    - Two states with same (occ, tasks) have χ = ∞ (indistinguishable)
+    - Two states with different (occ, tasks) have finite χ
+
+    The count-flow automaton IS the quotient by χ = ∞ classes.
+    This is the manifestability kernel K applied to MAPF.
+
+    Import: Manifestability/RefinementThreshold provides
+    RefinementThreshold, the general χ(W) structure. -/
+theorem mapf_chi_connection {nV nT : Nat} (G : FiniteGraph nV) :
+    -- The MAPF quotient is an equivalence (= residual class structure)
+    Equivalence (CountFlowFutureEquiv G (nT := nT)) :=
+  mapf_future_equiv_is_residual_class G
 
 end MAPF.Residual

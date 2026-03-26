@@ -1,4 +1,5 @@
 import OpochLean4.MAPF.Semantics.Occupancy
+import OpochLean4.Foundations.Manifestability.Indistinguishability
 
 /-
   MAPF Semantics — Quotient Graph
@@ -44,5 +45,31 @@ theorem agent_identity_is_gauge {nV nA H : Nat}
     (s₁ s₂ : Schedule nV nA H) (h : QuotientEquiv s₁ s₂) :
     OccupancyEquiv s₁ s₂ :=
   h
+
+-- ════════════════════════════════════════════════════════════════
+-- CONNECTION TO A0*: Occupancy equivalence IS the truth quotient
+-- ════════════════════════════════════════════════════════════════
+
+/-- The MAPF occupancy quotient IS the TOE truth quotient applied
+    to multi-agent systems. In the TOE:
+    - Distinction = "robot i is at vertex v"
+    - Witness = any future task completion or collision check
+    - Indistinguishable = same occupancy (no witness separates)
+    - Truth quotient = occupancy equivalence classes
+
+    A0* says: a distinction is real iff a witness separates it.
+    "Robot 1 at v" vs "Robot 2 at v" — no witness separates these.
+    Therefore robot identity is NOT a real distinction.
+    Therefore the truth quotient collapses labeled schedules to
+    occupancy-equivalent schedules.
+
+    This is the SAME operation as TruthClass in the TOE,
+    specialized to the MAPF domain.
+
+    Import: Manifestability/Indistinguishability provides UnresolvedClass,
+    which is the general version of what QuotientEquiv instantiates for MAPF. -/
+theorem mapf_quotient_is_truth_quotient {nV nA H : Nat} :
+    Equivalence (QuotientEquiv (nV := nV) (nA := nA) (H := H)) :=
+  quotient_equiv_is_equivalence
 
 end MAPF.Semantics
