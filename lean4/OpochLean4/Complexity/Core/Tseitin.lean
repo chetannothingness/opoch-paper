@@ -30,10 +30,10 @@ def orClauses (aux left right : Nat) : List Clause :=
    [negLit left, posLit aux], [negLit right, posLit aux]]
 
 -- Evaluation helpers
-private def eLit (l : Literal) (σ : Nat → Bool) : Bool :=
+def eLit (l : Literal) (σ : Nat → Bool) : Bool :=
   if l.pos then σ l.var else !σ l.var
 
-private def eC (c : Clause) (σ : Nat → Bool) : Bool :=
+def eC (c : Clause) (σ : Nat → Bool) : Bool :=
   c.any (eLit · σ)
 
 -- ════════════════════════════════════════════════════════════════
