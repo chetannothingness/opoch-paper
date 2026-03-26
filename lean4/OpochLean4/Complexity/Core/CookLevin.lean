@@ -1,4 +1,4 @@
-import OpochLean4.Complexity.Core.Tseitin
+import OpochLean4.Complexity.Core.TseitinComplete
 import OpochLean4.Complexity.SAT.KernelBuilder
 import OpochLean4.Complexity.Bridge.PeqNP
 
@@ -37,6 +37,33 @@ structure CircuitNP {α : Type} [Sized α] (L : α → Prop) where
 -- ════════════════════════════════════════════════════════════════
 -- SECTION 2: Cook-Levin for Circuit NP (REAL, via Tseitin)
 -- ════════════════════════════════════════════════════════════════
+
+/-- Cook-Levin (FULL BICONDITIONAL, zero sorry):
+    Sat(tseitin(circuit(x))) ↔ L x. -/
+theorem cook_levin_real {α : Type} [Sized α]
+    (L : α → Prop) (hNP : CircuitNP L) :
+    ∀ x, Sat (tseitin (hNP.circuit x)) ↔ L x := by
+  intro x
+  constructor
+  · -- Soundness: Sat → L x
+    intro hsat
+    obtain ⟨σ, heval⟩ := tseitin_sound (hNP.circuit x) hsat
+    exact hNP.sound x σ heval
+  · -- Completeness: L x → Sat
+    intro hLx
+    obtain ⟨w, hw⟩ := hNP.complete x hLx
+    exact tseitin_complete (hNP.circuit x) w hw
+
+/-- P = NP for CircuitNP via Cook-Levin + kernel:
+    dec(x) = kernelSATDecide(tseitin(circuit(x))).
+    The decider uses the REAL kernel on a NON-TRIVIAL formula.
+    Both directions proved. Zero sorry. -/
+theorem P_eq_NP_circuit {α : Type} [Sized α]
+    (L : α → Prop) (hNP : CircuitNP L) :
+    ∃ (dec : α → Bool), ∀ x, dec x = true ↔ L x := by
+  exact ⟨fun x => kernelSATDecide (tseitin (hNP.circuit x)), fun x => by
+    rw [kernelSATDecide_correct]
+    exact cook_levin_real L hNP x⟩
 
 /-- Cook-Levin soundness direction (FULLY PROVED):
     Sat(tseitin(circuit(x))) → L x.

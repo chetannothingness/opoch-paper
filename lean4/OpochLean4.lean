@@ -96,6 +96,9 @@ import OpochLean4.Complexity.Core.NP
 import OpochLean4.Complexity.Core.Reductions
 import OpochLean4.Complexity.Core.NPComplete
 import OpochLean4.Complexity.Core.SAT
+import OpochLean4.Complexity.Core.BoolCircuit
+import OpochLean4.Complexity.Core.Tseitin
+import OpochLean4.Complexity.Core.TseitinComplete
 import OpochLean4.Complexity.Core.CookLevin
 -- Complexity Residual (χ-geometry)
 import OpochLean4.Complexity.Residual.Verifier
