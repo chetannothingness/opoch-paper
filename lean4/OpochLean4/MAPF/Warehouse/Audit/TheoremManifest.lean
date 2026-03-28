@@ -102,9 +102,9 @@ theorem warehouse_bau_operational_realization (nV_base nA nT : Nat)
       warehouseValue σ (b + 1) =
         warehouseObjectiveGain σ (warehouseWaitAction σ) +
         warehouseValue (applyWarehouseAction σ (warehouseWaitAction σ)) b) ∧
-    -- Runtime operator is exact (definitional)
+    -- Move sub-step is exact (definitional)
     (∀ σ : WarehouseBAUState nV_base nT,
-      warehouseRuntimeStep σ = applyWarehouseAction σ (warehouseWaitAction σ)) :=
+      warehouseRuntimeStepMove σ = applyWarehouseAction σ (warehouseWaitAction σ)) :=
   ⟨warehouse_bau_kernel_finite nV_base nA nT hA hT,
    fun _ _ => rfl,
    fun _ => rfl⟩
