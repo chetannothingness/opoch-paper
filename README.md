@@ -1,4 +1,4 @@
-# Opoch: A Complete Theory of Everything Derived from Nothingness
+# Opoch: Strutural Reality Derived from Nothingness
 
 Starting from absolute nothingness — the state with no committed distinctions, no external labels, no external clock, no external verifier — this paper derives the complete structure of physical reality as machine-verified theorems. Quantum mechanics, general relativity, gauge theory, thermodynamics, 3+1 spacetime, the Standard Model gauge group SU(3)×SU(2)×U(1), the Born rule, the cosmological constant, charge quantization, and consciousness all emerge from a single self-applied principle: a distinction is real if and only if it can witness itself finitely from within reality. The operating principle A0\* (Completed Witnessability) is not an axiom — it is the first theorem, derived from nothingness via five necessity lemmas. Every claim is a Lean 4 theorem compiled against Mathlib with zero sorry and zero empirical inputs.
 
