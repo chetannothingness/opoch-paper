@@ -161,7 +161,7 @@ theorem stepComplete_no_regression {nV_base nT : Nat}
     (stepComplete s targets).taskPhases t = s.taskPhases t := by
   simp [stepComplete]
   split <;> simp_all
-  split <;> simp_all
+  exact (Decidable.em (s.occ (targets t) = 0)).elim Or.inr Or.inl
 
 /-- Reveal only changes Completed → Free (new task replaces old).
     No other phase is affected. -/

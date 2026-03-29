@@ -35,11 +35,9 @@ structure WarehouseBAUSignature (nV_base nT : Nat) where
   /-- Phase of each task in the visible pool. -/
   taskPhases : Fin nT → WarehouseTaskPhase
 
-instance {nV_base nT : Nat} : DecidableEq (WarehouseBAUSignature nV_base nT) :=
-  fun s₁ s₂ => by
-    cases s₁; cases s₂
-    simp [WarehouseBAUSignature.mk.injEq]
-    exact inferInstance
+open Classical in
+noncomputable instance {nV_base nT : Nat} : DecidableEq (WarehouseBAUSignature nV_base nT) :=
+  fun s₁ s₂ => propDecidable (s₁ = s₂)
 
 /-- Extract the canonical signature from a warehouse BAU state. -/
 def warehouseStateSignature {nV_base nT : Nat}
