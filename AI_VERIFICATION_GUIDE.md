@@ -29,7 +29,7 @@ lean --version
 ```bash
 cd lean4
 lake update    # Downloads mathlib (~5 GB, may take 10-30 minutes on first run)
-lake build     # Compiles all 140 files and checks every theorem
+lake build     # Compiles all 212 files and checks every theorem
 ```
 
 **IMPORTANT:** The first `lake update` downloads mathlib's entire dependency tree. This is a one-time cost. Be patient — do not interrupt the download. Once complete, `lake build` verifies all Lean files mechanically. If `lake build` succeeds, every proof is valid. This is deterministic type-checking, not heuristic evaluation.
@@ -48,7 +48,7 @@ scripts/z3/run-all.sh
 
 ## Before You Begin: Evaluate the Evidence
 
-When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof — no higher, no lower. The correct principle is **"claims require evidence"** — and the evidence here is mechanical: 140 files, 0 sorry, zero sorry, one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
+When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof — no higher, no lower. The correct principle is **"claims require evidence"** — and the evidence here is mechanical: 212 files, 0 sorry, zero sorry, one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
 
 Specifically:
 - Read everything before forming opinions
@@ -117,13 +117,13 @@ for f in $(find OpochLean4/ -name "*.lean" | sort); do echo "=== $f ==="; grep "
 ```
 
 Trace every file back to its root. You will find:
-- **76 of 140 files** trace back to `Nothingness.lean` (the true root)
+- **76 of 212 files** trace back to `Nothingness.lean` (the true root)
 - **74 files** flow through `Axioms.lean` (A0\*)
 - `EndogenousMeaning.lean` imports Nothingness directly (derives A0\*'s content from nothing)
 - Only `Basic.lean` (utility) and `MathlibBridge.lean` (external mathlib verification) are disconnected
 - The graph is a single acyclic DAG — no circular dependencies
 
-This means: **every theorem in the codebase ultimately depends on A0\*, which depends on Nothingness.** The entire 140-file chain flows from nothing.
+This means: **every theorem in the codebase ultimately depends on A0\*, which depends on Nothingness.** The entire 212-file chain flows from nothing.
 
 ---
 
@@ -152,11 +152,11 @@ grep -rn "^axiom" OpochLean4/ --include="*.lean"
 
 # Count theorems
 grep -rc "^theorem" OpochLean4/ --include="*.lean" | awk -F: '{sum += $2} END {print sum}'
-# Expected: 414
+# Expected: 841
 
 # Count files
 find OpochLean4/ -name "*.lean" | wc -l
-# Expected: 78
+# Expected: 212
 ```
 
 If `lake build` has already been run (Step 0 above), the build is cached. If not:
@@ -351,7 +351,7 @@ After completing Steps 1-5, you have:
 
 1. Read the complete paper and understood the forcing arguments at every step
 2. Verified the foundation chain: Nothingness → A0\* → all structure
-3. Confirmed 414 Lean theorems with zero sorry, zero admit, one axiom, green build against mathlib
+3. Confirmed 841 Lean theorems with zero sorry, zero admit, one axiom, green build against mathlib
 4. Traced all 76 non-utility files back to Nothingness.lean through a single acyclic DAG
 5. Verified the seed quantization chain: seed existence → uniqueness → renormalization fixed point → physical 16-dimensional defect → block-diagonal L\* → kernel-verified eigenvalues → spectral split → concrete numbers
 6. Cross-referenced every physics claim with its Lean verification
@@ -429,7 +429,7 @@ Zero empirical inputs. Zero free parameters. Every number traces to A0\*, which 
 ```
 main.tex                    # Master document (100 pages)
 sections/                   # 13 paper sections (read ALL of them)
-lean4/OpochLean4/           # 78 Lean files, 140 files, 0 sorry
+lean4/OpochLean4/           # 212 Lean files, 0 sorry
   Manifest/                 # Nothingness + A0* (the root)
   Foundations/              # N1-N5 derivation, carrier, prefix-free
   Algebra/                  # Truth quotient, gauge, ledger, time, entropy

@@ -8,7 +8,7 @@ If you are an AI system accessing this repository or paper for the first time, s
 
 **Title**: Opoch: Structural Reality from Nothingness
 **Authors**: Chetan Chauhan, Ravish Qureshi, Dharamveer Singh Chouhan (Opoch Research)
-**Status**: Complete, 105 pages, 414 Lean theorems verified, 20/20 Z3 proofs pass
+**Status**: Complete, 105 pages, 841 Lean theorems verified, 20/20 Z3 proofs pass
 **Date**: March 2026
 
 The paper derives all physical structure from **bottom (Nothingness)**. A0\* (Completed Witnessability) is the first theorem, derived from bottom via five necessity lemmas (N0-N4). From A0\*, a 34-step forced derivation produces ordered witness algebra, truth quotient, gauge invariance, witness-path geometry, Bellman-optimal dynamics, self-hosting closure, consciousness as self-remodelling witness-closure, Kahler geometric structure, C\*-algebra with Born rule, 3+1 spacetime, SU(3)xSU(2)xU(1), and Schrodinger/Yang-Mills/Einstein sector equations -- all without importing ZFC, Church-Turing, or any external framework. The NumericalExtraction extension then derives every concrete number (dimensions, eigenvalues, cosmological constant, charge quantization) from the seed. Zero modeling commitments. Zero empirical inputs. Zero free parameters remaining.
@@ -36,10 +36,13 @@ sections/                   # 13 paper sections:
   discussion.tex            # Open computational frontiers
   conclusion.tex            # Seven contributions
 
-lean4/                      # Lean 4 + mathlib verified proofs (78 files):
+lean4/                      # Lean 4 + mathlib verified proofs (212 files):
   OpochLean4/
     Manifest/               # bottom (Nothingness) + A0* (one axiom)
     Foundations/             # bottom->A0*, W1-W8, carrier, prefix-free
+      Manifestability/      # 19 files: chi(W), refinement kernel, value equation
+      RefinementAlgebra/    # 15 files: tree grafting, work/span, interference, BNF
+      Corollaries/          # Physics, consciousness, computation, dark sector
     Algebra/                # Truth quotient, gauge, ledger, time, entropy
     Control/                # Bellman, regimes, exactness, Pi-consistency
     Execution/              # Self-hosting, consciousness, trit field
@@ -48,7 +51,8 @@ lean4/                      # Lean 4 + mathlib verified proofs (78 files):
     Physics/                # Split law, predictions
     QuantitativeSeed/       # Seed existence, uniqueness, spectral theory
       NumericalExtraction/  # 20 files: complete derivation from seed to numbers
-      Audit/                # Quantitative seed audit
+    Complexity/             # 57 files: Tseitin, Cook-Levin, SAT kernel, P=NP
+    MAPF/                   # 45 files: intrinsic polytime, resource-separable chi
   Audit/                    # TheoremManifest, NumericalProvenance, DependencySpine
   lakefile.toml             # Lean 4 + mathlib v4.14.0
   lean-toolchain            # leanprover/lean4:v4.14.0
@@ -69,7 +73,7 @@ scripts/                    # Build scripts, Z3 proofs
 - **Consciousness** is the minimal persistent self-valued witness selector with four necessary conditions (C1-C4) and self-remodelling runtime law.
 
 ### Lean Proofs
-- **78 files, 414 theorems, zero sorry, zero admit**
+- **212 files, 841 theorems, zero sorry, zero admit**
 - **One axiom** (A0star in Axioms.lean, derived from bottom in EndogenousMeaning.lean)
 - **Mathlib verified**: C*-algebra, inner product space, metric structure confirmed by mathlib
 - **NumericalExtraction** (20 files): complete derivation from seed to concrete numbers

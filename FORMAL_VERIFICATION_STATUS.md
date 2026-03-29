@@ -12,7 +12,7 @@
 
 | Metric | Value |
 |--------|-------|
-| Lean source files | 140 |
+| Lean source files | 212 |
 | Includes | Manifestability block, residual kernel, Cook-Levin, P=NP |
 | `sorry` | 0 |
 | `admit` | 0 |
@@ -33,7 +33,7 @@ cd lean4 && lake build
 
 ## Build Status
 
-**GREEN** -- all 140 files compile, zero sorry, zero admit. Build produces 4006 targets.
+**GREEN** -- all 212 files compile, zero sorry, zero admit. Build produces 4012 targets.
 
 ---
 

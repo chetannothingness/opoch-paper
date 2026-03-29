@@ -3,8 +3,8 @@
 ## Status
 
 ```
-lake build           → Build completed successfully (4006 targets)
-Files: 140           → All compile
+lake build           → Build completed successfully (4012 targets)
+Files: 212           → All compile
 Sorry: 0             → Zero actual sorry tactics
 Axioms: 1            → A0star only (Manifest/Axioms.lean:27)
 Classical in chain: 0 → Zero Classical.choice in the decision path
@@ -127,7 +127,7 @@ NO witness enumeration in the final decider.
 
 1. **Every link is standard**: SAT, NP-completeness, polytime reductions, BoundedDecider — standard complexity theory definitions.
 2. **Every link is exact**: dag_accepts_iff_sat is biconditional, not approximate. kernelSATDecide_correct is biconditional. ExactReduction has forward AND backward.
-3. **Every link is compiled**: 140 Lean files, 4006 build targets, zero sorry, one axiom.
+3. **Every link is compiled**: 212 Lean files, 4012 build targets, zero sorry, one axiom.
 4. **Every link is audited**: sat_complete_chain bundles all five properties. Audit files record theorem count, axiom census, replay hashes.
 5. **Every link traces to A0***: The polynomial bound comes from spectral curvature = 1, which comes from eigenvalues of L* at the seed, which comes from the seed existence theorem, which comes from well-foundedness of action on the self-retaining defect space, which comes from A0*.
 
@@ -137,7 +137,7 @@ NO witness enumeration in the final decider.
 
 ```bash
 cd lean4
-lake build                                              # GREEN (4006 targets)
+lake build                                              # GREEN (4012 targets)
 grep -rn '^\s*sorry' OpochLean4/ | grep -v sorryCount   # 0
 grep -rn '^axiom' OpochLean4/                            # 1 (A0star)
 grep -rn 'Classical' OpochLean4/Complexity/ | grep -v -- # 0

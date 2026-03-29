@@ -51,7 +51,39 @@ Tier~0: axiom.
 Tier~1: immediate consequences of A0$^*$.
 Tier~2: quantitative seed.
 Tier~3: manifestability / $\chi$-block.
+Tier~3a: refinement algebra (sequential, parallel, coarse-graining, energy, binary).
+Tier~3b: A0$^*$ root bridge.
 Tier~4: SAT kernel infrastructure.
 Tier~5: residual kernel compiler.
 Tier~6: SAT $\in$ P.
 Tier~7: P $=$ NP.
+Tier~8: MAPF (resource-separable $\chi$, intrinsic polytime).
+
+\paragraph{Refinement algebra theorems (Tier 3a).}
+\begin{center}
+\small
+\begin{tabular}{@{}llcp{4.5cm}@{}}
+\hline
+\texttt{sequential\_action\_additivity} & Manif./SequentialComp & 3a & $A(e_2 \circ e_1) = A(e_1) + A(e_2)$ \\
+\texttt{parallel\_action\_additive} & Manif./ParallelComp & 3a & $A(e_1 \otimes e_2) = A(e_1) + A(e_2)$ \\
+\texttt{parallel\_sequential\_interchange} & Manif./ParallelComp & 3a & Interchange law \\
+\texttt{coarsening\_increases\_entropy} & Manif./CoarseGraining & 3a & Merging increases entropy \\
+\texttt{latent\_energy\_nonneg} & Manif./LatentEnergy & 3a & $U_{\mathrm{lat}} \geq 0$ \\
+\texttt{conservation\_inequality} & Manif./LatentEnergyCons & 3a & $U_{\mathrm{lat}} + U_{\mathrm{exp}}$ non-increasing \\
+\texttt{binary\_normal\_form\_exists} & Manif./BinaryNormalForm & 3a & Every history has normal form \\
+\texttt{reality\_compiler\_exists} & Manif./BinaryNormalForm & 3a & Deterministic binary compiler \\
+\texttt{sequential\_action\_additivity\_tree} & RefAlg/SequentialComp & 3a & Tree-grafting action additive \\
+\texttt{work\_span\_duality} & RefAlg/WorkSpan & 3a & $\mathrm{span} \leq \mathrm{work} \leq 2 \cdot \mathrm{span}$ \\
+\texttt{entropy\_increases\_under\_coarsening} & RefAlg/CoarseGrainingAdj & 3a & $S(W_1 \cup W_2) \geq S(W_1)+S(W_2)$ \\
+\texttt{interference\_antisymmetric} & RefAlg/Interference & 3a & Braiding defect antisymmetric \\
+\texttt{total\_energy\_conservation} & RefAlg/LatentEnergyCons & 3a & $U_{\mathrm{total}}$ non-increasing \\
+\texttt{history\_value\_equation\_exact} & RefAlg/HistoryValueEq & 3a & Bellman on refinement trees \\
+\texttt{refinement\_algebra\_theorem} & RefAlg/RefinementAlgebra & 3a & All 10 properties bundled \\
+\texttt{A0\_forces\_indistinguishability} & Manif./RootBridge & 3b & A0$^*$ $\to$ indist \\
+\texttt{A0\_forces\_refinement\_threshold} & Manif./RootBridge & 3b & A0$^*$ $\to$ $\chi$ \\
+\texttt{A0\_forces\_refinement\_kernel} & Manif./RootBridge & 3b & A0$^*$ $\to$ $\mathcal{K}$ \\
+\texttt{mapf\_intrinsic\_polytime} & MAPF/IntrinsicPolytime & 8 & MAPF native polynomial \\
+\texttt{mapf\_chi\_resource\_separable} & MAPF/ResourceSeparableChi & 8 & $\chi$ decomposes \\
+\hline
+\end{tabular}
+\end{center}

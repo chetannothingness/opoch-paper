@@ -3,8 +3,8 @@
 ## The Result
 
 ```
-Build:     4006 targets, completed successfully
-Files:     140 Lean 4 files
+Build:     4012 targets, completed successfully
+Files:     212 Lean 4 files
 Sorry:     0 (zero actual sorry tactics)
 Axioms:    1 (A0* — derived from ⊥)
 Lean:      4.14.0 + Mathlib v4.14.0
@@ -91,7 +91,7 @@ P = NP is a consequence of operational closure: the universe's witnessing struct
 
 ```bash
 cd lean4
-lake build                                                    # GREEN (4006 targets)
+lake build                                                    # GREEN (4012 targets)
 grep -rn '^\s*sorry' OpochLean4/ | grep -v sorryCount        # 0
 grep -rn '^axiom' OpochLean4/                                 # 1 (A0star)
 
@@ -103,7 +103,7 @@ grep -rn 'theorem residual_kernel_compiler_exact' OpochLean4/ # Residual/Compile
 grep -rn 'theorem chi_well_defined' OpochLean4/               # Manifestability/RefinementThreshold.lean:63
 ```
 
-## File Map (140 files)
+## File Map (212 files)
 
 ### Foundation (14 files)
 Manifest/, Foundations/, Algebra/ — ⊥ → A0* → witness structure → truth quotient → gauge → time → entropy

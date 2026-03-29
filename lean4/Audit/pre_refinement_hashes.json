@@ -1,0 +1,37 @@
+{
+  "baseline": "pre-refinement-algebra freeze",
+  "date": "2026-03-28",
+  "file_count": 188,
+  "sorry_count": 0,
+  "axiom_count": 1,
+  "sole_axiom": "A0star",
+  "build_status": "GREEN",
+  "flagship_theorems": {
+    "A0star": "Manifest/Axioms.lean:27",
+    "fixed_point_no_defect": "Foundations/EndogenousMeaning.lean",
+    "seed_unique_up_to_gauge": "QuantitativeSeed/SeedExistence.lean",
+    "P_eq_NP": "Complexity/Bridge/PeqNP.lean:123",
+    "P_eq_NP_bounded": "Complexity/Bridge/PeqNP.lean:154",
+    "P_eq_NP_circuit": "Complexity/Core/CookLevin.lean",
+    "tseitin_sound": "Complexity/Core/Tseitin.lean",
+    "tseitin_complete": "Complexity/Core/TseitinComplete.lean",
+    "chi_well_defined": "Foundations/Manifestability/RefinementThreshold.lean",
+    "SAT_in_P": "Complexity/Bridge/SATinP.lean",
+    "finite_mapf_exact_polytime": "MAPF/Optimization/PolytimeOptimization.lean"
+  },
+  "post_refinement_algebra": {
+    "new_files": 9,
+    "new_theorems": [
+      "sequential_action_additivity",
+      "parallel_action_additive",
+      "coarsening_increases_entropy_left",
+      "latent_energy_nonneg",
+      "conservation_inequality",
+      "binary_normal_form_exists",
+      "A0_forces_indistinguishability",
+      "A0_forces_refinement_threshold",
+      "A0_forces_refinement_kernel",
+      "reality_compiler_exists"
+    ]
+  }
+}

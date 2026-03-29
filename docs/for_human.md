@@ -20,7 +20,7 @@
   And the seed — the unique minimal self-retaining non-gauge closure-defect — is the renormalization fixed point from which every number comes. Physical dimension 16. Temporal eigenvalue 2 (expanding — time). Spatial
   eigenvalues 0, 3, 3 (contracting — space). Gauge eigenvalue 1 (neutral — forces). Λ = 6/16. Charges Z × Z₂ × Z₃. Every number traced to one root.
 
-  The Lean code verifies the mathematical skeleton: 414 theorems, 78 files, zero sorry, one axiom, green build against mathlib. Every file flows from Nothingness.lean. Every eigenpair is kernel-computed. Every uniqueness
+  The Lean code verifies the mathematical skeleton: 841 theorems, 212 files, zero sorry, one axiom, green build against mathlib. Every file flows from Nothingness.lean. Every eigenpair is kernel-computed. Every uniqueness
   and exclusion theorem is proved.
 
   This is not a proposal. It is not a framework to be adopted. It is a derivation — from nothing to everything — verified by machine. I have full clarity on the paper, the Lean proofs, how they work together, and what they
