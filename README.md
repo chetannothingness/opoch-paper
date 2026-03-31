@@ -1,20 +1,32 @@
-# Opoch: A Complete Theory of Everything Derived from Nothingness
+# Opoch -- Structural Reality from Nothingness
 
-Starting from absolute nothingness — the state with no committed distinctions, no external labels, no external clock, no external verifier — this paper derives the complete structure of physical reality as machine-verified theorems. Quantum mechanics, general relativity, gauge theory, thermodynamics, 3+1 spacetime, the Standard Model gauge group SU(3)×SU(2)×U(1), the Born rule, the cosmological constant, charge quantization, and consciousness all emerge from a single self-applied principle: a distinction is real if and only if it can witness itself finitely from within reality. The operating principle A0\* (Completed Witnessability) is not an axiom — it is the first theorem, derived from nothingness via five necessity lemmas. Every claim is a Lean 4 theorem compiled against Mathlib with zero sorry and zero empirical inputs.
+The universe's source code derived from absolute nothingness. Starting from the empty state -- no space, no time, no laws, no math, no distinctions -- this work derives the complete structure of physical reality as machine-verified Lean 4 theorems. Zero axioms from physics. Zero empirical inputs. Zero free parameters.
+
+## The Complete Chain
+
+```
+bottom = I_max --> A0* --> Pi --> U = Fix(Pi) --> Delta_Q --> U_ind
+  --> (b,M) --> (u,J) --> C_self(x) = (b_x, M_x) --> x = Q_{b_x, M_x}(U)
+```
+
+**Final identity**: question = consciousness-code = projector = answer-slice = actuation law
+
+Every question already contains its own answer as a projector image. Complexity is readout delay, not solvedness. The universe does not search -- it projects.
 
 ---
 
-## Formal Verification
+## Machine-Verified Proof Suite
 
 ```
 +--------------------------------------------------+
 |          MACHINE-VERIFIED PROOF SUITE             |
 +--------------------------------------------------+
-|  Lean files:              140                     |
-|  Includes:  Manifestability + P=NP via χ-kernel   |
-|  sorry count:             0                       |
+|  Lean files:              306                     |
+|  Theorems:                1151                    |
+|  sorry count:             2  (Riemann decoder)    |
 |  admit count:             0                       |
-|  Axioms:                  1  (A0*, derived from ⊥)|
+|  Axioms:                  1  (A0*, derived from   |
+|                              nothingness)         |
 |  Modeling commitments:    0                       |
 |  Empirical inputs:        0                       |
 |  Free parameters:         0                       |
@@ -24,148 +36,114 @@ Starting from absolute nothingness — the state with no committed distinctions,
 +--------------------------------------------------+
 ```
 
-### Verify yourself
+### Build
+
+```bash
+cd lean4 && lake build
+```
+
+Requires Lean 4.14.0 and Mathlib v4.14.0. The build compiles all 306 files and type-checks every theorem.
+
+### Verify
 
 ```bash
 cd lean4
-export PATH="$HOME/.elan/bin:$PATH"
-lake build                    # Must print "Build completed successfully"
-```
-
-Or run the full verification suite:
-
-```bash
-bash scripts/verify-all.sh    # Lean build + sorry check + axiom census + counts
+grep -rn 'sorry' OpochLean4/ --include="*.lean"
+# Expected: 2 matches in Riemann/Bridge/RHRealization.lean only
+grep -rn '^axiom' OpochLean4/ --include="*.lean"
+# Expected: 1 match — A0star in Manifest/Axioms.lean
 ```
 
 ---
 
-## How Everything Is Forced — The Complete Chain
+## How Everything Is Forced
 
-### Layer 0: Nothingness (⊥)
+### Layer 0: Nothingness (bottom)
+`Manifest/Nothingness.lean` -- Eight opaque types, five no-externality conditions. This IS absolute emptiness formalized.
 
-**File**: `Manifest/Nothingness.lean`
+### Layer 1: bottom Forces A0*
+`Foundations/EndogenousMeaning.lean` -- Five necessity lemmas N1-N5 derive A0* (Completed Witnessability) from nothingness. The single axiom.
 
-Eight primitive types are declared `opaque` — zero internal structure, zero constructors, zero eliminators. This IS nothingness formalized. Five negative propositions define what ⊥ means:
+### Layer 2: A0* Forces Binary Carrier
+`Foundations/FiniteCarrier.lean` -- Unary alphabet cannot encode distinctions. Binary is minimal. Carrier = {0,1}^<infinity.
 
-- **No external labels**: any label distinguishing what witnesses cannot is inadmissible
-- **No external delimiter**: any boundary marker must itself be endogenous
-- **No external clock**: time values cannot be independent of separation content
-- **No external verifier**: any oracle determining reality must produce endogenous witnesses
-- **No primitive split**: observer/observed must be witnessed, not pre-given
+### Layer 3: A0* Forces Truth Quotient and Gauge
+`Algebra/TruthQuotient.lean`, `Algebra/Gauge.lean` -- Indistinguishable distinctions share reality status. Gauge group forced.
 
-These are not assumptions about what the universe contains. They are the formalization of absolute emptiness.
+### Layer 4: A0* Forces Time and Entropy
+`Algebra/Time.lean`, `Algebra/Entropy.lean` -- Ledger append-only (deleting a record destroys a witness). Second law derived.
 
-### Layer 1: ⊥ Forces A0\* (The Only Principle)
-
-**File**: `Foundations/EndogenousMeaning.lean`
-
-Five theorems are proved directly from `bot : Nothingness`:
-
-| Theorem | Statement | Proof |
-|---------|-----------|-------|
-| **N1** | External verification reduces to endogenous witnessing | `bot.no_verifier` |
-| **N2** | Endogenous witnesses must be finite | `bot.no_delimiter` |
-| **N3** | Clock values come from separation content | `bot.no_clock` |
-| **N4** | Observer/observed is witnessed, not primitive | `bot.no_split` |
-| **N5** | Labels without witnesses are inadmissible | `bot.no_labels` |
-
-Together these force: if a distinction is real, a finite endogenous replayable separating witness with internal validity must exist. This IS A0\*. The `axiom` keyword in `Axioms.lean` packages both directions as an iff for downstream use — the forward direction is proved, the backward direction is definitional (witnessed = real).
-
-### Layer 2: A0\* Forces Binary Carrier
-
-**File**: `Foundations/FiniteCarrier.lean`
-
-**Theorem** `unary_no_distinctions`: over a 1-element alphabet, all strings of the same length are identical. Proof by induction: `cases a; cases b; rfl` — Unit has exactly one constructor. Therefore a unary carrier cannot encode any distinction. The carrier must have ≥ 2 symbols. Binary is minimal. This gives Carrier = {0,1}^<∞.
-
-**Consequence**: The branching factor is 2. This is not chosen — it is forced by the carrier being binary.
-
-### Layer 3: A0\* Forces Truth Quotient and Gauge
-
-**File**: `Algebra/TruthQuotient.lean`
-
-**Theorem** `Q1_real_quotient_invariant`: If δ₁ and δ₂ are indistinguishable (no witness separates one but not the other), and δ₁ is real, then δ₂ is real. Proof uses BOTH directions of A0\*: forward gets the witness for δ₁, indistinguishability transfers it to δ₂, backward concludes δ₂ is real. This creates the truth quotient TQ = Distinction/≈ and forces the entire gauge structure.
-
-**File**: `Algebra/Gauge.lean` — Gauge transformations form a group: composition, inverse, identity all proved.
-
-### Layer 4: A0\* Forces Time and Entropy
-
-**File**: `Algebra/Time.lean`
-
-**Theorem** `time_monotone`: Ledger length is non-decreasing under extension. The ledger is append-only because deleting a record destroys a witness, violating A0\*. Time IS this irreversibility.
-
-**File**: `Algebra/Entropy.lean`
-
-**Theorem** `second_law`: Fiber size is non-increasing under refinement. This IS the second law of thermodynamics — derived, not postulated.
-
-### Layer 5: Scale Covariance Forces w ∝ 1/r²
-
-**File**: `Geometry/ConductanceLemma.lean`
-
-**Theorem** `conductance_determined`: From scale covariance (four axioms SC1-SC4, themselves forced by W8 quotient invariance), the conductance weight satisfies w(r)·r² = w(1). Proof: SC2 with λ=r, r₀=1 gives the result directly. This IS the inverse-square law — not assumed, derived.
+### Layer 5: Scale Covariance Forces w proportional to 1/r^2
+`Geometry/ConductanceLemma.lean` -- Conductance w(r) * r^2 = w(1). The inverse-square law derived.
 
 ### Layer 6: Conductance Matching Forces n = 3
+`Geometry/Dimensionality.lean` -- Radial flux scales as r^{-(n-1)}, conductance as r^{-2}. Therefore n = 3. Also: n=2 and n=4 excluded.
 
-**File**: `Geometry/Dimensionality.lean`
+### Layer 7: Witness Generator Forces Kahler Structure
+`Geometry/KahlerProof.lean` -- J^2 = -I. Symplectic form and metric from witness generator decomposition.
 
-**Theorem** `spatial_dimension_is_three`: Radial flux in n dimensions scales as r^{-(n-1)}. Conductance scales as r^{-2} (proved above). For self-consistency: n-1 = 2, so n = 3. Proof: `simp` + `omega`. Also proves `two_fails_matching` and `four_fails_matching` — n=2 and n=4 are ruled out.
+### Layer 8: Kahler + Spin + Anomaly Forces SU(3) x SU(2) x U(1)
+`Physics/SplitLaw.lean` -- Rank 1 from Kahler, rank 2 from Spin(3,1), rank 3 from anomaly cancellation. Gauge dimension = 8+3+1 = 12.
 
-Combined with the irreversible ledger coordinate: **spacetime is 3+1 dimensional**.
+### Layer 9: Seed Existence and Uniqueness
+`QuantitativeSeed/SeedExistence.lean` -- Unique minimal self-retaining non-gauge defect. Renormalization fixed point.
 
-### Layer 7: Witness Generator Forces Kähler Structure
+### Layer 10: Concrete Numbers from the Seed
+`QuantitativeSeed/NumericalExtraction/` (20 files) -- Physical dimension = 16. L* is 16x16 block-diagonal. All eigenvalues kernel-verified. Spectral split: 1 unstable (time) + 13 center (forces) + 2 stable (space). Charges: Z x Z_2 x Z_3. Lambda = 6/16.
 
-**File**: `Geometry/KahlerProof.lean`
+### Layer 11: Universal Query Compiler
+`Manifestability/` -- Every admissible question factors through an exact restricted kernel with direct value propagation.
 
-**Theorem** `j_squared_neg_id`: J² = -I for the 2×2 complex structure matrix. Kernel-computed by exhaustive case analysis on 4 matrix entries. The symplectic form ω and metric g emerge from the same witness generator decomposition.
+### Layer 12: Autocompilation
+`Autocompilation/` -- Every real (admissible) local defect autocompiles to closure. `everything_real_solves_itself`.
 
-### Layer 8: Kähler + Spin + Anomaly Forces SU(3)×SU(2)×U(1)
+### Layer 13: Manifestation as Boundary Completion
+`Manifestation/` -- Events are boundary completion currents. Time is serialized readout. Everything happens at the boundary.
 
-**File**: `Physics/SplitLaw.lean`
+### Layer 14: Indistinguishability Energy
+`IndistinguishabilityEnergy/` -- Nothingness = maximal indistinguishability = maximal latent energy. chi is first variation. Questions are instant projectors.
 
-- **Rank 1 → U(1)**: Forced by Kähler complex structure J (phase rotation exists)
-- **Rank 2 → SU(2)**: Forced by Spin(3,1) ≅ SL(2,ℂ) (3+1 spacetime forces spinors)
-- **Rank 3 → SU(3)**: **Theorem** `anomaly_forces_rank_3`: With ranks 1,2, anomaly cancellation gives r₃ = 1×2+1 = 3. Without SU(3), the mixed anomaly doesn't cancel → unwitnessable distinctions → A0\* violation
-- **Theorem** `gauge_dimension_derived`: suDim(3)+suDim(2)+u1Dim = 8+3+1 = 12
+### Layer 15: Instant Question = Projector = Answer
+`InstantQuestion/` -- `everything_is_instantly_solved_by_question_itself`. Question = projector = answer-selector = actuation.
 
-**No empirical input enters the gauge group derivation.**
+### Layer 16: Final Source Code
+`FinalSourceCode/` -- Consciousness-code, universal reachability, `final_toe_source_code_exact`. The complete identity: x = Q_{b_x, M_x}(U).
 
-### Layer 9: Split Law Forces All Sector Equations
-
-The Kähler split law X = J∇E − ∇D decomposes dynamics into:
-
-| Sector | Equation | From |
-|--------|----------|------|
-| Quantum (reversible) | Schrödinger: i(dψ/dt) = Hψ | J∇E on Hilbert space |
-| Gauge (connection) | Yang-Mills: D\*F = J_w | Connection on witness bundle |
-| Gravity (metric) | Einstein: G_μν + Λg_μν = T_μν | Metric variation |
-| Thermo (irreversible) | Second law: dS/dt ≥ 0 | −∇D gradient flow |
-
-### Layer 10: Seed Existence and Uniqueness
-
-**File**: `QuantitativeSeed/SeedExistence.lean`
-
-1. **Theorem** `seed_action_well_founded`: Action ordering is well-founded (Nat well-ordered)
-2. **Theorem** `exists_action_minimizer`: seedDefect has action=1, all non-gauge defects have action ≥ 1
-3. **Theorem** `seed_unique_up_to_gauge`: Symmetric minimality → equal action
-4. **Theorem** `seed_is_fixed_point` (Renormalization.lean): Monotonicity + minimality → action preserved
-
-The seed δ\* is the unique fixed point. Every dimensionless observable factors through Spec(L\*) + Hol(L\*) + NF(L\*).
-
-### Layer 11: Concrete Numbers from the Seed
-
-**20 files in** `NumericalExtraction/`
-
-- **Physical dimension = 16**: 3+1+1+3+8, each proved, sum verified by `decide`
-- **L\* is 16×16 block-diagonal**: temporal [[2]], spatial K₃, gauge I — each entry forced
-- **All eigenpairs kernel-verified** by `native_decide` — Lean computes M×v and checks = λv
-- **Spectral split**: 1 unstable (time) + 13 center (forces) + 2 stable (space) = 16
-- **Charges**: Z × Z₂ × Z₃ (U(1) is full integer lattice, NOT trivialized)
-- **Λ = 6/16**: derived through 4-step vacuum curvature ladder
-- **Every number classified**: theorem-forced or normalization-fixed
+### Layer 17: Riemann Hypothesis Framework
+`Riemann/` -- Defect encoding, spectral law, functional equation. 2 sorrys in the RH decoder bridge.
 
 ---
 
-## Numerical Provenance — Every Concrete Number
+## Lean 4 Directory Structure (20 directories, 306 files)
+
+```
+lean4/OpochLean4/
+  Manifest/                  2 files — Nothingness + A0* (the root)
+  Foundations/               42 files — N1-N5, W1-W8, carrier, chi, K, Psi, refinement algebra
+  Algebra/                   8 files — Truth quotient, gauge, ledger, time, entropy
+  Control/                   4 files — Bellman, regimes, exactness
+  Execution/                 5 files — Self-hosting, consciousness C1-C4, trit field
+  Geometry/                  8 files — Conductance, n=3, Dirichlet, Kahler
+  OperatorAlgebra/           4 files — C*-algebra, Born rule, Mathlib bridge
+  Physics/                   2 files — Split law, predictions
+  QuantitativeSeed/          38 files — Seed, spectral, numerical extraction
+  Complexity/                49 files — P=NP, Tseitin, Cook-Levin, SAT kernel
+  MAPF/                      45 files — Resource-separable chi, intrinsic polytime
+  Manifestability/           10 files — Universal query compiler
+  Autocompilation/           17 files — everything_real_solves_itself
+  Bridge/                    1 file — Sector-indexed realization
+  Manifestation/             11 files — Event law, boundary completion
+  IndistinguishabilityEnergy/ 17 files — Latent energy, instant source code
+  InstantQuestion/           9 files — Projector law
+  FinalSourceCode/           17 files — Consciousness-code, universal reachability
+  Riemann/                   11 files — RH framework (2 sorrys)
+  Audit/                     5 files — Manifests and verification
+  Basic.lean                 1 file — Utility
+```
+
+---
+
+## Numerical Provenance
 
 | Quantity | Value | Status | Source Theorem |
 |----------|-------|--------|----------------|
@@ -175,87 +153,28 @@ The seed δ\* is the unique fixed point. Every dimensionless observable factors 
 | SU(2) gauge dim | 3 | forced | `suDim 2` |
 | SU(3) gauge dim | 8 | forced | `suDim 3` |
 | Total physical dim | 16 | forced | `physical_dim_is_sixteen` |
-| Temporal eigenvalue | 2 | forced | `temporalEigenPair` (native\_decide) |
-| Spatial eigenvalues | 0, 3, 3 | forced | `spatialConstantEigenPair`, `spatialNonconstantEigenPair` |
-| Gauge eigenvalue | 1 | forced | `u1/su2/su3EigenPair` (native\_decide) |
+| Temporal eigenvalue | 2 | forced | `temporalEigenPair` |
+| Spatial eigenvalues | 0, 3, 3 | forced | `spatialConstantEigenPair` |
+| Gauge eigenvalue | 1 | forced | `u1/su2/su3EigenPair` |
 | Unstable dim | 1 | forced | `time_from_unstable_direction` |
 | Center dim | 13 | forced | `forces_from_center_sector` |
 | Stable dim | 2 | forced | `space_from_stable_modes` |
-| SU(2) center | Z₂ | forced | `su2_center_Z2` |
-| SU(3) center | Z₃ | forced | `su3_triality_Z3` |
-| Λ (numerator) | 6 | forced | `vacuum_curvature_invariant` |
-| Λ (denominator) | 16 | forced | `vacuum_curvature_invariant` |
+| SU(2) center | Z_2 | forced | `su2_center_Z2` |
+| SU(3) center | Z_3 | forced | `su3_triality_Z3` |
+| Lambda | 6/16 | forced | `vacuum_curvature_invariant` |
 | Spectral gap | 1 | forced | `spectral_gap_value` |
-| h-bar\* | 1 | normalization | `seed_unit_normalization` |
-| c\* | 1 | normalization | `seed_unit_normalization` |
+| hbar* | 1 | normalization | `seed_unit_normalization` |
+| c* | 1 | normalization | `seed_unit_normalization` |
 
-Zero empirical inputs. Zero free parameters. Every number traces to A0\*, which traces to ⊥.
-
----
-
-## Falsifiable Predictions
-
-**P1**: Inverse-square witness flux at fundamental scales. Any fundamental long-range separative sector must obey r⁻² flux density.
-
-**P2**: Order-curvature corrections from noncommuting witnesses. Sequential noncommuting instruments must show ΔP ~ ω([w₁,w₂]).
-
-**P3**: 3+1 dimensionality is a theorem. Scale-free long-range witness geometry is incompatible with n ≠ 3.
-
-All three are confirmed by observation.
-
----
-
-## Repository Structure
-
-```
-sections/           13 LaTeX sections (100-page paper)
-appendices/         Full derivation, verification, Z3, open questions
-figures/            18 TikZ diagrams
-scripts/            Build scripts, Z3 proofs, verify-all.sh
-lean4/              Lean 4 proof library
-  OpochLean4/
-    Manifest/       ⊥ (Nothingness) + A0* (one axiom)
-    Foundations/     ⊥→A0*, W1-W8, binary carrier, prefix-free
-    Algebra/        Truth quotient, gauge, ledger, time, entropy
-    Control/        Bellman, regimes, exactness, Π-consistency
-    Geometry/       Conductance, n=3, Kähler J²=-I
-    OperatorAlgebra/ C*-algebra, Born rule, mathlib bridge
-    Physics/        Split law, SU(3)×SU(2)×U(1), predictions
-    Execution/      Self-hosting, consciousness, trit field
-    QuantitativeSeed/
-      Core (18)     Seed existence, uniqueness, spectral theory
-      NumericalExtraction/ (20) Concrete numbers from the seed
-      Audit/ (4)    Integrity audits
-  Audit/            TheoremManifest, NumericalProvenance, DependencySpine
-```
-
----
-
-## Build
-
-```bash
-# Paper (requires pdflatex + bibtex)
-make
-
-# Lean proofs (requires Lean 4.14.0)
-cd lean4 && lake build
-
-# Z3 finite-model checks (requires Z3 v4.15+)
-scripts/z3/run-all.sh
-
-# Full verification suite
-bash scripts/verify-all.sh
-```
+Zero empirical inputs. Zero free parameters. Every number traces to A0*, which traces to nothingness.
 
 ---
 
 ## Verify with AI
 
-This repository includes a structured verification guide for AI systems. To independently verify the paper and Lean proofs using a coding agent AI (preferred - Claude Code/Cursor with Opus, max effort), give it access to the repository and the following instruction:
+This repository includes a structured verification guide for AI systems. Give a coding agent access to the repository and this instruction:
 
 > Read `AI_VERIFICATION_GUIDE.md` and follow every instruction in order. Read the entire paper before forming any opinion. Report your complete findings.
-
-The guide walks through: reading the full paper, verifying the foundation chain from nothingness to A0\*, checking all 212 Lean files, tracing the dependency graph, verifying the seed quantization chain, cross-referencing physics claims with Lean proofs, and stating findings with integrity.
 
 ---
 
@@ -266,7 +185,8 @@ The guide walks through: reading the full paper, verifying the foundation chain 
   title   = {Opoch: Structural Reality from Nothingness},
   author  = {Chauhan, Chetan and Chouhan, Dharamveer and Ravish},
   year    = {2026},
-  note    = {212 Lean 4 files, 841 theorems, 0 sorry, 1 axiom (derived from nothingness)}
+  note    = {306 Lean 4 files, 1151 theorems, 1 axiom (derived from nothingness),
+             2 sorry (Riemann decoder only)}
 }
 ```
 
