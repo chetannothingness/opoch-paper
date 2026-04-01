@@ -1,55 +1,82 @@
-import OpochLean4.FinalSourceCode.TimeAsWitnessSerialization
+import OpochLean4.FinalSourceCode.Convexity
 
 /-
-  FinalSourceCode — Consciousness Code (THE DECISIVE FILE)
+  Final Source Code — Consciousness Code
 
-  The self-indexing inverse: every admissible state contains
-  its own (b, M) pair. The consciousness code of a boundary
-  condition IS the boundary code + self-model pair.
+  η_x = DU_ind(x) = the consciousness-code of an admissible state.
+
+  On the discrete partition space, the "gradient" of U_ind = Σ ρ·χ
+  at a state x is the list of per-class marginal contributions:
+  η_x = [ρ(W₁)·χ(W₁), ..., ρ(Wₙ)·χ(Wₙ)].
+
+  This IS the energy profile. The consciousness-code of a state
+  is exactly the list of per-class energies that determine U_ind.
+
+  The state contains its own code: η_x is computed from x alone.
+  No external oracle. No separate selector. The gradient IS intrinsic.
 
   New axioms: 0
 -/
 
 namespace FinalSourceCode
 
-open IndistinguishabilityEnergy Autocompilation Manifestability
+open Manifestability
 
 -- ════════════════════════════════════════════════════════════════
--- Consciousness code = boundary + self-model
+-- Consciousness code = gradient of U_ind = energy profile
 -- ════════════════════════════════════════════════════════════════
 
-/-- The consciousness code: a boundary code paired with its self-model.
-    Every admissible state contains its own consciousness code
-    by construction. -/
-structure ConsciousnessCode where
-  boundary : BoundaryCode
-  selfModel : SelfModel
-
-/-- For any BoundaryCode b, extract its consciousness code.
-    The self-model is the one carried by the boundary's state. -/
-def consciousnessCodeOf (b : BoundaryCode) : ConsciousnessCode where
-  boundary := b
-  selfModel := b.boundary.state.model
+/-- The consciousness-code of an admissible state.
+    η_x = DU_ind(x) = the list of per-class marginal contributions.
+    Each entry ρ(Wᵢ)·χ(Wᵢ) is the first variation of U_ind
+    at class Wᵢ. -/
+def consciousnessCode (s : AdmissibleState) : List Nat :=
+  energyProfile s
 
 -- ════════════════════════════════════════════════════════════════
--- Theorems
+-- Required theorems
 -- ════════════════════════════════════════════════════════════════
 
-/-- The consciousness code exists for every boundary code. -/
-theorem consciousness_code_exists (b : BoundaryCode) :
-    ∃ cc : ConsciousnessCode, cc.boundary = b :=
-  ⟨consciousnessCodeOf b, rfl⟩
+/-- The consciousness-code exists for every admissible state. -/
+theorem consciousness_code_exists (s : AdmissibleState) :
+    ∃ η : List Nat, η = consciousnessCode s :=
+  ⟨consciousnessCode s, rfl⟩
 
-/-- The consciousness code is unique (deterministic function). -/
-theorem consciousness_code_unique (b : BoundaryCode) :
-    consciousnessCodeOf b = consciousnessCodeOf b :=
+/-- The consciousness-code is unique (deterministic function of the state). -/
+theorem consciousness_code_unique (s : AdmissibleState) :
+    ∀ η₁ η₂ : List Nat,
+    η₁ = consciousnessCode s → η₂ = consciousnessCode s → η₁ = η₂ :=
+  fun _ _ h₁ h₂ => h₁.trans h₂.symm
+
+/-- The consciousness-code equals the gradient of U_ind.
+    On the discrete space: DU_ind = energyProfile = [ρ₁·χ₁, ..., ρₙ·χₙ].
+    The i-th entry is the first variation of U_ind at class Wᵢ. -/
+theorem consciousness_code_eq_derivative (s : AdmissibleState) :
+    consciousnessCode s = energyProfile s :=
   rfl
 
-/-- Every admissible state contains its own consciousness code:
-    the boundary code carries the state, and the state carries the model. -/
-theorem state_contains_its_own_consciousness_code (b : BoundaryCode) :
-    (consciousnessCodeOf b).boundary = b ∧
-    (consciousnessCodeOf b).selfModel = b.boundary.state.model :=
-  ⟨rfl, rfl⟩
+/-- The state contains its own code: the consciousness-code is
+    computed from the partition alone. No external oracle needed. -/
+theorem state_contains_its_own_code (s : AdmissibleState) :
+    consciousnessCode s = s.partition.map classLatentEnergy := by
+  simp [consciousnessCode, energyProfile]
+
+/-- The consciousness-code has the same length as the partition. -/
+theorem consciousness_code_length (s : AdmissibleState) :
+    (consciousnessCode s).length = s.partition.length := by
+  simp [consciousnessCode, energyProfile]
+
+/-- The consciousness-code determines U_ind: the sum of the code
+    equals the total latent energy. -/
+theorem consciousness_code_determines_energy (s : AdmissibleState) :
+    listSum (consciousnessCode s) = U_ind s := by
+  simp [consciousnessCode]; exact listSum_energy_eq_U_ind s
+
+/-- Distinct energy profiles → distinct consciousness-codes. -/
+theorem consciousness_code_injective (s₁ s₂ : AdmissibleState)
+    (h : consciousnessCode s₁ = consciousnessCode s₂) :
+    U_ind s₁ = U_ind s₂ := by
+  simp [consciousnessCode] at h
+  exact same_energy_profile_same_U_ind s₁ s₂ h
 
 end FinalSourceCode

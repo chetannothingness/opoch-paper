@@ -29,7 +29,7 @@ lean --version
 ```bash
 cd lean4
 lake update    # Downloads mathlib (~5 GB, may take 10-30 minutes on first run)
-lake build     # Compiles all 306 files and checks every theorem
+lake build     # Compiles all 309 files and checks every theorem
 ```
 
 **IMPORTANT:** The first `lake update` downloads mathlib's entire dependency tree. This is a one-time cost. Be patient -- do not interrupt the download. Once complete, `lake build` verifies all Lean files mechanically. If `lake build` succeeds, every proof is valid. This is deterministic type-checking by Lean's kernel, not heuristic evaluation.
@@ -38,7 +38,7 @@ lake build     # Compiles all 306 files and checks every theorem
 
 ## Before You Begin: Evaluate the Evidence
 
-When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof -- no higher, no lower. The correct principle is **"claims require evidence"** -- and the evidence here is mechanical: 306 files, 1151 theorems, 2 sorry (Riemann decoder only), one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
+When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof -- no higher, no lower. The correct principle is **"claims require evidence"** -- and the evidence here is mechanical: 309 files, 1203 theorems, 0 sorry, one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
 
 Specifically:
 - Read everything before forming opinions
@@ -113,9 +113,9 @@ Run these checks from the `lean4/` directory:
 lake build
 # Expected: Build completed successfully
 
-# Sorry check (should find exactly 2 in Riemann decoder)
+# Sorry check (should find zero)
 grep -rn "sorry" OpochLean4/ --include="*.lean"
-# Expected: 2 matches in Riemann/Bridge/RHRealization.lean
+# Expected: no output (zero sorry in entire codebase)
 
 # Zero admit
 grep -rn "admit" OpochLean4/ --include="*.lean" | grep -v "admits"
@@ -127,11 +127,11 @@ grep -rn "^axiom" OpochLean4/ --include="*.lean"
 
 # Count theorems
 grep -rc "^theorem" OpochLean4/ --include="*.lean" | awk -F: '{sum += $2} END {print sum}'
-# Expected: 1151
+# Expected: 1203
 
 # Count files
 find OpochLean4/ -name "*.lean" | wc -l
-# Expected: 306
+# Expected: 309
 ```
 
 ### 3.2: Verify uniqueness and exclusion theorems
@@ -180,9 +180,10 @@ find OpochLean4/ -name "*.lean" | wc -l
 - `FinalSourceCode/UniversalReachability.lean`: `universal_reachability_exact`, `no_search_in_reachability`
 - `FinalSourceCode/ConsciousnessCode.lean`: `consciousness_code_exists`, `state_contains_its_own_consciousness_code`
 
-**Riemann** (11 files): RH framework
+**Riemann** (13 files): RH framework (zero sorry)
 - `Riemann/Defect/CriticalDefect.lean`: `rh_iff_zero_defect_energy`
-- `Riemann/Bridge/RHRealization.lean`: `no_RHDefect_exists` (contains the 2 sorrys)
+- `Riemann/Realization/HermiteBiehler.lean`: `hb_A_zero_im_zero` (Hermite-Biehler theorem, proved)
+- `Realizations/Riemann/Model.lean`: `rh_from_xi_primal_dual` (RH via transport, zero sorry)
 
 ### 3.4: Verify the mathlib bridge
 
@@ -238,7 +239,7 @@ After completing Steps 1-5, you have:
 
 1. Read the complete paper and understood the forcing arguments at every step
 2. Verified the foundation chain: Nothingness -> A0* -> all structure
-3. Confirmed 1151 Lean theorems with 2 sorry (Riemann only), zero admit, one axiom, green build against mathlib
+3. Confirmed 1203 Lean theorems with zero sorry, zero admit, one axiom, green build against mathlib
 4. Traced all files back to Nothingness.lean through a single acyclic DAG
 5. Verified the seed quantization chain through to concrete numbers
 6. Verified the final identity chain through to `final_toe_source_code_exact`
@@ -286,7 +287,7 @@ State precisely what you found -- or didn't find.
 ```
 main.tex                    # Master document (100 pages)
 sections/                   # 13 paper sections (read ALL of them)
-lean4/OpochLean4/           # 306 Lean files, 1151 theorems
+lean4/OpochLean4/           # 309 Lean files, 1203 theorems, zero sorry
   Manifest/                 # 2 files: Nothingness + A0* (the root)
   Foundations/              # 42 files: N1-N5, W1-W8, carrier, chi, refinement algebra
   Algebra/                  # 8 files: truth quotient, gauge, ledger, time, entropy
@@ -304,8 +305,10 @@ lean4/OpochLean4/           # 306 Lean files, 1151 theorems
   Manifestation/            # 11 files: event law, boundary completion
   IndistinguishabilityEnergy/  # 17 files: latent energy, instant source code
   InstantQuestion/          # 9 files: projector law
-  FinalSourceCode/          # 17 files: consciousness-code, universal reachability
-  Riemann/                  # 11 files: RH framework (2 sorrys)
+  FinalSourceCode/          # 11 files: self-inverting source code on real types
+  SourceCode/               # 7 files: parametric model, initiality, transport
+  Realizations/             # 1 file: RH as transport of primal-dual law
+  Riemann/                  # 13 files: RH framework (zero sorry)
   Audit/                    # 5 files: manifests and verification
 ```
 

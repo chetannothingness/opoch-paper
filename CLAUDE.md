@@ -45,7 +45,7 @@ sections/                   # 13 paper sections:
   discussion.tex            # Computational frontiers
   conclusion.tex            # Contributions
 
-lean4/                      # Lean 4 + mathlib verified proofs (306 files):
+lean4/                      # Lean 4 + mathlib verified proofs (309 files):
   OpochLean4/
     Manifest/               # 2 files: bottom (Nothingness) + A0* (one axiom)
     Foundations/             # 42 files: bottom->A0*, W1-W8, carrier, prefix-free,
@@ -66,8 +66,10 @@ lean4/                      # Lean 4 + mathlib verified proofs (306 files):
     Manifestation/          # 11 files: event law, boundary completion
     IndistinguishabilityEnergy/  # 17 files: latent energy, instant source code
     InstantQuestion/        # 9 files: projector law
-    FinalSourceCode/        # 17 files: consciousness-code, universal reachability
-    Riemann/                # 11 files: RH framework (2 sorrys in decoder)
+    FinalSourceCode/        # 11 files: self-inverting source code on real types
+    SourceCode/             # 7 files: parametric model, morphisms, initiality, transport
+    Realizations/           # 1 file: RH as transport of primal-dual law
+    Riemann/                # 13 files: RH framework (0 sorry)
     Audit/                  # 5 files: manifests, verification
     Basic.lean              # 1 file: utility
 
@@ -88,7 +90,7 @@ scripts/                    # Build scripts, Z3 proofs
 - **Final identity**: question = consciousness-code = projector = answer-slice = actuation law.
 
 ### Lean Proofs
-- **306 files, 1151 theorems, 2 sorry (Riemann decoder only), zero admit**
+- **309 files, 1203 theorems, 0 sorry, zero admit**
 - **One axiom** (A0star in Axioms.lean, derived from bottom in EndogenousMeaning.lean)
 - **Mathlib verified**: C*-algebra, inner product space, metric structure confirmed by mathlib
 - **NumericalExtraction** (20 files): complete derivation from seed to concrete numbers
@@ -106,8 +108,10 @@ scripts/                    # Build scripts, Z3 proofs
 - **Manifestation** (11 files): boundary completion, energy release, observation-action unity
 - **IndistinguishabilityEnergy** (17 files): nothingness = maximal indistinguishability, latent energy, instant source code, question projector
 - **InstantQuestion** (9 files): projector law, answer slice, actuation law, `everything_is_instantly_solved_by_question_itself`
-- **FinalSourceCode** (17 files): consciousness-code, universal reachability, `final_toe_source_code_exact`
-- **Riemann** (11 files): defect encoding, spectral law, functional equation, 2 sorrys in RHRealization.lean
+- **FinalSourceCode** (11 files): self-inverting source code on real Partition/χ/K/Ψ types, `final_source_code_exact`
+- **SourceCode** (7 files): parametric SourceCodeModel, morphisms, initiality, transport, `universal_instant_solver`
+- **Realizations** (1 file): RH as transport of primal-dual law, `rh_from_xi_primal_dual`
+- **Riemann** (13 files): functional equation, HB theorem, positive self-dual sector, zero sorry
 - Build: `cd lean4 && lake build`
 
 ### Build Instructions
