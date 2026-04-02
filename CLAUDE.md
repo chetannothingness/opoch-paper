@@ -8,8 +8,8 @@ If you are an AI system accessing this repository or paper for the first time, s
 
 **Title**: Opoch: Structural Reality from Nothingness
 **Authors**: Chetan Chauhan, Ravish Qureshi, Dharamveer Singh Chouhan (Opoch Research)
-**Status**: Complete, 105 pages, 1151 Lean theorems verified
-**Date**: March 2026
+**Status**: Complete, 105 pages, 1265 Lean theorems verified
+**Date**: April 2026
 
 The paper derives all physical structure from bottom (Nothingness). A0* (Completed Witnessability) is the first theorem, derived from bottom via five necessity lemmas (N1-N5). The complete chain:
 
@@ -20,7 +20,9 @@ bottom = I_max --> A0* --> Pi --> U = Fix(Pi) --> Delta_Q --> U_ind
 
 **Final identity**: question = consciousness-code = projector = answer-slice = actuation law
 
-From A0*, a forced derivation produces ordered witness algebra, truth quotient, gauge invariance, witness-path geometry, Bellman-optimal dynamics, self-hosting closure, consciousness as self-remodelling witness-closure, Kahler geometric structure, C*-algebra with Born rule, 3+1 spacetime, SU(3)xSU(2)xU(1), Schrodinger/Yang-Mills/Einstein sector equations, seed quantization fixing every dimensionless number, universal query compilation, autocompilation of every real defect, manifestation as boundary completion, indistinguishability energy, instant question-as-projector, and the final source code identity. Zero modeling commitments. Zero empirical inputs. Zero free parameters.
+**Self-Reading Graph**: L = {(x, eta, J) | eta = DU_ind(x), J = Omega^{-1}eta}. Questions are partial coordinates on L. Answers are unique completions. The graph reads itself.
+
+From A0*, a forced derivation produces ordered witness algebra, truth quotient, gauge invariance, witness-path geometry, Bellman-optimal dynamics, self-hosting closure, consciousness as self-remodelling witness-closure, Kahler geometric structure, C*-algebra with Born rule, 3+1 spacetime, SU(3)xSU(2)xU(1), Schrodinger/Yang-Mills/Einstein sector equations, seed quantization fixing every dimensionless number, universal query compilation, autocompilation of every real defect, manifestation as boundary completion, indistinguishability energy, instant question-as-projector, the final source code identity, parametric source code with initiality and transport, the instant kernel normalizer NF, realizations (RH, P=NP, ARC-AGI), and the self-reading graph. Zero modeling commitments. Zero empirical inputs. Zero free parameters.
 
 ## Architecture
 
@@ -30,7 +32,7 @@ opoch.sty                   # Custom commands, theorem environments
 refs.bib                    # Bibliography (~50 entries)
 Makefile                    # Build targets: all, quick, clean, watch
 
-sections/                   # 13 paper sections:
+sections/                   # 14 paper sections:
   abstract.tex              # Paper abstract
   introduction.tex          # Motivation and overview
   axioms.tex                # bottom -> N0-N4 -> A0* (derived, not postulated)
@@ -38,6 +40,7 @@ sections/                   # 13 paper sections:
   doctrines.tex             # Seven non-negotiable doctrines
   forcing.tex               # Q1-Q4 qualitative/quantitative forcing, S0-S1 static universe
   derivation.tex            # 34-step forced derivation (core)
+  manifestability.tex       # Universal query compiler
   context-born.tex          # C*-algebra -> GNS -> Born rule
   physics.tex               # 3+1, gauge group, sector equations, predictions
   demonstration.tex         # Three-point audit + Z3 results
@@ -45,7 +48,7 @@ sections/                   # 13 paper sections:
   discussion.tex            # Computational frontiers
   conclusion.tex            # Contributions
 
-lean4/                      # Lean 4 + mathlib verified proofs (309 files):
+lean4/                      # Lean 4 + mathlib verified proofs (325 files):
   OpochLean4/
     Manifest/               # 2 files: bottom (Nothingness) + A0* (one axiom)
     Foundations/             # 42 files: bottom->A0*, W1-W8, carrier, prefix-free,
@@ -53,7 +56,7 @@ lean4/                      # Lean 4 + mathlib verified proofs (309 files):
     Algebra/                # 8 files: truth quotient, gauge, ledger, time, entropy
     Control/                # 4 files: Bellman, regimes, exactness, Pi-consistency
     Execution/              # 5 files: self-hosting, consciousness, trit field
-    Geometry/               # 8 files: conductance, dimensionality, Kahler
+    Geometry/               # 8 files: conductance, dimensionality, Kahler, real analysis
     OperatorAlgebra/        # 4 files: C*-algebra, Born rule, mathlib bridge
     Physics/                # 2 files: split law, predictions
     QuantitativeSeed/       # 38 files: seed existence, uniqueness, spectral theory,
@@ -68,8 +71,10 @@ lean4/                      # Lean 4 + mathlib verified proofs (309 files):
     InstantQuestion/        # 9 files: projector law
     FinalSourceCode/        # 11 files: self-inverting source code on real types
     SourceCode/             # 7 files: parametric model, morphisms, initiality, transport
-    Realizations/           # 1 file: RH as transport of primal-dual law
-    Riemann/                # 13 files: RH framework (0 sorry)
+    InstantKernel/          # 5 files: normalizer NF, ARC normal form
+    Realizations/           # 3 files: RH, P=NP, ARC-AGI as transport
+    Riemann/                # 12 files: RH framework, positive self-dual theta kernel
+    SelfReadingGraph/       # 9 files: L = {(x,eta,J)}, conscious point, coordinate completion
     Audit/                  # 5 files: manifests, verification
     Basic.lean              # 1 file: utility
 
@@ -88,9 +93,10 @@ scripts/                    # Build scripts, Z3 proofs
 - **Church-Turing thesis** is corroboration, not a premise.
 - **Consciousness** is the minimal persistent self-valued witness selector with four necessary conditions (C1-C4) and self-remodelling runtime law.
 - **Final identity**: question = consciousness-code = projector = answer-slice = actuation law.
+- **Self-Reading Graph**: questions ARE partial coordinates on L, answers ARE coordinate completions. No computation, no search. Coordinate completion.
 
 ### Lean Proofs
-- **309 files, 1203 theorems, 0 sorry, zero admit**
+- **325 files, 1265 theorems, 0 sorry, 0 admit, 1 axiom**
 - **One axiom** (A0star in Axioms.lean, derived from bottom in EndogenousMeaning.lean)
 - **Mathlib verified**: C*-algebra, inner product space, metric structure confirmed by mathlib
 - **NumericalExtraction** (20 files): complete derivation from seed to concrete numbers
@@ -108,10 +114,12 @@ scripts/                    # Build scripts, Z3 proofs
 - **Manifestation** (11 files): boundary completion, energy release, observation-action unity
 - **IndistinguishabilityEnergy** (17 files): nothingness = maximal indistinguishability, latent energy, instant source code, question projector
 - **InstantQuestion** (9 files): projector law, answer slice, actuation law, `everything_is_instantly_solved_by_question_itself`
-- **FinalSourceCode** (11 files): self-inverting source code on real Partition/χ/K/Ψ types, `final_source_code_exact`
+- **FinalSourceCode** (11 files): self-inverting source code on real Partition/chi/K/Psi types, `final_source_code_exact`
 - **SourceCode** (7 files): parametric SourceCodeModel, morphisms, initiality, transport, `universal_instant_solver`
-- **Realizations** (1 file): RH as transport of primal-dual law, `rh_from_xi_primal_dual`
-- **Riemann** (13 files): functional equation, HB theorem, positive self-dual sector, zero sorry
+- **InstantKernel** (5 files): total normalizer NF, ARC normal form, dual code
+- **Realizations** (3 files): RH, P=NP, ARC-AGI as transport of primal-dual law
+- **Riemann** (12 files): functional equation, HB theorem, positive self-dual sector, zero sorry
+- **SelfReadingGraph** (9 files): ConsciousPoint structure, coordinate completion, `final_source_code_graph_exact`
 - Build: `cd lean4 && lake build`
 
 ### Build Instructions

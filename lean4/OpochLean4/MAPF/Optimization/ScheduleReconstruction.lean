@@ -1,5 +1,6 @@
 import OpochLean4.MAPF.Semantics.Lifting
 import OpochLean4.MAPF.Optimization.ValueFromDecision
+import OpochLean4.MAPF.Optimization.PolytimeOptimization
 
 /-
   MAPF Optimization — Schedule Reconstruction

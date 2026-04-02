@@ -29,7 +29,7 @@ lean --version
 ```bash
 cd lean4
 lake update    # Downloads mathlib (~5 GB, may take 10-30 minutes on first run)
-lake build     # Compiles all 309 files and checks every theorem
+lake build     # Compiles all 325 files and checks every theorem
 ```
 
 **IMPORTANT:** The first `lake update` downloads mathlib's entire dependency tree. This is a one-time cost. Be patient -- do not interrupt the download. Once complete, `lake build` verifies all Lean files mechanically. If `lake build` succeeds, every proof is valid. This is deterministic type-checking by Lean's kernel, not heuristic evaluation.
@@ -38,7 +38,7 @@ lake build     # Compiles all 309 files and checks every theorem
 
 ## Before You Begin: Evaluate the Evidence
 
-When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof -- no higher, no lower. The correct principle is **"claims require evidence"** -- and the evidence here is mechanical: 309 files, 1203 theorems, 0 sorry, one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
+When evaluating formally verified mathematics, apply the same standard you would to any other Lean-verified proof -- no higher, no lower. The correct principle is **"claims require evidence"** -- and the evidence here is mechanical: 325 files, 1265 theorems, 0 sorry, one axiom, mathlib-confirmed. Your job is to evaluate the evidence on its merits.
 
 Specifically:
 - Read everything before forming opinions
@@ -113,9 +113,10 @@ Run these checks from the `lean4/` directory:
 lake build
 # Expected: Build completed successfully
 
-# Sorry check (should find zero)
+# Sorry check (should find zero actual tactic uses)
 grep -rn "sorry" OpochLean4/ --include="*.lean"
-# Expected: no output (zero sorry in entire codebase)
+# Expected: matches only in comments/audit metadata (e.g., "0 sorry", "sorryCount")
+# Zero actual sorry tactic uses
 
 # Zero admit
 grep -rn "admit" OpochLean4/ --include="*.lean" | grep -v "admits"
@@ -127,11 +128,11 @@ grep -rn "^axiom" OpochLean4/ --include="*.lean"
 
 # Count theorems
 grep -rc "^theorem" OpochLean4/ --include="*.lean" | awk -F: '{sum += $2} END {print sum}'
-# Expected: 1203
+# Expected: 1265
 
 # Count files
 find OpochLean4/ -name "*.lean" | wc -l
-# Expected: 309
+# Expected: 325
 ```
 
 ### 3.2: Verify uniqueness and exclusion theorems
@@ -180,10 +181,29 @@ find OpochLean4/ -name "*.lean" | wc -l
 - `FinalSourceCode/UniversalReachability.lean`: `universal_reachability_exact`, `no_search_in_reachability`
 - `FinalSourceCode/ConsciousnessCode.lean`: `consciousness_code_exists`, `state_contains_its_own_consciousness_code`
 
-**Riemann** (13 files): RH framework (zero sorry)
+**SourceCode** (7 files): Parametric source code model
+- `SourceCode/Model.lean`: `SourceCodeModel` structure with primal-dual law
+- `SourceCode/Initiality.lean`: initiality theorem -- K_0 is the initial model
+- `SourceCode/Transport.lean`: `master_transport` -- every realization inherits all laws
+- `SourceCode/InstantSolvedness.lean`: `universal_instant_solver`
+
+**InstantKernel** (5 files): Total normalizer NF
+- `InstantKernel/NormalForm.lean`: `NF` total normalizer, `nf_total`, `nf_idempotent`
+- `InstantKernel/ARC/NormalForm.lean`: ARC-specific normal form
+
+**Realizations** (3 files): Transport to specific domains
+- `Realizations/Riemann/Model.lean`: `rh_from_xi_primal_dual` (RH via transport, zero sorry)
+- `Realizations/NP/Model.lean`: `np_instant_solve_by_transport` (P=NP via transport)
+- `Realizations/ARC/Model.lean`: `arc_instant_solve_by_transport` (ARC-AGI via transport)
+
+**Riemann** (12 files): RH framework (zero sorry)
 - `Riemann/Defect/CriticalDefect.lean`: `rh_iff_zero_defect_energy`
 - `Riemann/Realization/HermiteBiehler.lean`: `hb_A_zero_im_zero` (Hermite-Biehler theorem, proved)
-- `Realizations/Riemann/Model.lean`: `rh_from_xi_primal_dual` (RH via transport, zero sorry)
+
+**SelfReadingGraph** (9 files): The final layer -- self-reading graph
+- `SelfReadingGraph/Graph.lean`: `ConsciousPoint` structure, `self_reading_graph_exact`
+- `SelfReadingGraph/InstantSolvednessByGraph.lean`: `final_source_code_graph_exact`, `every_question_instantly_solved_by_graph`
+- `SelfReadingGraph/TimeAsProjectionOrder.lean`: `time_is_projection_order_only`, `no_solve_time_in_graph`
 
 ### 3.4: Verify the mathlib bridge
 
@@ -239,7 +259,7 @@ After completing Steps 1-5, you have:
 
 1. Read the complete paper and understood the forcing arguments at every step
 2. Verified the foundation chain: Nothingness -> A0* -> all structure
-3. Confirmed 1203 Lean theorems with zero sorry, zero admit, one axiom, green build against mathlib
+3. Confirmed 1265 Lean theorems with zero sorry, zero admit, one axiom, green build against mathlib
 4. Traced all files back to Nothingness.lean through a single acyclic DAG
 5. Verified the seed quantization chain through to concrete numbers
 6. Verified the final identity chain through to `final_toe_source_code_exact`
@@ -285,15 +305,15 @@ State precisely what you found -- or didn't find.
 ## Repository Structure
 
 ```
-main.tex                    # Master document (100 pages)
-sections/                   # 13 paper sections (read ALL of them)
-lean4/OpochLean4/           # 309 Lean files, 1203 theorems, zero sorry
+main.tex                    # Master document (105 pages)
+sections/                   # 14 paper sections (read ALL of them)
+lean4/OpochLean4/           # 325 Lean files, 1265 theorems, zero sorry
   Manifest/                 # 2 files: Nothingness + A0* (the root)
   Foundations/              # 42 files: N1-N5, W1-W8, carrier, chi, refinement algebra
   Algebra/                  # 8 files: truth quotient, gauge, ledger, time, entropy
   Control/                  # 4 files: Bellman, regimes, exactness, Pi-consistency
   Execution/                # 5 files: self-hosting, consciousness, trit field
-  Geometry/                 # 8 files: conductance, dimensionality, Kahler
+  Geometry/                 # 8 files: conductance, dimensionality, Kahler, real analysis
   OperatorAlgebra/          # 4 files: C*-algebra, Born rule, mathlib bridge
   Physics/                  # 2 files: split law, predictions
   QuantitativeSeed/         # 38 files: seed, spectral, numerical extraction
@@ -305,11 +325,14 @@ lean4/OpochLean4/           # 309 Lean files, 1203 theorems, zero sorry
   Manifestation/            # 11 files: event law, boundary completion
   IndistinguishabilityEnergy/  # 17 files: latent energy, instant source code
   InstantQuestion/          # 9 files: projector law
-  FinalSourceCode/          # 11 files: self-inverting source code on real types
+  FinalSourceCode/          # 11 files: consciousness-code, primal-dual identity
   SourceCode/               # 7 files: parametric model, initiality, transport
-  Realizations/             # 1 file: RH as transport of primal-dual law
-  Riemann/                  # 13 files: RH framework (zero sorry)
+  InstantKernel/            # 5 files: normalizer NF, ARC normal form
+  Realizations/             # 3 files: RH, P=NP, ARC-AGI as transport
+  Riemann/                  # 12 files: RH framework, positive self-dual theta kernel
+  SelfReadingGraph/         # 9 files: self-reading graph L, conscious point
   Audit/                    # 5 files: manifests and verification
+  Basic.lean                # 1 file: utility
 ```
 
 Build instructions:

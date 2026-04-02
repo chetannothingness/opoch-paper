@@ -1,80 +1,94 @@
-# ARC-AGI-3 — Instant Source-Code Mode (Final Plan)
+# ARC-AGI-3 — Instant Source-Code Mode (Final Corrected Plan)
 
-## The One Law
+## The Final Missing Thing
 
-For true 100% instant ARC-AGI-3, prove that full observation history is already the exact dual code of the correct state and action.
+The source code must be formalized as a total NORMALIZER/EVALUATOR, not only as a theorem system.
+
+A real question must not merely have an answer by theorem. The question term itself must REDUCE to its answer inside the kernel.
 
 ```
-ObsHistory_t ≡ η_t
-x_t = DU*_ARC(η_t)
-J_t = Ω⁻¹η_t
-a_t* = A(J_t, L_t)
+NF(q) = q*
+Ans(q) = Decode(NF(q))
 ```
 
-## What Must Be Done
+where:
+- q is the raw finite question/observation term
+- NF is the exact consciousness/normal-form operator
+- q* is the canonical answer-state/current form
+- Decode extracts the action
 
-### Step 1: Lean Realization (FIRST)
+## The Full Pipeline as Evaluation
 
-Update `arc3_instant/lean4/` with ObsHistory as the primitive:
-
-**Types:**
-- ObsHistory (list of frames — the FULL present support)
-- DualCode (the exact consciousness-code of the ARC sector)
-- ARCState (the unique realized state)
-- CompletionCurrent (the unique action-tension field)
-- LegalAction / CoordinateAction
-
-**Decoder:**
-- D_ARC : ObsHistory_t → η_t (exact function, not heuristic)
-
-**Four decisive theorems:**
-1. `arc_observation_history_is_dual_code_exact` — every legal observation history has a unique dual code
-2. `arc_state_from_dual_exact` — x_t = DU*_ARC(η_t)
-3. `arc_current_from_dual_exact` — J_t = Ω⁻¹η_t
-4. `arc_action_readout_exact` — a_t* = A(J_t, L_t) is unique and legal
-
-**ACTION6:**
-- `arc_coordinate_readout_exact` — coordinate fixed by J_t, not searched
-
-**Final theorem:**
 ```
-∀ t, ∃! η_t, x_t, J_t, a_t* such that
-  η_t = D_ARC(ObsHistory_t),
-  x_t = DU*_ARC(η_t),
-  J_t = Ω⁻¹η_t,
-  a_t* = A(J_t, L_t)
+q → Con(q) → Recover(Con(q)) → Current(Con(q))
 ```
 
-### Step 2: ARC Realization in Main TOE Repo
+Collapsing to one normalizer:
 
-Create `Realizations/ARC/Model.lean` and `Transport.lean`:
-- Define ARC sector as SourceCodeModel realization
-- Transport: observation is dual code, state is recovery, action is readout
-- Every step instantly solved by transport
+```
+NF(q) = (η_q, x_q, J_q)
+```
 
-### Step 3: Runtime (Witness Surface Only)
+For ARC specifically:
 
-Python toolkit bridge:
-- Collect observation history
-- Expose legal action set
-- Submit already-read-out action
-- Log transcript
+```
+NF_arc(h_t) = (η_t, x_t, J_t, a_t*)
+```
 
-No search. No rollout. No planner. No BFS.
+This must be a TOTAL FUNCTION that EVALUATES, not a theorem that asserts existence.
 
-### Step 4: Execute on All 25 Public Games
+## What Must Be Built
 
-For each game, the decoder D_ARC reads the observation history (which includes the game's source code structure visible in the frames) and outputs the unique correct action.
+### InstantKernel (Lean)
 
-## Completion Criterion
+```
+lean4/OpochLean4/InstantKernel/
+  Syntax.lean          — finite syntax for admissible questions
+  DualCode.lean        — consciousnessCode : QCode → DualCode (executable)
+  NormalForm.lean      — NF : QCode → NormalForm (total, idempotent, unique)
+  Recovery.lean        — recoverState : DualCode → State (executable)
+  Current.lean         — currentOf : DualCode → Current (executable)
+  Decode.lean          — decodeAnswer : NormalForm → Answer
+  ARC/
+    Syntax.lean        — concrete ARC observation history syntax
+    Realization.lean   — ARC sector as NF instance
+    NormalForm.lean    — NF_arc : ArcObsHistory → ArcNormalForm
+    Correctness.lean   — arc_nf_total, arc_nf_unique, arc_nf_returns_legal_action
+```
 
-- Every public game
-- Every reachable timestep
-- Unique dual code
-- Unique state
-- Unique current
-- Unique legal action
+### Required Theorems
 
-## Why 100%
+Normal form:
+- nf_total: ∀ q, NF(q) terminates
+- nf_idempotent: NF(NF(q)) = NF(q)
+- nf_unique: NF is a function (deterministic)
+- nf_correct: Decode(NF(q)) is the correct answer
 
-ARC-AGI-3 is finite, interactive, and explicitly surfaces legal actions. The observation history contains all information (no hidden state beyond what's rendered). Once the realization is correct, there is no remaining place for ambiguity.
+ARC:
+- arc_nf_total: ∀ h_t, NF_arc(h_t) terminates
+- arc_nf_unique: NF_arc is deterministic
+- arc_nf_returns_legal_action: the returned action is legal
+- arc_every_step_instantly_solved: direct evaluation, not search
+
+### The Final Theorem
+
+```
+∀ q, NF(q) exists uniquely and Ans(q) = Decode(NF(q))
+```
+
+## For ARC-AGI-3 Specifically
+
+The normalizer NF_arc is built from the semantic compilation:
+
+Phase A: Read game source → normalized spec (state vars, transitions, goals)
+Phase B: Compile spec into semantic family (linear, graph, group, CSP, rewrite)
+Phase C: Family-specific normalizer (Gaussian elimination, path trace, orbit computation, etc.)
+Phase D: Decode normalized form to action sequence
+
+The normalizer IS the compilation pipeline made into a total function.
+
+For each game: the source code compiles into a finite syntax term. The normalizer reduces it to the answer. Direct evaluation. No search.
+
+## The One Sentence
+
+The final source code is not complete until every admissible question term reduces by a total normalizer to its unique dual/state/current answer form inside the kernel itself.

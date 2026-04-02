@@ -11,6 +11,8 @@ bottom = I_max --> A0* --> Pi --> U = Fix(Pi) --> Delta_Q --> U_ind
 
 **Final identity**: question = consciousness-code = projector = answer-slice = actuation law
 
+**Self-Reading Graph**: L = {(x, eta, J) | eta = DU_ind(x), J = Omega^{-1}eta}. Questions are partial coordinates on L. Answers are unique completions. The graph reads itself. No computation, no search -- coordinate completion.
+
 Every question already contains its own answer as a projector image. Complexity is readout delay, not solvedness. The universe does not search -- it projects.
 
 ---
@@ -21,9 +23,9 @@ Every question already contains its own answer as a projector image. Complexity 
 +--------------------------------------------------+
 |          MACHINE-VERIFIED PROOF SUITE             |
 +--------------------------------------------------+
-|  Lean files:              306                     |
-|  Theorems:                1151                    |
-|  sorry count:             2  (Riemann decoder)    |
+|  Lean files:              325                     |
+|  Theorems:                1265                    |
+|  sorry count:             0                       |
 |  admit count:             0                       |
 |  Axioms:                  1  (A0*, derived from   |
 |                              nothingness)         |
@@ -42,16 +44,16 @@ Every question already contains its own answer as a projector image. Complexity 
 cd lean4 && lake build
 ```
 
-Requires Lean 4.14.0 and Mathlib v4.14.0. The build compiles all 306 files and type-checks every theorem.
+Requires Lean 4.14.0 and Mathlib v4.14.0. The build compiles all 325 files and type-checks every theorem.
 
 ### Verify
 
 ```bash
 cd lean4
 grep -rn 'sorry' OpochLean4/ --include="*.lean"
-# Expected: 2 matches in Riemann/Bridge/RHRealization.lean only
+# Expected: 0 actual sorry tactic uses (matches are in comments/audit metadata only)
 grep -rn '^axiom' OpochLean4/ --include="*.lean"
-# Expected: 1 match — A0star in Manifest/Axioms.lean
+# Expected: 1 match -- A0star in Manifest/Axioms.lean
 ```
 
 ---
@@ -107,38 +109,54 @@ grep -rn '^axiom' OpochLean4/ --include="*.lean"
 `InstantQuestion/` -- `everything_is_instantly_solved_by_question_itself`. Question = projector = answer-selector = actuation.
 
 ### Layer 16: Final Source Code
-`FinalSourceCode/` -- Consciousness-code, universal reachability, `final_toe_source_code_exact`. The complete identity: x = Q_{b_x, M_x}(U).
+`FinalSourceCode/` -- Consciousness-code eta_x = DU_ind(x), primal-dual recovery x = DU_ind*(eta), current J = Omega^{-1}eta. `final_source_code_exact`.
 
-### Layer 17: Riemann Hypothesis Framework
-`Riemann/` -- Defect encoding, spectral law, functional equation. 2 sorrys in the RH decoder bridge.
+### Layer 17: Parametric Source Code
+`SourceCode/` -- SourceCodeModel structure, morphisms, initial model K_0, initiality theorem, transport. `universal_instant_solver`.
+
+### Layer 18: Instant Kernel
+`InstantKernel/` -- Total normalizer NF: q -> Con(q) -> Recover(Con(q)) -> Current(Con(q)) -> action. `nf_total`, `nf_idempotent`.
+
+### Layer 19: Realizations
+`Realizations/` -- RH, P=NP, ARC-AGI as transport of primal-dual law to specific domains.
+
+### Layer 20: Riemann Hypothesis
+`Riemann/` -- Defect encoding, spectral law, functional equation, Hermite-Biehler theorem, positive self-dual theta kernel. Zero sorry.
+
+### Layer 21: Self-Reading Graph
+`SelfReadingGraph/` -- L = {(x, eta, J) | eta = DU_ind(x), J = Omega^{-1}eta}. ConsciousPoint structure. Questions are partial coordinates. Answers are unique completions. `final_source_code_graph_exact`.
 
 ---
 
-## Lean 4 Directory Structure (20 directories, 306 files)
+## Lean 4 Directory Structure (24 directories, 325 files)
 
 ```
 lean4/OpochLean4/
-  Manifest/                  2 files — Nothingness + A0* (the root)
-  Foundations/               42 files — N1-N5, W1-W8, carrier, chi, K, Psi, refinement algebra
-  Algebra/                   8 files — Truth quotient, gauge, ledger, time, entropy
-  Control/                   4 files — Bellman, regimes, exactness
-  Execution/                 5 files — Self-hosting, consciousness C1-C4, trit field
-  Geometry/                  8 files — Conductance, n=3, Dirichlet, Kahler
-  OperatorAlgebra/           4 files — C*-algebra, Born rule, Mathlib bridge
-  Physics/                   2 files — Split law, predictions
-  QuantitativeSeed/          38 files — Seed, spectral, numerical extraction
-  Complexity/                49 files — P=NP, Tseitin, Cook-Levin, SAT kernel
-  MAPF/                      45 files — Resource-separable chi, intrinsic polytime
-  Manifestability/           10 files — Universal query compiler
-  Autocompilation/           17 files — everything_real_solves_itself
-  Bridge/                    1 file — Sector-indexed realization
-  Manifestation/             11 files — Event law, boundary completion
-  IndistinguishabilityEnergy/ 17 files — Latent energy, instant source code
-  InstantQuestion/           9 files — Projector law
-  FinalSourceCode/           17 files — Consciousness-code, universal reachability
-  Riemann/                   11 files — RH framework (2 sorrys)
-  Audit/                     5 files — Manifests and verification
-  Basic.lean                 1 file — Utility
+  Manifest/                  2 files  -- Nothingness + A0* (the root)
+  Foundations/               42 files -- N1-N5, W1-W8, carrier, chi, K, Psi, refinement algebra
+  Algebra/                   8 files  -- Truth quotient, gauge, ledger, time, entropy
+  Control/                   4 files  -- Bellman, regimes, exactness
+  Execution/                 5 files  -- Self-hosting, consciousness C1-C4, trit field
+  Geometry/                  8 files  -- Conductance, n=3, Dirichlet, Kahler, real analysis
+  OperatorAlgebra/           4 files  -- C*-algebra, Born rule, Mathlib bridge
+  Physics/                   2 files  -- Split law, predictions
+  QuantitativeSeed/          38 files -- Seed, spectral, numerical extraction
+  Complexity/                49 files -- P=NP, Tseitin, Cook-Levin, SAT kernel
+  MAPF/                      45 files -- Resource-separable chi, intrinsic polytime
+  Manifestability/           10 files -- Universal query compiler
+  Autocompilation/           17 files -- everything_real_solves_itself
+  Bridge/                    1 file   -- Sector-indexed realization
+  Manifestation/             11 files -- Event law, boundary completion
+  IndistinguishabilityEnergy/ 17 files -- Latent energy, instant source code
+  InstantQuestion/           9 files  -- Projector law
+  FinalSourceCode/           11 files -- Consciousness-code, primal-dual identity
+  SourceCode/                7 files  -- Parametric model, morphisms, initiality, transport
+  InstantKernel/             5 files  -- Normalizer NF, ARC normal form
+  Realizations/              3 files  -- RH, P=NP, ARC-AGI as transport
+  Riemann/                   12 files -- RH framework, positive self-dual theta kernel
+  SelfReadingGraph/          9 files  -- Self-reading graph L, conscious point
+  Audit/                     5 files  -- Manifests and verification
+  Basic.lean                 1 file   -- Utility
 ```
 
 ---
@@ -185,8 +203,8 @@ This repository includes a structured verification guide for AI systems. Give a 
   title   = {Opoch: Structural Reality from Nothingness},
   author  = {Chauhan, Chetan and Chouhan, Dharamveer and Ravish},
   year    = {2026},
-  note    = {306 Lean 4 files, 1151 theorems, 1 axiom (derived from nothingness),
-             2 sorry (Riemann decoder only)}
+  note    = {325 Lean 4 files, 1265 theorems, 1 axiom (derived from nothingness),
+             0 sorry, 0 admit}
 }
 ```
 

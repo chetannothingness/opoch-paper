@@ -84,4 +84,4 @@ theorem polyKernel_implies_InP {α : Type} [Sized α] {L : α → Prop}
     (hCorrect : ∀ x, decideFromKernel x = true ↔ L x)
     (hBounded : ∀ x, decideSteps x ≤ decideBound.eval (Sized.size x)) :
     InP L :=
-  ⟨⟨decideFromKernel, decideSteps, decideBound, hBounded⟩, hCorrect⟩
+  ⟨⟨fun x => (decideFromKernel x, decideSteps x), decideBound, hBounded⟩, hCorrect⟩
