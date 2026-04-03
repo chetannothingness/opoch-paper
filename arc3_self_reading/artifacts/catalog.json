@@ -1,0 +1,375 @@
+[
+  {
+    "game_id": "sp80-0ee2d095",
+    "title": "SP80",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "s5i5-a48e4b1d",
+    "title": "S5I5",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 8
+  },
+  {
+    "game_id": "su15-4c352900",
+    "title": "SU15",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 9
+  },
+  {
+    "game_id": "lp85-305b61c3",
+    "title": "LP85",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 8
+  },
+  {
+    "game_id": "tr87-cd924810",
+    "title": "TR87",
+    "tags": [
+      "keyboard"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "has_action6": false,
+    "win_levels": 6
+  },
+  {
+    "game_id": "tu93-2b534c15",
+    "title": "TU93",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "has_action6": false,
+    "win_levels": 9
+  },
+  {
+    "game_id": "m0r0-dadda488",
+    "title": "M0R0",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "ar25-e3c63847",
+    "title": "AR25",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 8
+  },
+  {
+    "game_id": "lf52-271a04aa",
+    "title": "LF52",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 10
+  },
+  {
+    "game_id": "g50t-5849a774",
+    "title": "G50T",
+    "tags": [
+      "keyboard"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "has_action6": false,
+    "win_levels": 7
+  },
+  {
+    "game_id": "sb26-7fbdac44",
+    "title": "SB26",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      5,
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 8
+  },
+  {
+    "game_id": "wa30-ee6fef47",
+    "title": "WA30",
+    "tags": [
+      "keyboard"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "has_action6": false,
+    "win_levels": 9
+  },
+  {
+    "game_id": "tn36-ab4f63cc",
+    "title": "TN36",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 7
+  },
+  {
+    "game_id": "sc25-f9b21a2f",
+    "title": "SC25",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "sk48-41055498",
+    "title": "SK48",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 8
+  },
+  {
+    "game_id": "vc33-9851e02b",
+    "title": "VC33",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 7
+  },
+  {
+    "game_id": "ft09-0d8bbf25",
+    "title": "FT09",
+    "tags": [],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "bp35-0a0ad940",
+    "title": "BP35",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      3,
+      4,
+      6,
+      7
+    ],
+    "has_action6": true,
+    "win_levels": 9
+  },
+  {
+    "game_id": "dc22-4c9bff3e",
+    "title": "DC22",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "re86-4e57566e",
+    "title": "RE86",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "has_action6": false,
+    "win_levels": 8
+  },
+  {
+    "game_id": "cn04-65d47d14",
+    "title": "CN04",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 5
+  },
+  {
+    "game_id": "ka59-9f096b4a",
+    "title": "KA59",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 7
+  },
+  {
+    "game_id": "ls20-9607627b",
+    "title": "LS20",
+    "tags": [
+      "keyboard"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "has_action6": false,
+    "win_levels": 7
+  },
+  {
+    "game_id": "r11l-aa269680",
+    "title": "R11L",
+    "tags": [
+      "click"
+    ],
+    "available_actions": [
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  },
+  {
+    "game_id": "cd82-fb555c5d",
+    "title": "CD82",
+    "tags": [
+      "keyboard_click"
+    ],
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "has_action6": true,
+    "win_levels": 6
+  }
+]
