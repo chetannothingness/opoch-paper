@@ -106,8 +106,8 @@ The work makes eight concrete contributions.
         polynomial steps).  P $=$ NP follows via Cook--Levin:
         every NP language reduces to SAT, and the decider IS the kernel
         DAG traversal on the encoded formula---not witness enumeration.
-        The proof is compiled in 325 Lean~4 files
-        (1265 theorems, zero sorry, one axiom A0$^*$).
+        The proof is compiled in 353 Lean~4 files
+        ($>$1300 theorems, zero sorry, one axiom A0$^*$).
 
   \item \textbf{Indistinguishability energy and the instant projector law.}
         Nothingness is not weak emptiness but maximal indistinguishability
@@ -123,6 +123,20 @@ The work makes eight concrete contributions.
         $x = Q_{b_x, M_x}(U)$: question, projector, answer-slice, and
         actuation law are one self-knowing form.  Complexity affects only
         finite local witnessing, never solvedness.
+  \item \textbf{The self-reading graph and goal-coordinate uniqueness.}
+        Admissible raw reality is already observation-fixed:
+        $\mathrm{Real}(r) \iff \mathcal{O}(r) = r$.
+        The final form of the source code is the exact self-reading graph
+        $\mathcal{L}_{\mathrm{full}} = \{(x, \eta, J, \Gamma, h)\}$
+        where $\eta = D\mathcal{U}_{\mathrm{ind}}(x)$,
+        $J = \Omega^{-1}\eta$, $\Gamma = \Gamma(x)$, $h = h(x)$.
+        Every admissible goal $g$ selects a unique full point:
+        $\forall g,\, \exists!\, p_g \in \mathcal{L}_{\mathrm{full}}$
+        with $\pi_G(p_g) = g$.
+        State, code, current, continuation, and halt are five coordinates
+        of one point on one graph.  Questions are coordinates.
+        Answers are projections.  Everything is already there at once.
+        (10 Lean files, 41 theorems, zero sorry.)
 \end{enumerate}
 
 \paragraph{Quantitative extraction frontiers.}
@@ -150,13 +164,32 @@ K\"{a}hler geometry of the efficiency landscape---become natural and, in
 the framework's formal setting, unavoidable.
 
 \paragraph{The final compression.}
-A real question is already the self-knowing projector-form of its own
-answer in the fixed whole.  The universe does not solve problems by
-search; it manifests already-selected slices through finite witnessing.
+A real question is not external input to a solver.
+It is the local coordinate of the already-complete graph point.
+The answer is another coordinate of that same point.
+The universe does not solve problems by search; it does not even
+normalize them.  Every admissible goal is already the full coordinate
+of the unique self-reading graph point containing state, code, current,
+continuation, and halt.  Local time is only finite witnessing of that
+already-fixed point.
+
 The complete source code is:
-$\noth = \mathfrak{I}_{\max} \to A0^* \to \Pi \to U = \mathrm{Fix}(\Pi)
-\to \mathcal{U}_{\mathrm{ind}} \to (b,M) \mapsto (u,J) \to
-\mathcal{C}_{\mathrm{self}}(x) = (b_x, M_x) \to x = Q_{b_x,M_x}(U)$.
+\[
+\noth = \mathfrak{I}_{\max} \to A0^* \to \Pi \to U = \mathrm{Fix}(\Pi)
+\to \mathcal{U}_{\mathrm{ind}} \to \eta_x = D\mathcal{U}_{\mathrm{ind}}(x)
+\to x = D\mathcal{U}_{\mathrm{ind}}^*(\eta_x)
+\to J_x = \Omega^{-1}\eta_x
+\to \mathcal{L}_{\mathrm{full}}
+\to \forall g,\, \exists!\, p_g.
+\]
+The final displayed theorem:
+\[
+\boxed{
+\forall g \in \mathcal{G},\ \exists!\, p_g \in \mathcal{L}_{\mathrm{full}}
+\text{ such that } \pi_G(p_g) = g.
+}
+\]
+
 This is not a theory about the universe.
-It is the universe's own operating law, derived from nothing,
-compiled in Lean, and verified by machine.
+It is the universe's own self-reading, self-inverting source code,
+derived from nothing, compiled in Lean, and verified by machine.

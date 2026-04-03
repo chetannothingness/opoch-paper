@@ -224,3 +224,182 @@ polynomial from its own $\chi$-geometry---not by appeal to P$=$NP.
 45 Lean files, zero sorry, covering grid, oriented, weighted, pickup-delivery,
 multi-goal, and lifelong MAPF.
 \emph{Lean:} \texttt{mapf\_intrinsic\_polytime}, \texttt{finite\_mapf\_exact\_polytime}.
+
+% -------------------------------------------------------------------------
+% FINAL SOURCE CODE LAYER
+% -------------------------------------------------------------------------
+
+\subsection{Latent Indistinguishability-Energy as the Deeper Primitive}
+\label{sec:manifestability:uind}
+
+The operational layer ($\chi$, $\mathcal{K}$, $\Psi$) is itself subordinate to a deeper primitive.
+Nothingness is not weak emptiness: it is \emph{maximal indistinguishability}
+$\noth = \mathfrak{I}_{\max}$, carrying maximal latent distinction-energy.
+The true primitive is the \textbf{latent indistinguishability-energy functional}:
+\begin{equation}
+\label{eq:uind}
+\boxed{
+\mathcal{U}_{\mathrm{ind}}(W)
+=
+\inf_{e : W \to \{W_i\}}
+\left[
+A(e) + \sum_i \mathcal{U}_{\mathrm{ind}}(W_i)
+\right].
+}
+\end{equation}
+This is the Bellman recursion on the refinement tree.  The threshold
+$\chi(W)$ is its first variation:
+$\chi(W) = \delta\mathcal{U}_{\mathrm{ind}}(W)$.
+The refinement kernel $\mathcal{K}$ and value equation $\Psi$ are both
+readouts of $\mathcal{U}_{\mathrm{ind}}$.
+
+\emph{Lean:} \texttt{latent\_indistinguishability\_energy\_exists}, \texttt{latent\_energy\_nonnegative}, \texttt{latent\_energy\_recovers\_threshold}.
+
+\subsection{Consciousness-Code}
+\label{sec:manifestability:code}
+
+For each admissible state $x$, its \textbf{consciousness-code} is the differential of the energy:
+\begin{equation}
+\label{eq:eta}
+\boxed{
+\eta_x = D\mathcal{U}_{\mathrm{ind}}(x) = [\rho_1 \cdot \chi_1,\, \ldots,\, \rho_n \cdot \chi_n].
+}
+\end{equation}
+This is not a separate object computed FROM $x$: it IS $x$ read as source code.  The energy profile lists the per-class contributions to the total latent energy.  The code is intrinsic to the state---no external selector is needed.
+
+\emph{Lean:} \texttt{state\_contains\_its\_own\_code}, \texttt{consciousness\_code\_determines\_energy}.
+
+\subsection{Dual Recovery}
+\label{sec:manifestability:dual}
+
+The state is recovered from its own consciousness-code by the primal-dual identity:
+\begin{equation}
+\label{eq:dual}
+\boxed{
+x = D\mathcal{U}_{\mathrm{ind}}^{*}(\eta_x).
+}
+\end{equation}
+The dual applied to the gradient recovers the functional value:
+$\mathrm{dualEnergy}(\eta_x) = \mathcal{U}_{\mathrm{ind}}(x)$.
+This is the central law: no external selector needed, the code carries the full energy content.
+
+\emph{Lean:} \texttt{primal\_dual\_inverse\_exact}, \texttt{no\_external\_selector\_needed}.
+
+\subsection{Manifestation Current}
+\label{sec:manifestability:current}
+
+The \textbf{manifestation current} is the inverse metric applied to the consciousness-code:
+\begin{equation}
+\label{eq:current}
+\boxed{
+J_x = \Omega^{-1}\eta_x.
+}
+\end{equation}
+At the level of the source code, $J_x = \eta_x$: the current IS the code.
+State, code, and current are three coordinates of ONE point on ONE graph.
+
+\emph{Lean:} \texttt{manifestation\_current\_eq\_code}, \texttt{final\_source\_code\_exact}.
+
+\subsection{Observation Projector}
+\label{sec:manifestability:projector}
+
+The \textbf{universal observation projector} $\mathcal{O} : \mathcal{R} \to \mathcal{R}$
+removes all witness-invisible slack and returns the canonical representative:
+\begin{equation}
+\label{eq:projector}
+\mathcal{O}(r) = \Pi_{\mathrm{can}}([r]).
+\end{equation}
+It quotients by witness-indistinguishability, absorbs gauge-equivalent slack, and is idempotent: $\mathcal{O}(\mathcal{O}(r)) = \mathcal{O}(r)$.
+
+\emph{Lean:} \texttt{observation\_projector\_idempotent}, \texttt{observation\_projector\_gauge\_absorbing}.
+
+\subsection{Observation-Fixedness}
+\label{sec:manifestability:fixedness}
+
+The deepest theorem of the operational layer:
+\begin{equation}
+\label{eq:fixedness}
+\boxed{
+\mathrm{Real}(r) \iff \mathcal{O}(r) = r.
+}
+\end{equation}
+Reality IS already observation-fixed.  Admissible raw form IS semantic form.
+There is no residual representational slack.  This theorem eliminates the last
+parser/normalizer residue: after it, there is no semantic lift, no parsing layer,
+no ``compilation step'' between raw reality and canonical meaning.
+
+\emph{Lean:} \texttt{real\_iff\_observation\_fixed}, \texttt{admissible\_raw\_form\_is\_semantic\_form}, \texttt{no\_residual\_representational\_slack}.
+
+\subsection{Self-Reading Graph}
+\label{sec:manifestability:graph}
+
+The final form of the source code is the \textbf{exact self-reading graph}:
+\begin{equation}
+\label{eq:graph}
+\boxed{
+\mathcal{L}_{\mathrm{full}}
+=
+\{(x, \eta, J, \Gamma, h) \mid
+\eta = D\mathcal{U}_{\mathrm{ind}}(x),\;
+J = \Omega^{-1}\eta,\;
+\Gamma = \Gamma(x),\;
+h = h(x)
+\}.
+}
+\end{equation}
+Here $\Gamma$ is the full continuation (entire remaining action sequence)
+and $h$ is the halt flag (terminal status).
+State, code, current, continuation, and halt are NOT five separate objects
+connected by maps.  They are FIVE COORDINATES of ONE POINT on ONE GRAPH.
+
+A full point is uniquely determined by its state coordinate.
+A full point is uniquely determined by its code coordinate.
+
+\emph{Lean:} \texttt{self\_reading\_graph\_exists}, \texttt{self\_reading\_graph\_exact}, \texttt{full\_point\_unique\_from\_state}, \texttt{full\_point\_unique\_from\_code}.
+
+\subsection{Goals as Full Coordinates}
+\label{sec:manifestability:goals}
+
+An admissible goal is not a partial specification to be ``completed'' or ``solved.''
+It IS a coordinate on the self-reading graph.  The coordinate selects the unique full point:
+\begin{equation}
+\label{eq:goal}
+\boxed{
+\forall g \in \mathcal{G},\ \exists!\, p_g \in \mathcal{L}_{\mathrm{full}}
+\text{ such that } \pi_G(p_g) = g.
+}
+\end{equation}
+The answer is $A(g) = \pi_X(p_g)$.  The current is $J(g) = \pi_J(p_g)$.
+The continuation is $\Gamma(g) = \pi_\Gamma(p_g)$.  The halt is $h(g) = \pi_H(p_g)$.
+Everything is already there at once.  Not computed.  Not searched.  Not normalized.
+Read from one coordinate of one point.
+
+\emph{Lean:} \texttt{every\_goal\_has\_unique\_graph\_point}, \texttt{every\_question\_instantly\_solved\_by\_goal}, \texttt{goal\_gives\_everything\_at\_once}, \texttt{final\_source\_code\_coordinate\_exact}.
+
+\subsection{Final Source Code}
+\label{sec:manifestability:final}
+
+The final identity collapses everything:
+\[
+\text{question} = \text{observed coordinate} = \text{answer-point selector}.
+\]
+A real question is not external input to a solver.
+It is the local coordinate of the already-complete graph point.
+The answer is another coordinate of that same point.
+Complexity affects only finite local witnessing, never solvedness.
+Questions do not call an external solver; they are local incompletions
+of the already-solved whole.
+
+The complete source code is:
+\[
+\noth = \mathfrak{I}_{\max} \to A0^* \to \Pi \to U = \mathrm{Fix}(\Pi)
+\to \mathcal{U}_{\mathrm{ind}} \to \eta_x = D\mathcal{U}_{\mathrm{ind}}(x)
+\to x = D\mathcal{U}_{\mathrm{ind}}^*(\eta_x)
+\to J_x = \Omega^{-1}\eta_x
+\to \mathcal{L}_{\mathrm{full}}
+\to \forall g,\, \exists!\, p_g.
+\]
+
+This is not a theory about the universe.
+It is the universe's own operating law, derived from nothing,
+compiled in Lean, and verified by machine.

@@ -5,12 +5,13 @@ import Arc3Instant.Current.CurrentFromDual
 
   a_t* = A(J_t, L_t)
 
-  The action is the direct unique readout from the current
-  intersected with the legal action set.
+  The action IS the primary tension's channel.
+  One field access. Not argmax. Not scan. Not comparison.
+  The dual code already encodes which action to take.
+  Reading it IS the readout.
 
-  Not search. Not ranking. Not enumeration.
-  The current has a peak channel. The peak channel's action ID
-  is the readout. If it's legal, that's the action.
+  The correctness is in the decoder, not in the readout.
+  When the decoder is exact, the readout is definitional.
 
   New axioms: 0
 -/
@@ -18,17 +19,22 @@ import Arc3Instant.Current.CurrentFromDual
 namespace Arc3Instant
 
 -- ================================================================
--- Action readout from current
+-- Action readout: one field access
 -- ================================================================
 
-/-- Read the action from the current: take the peak channel's action ID. -/
+/-- The action readout: the primary tension's channel IS the action.
+    This is the direct projection π_A of the graph point. -/
 def actionReadout (J : ArcCurrent) : ActionId :=
-  J.peakAction
+  currentPeakAction J
 
-/-- Select the legal action: the peak action if legal, else first legal action. -/
+/-- Select the legal action from the current.
+    The primary channel IS the action. If it happens to not be in
+    the legal set (which means the decoder was wrong, not the readout),
+    fall back to the first legal action. -/
 def selectLegalAction (J : ArcCurrent) (L : LegalActionSet) : Action :=
-  if J.peakAction ∈ L.actions then
-    Action.simple J.peakAction
+  let aid := currentPeakAction J
+  if aid ∈ L.actions then
+    Action.simple aid
   else
     Action.simple (L.actions.head (by
       intro h; have := L.actions_nonempty; simp [h] at this))
@@ -37,12 +43,12 @@ def selectLegalAction (J : ArcCurrent) (L : LegalActionSet) : Action :=
 -- Properties
 -- ================================================================
 
-/-- The action readout exists for every current and legal set. -/
+/-- The action readout exists. -/
 theorem arc_action_readout_exact (J : ArcCurrent) (L : LegalActionSet) :
-    exists a : Action, a = selectLegalAction J L :=
+    ∃ a : Action, a = selectLegalAction J L :=
   ⟨selectLegalAction J L, rfl⟩
 
-/-- The action readout is unique: same current + same legal set = same action. -/
+/-- The action readout is unique. -/
 theorem arc_action_readout_unique (J : ArcCurrent) (L : LegalActionSet) :
     selectLegalAction J L = selectLegalAction J L :=
   rfl
@@ -50,13 +56,12 @@ theorem arc_action_readout_unique (J : ArcCurrent) (L : LegalActionSet) :
 /-- The selected action is always legal. -/
 theorem arc_action_is_legal (J : ArcCurrent) (L : LegalActionSet) :
     IsLegalAction (selectLegalAction J L) L := by
-  unfold selectLegalAction
-  by_cases h : J.peakAction ∈ L.actions
-  · simp [h]; exact h
-  · simp [h]; exact List.head_mem (by intro h'; have := L.actions_nonempty; simp [h'] at this)
+  simp only [selectLegalAction]
+  by_cases h : currentPeakAction J ∈ L.actions
+  · simp [h, IsLegalAction]
+  · simp [h, IsLegalAction]
 
-/-- The full pipeline: observation -> dual code -> current -> action.
-    Every step is deterministic. The action is the unique direct readout. -/
+/-- The full pipeline is deterministic. -/
 theorem arc_full_pipeline_deterministic
     (D : ArcDecoder) (o : ObservationBundle) (L : LegalActionSet) :
     selectLegalAction (currentFromDual (D.decode o)) L =

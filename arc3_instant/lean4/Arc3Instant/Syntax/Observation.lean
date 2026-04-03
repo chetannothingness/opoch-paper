@@ -24,10 +24,14 @@ structure Frame where
   stepRemaining : Nat
   levelIndex : Nat
 
-/-- The observation bundle: all frames visible at time t. -/
+/-- The observation bundle: all frames visible at time t,
+    plus the legal action set exposed by the environment. -/
 structure ObservationBundle where
   frames : List Frame
   frames_nonempty : frames.length ≥ 1
+  /-- Legal actions exposed by the environment at this step. -/
+  legalActionIds : List Nat
+  legalActions_nonempty : legalActionIds.length ≥ 1
 
 /-- The primary frame (the most recent / current). -/
 def ObservationBundle.primaryFrame (o : ObservationBundle) : Frame :=

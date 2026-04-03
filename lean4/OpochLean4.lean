@@ -393,6 +393,28 @@ import OpochLean4.Realizations.NP.Model
 import OpochLean4.Realizations.ARC.Model
 
 -- ================================================================
+-- LEVEL 8b: ARC-AGI-3 Full Realization (15 files)
+-- ================================================================
+import OpochLean4.Realizations.ARC3.Syntax
+import OpochLean4.Realizations.ARC3.ObservationHistory
+import OpochLean4.Realizations.ARC3.DualCode
+import OpochLean4.Realizations.ARC3.State
+import OpochLean4.Realizations.ARC3.LatentEnergy
+import OpochLean4.Realizations.ARC3.Recovery
+import OpochLean4.Realizations.ARC3.Current
+import OpochLean4.Realizations.ARC3.LegalAction
+import OpochLean4.Realizations.ARC3.ActionReadout
+import OpochLean4.Realizations.ARC3.CoordinateReadout
+import OpochLean4.Realizations.ARC3.PublicGames
+import OpochLean4.Realizations.ARC3.Realization
+import OpochLean4.Realizations.ARC3.Transport
+import OpochLean4.Realizations.ARC3.InstantSolvedness
+import OpochLean4.Realizations.ARC3.NormalForm
+import OpochLean4.Realizations.ARC3.Correctness
+import OpochLean4.Realizations.ARC3.RuntimeBridge
+import OpochLean4.Realizations.ARC3.Audit.Manifest
+
+-- ================================================================
 -- LEVEL 9: Riemann Hypothesis (positive self-dual theta kernel)
 -- ================================================================
 import OpochLean4.Riemann.Analytic.XiCoordinate
@@ -429,3 +451,5 @@ import OpochLean4.Audit.PreChiAxiomCensus
 import OpochLean4.Audit.PreRefinementManifest
 import OpochLean4.Audit.PreRefinementAxiomCensus
 import OpochLean4.Audit.PostRefinementAlgebraManifest
+import OpochLean4.FinalKernel.ObservationFixedness
+import OpochLean4.FinalKernel.ProjectionLaws

@@ -6,3 +6,6 @@ package «Arc3Instant» where
 
 @[default_target]
 lean_lib «Arc3Instant» where
+
+lean_exe «arc3instant» where
+  root := `Arc3Instant.Runtime.Main
