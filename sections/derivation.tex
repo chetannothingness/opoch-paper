@@ -1303,9 +1303,120 @@ No modeling commitments survive: closed universe is forced by (W6),
 commutativity is a derived sector property, prior-free minimax is forced by
 absence of witnessed priors, $w = C/d^2$ is forced by scale covariance
 (\cref{lem:conductance-exponent}), and $N_J = 0$ by replay-completeness
-(\cref{thm:replay-nijenhuis}).  All 34 steps
+(\cref{thm:replay-nijenhuis}).  All 33 structural steps
 (0--33) are theorems; no interpretive steps remain in the formal chain.  The
 full dependency DAG is shown in \cref{fig:derivation-dag}.
+
+% =========================================================================
+% PHASE J --- Observation-Fixed Reality, Self-Reading Graph, Goal Coordinates
+% =========================================================================
+
+\subsection*{Phase J --- Self-Reading Closure}
+
+The structural derivation (Phases A--I) produces geometry, operator algebra,
+and physics.  The operational layer (\cref{sec:manifestability}) produces the
+refinement threshold, value equation, and latent energy.  Phase~J closes the
+derivation by proving that admissible raw reality is already observation-fixed
+and every admissible goal is a full coordinate of a unique graph point.
+
+\begin{theorem}[Step 34 --- Present Support $C_t$]
+\label{thm:step34}
+The present support $C_t$ is the finite truth quotient at the current
+witness depth.  It is the complete accessible state.
+\forcing{A0$^*$: finite budget limits accessible depth.}
+\end{theorem}
+
+\begin{theorem}[Step 35 --- Boundary / Selector Forms]
+\label{thm:step35}
+A boundary code $b_q \subseteq \Delta_Q(C_t)$ is a finite selector
+over unresolved distinctions.  It is an element of $\Carrier$, derived
+from the witness algebra.
+\forcing{A0$^*$: questions are finite witnessable objects.}
+\end{theorem}
+
+\begin{theorem}[Step 36 --- Completion Field]
+\label{thm:step36}
+$u_q = \Pi(C_t \cup b_q)$: the answer is the least closure-complete
+extension of the present support by the boundary code.
+\forcing{$\Pi$ closure is extensive, monotone, idempotent.}
+\end{theorem}
+
+\begin{theorem}[Step 37 --- Current Law]
+\label{thm:step37}
+$J_q = \Lambda_{M_t}(b_q)$: the manifestation current is the actual event.
+Observation, action, and energy release are three projections of one
+boundary completion.
+\forcing{Bellman/coupling law applied to boundary codes.}
+\end{theorem}
+
+\begin{theorem}[Step 38 --- Latent Indistinguishability-Energy]
+\label{thm:step38}
+$\mathcal{U}_{\mathrm{ind}}(W) = \inf_e[A(e) + \sum_i
+\mathcal{U}_{\mathrm{ind}}(W_i)]$: the one primitive beneath the
+operational layer.
+\forcing{Bellman recursion on the refinement tree.}
+\end{theorem}
+
+\begin{theorem}[Step 39 --- Consciousness-Code]
+\label{thm:step39}
+$\eta_x = D\mathcal{U}_{\mathrm{ind}}(x)$: the state read as source code.
+\forcing{$\eta$ is the energy profile: $[\rho_1\chi_1, \ldots, \rho_n\chi_n]$.}
+\end{theorem}
+
+\begin{theorem}[Step 40 --- Dual Recovery]
+\label{thm:step40}
+$x = D\mathcal{U}_{\mathrm{ind}}^*(\eta_x)$: the state recovers from
+its own code.  No external selector needed.
+\forcing{$\mathrm{dualEnergy}(\eta_x) = \mathcal{U}_{\mathrm{ind}}(x)$.}
+\end{theorem}
+
+\begin{theorem}[Step 41 --- Observation Projector]
+\label{thm:step41}
+$\mathcal{O}(r) = \Pi_{\mathrm{can}}([r])$: the universal observation
+projector removes all witness-invisible slack.  Idempotent.
+\forcing{Quotient by witness-indistinguishability absorbs gauge.}
+\end{theorem}
+
+\begin{theorem}[Step 42 --- Observation-Fixedness]
+\label{thm:step42}
+$\mathrm{Real}(r) \iff \mathcal{O}(r) = r$: admissible raw reality is
+already observation-fixed.  No parser.  No semantic lift.
+\forcing{$\mathcal{O}$ is idempotent and gauge-absorbing.}
+\end{theorem}
+
+\begin{theorem}[Step 43 --- Self-Reading Graph]
+\label{thm:step43}
+$\mathcal{L}_{\mathrm{full}} = \{(x, \eta, J, \Gamma, h)\}$: five
+coordinates of one point.  The universe IS this graph.
+\forcing{Each coordinate is an exact function of $x$.}
+\end{theorem}
+
+\begin{theorem}[Step 44 --- Admissible Goal as Full Coordinate]
+\label{thm:step44}
+An admissible goal $g$ is a coordinate on $\mathcal{L}_{\mathrm{full}}$,
+not a partial specification to be completed.
+\forcing{Goals are derived selector forms (\cref{sec:primitives:selectors}).}
+\end{theorem}
+
+\begin{theorem}[Step 45 --- Unique Graph Point]
+\label{thm:step45}
+$\forall g \in \mathcal{G},\ \exists!\, p_g \in
+\mathcal{L}_{\mathrm{full}}$ with $\pi_G(p_g) = g$.
+\forcing{Full point unique from state (\cref{sec:main-theorem}).}
+\end{theorem}
+
+\begin{theorem}[Step 46 --- Answer as Graph Projections]
+\label{thm:step46}
+$A(g) = \pi_X(p_g)$, $\eta(g) = \pi_\eta(p_g)$,
+$J(g) = \pi_J(p_g)$, $\Gamma(g) = \pi_\Gamma(p_g)$,
+$h(g) = \pi_H(p_g)$.  Not computed.  Read.
+\forcing{Projections of a uniquely determined point.}
+\end{theorem}
+
+\noindent
+Phase~J closes the derivation.  The complete chain from $\noth$ to
+$\mathrm{Solve}(g) = \pi(\Sigma(g))$ is now a single machine-checked
+theorem: \texttt{universe\_source\_code\_complete}.
 
 % Figures for derivation (moved from main.tex)
 \input{figures/derivation-dag}
