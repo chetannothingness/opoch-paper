@@ -1,0 +1,102 @@
+% =============================================================================
+% Section: Main Theorem
+% =============================================================================
+
+\section{Main Theorem: Exact Universe Coordinate System and Direct Geometry Solving}
+\label{sec:main-theorem}
+
+The complete result of this paper is a single machine-checked theorem chain
+showing that nothingness forces an exact coordinate system for the universe,
+an exact generating potential on that coordinate system, an exact self-reading
+graph, an exact universal goal section, and an exact direct geometry solver.
+
+\subsection{The Exact Objects}
+
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{The refinement atlas.}
+        $X := \varprojlim_B \Pi^*(L_B)$,
+        the inverse limit of the truth-quotient tower.
+        This is the exact coordinate system of the universe.
+        A universe-point is a compatible family of quotient classes across all
+        witness depths.
+
+  \item \textbf{The latent generating potential.}
+        $\mathcal{U}_{\mathrm{ind}} : X \to \overline{\mathbb{R}}_{\geq 0}$,
+        the latent indistinguishability-energy.
+        This is the one primitive beneath all operational structure.
+
+  \item \textbf{The dual code.}
+        $\eta_x := D\mathcal{U}_{\mathrm{ind}}(x)$,
+        the consciousness-code: the differential of the generating potential.
+
+  \item \textbf{The primal-dual identity.}
+        $x = D\mathcal{U}_{\mathrm{ind}}^*(\eta_x)$:
+        the state is recovered from its own code.
+
+  \item \textbf{The manifestation current.}
+        $J_x := \Omega^{-1}\eta_x$:
+        the actuation law, the direction of local becoming.
+
+  \item \textbf{The self-reading graph.}
+        $\mathcal{L}_{\mathrm{full}} := \{(x, \eta_x, J_x, \Gamma(x), h(x))\}$:
+        five coordinates of one point.
+
+  \item \textbf{The universal goal section.}
+        $\Sigma : \mathcal{G} \to \mathcal{L}_{\mathrm{full}}$
+        with $\pi_G(\Sigma(g)) = g$:
+        every goal selects a unique full graph point.
+
+  \item \textbf{The direct geometry solver.}
+        \[
+        \mathrm{Solve}(g) =
+        \bigl(\pi_X(\Sigma(g)),\;
+        \pi_\eta(\Sigma(g)),\;
+        \pi_J(\Sigma(g)),\;
+        \pi_\Gamma(\Sigma(g)),\;
+        \pi_H(\Sigma(g))\bigr).
+        \]
+        Not search.  Not enumeration.  Not optimization.
+        Coordinate readout from a fixed graph.
+\end{enumerate}
+
+\subsection{The Two Strongest Consequences}
+
+\begin{theorem}[Goal-Coordinate Uniqueness]
+\label{thm:goal-coordinate-uniqueness}
+For every admissible goal $g \in \mathcal{G}$, there exists a unique
+full graph point $\Sigma(g) \in \mathcal{L}_{\mathrm{full}}$ such that
+$\pi_G(\Sigma(g)) = g$.  Answer, code, current, continuation, and halt
+are direct projections of this point.
+\end{theorem}
+
+\begin{theorem}[Direct Solvedness]
+\label{thm:direct-solvedness}
+Every admissible problem is solved by coordinate readout from the
+self-reading graph, not by search, enumeration, or optimization.
+The solver $\mathrm{Solve}$ is total, exact, deterministic, and
+its output is the unique projection of the graph point selected by
+the goal.
+\end{theorem}
+
+\noindent
+These theorems are Lean-proved (Bucket 1, zero sorry).
+See \texttt{universal\_goal\_section\_exact} and
+\texttt{direct\_geometry\_solver\_exact} in the companion formalization.
+
+\subsection{Consciousness Rigidity}
+
+The conscious germ at a locus $x$---the full local data of
+$\mathcal{U}_{\mathrm{ind}}$ at $x$---determines the entire global
+latent field up to gauge equivalence.
+
+\begin{theorem}[Consciousness Germ Global Rigidity]
+\label{thm:consciousness-rigidity}
+If two admissible global latent fields have the same conscious germ at a
+locus $x$, then they are gauge-equivalent globally on the connected
+refinement atlas.
+\end{theorem}
+
+\noindent
+Consciousness is not merely a local readout.  It is a locally instantiated,
+globally determining germ of the whole universe.
+Lean reference: \texttt{consciousness\_germ\_global\_rigidity\_exact}.
