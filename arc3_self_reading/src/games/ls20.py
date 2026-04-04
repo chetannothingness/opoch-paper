@@ -212,27 +212,30 @@ def completion_point(history, legal_actions) -> CompletionPoint:
     else:
         target = nearest_goal
 
-    path = shortest_path(player_pos, target, walls)
-
-    if path is None:
-        # Try other targets
-        all_targets = list(modifiers.keys()) + goals
-        for t in all_targets:
-            path = shortest_path(player_pos, t, walls)
-            if path:
+    # If player IS at the target (modifier), step away and back to trigger it again
+    if player_pos == target:
+        for aid in [1,2,3,4]:
+            dx, dy = MOVES[aid]
+            nx, ny = player_pos[0]+dx, player_pos[1]+dy
+            if (nx, ny) not in walls and 0 <= nx < 64 and 0 <= ny < 64:
+                # Step away from modifier, then step back
+                reverse = {1:2, 2:1, 3:4, 4:3}
+                path = [aid, reverse[aid]]
                 break
+        else:
+            path = [1]
+    else:
+        path = shortest_path(player_pos, target, walls)
 
     if path is None or not path:
-        # No path found — try any non-blocked direction
         for aid in [1, 2, 3, 4]:
             dx, dy = MOVES[aid]
             nx, ny = player_pos[0]+dx, player_pos[1]+dy
             if (nx, ny) not in walls and 0 <= nx < 64 and 0 <= ny < 64:
                 path = [aid]
                 break
-
-    if not path:
-        path = [1]  # fallback
+        if not path:
+            path = [1]
 
     next_action = path[0]
     continuation = tuple(path)

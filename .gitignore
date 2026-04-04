@@ -36,3 +36,5 @@ arxiv_submission/
 .env
 arxiv_abstract.txt
 arxiv_submission.tar.gz
+environment_files
+.lake/

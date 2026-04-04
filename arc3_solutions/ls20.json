@@ -1,0 +1,109 @@
+{
+  "game_id": "ls20",
+  "total": 7,
+  "solved": 1,
+  "levels": [
+    {
+      "level": 0,
+      "solved": true,
+      "n_actions": 13,
+      "budget": 42,
+      "actions": [
+        {
+          "action": 3,
+          "name": "LEFT"
+        },
+        {
+          "action": 3,
+          "name": "LEFT"
+        },
+        {
+          "action": 3,
+          "name": "LEFT"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 4,
+          "name": "RIGHT"
+        },
+        {
+          "action": 4,
+          "name": "RIGHT"
+        },
+        {
+          "action": 4,
+          "name": "RIGHT"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        },
+        {
+          "action": 1,
+          "name": "UP"
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 21,
+      "actions": []
+    },
+    {
+      "level": 2,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 21,
+      "actions": []
+    },
+    {
+      "level": 3,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 42,
+      "actions": []
+    },
+    {
+      "level": 4,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 21,
+      "actions": []
+    },
+    {
+      "level": 5,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 42,
+      "actions": []
+    },
+    {
+      "level": 6,
+      "solved": false,
+      "n_actions": 0,
+      "budget": 21,
+      "actions": []
+    }
+  ]
+}
